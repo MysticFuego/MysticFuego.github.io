@@ -1,0 +1,23 @@
+[
+  {
+    "id": "g1_001",
+    "name": "Fire Slime",
+    "category": "Monster",
+    "tags": ["fire", "starter"],
+    "description": "Basic fire-aligned creature."
+  },
+  {
+    "id": "g1_002",
+    "name": "Stone Beetle",
+    "category": "Monster",
+    "tags": ["earth", "tank"],
+    "description": "Heavy defense unit."
+  },
+  {
+    "id": "g1_003",
+    "name": "Wind Pixie",
+    "category": "Monster",
+    "tags": ["air", "support"],
+    "description": "Fast support-type creature."
+  }
+]

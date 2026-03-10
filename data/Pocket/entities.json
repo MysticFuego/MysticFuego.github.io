@@ -1,0 +1,23 @@
+[
+  {
+    "id": "g2_001",
+    "name": "Knight Arlen",
+    "category": "Character",
+    "tags": ["sword", "frontline"],
+    "description": "Balanced melee fighter."
+  },
+  {
+    "id": "g2_002",
+    "name": "Mira",
+    "category": "Character",
+    "tags": ["magic", "support"],
+    "description": "Backline caster."
+  },
+  {
+    "id": "g2_003",
+    "name": "Rook",
+    "category": "Character",
+    "tags": ["stealth", "crit"],
+    "description": "Fast assassin unit."
+  }
+]

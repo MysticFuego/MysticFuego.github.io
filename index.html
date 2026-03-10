@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dual Game Tracker</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Dual Game Tracker</h1>
+    <p>Local-only progress tracker</p>
+  </header>
+
+  <main>
+    <section class="controls">
+      <label for="gameSelect">Choose tracker:</label>
+      <select id="gameSelect">
+        <option value="game1">Game 1</option>
+        <option value="game2">Game 2</option>
+      </select>
+
+      <input type="text" id="searchInput" placeholder="Search..." />
+
+      <button id="exportBtn">Export Save</button>
+      <button id="importBtn">Import Save</button>
+      <button id="resetBtn">Reset Current Game Save</button>
+      <input type="file" id="importFile" accept=".json" hidden />
+    </section>
+
+    <section id="summary" class="summary"></section>
+    <section id="entityList" class="entity-list"></section>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
