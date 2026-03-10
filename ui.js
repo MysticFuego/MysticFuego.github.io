@@ -1,5 +1,11 @@
 import { saveProgress } from "./db.js";
 
+/**
+ * Renders the summary section showing total, collected, and favorite counts.
+ * @param {HTMLElement} container - The DOM element to render the summary into.
+ * @param {Array} entities - The static entity data.
+ * @param {Array} mergedData - The merged entity and progress data.
+ */
 export function renderSummary(container, entities, mergedData) {
   const total = entities.length;
   const collected = mergedData.filter((x) => x.progress.collected).length;
@@ -14,6 +20,13 @@ export function renderSummary(container, entities, mergedData) {
   `;
 }
 
+/**
+ * Renders the list of entity cards with their progress controls.
+ * @param {HTMLElement} container - The DOM element to render the list into.
+ * @param {string} gameKey - The key of the game.
+ * @param {Array} mergedData - The merged entity and progress data.
+ * @param {function} refreshCallback - Callback function to refresh the UI after saving.
+ */
 export function renderEntityList(container, gameKey, mergedData, refreshCallback) {
   container.innerHTML = "";
 

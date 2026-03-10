@@ -13,11 +13,13 @@
   </header>
 
   <main>
+    <!-- Controls section for game selection, search, and data management -->
     <section class="controls">
       <label for="gameSelect">Choose tracker:</label>
+      <!-- Dropdown to select which game's data to load -->
       <select id="gameSelect">
-        <option value="game1">Game 1</option>
-        <option value="game2">Game 2</option>
+        <option value="MSM">MSM</option>
+        <option value="Pocket">Pocket</option>
       </select>
 
       <input type="text" id="searchInput" placeholder="Search..." />
@@ -28,7 +30,10 @@
       <input type="file" id="importFile" accept=".json" hidden />
     </section>
 
+    <!-- Section to display summary statistics (total, collected, favorites) -->
     <section id="summary" class="summary"></section>
+    
+    <!-- Container for the list of entities (cards) -->
     <section id="entityList" class="entity-list"></section>
   </main>
 

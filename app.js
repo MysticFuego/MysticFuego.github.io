@@ -18,8 +18,15 @@ const importBtn = document.getElementById("importBtn");
 const importFile = document.getElementById("importFile");
 const resetBtn = document.getElementById("resetBtn");
 
+// Cache to store loaded game data so we don't fetch it multiple times
 const gameDataCache = {};
 
+/**
+ * Loads entity data for a specific game from the JSON file.
+ * Uses a cache to avoid redundant network requests.
+ * @param {string} gameKey - The key of the game (e.g., "MSM", "Pocket").
+ * @returns {Promise<Array>} A promise that resolves with the entity data.
+ */
 async function loadGameData(gameKey) {
   if (gameDataCache[gameKey]) return gameDataCache[gameKey];
 
@@ -33,6 +40,12 @@ async function loadGameData(gameKey) {
   return data;
 }
 
+/**
+ * Merges static entity data with user progress records.
+ * @param {Array} entities - The static entity data.
+ * @param {Array} progressRecords - The user's progress records.
+ * @returns {Array} An array of merged entity objects.
+ */
 function mergeEntitiesWithProgress(entities, progressRecords) {
   const progressMap = new Map(progressRecords.map(p => [p.entityId, p]));
 
@@ -48,6 +61,9 @@ function mergeEntitiesWithProgress(entities, progressRecords) {
   }));
 }
 
+/**
+ * Refreshes the UI by loading data, merging progress, filtering, and rendering.
+ */
 async function refresh() {
   const gameKey = gameSelect.value;
   const searchTerm = searchInput.value.trim().toLowerCase();
@@ -70,6 +86,11 @@ async function refresh() {
   renderEntityList(entityList, gameKey, merged, refresh);
 }
 
+/**
+ * Triggers a download of a JSON file with the provided data.
+ * @param {string} filename - The name of the file to download.
+ * @param {Object} data - The data to serialize as JSON.
+ */
 function downloadJson(filename, data) {
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
   const url = URL.createObjectURL(blob);
@@ -82,6 +103,7 @@ function downloadJson(filename, data) {
   URL.revokeObjectURL(url);
 }
 
+// Event listener for exporting the current game's save data
 exportBtn.addEventListener("click", async () => {
   const gameKey = gameSelect.value;
   const progress = await getAllProgress(gameKey);
@@ -95,10 +117,12 @@ exportBtn.addEventListener("click", async () => {
   downloadJson(`${gameKey}_save.json`, exportData);
 });
 
+// Event listener for triggering the file input when the import button is clicked
 importBtn.addEventListener("click", () => {
   importFile.click();
 });
 
+// Event listener for handling the selected import file
 importFile.addEventListener("change", async (event) => {
   const file = event.target.files[0];
   if (!file) return;
@@ -126,6 +150,7 @@ importFile.addEventListener("change", async (event) => {
   }
 });
 
+// Event listener for resetting the current game's save data
 resetBtn.addEventListener("click", async () => {
   const gameKey = gameSelect.value;
   const confirmed = confirm(`Delete all local progress for ${gameKey}?`);
