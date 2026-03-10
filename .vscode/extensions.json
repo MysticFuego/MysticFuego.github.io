@@ -1,0 +1,12 @@
+﻿{
+  "recommendations": [
+    "ritwickdey.liveserver",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "streetsidesoftware.code-spell-checker",
+    "ecmel.vscode-html-css",
+    "christian-kohler.path-intellisense",
+    "yzhang.markdown-all-in-one",
+    "usernamehw.errorlens"
+  ]
+}
