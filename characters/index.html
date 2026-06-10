@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Player Characters</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+    :root {
+      --bg:      #07090f;
+      --bg2:     #0d1117;
+      --panel:   #111827;
+      --panel2:  #1a2235;
+      --line:    #1e2d42;
+      --line2:   #253347;
+      --text:    #e8edf5;
+      --muted:   #6b7e99;
+      --link:    #7eb8f7;
+      --accent:  #2563eb;
+      --gold:    #d97706;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 2rem 1rem 4rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--gold);
+      letter-spacing: 0.06em;
+      text-shadow: 0 0 24px rgba(217,119,6,0.35);
+      margin-bottom: 0.5rem;
+    }
+
+    header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .roster {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .character-card {
+      background: var(--panel);
+      border: 1px solid var(--line2);
+      border-radius: 12px;
+      padding: 1.5rem 1.75rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+
+    .character-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 18px rgba(37,99,235,0.25);
+      transform: translateY(-3px);
+    }
+
+    .character-card .name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--link);
+    }
+
+    .character-card .meta {
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+
+    .character-card .badge {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      background: rgba(37,99,235,0.15);
+      border: 1px solid rgba(37,99,235,0.35);
+      color: var(--link);
+      width: fit-content;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    footer a {
+      color: var(--link);
+      text-decoration: none;
+    }
+
+    footer a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Player Characters</h1>
+    <p>Select a character to view their full sheet.</p>
+  </header>
+
+  <main class="roster">
+
+    <!-- ── Character cards – add a new <a> block for each new character ── -->
+
+    <a class="character-card" href="kaelin_tidewalker.html">
+      <span class="name">Kaelin Tidewalker</span>
+      <span class="meta">Druid · Tidal Warden</span>
+      <span class="badge">View Sheet →</span>
+    </a>
+
+    <!-- Future characters go here -->
+
+  </main>
+
+  <footer>
+    <p><a href="../index.html">← Back to tracker</a></p>
+  </footer>
+
+</body>
+</html>

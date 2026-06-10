@@ -1,0 +1,1586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kaelin Tidewalker – Character Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  --accent: #2563eb;
+  --accent2: #1d4ed8;
+  --teal: #0891b2;
+  --gold: #d97706;
+  --druid: #16a34a;
+  --druid-dim: #052e16;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
+
+/* ─── LINKS ─── */
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; color: #a5d0fb; }
+
+/* ─── LAYOUT ─── */
+.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
+
+/* ─── HERO BANNER ─── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #0a1628 0%, #0f2040 40%, #0a1a2e 100%);
+  border: 1px solid var(--line2);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(37,99,235,.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(22,163,74,.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--druid) 0%, #2563eb 50%, var(--teal) 100%);
+  border-radius: 20px 20px 0 0;
+}
+
+.hero-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.hero-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 18px;
+  object-fit: cover;
+  border: 2px solid var(--line2);
+  background: var(--panel);
+  box-shadow: 0 0 0 4px rgba(22,163,74,.12), 0 8px 32px rgba(0,0,0,.5);
+}
+.hero-class-icon {
+  position: absolute;
+  bottom: -8px; right: -8px;
+  width: 32px; height: 32px;
+  background: var(--druid);
+  border-radius: 10px;
+  border: 2px solid var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+}
+
+.hero-info { flex: 1; min-width: 0; }
+.hero-name {
+  font-family: 'Cinzel', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: #f0f6ff;
+  letter-spacing: .02em;
+  line-height: 1.1;
+}
+.hero-sub {
+  color: var(--muted);
+  margin-top: 6px;
+  font-size: 13px;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.hero-sub .sep { color: var(--line2); }
+
+.stat-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 18px;
+}
+.stat-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(255,255,255,.04);
+  border: 1px solid var(--line2);
+  border-radius: 12px;
+  padding: 8px 14px;
+  min-width: 64px;
+  gap: 1px;
+}
+.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
+.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
+.stat-pill.sp-hp .sp-val { color: var(--good); }
+.stat-pill.sp-spell .sp-val { color: #c084fc; }
+
+#inspirationPill {
+  cursor: pointer;
+  transition: background .15s, border-color .15s;
+  user-select: none;
+}
+#inspirationPill.on { background: rgba(37,99,235,.18); border-color: #3b82f6; }
+#inspirationPill.on .sp-val { color: #93c5fd; }
+
+/* ─── TABS ─── */
+.tabs-bar {
+  display: flex;
+  gap: 4px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 5px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  flex: 1;
+  min-width: 90px;
+  padding: 9px 14px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  letter-spacing: .01em;
+  white-space: nowrap;
+}
+.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.tab-btn .tab-icon { margin-right: 6px; }
+
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ─── GRID LAYOUTS ─── */
+.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stack { display: grid; gap: 16px; align-content: start; }
+
+/* ─── PANELS ─── */
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 20px;
+}
+.panel-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.panel-title::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+.panel-title .pt-icon { font-size: 14px; }
+
+/* ─── ABILITY SCORES ─── */
+.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ability-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color .15s;
+}
+.ability-card:hover { border-color: var(--line2); }
+.ability-card .ab-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+}
+.ability-card .ab-score {
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  margin: 6px 0 4px;
+  color: var(--text);
+}
+.ability-card .ab-mod {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--good);
+}
+.ability-card .ab-mod.neg { color: var(--danger); }
+.ability-card.prof-save::after {
+  content: '★';
+  position: absolute;
+  top: 6px; right: 8px;
+  font-size: 10px;
+  color: var(--warn);
+}
+
+/* ─── STAT BLOCKS (saves/skills) ─── */
+.stat-list { display: flex; flex-direction: column; gap: 2px; }
+.stat-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px;
+  border-radius: 8px;
+  transition: background .1s;
+}
+.stat-row:hover { background: rgba(255,255,255,.03); }
+.prof-dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--muted2);
+  flex-shrink: 0;
+}
+.prof-dot.filled { background: var(--warn); border-color: var(--warn); }
+.stat-name { flex: 1; color: var(--text); font-size: 13px; }
+.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
+.stat-bonus {
+  font-size: 13px;
+  font-weight: 700;
+  width: 36px;
+  text-align: right;
+  color: var(--good);
+}
+.stat-bonus.neg { color: var(--danger); }
+.stat-bonus.zero { color: var(--muted); }
+
+/* ─── TRACKERS ─── */
+.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.tracker-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.tracker-card h3 {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* HP display */
+.hp-display { display: flex; align-items: baseline; gap: 6px; }
+.hp-input {
+  width: 72px;
+  background: var(--panel3);
+  color: var(--text);
+  border: 1.5px solid var(--line2);
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 22px;
+  font-weight: 800;
+  text-align: center;
+  transition: border-color .15s, color .15s;
+}
+.hp-input:focus { outline: none; border-color: var(--accent); }
+.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
+.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
+.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
+.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.temp-hp-input {
+  width: 52px;
+  background: var(--panel3);
+  color: var(--text);
+  border: 1px solid var(--line2);
+  border-radius: 8px;
+  padding: 4px 6px;
+  font-size: 13px;
+  text-align: center;
+}
+.temp-hp-input:focus { outline: none; border-color: var(--teal); }
+
+/* Resource dots */
+.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.dot {
+  width: 34px; height: 34px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line2);
+  background: var(--panel3);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition: background .1s, border-color .1s, color .1s;
+  display: flex; align-items: center; justify-content: center;
+}
+.dot:hover { border-color: var(--muted2); }
+.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+
+/* Death saves */
+.death-panel {
+  background: rgba(63,31,38,.35);
+  border: 1px solid #7f1d1d;
+  border-radius: 14px;
+  padding: 16px;
+  margin-top: 12px;
+  display: none;
+}
+.death-panel h3 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--danger);
+  margin-bottom: 12px;
+}
+.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.death-success .death-label { color: var(--good); }
+.death-fail .death-label { color: var(--danger); }
+
+/* ─── CONCENTRATION ─── */
+.conc-toggle {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+  margin-bottom: 12px;
+  transition: border-color .15s;
+}
+.conc-toggle:hover { border-color: var(--line2); }
+.conc-toggle.active { border-color: #c084fc; background: rgba(192,132,252,.07); }
+.conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: background .15s, border-color .15s; }
+.conc-dot.on { background: #c084fc; border-color: #c084fc; }
+.conc-label { font-size: 13px; font-weight: 600; color: var(--muted); flex: 1; }
+.conc-toggle.active .conc-label { color: #c084fc; }
+
+.conc-body { display: none; }
+.conc-body.open { display: block; }
+
+.field-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+.text-field {
+  width: 100%;
+  background: var(--panel3);
+  color: var(--text);
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  padding: 9px 12px;
+  font: inherit;
+  resize: vertical;
+  transition: border-color .15s;
+  margin-bottom: 10px;
+}
+.text-field:focus { outline: none; border-color: #c084fc; }
+
+/* ─── BUTTONS ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  padding: 8px 14px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background .1s, border-color .1s;
+  white-space: nowrap;
+}
+.btn:hover { background: var(--panel3); border-color: var(--muted2); }
+.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
+.btn.btn-danger:hover { background: var(--danger-dim); }
+.btn.btn-rest { border-color: var(--druid); color: var(--good); }
+.btn.btn-rest:hover { background: var(--druid-dim); }
+
+.roll-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--line2);
+  border-radius: 8px;
+  padding: 6px 11px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .1s, border-color .1s;
+}
+.roll-btn:hover { background: rgba(37,99,235,.15); border-color: var(--accent); color: #93c5fd; }
+.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
+
+/* ─── ROLL HISTORY ─── */
+.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.roll-log {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+.roll-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  font-size: 13px;
+}
+.roll-entry-label { color: var(--muted); font-size: 12px; }
+.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
+.roll-entry-total.nat20 { color: var(--warn); }
+.roll-entry-total.nat1 { color: var(--danger); }
+.roll-entry-detail { font-size: 11px; color: var(--muted); }
+.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
+.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
+
+/* ─── WEAPON CARDS ─── */
+.weapon-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.weapon-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.weapon-name { font-weight: 700; font-size: 14px; }
+.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
+.weapon-props { font-size: 11px; color: var(--muted); }
+
+/* ─── ACTION CARDS ─── */
+.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
+.action-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.action-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.action-card-title.atk { color: var(--danger); }
+.action-card-title.mag { color: #c084fc; }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--teal); }
+.action-card-title.oth { color: var(--muted); }
+.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.link-list li a { font-size: 13px; }
+
+/* ─── SPELL CARDS ─── */
+.spell-search-wrap { position: relative; margin-bottom: 14px; }
+.spell-search-wrap::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; }
+.spell-search {
+  width: 100%;
+  background: var(--panel2);
+  color: var(--text);
+  border: 1px solid var(--line2);
+  border-radius: 10px;
+  padding: 10px 12px 10px 36px;
+  font: inherit;
+  font-size: 13px;
+  transition: border-color .15s;
+}
+.spell-search:focus { outline: none; border-color: #c084fc; }
+
+.spell-section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin: 16px 0 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.spell-section-title::after { content:''; flex:1; height:1px; background:var(--line); }
+
+.spells-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.spell-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 14px;
+  transition: border-color .15s;
+  position: relative;
+  overflow: hidden;
+}
+.spell-card:hover { border-color: var(--line2); }
+.spell-card.conc-spell { border-left: 3px solid #c084fc; }
+.spell-card.ritual-spell { border-left: 3px solid var(--warn); }
+.spell-card.both-spell { border-left: 3px solid var(--teal); }
+
+.spell-card-name { font-weight: 700; font-size: 13px; margin-bottom: 6px; }
+.spell-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.sbadge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 999px;
+  border: 1px solid;
+  text-transform: uppercase;
+  letter-spacing: .05em;
+}
+.sbadge.prepared { background: rgba(22,163,74,.12); color: var(--good); border-color: rgba(22,163,74,.3); }
+.sbadge.always { background: rgba(37,99,235,.12); color: #93c5fd; border-color: rgba(37,99,235,.3); }
+.sbadge.available { background: rgba(255,255,255,.05); color: var(--muted); border-color: var(--line2); }
+.sbadge.ritual { background: rgba(251,191,36,.1); color: var(--warn); border-color: rgba(251,191,36,.25); }
+.sbadge.conc { background: rgba(192,132,252,.1); color: #c084fc; border-color: rgba(192,132,252,.25); }
+
+.spell-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; }
+.spell-meta-item { font-size: 11px; color: var(--muted); }
+.spell-meta-item span { color: var(--text); }
+.spell-dmg { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); padding: 4px 8px; background: rgba(251,191,36,.08); border-radius: 6px; }
+
+/* ─── FEATURES ─── */
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.feature-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.feature-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 10px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+
+/* ─── EQUIPMENT ─── */
+.equip-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.equip-card {
+  background: var(--panel2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.equip-card-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+
+/* ─── REMINDER BOX ─── */
+.reminder {
+  background: var(--druid-dim);
+  border: 1px solid rgba(22,163,74,.25);
+  border-radius: 14px;
+  padding: 16px;
+}
+.reminder .reminder-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(22,163,74,.1);
+  font-size: 13px;
+  color: #bbf7d0;
+}
+.reminder .reminder-item:last-child { border-bottom: none; }
+.reminder .reminder-item::before { content: '🌿'; flex-shrink: 0; }
+
+/* ─── BUTTONS ROW ─── */
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+/* ─── SEARCH ─── */
+input[type="search"]::-webkit-search-cancel-button { display: none; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .two-col, .two-col-eq { grid-template-columns: 1fr; }
+  .three-col { grid-template-columns: 1fr 1fr; }
+  .weapon-grid { grid-template-columns: 1fr 1fr; }
+  .feature-grid, .action-section.bottom { grid-template-columns: 1fr 1fr; }
+  .action-section { grid-template-columns: 1fr; }
+  .hero { flex-direction: column; }
+  .abilities-grid { grid-template-columns: repeat(2,1fr); }
+}
+@media (max-width: 600px) {
+  .page { padding: 12px 14px 50px; }
+  .hero-name { font-size: 22px; }
+  .stat-bar { gap: 7px; }
+  .stat-pill { padding: 7px 10px; min-width: 54px; }
+  .spells-grid, .equip-grid, .three-col { grid-template-columns: 1fr; }
+  .feature-grid, .action-section, .action-section.bottom { grid-template-columns: 1fr; }
+  .weapon-grid { grid-template-columns: 1fr; }
+  .abilities-grid { grid-template-columns: repeat(3,1fr); }
+  .tab-btn { font-size: 12px; padding: 8px 10px; }
+}
+@media print {
+  body { background: #fff; color: #000; }
+  .tabs-bar, .btn, .roll-btn, .spell-search-wrap { display: none; }
+  .tab-pane { display: block !important; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/tokenizer/pc-images/kaelin_tidewalker.Avatar.webp?1767809452547" alt="Kaelin Tidewalker">
+    <div class="hero-class-icon">🌿</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Kaelin Tidewalker</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/classes.html#druid_xphb">Druid 1</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/races.html#simic%20hybrid_ggr">Simic Hybrid</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/backgrounds.html#outlander_phb">Outlander</a>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val">10/10</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Leather 11 + DEX +1 + Shield +2">14</span></div>
+      <div class="stat-pill"><span class="sp-label">Initiative</span><span class="sp-val">+1</span></div>
+      <div class="stat-pill"><span class="sp-label">Speed</span><span class="sp-val">30 ft</span></div>
+      <div class="stat-pill"><span class="sp-label">Prof.</span><span class="sp-val">+2</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell DC</span><span class="sp-val">12</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell Atk</span><span class="sp-val">+4</span></div>
+      <div class="stat-pill"><span class="sp-label">Passive Perc</span><span class="sp-val">12</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar" role="tablist">
+  <button class="tab-btn active" data-tab="combat" role="tab"><span class="tab-icon">⚔️</span>Combat</button>
+  <button class="tab-btn" data-tab="spells" role="tab"><span class="tab-icon">✨</span>Spells</button>
+  <button class="tab-btn" data-tab="abilities" role="tab"><span class="tab-icon">🎲</span>Abilities</button>
+  <button class="tab-btn" data-tab="features" role="tab"><span class="tab-icon">📜</span>Features</button>
+  <button class="tab-btn" data-tab="gear" role="tab"><span class="tab-icon">🎒</span>Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">❤️</span>Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="10" value="10">
+              <span class="hp-max">/ 10</span>
+            </div>
+            <div class="temp-hp-row">
+              <span>Temp HP:</span>
+              <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0">
+            </div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice (d8)</h3>
+            <div class="dots-row" id="hitDiceDots" data-key="hitDice" data-total="1"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Spell Slots — Lvl 1</h3>
+            <div class="dots-row" id="slotDots" data-key="spellSlots1" data-total="2"></div>
+          </div>
+        </div>
+
+        <!-- Death saves (hidden until HP = 0) -->
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success">
+              <div class="death-label">Successes</div>
+              <div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true"></div>
+            </div>
+            <div class="death-fail">
+              <div class="death-label">Failures</div>
+              <div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true"></div>
+            </div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button>
+          </div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Concentration -->
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">🔮</span>Concentration</div>
+        <div class="conc-toggle" id="concToggle">
+          <div class="conc-dot" id="concDot"></div>
+          <div class="conc-label" id="concLabel">Not Concentrating</div>
+        </div>
+        <div class="conc-body" id="concBody">
+          <div class="field-label">Spell</div>
+          <input id="concSpell" class="text-field" type="text" placeholder="Spell name…">
+          <div class="field-label">Notes / damage check reminders</div>
+          <textarea id="concNotes" class="text-field" rows="2" placeholder="e.g. DC 10+ CON save when hit…"></textarea>
+          <button class="btn btn-danger" id="clearConcBtn" style="font-size:12px;">Clear Concentration</button>
+        </div>
+      </div>
+
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">⚄</span>Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="1">Initiative +1</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="2">Perception +2</button>
+          <button class="roll-btn" data-label="Insight" data-bonus="4">Insight +4</button>
+          <button class="roll-btn" data-label="Survival" data-bonus="4">Survival +4</button>
+          <button class="roll-btn" data-label="Animal Handling" data-bonus="4">Animal Handling +4</button>
+          <button class="roll-btn" data-label="Medicine" data-bonus="2">Medicine +2</button>
+          <button class="roll-btn" data-label="Nature" data-bonus="3">Nature +3</button>
+          <button class="roll-btn" data-label="Arcana" data-bonus="3">Arcana +3</button>
+          <button class="roll-btn" data-label="Spell Attack" data-bonus="4">Spell Atk +4</button>
+          <button class="roll-btn" data-label="Sickle" data-bonus="2">Sickle +2</button>
+          <button class="roll-btn" data-label="Staff" data-bonus="2">Staff +2</button>
+        </div>
+        <div class="roll-log" id="rollLog">
+          <div class="roll-log-empty">No rolls yet this session</div>
+        </div>
+      </div>
+
+    </div><!-- /left stack -->
+
+    <div class="stack">
+
+      <!-- Weapons -->
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">⚔️</span>Weapons</div>
+        <div class="weapon-grid">
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/variantrules.html#unarmed%20strike_xphb">Unarmed Strike</a></div>
+            <div><button class="roll-btn" data-label="Unarmed Strike" data-bonus="2">+2 to hit</button></div>
+            <div class="weapon-dmg">1 bludgeoning</div>
+            <div class="weapon-props">STR · —</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#sickle_xphb">Sickle</a></div>
+            <div><button class="roll-btn" data-label="Sickle" data-bonus="2">+2 to hit</button></div>
+            <div class="weapon-dmg">1d4 slashing</div>
+            <div class="weapon-props">STR · Light</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#staff_xphb">Staff</a></div>
+            <div><button class="roll-btn" data-label="Staff" data-bonus="2">+2 to hit</button></div>
+            <div class="weapon-dmg">1d6 · Versatile 1d8</div>
+            <div class="weapon-props">STR · Versatile · Bludgeoning</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">🎯</span>Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title atk">⚔ Attack</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#attack_xphb">Attack Action</a></li>
+              <li><a href="https://5e.tools/items.html#sickle_xphb">Sickle</a></li>
+              <li><a href="https://5e.tools/items.html#staff_xphb">Staff</a></li>
+              <li><a href="https://5e.tools/variantrules.html#unarmed%20strike_xphb">Unarmed / Grapple / Shove</a></li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title mag">✨ Magic</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#control flames_xge">Control Flames</a></li>
+              <li><a href="https://5e.tools/spells.html#elementalism_xphb">Elementalism</a></li>
+              <li><a href="https://5e.tools/spells.html#poison spray_xphb">Poison Spray</a></li>
+              <li><a href="https://5e.tools/spells.html#cure wounds_xphb">Cure Wounds</a></li>
+              <li><a href="https://5e.tools/spells.html#fog cloud_xphb">Fog Cloud</a></li>
+              <li><a href="https://5e.tools/spells.html#thunderwave_xphb">Thunderwave</a></li>
+              <li><a href="https://5e.tools/spells.html#ice knife_xphb">Ice Knife</a></li>
+              <li><a href="https://5e.tools/spells.html#entangle_xphb">Entangle</a></li>
+              <li><a href="https://5e.tools/spells.html#faerie fire_xphb">Faerie Fire</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="action-section bottom">
+          <div class="action-card">
+            <div class="action-card-title bon">★ Bonus Action</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#magic stone_xge">Magic Stone</a></li>
+              <li><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a></li>
+              <li><a href="https://5e.tools/spells.html#jump_xphb">Jump</a></li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#absorb elements_xge">Absorb Elements</a></li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a></li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#ready_xphb">Ready</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reminders -->
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">🌿</span>Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item">WIS spellcaster — Spell DC 12, attack +4</div>
+          <div class="reminder-item">Ritual spells can be cast as rituals (10 min extra)</div>
+          <div class="reminder-item">Concentration breaks on damage — CON save DC = max(10, half dmg)</div>
+          <div class="reminder-item"><a href="https://5e.tools/races.html#simic%20hybrid_ggr">Darkvision</a> 60 ft</div>
+          <div class="reminder-item">You speak <a href="https://5e.tools/languages.html#druidic_xphb">Druidic</a> (secret language)</div>
+        </div>
+      </div>
+
+    </div><!-- /right stack -->
+  </div>
+</div>
+
+<!-- ═══ TAB: SPELLS ═══ -->
+<div class="tab-pane" id="tab-spells">
+  <div class="panel">
+    <div class="panel-title"><span class="pt-icon">✨</span>Spells</div>
+    <div class="spell-search-wrap">
+      <input id="spellSearch" class="spell-search" type="search" placeholder="Filter spells…">
+    </div>
+
+    <div class="spell-section-title">Cantrips</div>
+    <div class="spells-grid" id="cantripList">
+      <div class="spell-card" data-name="magic stone">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#magic stone_xge">Magic Stone</a></div>
+        <div class="spell-badges"><span class="sbadge always">Always Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Bonus</span></div>
+          <div class="spell-meta-item">Range <span>60 ft</span></div>
+          <div class="spell-meta-item">Duration <span>1 min</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+        <div class="spell-dmg">1d6 + 2 bludgeoning</div>
+      </div>
+      <div class="spell-card" data-name="control flames">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#control flames_xge">Control Flames</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>60 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>S</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="elementalism">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#elementalism_xphb">Elementalism</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>30 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="poison spray">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#poison spray_xphb">Poison Spray</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>30 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+        <div class="spell-dmg">Spell atk +4 · 1d12 poison</div>
+      </div>
+    </div>
+
+    <div class="spell-section-title">Level 1 — Prepared</div>
+    <div class="spells-grid" id="spellList">
+      <div class="spell-card ritual-spell" data-name="speak with animals">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#speak with animals_xphb">Speak with Animals</a></div>
+        <div class="spell-badges"><span class="sbadge always">Always Prepared</span><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Self</span></div>
+          <div class="spell-meta-item">Duration <span>10 min</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="absorb elements">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#absorb elements_xge">Absorb Elements</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Reaction</span></div>
+          <div class="spell-meta-item">Range <span>Self</span></div>
+          <div class="spell-meta-item">Duration <span>1 round</span></div>
+          <div class="spell-meta-item">Components <span>S</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="create or destroy water">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#create or destroy water_xphb">Create or Destroy Water</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>30 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>V, S, M</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="cure wounds">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#cure wounds_xphb">Cure Wounds</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Touch</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+        <div class="spell-dmg">Heals 2d8 + 2</div>
+      </div>
+      <div class="spell-card conc-spell" data-name="fog cloud">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#fog cloud_xphb">Fog Cloud</a></div>
+        <div class="spell-badges"><span class="sbadge prepared">Prepared</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>120 ft</span></div>
+          <div class="spell-meta-item">Duration <span>1 hour</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+      </div>
+
+      <div class="spell-section-title" style="grid-column:1/-1;margin:4px 0 0;">Available (not yet prepared)</div>
+
+      <div class="spell-card" data-name="animal friendship">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#animal friendship_xphb">Animal Friendship</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>30 ft</span></div>
+          <div class="spell-meta-item">Duration <span>24 hours</span></div>
+          <div class="spell-meta-item">Save <span>WIS DC 12</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="charm person">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#charm person_xphb">Charm Person</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>30 ft</span></div>
+          <div class="spell-meta-item">Duration <span>1 hour</span></div>
+          <div class="spell-meta-item">Save <span>WIS DC 12</span></div>
+        </div>
+      </div>
+      <div class="spell-card both-spell" data-name="detect magic">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect magic_xphb">Detect Magic</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Self</span></div>
+          <div class="spell-meta-item">Duration <span>10 min</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+      </div>
+      <div class="spell-card both-spell" data-name="detect poison and disease">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect poison and disease_xphb">Detect Poison & Disease</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Self</span></div>
+          <div class="spell-meta-item">Duration <span>10 min</span></div>
+          <div class="spell-meta-item">Components <span>V, S, M</span></div>
+        </div>
+      </div>
+      <div class="spell-card conc-spell" data-name="entangle">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#entangle_xphb">Entangle</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>90 ft</span></div>
+          <div class="spell-meta-item">Duration <span>1 min</span></div>
+          <div class="spell-meta-item">Save <span>STR DC 12</span></div>
+        </div>
+      </div>
+      <div class="spell-card conc-spell" data-name="faerie fire">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#faerie fire_xphb">Faerie Fire</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>60 ft</span></div>
+          <div class="spell-meta-item">Duration <span>1 min</span></div>
+          <div class="spell-meta-item">Save <span>DEX DC 12</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="goodberry">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#goodberry_xphb">Goodberry</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Touch</span></div>
+          <div class="spell-meta-item">Duration <span>24 hours</span></div>
+          <div class="spell-meta-item">Components <span>V, S, M</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="healing word">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Bonus</span></div>
+          <div class="spell-meta-item">Range <span>60 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>V</span></div>
+        </div>
+        <div class="spell-dmg">Heals 2d4 + 2</div>
+      </div>
+      <div class="spell-card" data-name="ice knife">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#ice knife_xphb">Ice Knife</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>60 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>S, M</span></div>
+        </div>
+        <div class="spell-dmg">Spell atk +4 · 1d10 pierce + DEX DC 12 · 2d6 cold</div>
+      </div>
+      <div class="spell-card" data-name="jump">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#jump_xphb">Jump</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Bonus</span></div>
+          <div class="spell-meta-item">Range <span>Touch</span></div>
+          <div class="spell-meta-item">Duration <span>1 min</span></div>
+          <div class="spell-meta-item">Components <span>V, S, M</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="longstrider">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#longstrider_xphb">Longstrider</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Touch</span></div>
+          <div class="spell-meta-item">Duration <span>1 hour</span></div>
+          <div class="spell-meta-item">Components <span>V, S, M</span></div>
+        </div>
+      </div>
+      <div class="spell-card conc-spell" data-name="protection from evil and good">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from evil and good_xphb">Protection from Evil &amp; Good</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Touch</span></div>
+          <div class="spell-meta-item">Duration <span>10 min</span></div>
+          <div class="spell-meta-item">Components <span>V, S, M</span></div>
+        </div>
+      </div>
+      <div class="spell-card ritual-spell" data-name="purify food and drink">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#purify food and drink_xphb">Purify Food and Drink</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>10 ft</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Components <span>V, S</span></div>
+        </div>
+      </div>
+      <div class="spell-card" data-name="thunderwave">
+        <div class="spell-card-name"><a href="https://5e.tools/spells.html#thunderwave_xphb">Thunderwave</a></div>
+        <div class="spell-badges"><span class="sbadge available">Available</span></div>
+        <div class="spell-meta">
+          <div class="spell-meta-item">Action <span>Action</span></div>
+          <div class="spell-meta-item">Range <span>Self</span></div>
+          <div class="spell-meta-item">Duration <span>Instant</span></div>
+          <div class="spell-meta-item">Save <span>CON DC 12</span></div>
+        </div>
+        <div class="spell-dmg">2d8 thunder (half on save)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">💪</span>Ability Scores</div>
+        <div class="abilities-grid">
+          <div class="ability-card"><div class="ab-label">Strength</div><div class="ab-score">10</div><div class="ab-mod">+0</div></div>
+          <div class="ability-card"><div class="ab-label">Dexterity</div><div class="ab-score">13</div><div class="ab-mod">+1</div></div>
+          <div class="ability-card"><div class="ab-label">Constitution</div><div class="ab-score">14</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Intelligence</div><div class="ab-score">12</div><div class="ab-mod">+1</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Wisdom</div><div class="ab-score">15</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card"><div class="ab-label">Charisma</div><div class="ab-score">8</div><div class="ab-mod neg">−1</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--muted);">★ = Saving throw proficiency</div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">🛡</span>Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Strength</div><div class="stat-ability">STR</div><div class="stat-bonus zero">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Dexterity</div><div class="stat-ability">DEX</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-ability">CON</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Intelligence</div><div class="stat-ability">INT</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Wisdom</div><div class="stat-ability">WIS</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Charisma</div><div class="stat-ability">CHA</div><div class="stat-bonus neg">−1</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">🎲</span>Skills</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">+4</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title"><span class="pt-icon">👁</span>Senses & Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name"><a href="https://5e.tools/races.html#simic%20hybrid_ggr">Darkvision</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">60 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">12</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Insight</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">14</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;"><span class="pt-icon">🗣</span>Languages</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="stat-name"><a href="https://5e.tools/languages.html#common_xphb">Common</a></div></div>
+          <div class="stat-row"><div class="stat-name"><a href="https://5e.tools/languages.html#druidic_xphb">Druidic</a></div></div>
+          <div class="stat-row"><div class="stat-name"><a href="https://5e.tools/languages.html#elvish_xphb">Elvish</a></div></div>
+        </div>
+        <div class="panel-title" style="margin-top:14px;"><span class="pt-icon">🔧</span>Tools</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="stat-name"><a href="https://5e.tools/items.html#herbalism%20kit_xphb">Herbalism Kit</a></div><div class="stat-ability">INT</div><div class="stat-bonus">+3</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title"><span class="pt-icon">📜</span>Features & Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🧬 Species — Simic Hybrid</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/races.html#simic%20hybrid_ggr">Darkvision</a> — 60 ft</li>
+          <li><a href="https://5e.tools/races.html#simic%20hybrid_ggr">Animal Enhancement</a></li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🌿 Class — Druid</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Druidic</a></li>
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Spellcasting (WIS)</a></li>
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Primal Order</a></li>
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Primal Order: Magician</a></li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🏕 Background — Outlander</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/backgrounds.html#outlander_phb">Wanderer</a></li>
+          <li><a href="https://5e.tools/feats.html#healer_xphb">Healer</a> (feat)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="panel-title"><span class="pt-icon">🛡</span>Proficiencies</div>
+      <div class="two-col-eq">
+        <div class="feature-card">
+          <div class="feature-card-title">Armor</div>
+          <ul class="link-list">
+            <li>Light Armor</li>
+            <li>Shields</li>
+          </ul>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-title">Weapons</div>
+          <ul class="link-list">
+            <li>Simple Weapons</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="panel-title"><span class="pt-icon">🌙</span>Out of Combat Toolkit</div>
+      <div class="feature-card">
+        <ul class="link-list" style="display:grid;grid-template-columns:1fr 1fr;gap:6px 20px;">
+          <li><a href="https://5e.tools/races.html#simic%20hybrid_ggr">Darkvision</a></li>
+          <li><a href="https://5e.tools/backgrounds.html#outlander_phb">Wanderer</a></li>
+          <li><a href="https://5e.tools/spells.html#speak with animals_xphb">Speak with Animals</a></li>
+          <li><a href="https://5e.tools/spells.html#detect magic_xphb">Detect Magic</a></li>
+          <li><a href="https://5e.tools/spells.html#detect poison and disease_xphb">Detect Poison & Disease</a></li>
+          <li><a href="https://5e.tools/spells.html#purify food and drink_xphb">Purify Food & Drink</a></li>
+          <li><a href="https://5e.tools/spells.html#create or destroy water_xphb">Create or Destroy Water</a></li>
+          <li><a href="https://5e.tools/spells.html#goodberry_xphb">Goodberry</a></li>
+          <li><a href="https://5e.tools/spells.html#animal friendship_xphb">Animal Friendship</a></li>
+          <li><a href="https://5e.tools/spells.html#longstrider_xphb">Longstrider</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:16px;">
+      <div class="panel-title"><span class="pt-icon">💤</span>Rest Recovery</div>
+      <div class="two-col-eq">
+        <div class="feature-card">
+          <div class="feature-card-title">Short Rest</div>
+          <ul class="link-list"><li>Spend Hit Dice to heal</li></ul>
+        </div>
+        <div class="feature-card">
+          <div class="feature-card-title">Long Rest</div>
+          <ul class="link-list"><li>Full HP restored</li><li>All Spell Slots restored</li><li>Half Hit Dice restored</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title"><span class="pt-icon">🎒</span>Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">⚔️ Weapons</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#sickle_xphb">Sickle</a> — 1d4 slashing, Light</li>
+          <li><a href="https://5e.tools/items.html#staff_xphb">Staff</a> — 1d6/1d8 bludgeoning, Versatile</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🛡️ Armor & Worn</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#leather%20armor_xphb">Leather Armor</a> (AC 11 + DEX)</li>
+          <li><a href="https://5e.tools/items.html#shield_xphb">Shield</a> (+2 AC)</li>
+          <li><a href="https://5e.tools/items.html#traveler's%20clothes_xphb">Traveler's Clothes</a></li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪄 Focus & Tools</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#druidic%20focus_xphb">Druidic Focus</a></li>
+          <li><a href="https://5e.tools/items.html#herbalism%20kit_xphb">Herbalism Kit</a></li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🎒 Pack</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#backpack_xphb">Backpack</a></li>
+          <li><a href="https://5e.tools/items.html#pouch_xphb">Pouch</a></li>
+          <li><a href="https://5e.tools/items.html#waterskin_xphb">Waterskin</a></li>
+          <li><a href="https://5e.tools/items.html#bedroll_xphb">Bedroll</a></li>
+          <li><a href="https://5e.tools/items.html#hunting%20trap_xphb">Hunting Trap</a></li>
+          <li><a href="https://5e.tools/items.html#rope_xphb">Rope</a></li>
+          <li><a href="https://5e.tools/items.html#tinderbox_xphb">Tinderbox</a></li>
+          <li><a href="https://5e.tools/items.html#torch_xphb">Torch</a></li>
+          <li><a href="https://5e.tools/items.html#oil_xphb">Oil</a></li>
+          <li><a href="https://5e.tools/items.html#rations_xphb">Rations</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const STORE_PREFIX = "kaelin_v12_";
+const HP_MAX = 10;
+
+function save(k, v) { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); }
+function load(k, fallback) {
+  try { const v = JSON.parse(localStorage.getItem(STORE_PREFIX + k)); return v === null ? fallback : v; }
+  catch { return fallback; }
+}
+
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+/* ── DOTS ── */
+function makeDots(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const total = Number(el.dataset.total || 0);
+  const key = el.dataset.key;
+  const isSuccess = el.dataset.success === 'true';
+  const isFail = el.dataset.fail === 'true';
+  const used = load(key, []);
+  el.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'dot';
+    const isUsed = used.includes(i);
+    if (isSuccess && isUsed) btn.classList.add('success');
+    else if (isFail && isUsed) btn.classList.add('fail');
+    else if (isUsed) btn.classList.add('used');
+    btn.textContent = i + 1;
+    btn.addEventListener('click', () => {
+      const cur = load(key, []);
+      const idx = cur.indexOf(i);
+      idx >= 0 ? cur.splice(idx, 1) : cur.push(i);
+      save(key, cur);
+      makeDots(id);
+    });
+    el.appendChild(btn);
+  }
+}
+
+/* ── HP ── */
+function updateHp() {
+  const el = document.getElementById('hpCurrent');
+  const val = Number(el.value);
+  el.classList.remove('hp-warn', 'hp-danger');
+  const deathPanel = document.getElementById('deathSavePanel');
+  if (val === 0) {
+    el.classList.add('hp-danger');
+    deathPanel.style.display = '';
+  } else {
+    deathPanel.style.display = 'none';
+    if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
+    else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
+  }
+}
+
+function bindInput(id, key) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.value = load(key, el.value);
+  el.addEventListener('input', () => { save(key, el.value); if (id === 'hpCurrent') updateHp(); });
+}
+function bindText(id, key) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.value = load(key, '');
+  el.addEventListener('input', () => save(key, el.value));
+}
+
+/* ── INSPIRATION ── */
+(function() {
+  const pill = document.getElementById('inspirationPill');
+  const val_el = document.getElementById('inspirationVal');
+  let on = load('inspiration', false);
+  const update = () => {
+    val_el.textContent = on ? '✦ ON' : '—';
+    pill.classList.toggle('on', on);
+  };
+  update();
+  pill.addEventListener('click', () => { on = !on; save('inspiration', on); update(); });
+})();
+
+/* ── CONCENTRATION ── */
+(function() {
+  const toggle = document.getElementById('concToggle');
+  const dot = document.getElementById('concDot');
+  const label = document.getElementById('concLabel');
+  const body = document.getElementById('concBody');
+  let on = load('concActive', false);
+  const update = () => {
+    toggle.classList.toggle('active', on);
+    dot.classList.toggle('on', on);
+    body.classList.toggle('open', on);
+    label.textContent = on ? 'Concentrating' : 'Not Concentrating';
+  };
+  update();
+  toggle.addEventListener('click', () => { on = !on; save('concActive', on); update(); });
+  bindText('concSpell', 'concSpell');
+  bindText('concNotes', 'concNotes');
+  document.getElementById('clearConcBtn').addEventListener('click', () => {
+    on = false; save('concActive', false); save('concSpell', ''); save('concNotes', '');
+    document.getElementById('concSpell').value = '';
+    document.getElementById('concNotes').value = '';
+    update();
+  });
+})();
+
+/* ── ROLL LOG ── */
+function addRoll(label, bonus) {
+  const die = Math.floor(Math.random() * 20) + 1;
+  const total = die + bonus;
+  const isNat20 = die === 20, isNat1 = die === 1;
+  const log = document.getElementById('rollLog');
+  // Remove empty state
+  const empty = log.querySelector('.roll-log-empty');
+  if (empty) empty.remove();
+
+  const div = document.createElement('div');
+  div.className = 'roll-entry';
+  const bonusStr = bonus >= 0 ? `+${bonus}` : `${bonus}`;
+  const time = new Date().toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'});
+
+  div.innerHTML = `
+    <div>
+      <div class="roll-entry-label">${label}</div>
+      <div class="roll-entry-detail">d20 (${die}) ${bonusStr}</div>
+    </div>
+    <div class="roll-entry-total${isNat20 ? ' nat20' : isNat1 ? ' nat1' : ''}">${total}${isNat20 ? ' 🎉' : isNat1 ? ' 💀' : ''}</div>
+    <div class="roll-entry-time">${time}</div>
+  `;
+  log.insertBefore(div, log.firstChild);
+  while (log.children.length > 12) log.removeChild(log.lastChild);
+}
+
+document.querySelectorAll('.roll-btn').forEach(btn => {
+  btn.addEventListener('click', () => addRoll(btn.dataset.label, Number(btn.dataset.bonus || 0)));
+});
+
+/* ── LONG/SHORT REST ── */
+document.getElementById('longRestBtn').addEventListener('click', () => {
+  save('hpCurrent', HP_MAX); save('hpTemp', '0');
+  save('spellSlots1', []); save('hitDice', []);
+  save('deathSuccess', []); save('deathFail', []);
+  document.getElementById('hpCurrent').value = HP_MAX;
+  document.getElementById('hpTemp').value = '0';
+  updateHp();
+  ['slotDots','hitDiceDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+});
+document.getElementById('shortRestBtn').addEventListener('click', () => {
+  // Short rest: recover one hit die if available — just alert for now
+  alert('Short Rest: You may spend Hit Dice to recover HP. Roll a d8 + CON mod (+2) per die spent.');
+});
+document.getElementById('clearDeathBtn').addEventListener('click', () => {
+  save('deathSuccess', []); save('deathFail', []);
+  makeDots('deathSuccessDots'); makeDots('deathFailDots');
+});
+document.getElementById('clearSessionBtn').addEventListener('click', () => {
+  if (!confirm('Clear all saved tracking data?')) return;
+  Object.keys(localStorage).forEach(k => { if (k.startsWith(STORE_PREFIX)) localStorage.removeItem(k); });
+  location.reload();
+});
+
+/* ── SPELL FILTER ── */
+(function() {
+  const search = document.getElementById('spellSearch');
+  const allCards = document.querySelectorAll('#cantripList .spell-card, #spellList .spell-card');
+  search.addEventListener('input', () => {
+    const q = search.value.toLowerCase().trim();
+    allCards.forEach(card => {
+      card.style.display = !q || (card.dataset.name || '').includes(q) ? '' : 'none';
+    });
+  });
+})();
+
+/* ── INIT ── */
+makeDots('hitDiceDots');
+makeDots('slotDots');
+makeDots('deathSuccessDots');
+makeDots('deathFailDots');
+bindInput('hpCurrent', 'hpCurrent');
+bindInput('hpTemp', 'hpTemp');
+updateHp();
+</script>
+</body>
+</html>
