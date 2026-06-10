@@ -3,41 +3,34 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dual Game Tracker</title>
+  <title>Tracker Hub</title>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header>
-    <h1>Dual Game Tracker</h1>
-    <p>Local-only progress tracker</p>
-    <a href="characters/index.html" id="pcBtn">&#9876; Player Characters</a>
+<body class="hub">
+
+  <header class="hub-header">
+    <h1>Tracker Hub</h1>
+    <p>Choose a section to get started.</p>
   </header>
 
-  <main>
-    <!-- Controls section for game selection, search, and data management -->
-    <section class="controls">
-      <label for="gameSelect">Choose tracker:</label>
-      <!-- Dropdown to select which game's data to load -->
-      <select id="gameSelect">
-        <option value="MSM">MSM</option>
-        <option value="Pocket">Pocket</option>
-      </select>
+  <main class="hub-grid">
 
-      <input type="text" id="searchInput" placeholder="Search..." />
+    <a class="hub-card" href="msm/index.html">
+      <span class="hub-card__title">MSM</span>
+      <span class="hub-card__sub">My Singing Monsters tracker</span>
+    </a>
 
-      <button id="exportBtn">Export Save</button>
-      <button id="importBtn">Import Save</button>
-      <button id="resetBtn">Reset Current Game Save</button>
-      <input type="file" id="importFile" accept=".json" hidden />
-    </section>
+    <a class="hub-card" href="pocket/index.html">
+      <span class="hub-card__title">Pocket</span>
+      <span class="hub-card__sub">Pocket edition tracker</span>
+    </a>
 
-    <!-- Section to display summary statistics (total, collected, favorites) -->
-    <section id="summary" class="summary"></section>
-    
-    <!-- Container for the list of entities (cards) -->
-    <section id="entityList" class="entity-list"></section>
+    <a class="hub-card" href="characters/index.html">
+      <span class="hub-card__title">&#9876; Player Characters</span>
+      <span class="hub-card__sub">TTRPG character sheets</span>
+    </a>
+
   </main>
 
-  <script type="module" src="app.js"></script>
 </body>
 </html>

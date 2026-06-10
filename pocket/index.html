@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pocket Tracker</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body>
+  <header>
+    <h1>Pocket Tracker</h1>
+    <p>Local-only progress tracker</p>
+    <a href="../index.html" id="pcBtn">&#8592; Home</a>
+  </header>
+
+  <main>
+    <section class="controls">
+      <input type="text" id="searchInput" placeholder="Search..." />
+      <button id="exportBtn">Export Save</button>
+      <button id="importBtn">Import Save</button>
+      <button id="resetBtn">Reset Save</button>
+      <input type="file" id="importFile" accept=".json" hidden />
+    </section>
+
+    <section id="summary" class="summary"></section>
+    <section id="entityList" class="entity-list"></section>
+  </main>
+
+  <script type="module">
+    import { getAllProgress, bulkImportProgress, clearProgress } from "../db.js";
+    import { renderSummary, renderEntityList } from "../ui.js";
+
+    const GAME_KEY = "Pocket";
+
+    const searchInput  = document.getElementById("searchInput");
+    const entityList   = document.getElementById("entityList");
+    const summary      = document.getElementById("summary");
+    const exportBtn    = document.getElementById("exportBtn");
+    const importBtn    = document.getElementById("importBtn");
+    const importFile   = document.getElementById("importFile");
+    const resetBtn     = document.getElementById("resetBtn");
+
+    let cachedEntities = null;
+
+    async function loadGameData() {
+      if (cachedEntities) return cachedEntities;
+      const res = await fetch(`../data/${GAME_KEY}/entities.json`);
+      if (!res.ok) throw new Error(`Failed to load data for ${GAME_KEY}`);
+      cachedEntities = await res.json();
+      return cachedEntities;
+    }
+
+    function mergeEntitiesWithProgress(entities, progressRecords) {
+      const progressMap = new Map(progressRecords.map(p => [p.entityId, p]));
+      return entities.map(entity => ({
+        ...entity,
+        progress: progressMap.get(entity.id) || {
+          entityId: entity.id, collected: false, favorite: false, level: 0, notes: ""
+        }
+      }));
+    }
+
+    async function refresh() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      const entities   = await loadGameData();
+      const progress   = await getAllProgress(GAME_KEY);
+      let merged       = mergeEntitiesWithProgress(entities, progress);
+      if (searchTerm) {
+        merged = merged.filter(item =>
+          item.name.toLowerCase().includes(searchTerm) ||
+          item.id.toLowerCase().includes(searchTerm) ||
+          (item.category && item.category.toLowerCase().includes(searchTerm)) ||
+          (item.tags && item.tags.some(tag => tag.toLowerCase().includes(searchTerm)))
+        );
+      }
+      renderSummary(summary, entities, mergeEntitiesWithProgress(entities, progress));
+      renderEntityList(entityList, GAME_KEY, merged, refresh);
+    }
+
+    function downloadJson(filename, data) {
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement("a");
+      a.href = url; a.download = filename; a.click();
+      URL.revokeObjectURL(url);
+    }
+
+    exportBtn.addEventListener("click", async () => {
+      const progress = await getAllProgress(GAME_KEY);
+      downloadJson(`${GAME_KEY}_save.json`, { game: GAME_KEY, exportedAt: new Date().toISOString(), progress });
+    });
+
+    importBtn.addEventListener("click", () => importFile.click());
+
+    importFile.addEventListener("change", async (event) => {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const data = JSON.parse(await file.text());
+        if (!data.game || !Array.isArray(data.progress)) throw new Error("Invalid save file format.");
+        if (data.game !== GAME_KEY) throw new Error("This save file is for a different game.");
+        await bulkImportProgress(data.game, data.progress);
+        await refresh();
+        alert("Save imported.");
+      } catch (error) {
+        alert(`Import failed: ${error.message}`);
+      } finally {
+        importFile.value = "";
+      }
+    });
+
+    resetBtn.addEventListener("click", async () => {
+      if (!confirm(`Delete all local progress for ${GAME_KEY}?`)) return;
+      await clearProgress(GAME_KEY);
+      await refresh();
+    });
+
+    searchInput.addEventListener("input", refresh);
+    refresh().catch(() => { entityList.innerHTML = `<p>Failed to load app data.</p>`; });
+  </script>
+</body>
+</html>
