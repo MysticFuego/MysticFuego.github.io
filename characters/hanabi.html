@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hanabi – Character Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  --accent: #2563eb;
+  --teal: #0891b2;
+  /* Rogue crimson/purple theme */
+  --rogue: #9333ea;
+  --rogue-bright: #c084fc;
+  --rogue-dim: #1a0a2e;
+  --rogue2: #be123c;
+  --rogue2-bright: #fb7185;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; color: #a5d0fb; }
+
+.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #0d0214 0%, #150820 40%, #0a0512 100%);
+  border: 1px solid var(--line2);
+  border-radius: 20px;
+  padding: 28px 32px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(147,51,234,.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(190,18,60,.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--rogue2) 0%, var(--rogue) 50%, var(--rogue-bright) 100%);
+  border-radius: 20px 20px 0 0;
+}
+.hero-avatar-wrap { position: relative; flex-shrink: 0; }
+.hero-avatar {
+  width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
+  border: 2px solid var(--line2); background: var(--panel);
+  box-shadow: 0 0 0 4px rgba(147,51,234,.15), 0 8px 32px rgba(0,0,0,.6);
+}
+.hero-class-icon {
+  position: absolute; bottom: -8px; right: -8px;
+  width: 32px; height: 32px; background: var(--rogue);
+  border-radius: 10px; border: 2px solid var(--bg);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.hero-info { flex: 1; min-width: 0; }
+.hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #f5f0ff; letter-spacing: .02em; line-height: 1.1; }
+.hero-sub { color: var(--muted); margin-top: 6px; font-size: 13px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.hero-sub .sep { color: var(--line2); }
+.hero-bio { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-bio span { color: var(--text); }
+
+.stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.stat-pill {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line2);
+  border-radius: 12px; padding: 8px 14px; min-width: 64px; gap: 1px;
+}
+.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
+.stat-pill.sp-hp .sp-val { color: var(--good); }
+.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
+.stat-pill.sp-sneak .sp-val { color: var(--rogue2-bright); }
+#inspirationPill { cursor: pointer; transition: background .15s, border-color .15s; user-select: none; }
+#inspirationPill.on { background: rgba(147,51,234,.2); border-color: var(--rogue-bright); }
+#inspirationPill.on .sp-val { color: var(--rogue-bright); }
+
+/* ── CURRENCY ── */
+.currency-bar { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 10px; }
+.coin {
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(255,255,255,.03); border: 1px solid var(--line2);
+  border-radius: 10px; padding: 6px 12px; font-size: 13px; font-weight: 600;
+}
+.coin .coin-icon { font-size: 14px; }
+.coin.gp .coin-val { color: var(--warn); }
+.coin.sp .coin-val { color: #cbd5e1; }
+.coin.cp .coin-val { color: #b45309; }
+
+/* ── TABS ── */
+.tabs-bar {
+  display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.tab-btn {
+  flex: 1; min-width: 90px; padding: 9px 14px; border: none; border-radius: 10px;
+  background: transparent; color: var(--muted); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background .15s, color .15s; white-space: nowrap;
+}
+.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── LAYOUT ── */
+.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.stack { display: grid; gap: 16px; align-content: start; }
+
+/* ── PANELS ── */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.panel-title {
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.panel-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* ── ABILITY SCORES ── */
+.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ability-card {
+  background: var(--panel2); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px 10px; text-align: center; position: relative; overflow: hidden;
+}
+.ability-card .ab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; color: var(--text); }
+.ability-card .ab-mod { font-size: 15px; font-weight: 700; color: var(--good); }
+.ability-card .ab-mod.neg { color: var(--danger); }
+.ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--rogue-bright); }
+
+/* ── STAT ROWS ── */
+.stat-list { display: flex; flex-direction: column; gap: 2px; }
+.stat-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; transition: background .1s; }
+.stat-row:hover { background: rgba(255,255,255,.03); }
+.prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; }
+.prof-dot.filled { background: var(--rogue-bright); border-color: var(--rogue-bright); }
+.prof-dot.expertise { background: var(--rogue2-bright); border-color: var(--rogue2-bright); width: 12px; height: 12px; }
+.stat-name { flex: 1; color: var(--text); font-size: 13px; }
+.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
+.stat-tag { font-size: 10px; color: var(--rogue2-bright); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.stat-bonus { font-size: 13px; font-weight: 700; width: 36px; text-align: right; color: var(--good); }
+.stat-bonus.neg { color: var(--danger); }
+.stat-bonus.zero { color: var(--muted); }
+
+/* ── TRACKERS ── */
+.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.tracker-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.tracker-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+.hp-display { display: flex; align-items: baseline; gap: 6px; }
+.hp-input {
+  width: 72px; background: var(--panel3); color: var(--text);
+  border: 1.5px solid var(--line2); border-radius: 10px; padding: 8px 10px;
+  font-size: 22px; font-weight: 800; text-align: center; transition: border-color .15s, color .15s;
+}
+.hp-input:focus { outline: none; border-color: var(--rogue); }
+.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
+.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
+.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
+.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
+
+/* ── DOTS ── */
+.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.dot {
+  width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--line2);
+  background: var(--panel3); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700;
+  transition: background .1s, border-color .1s; display: flex; align-items: center; justify-content: center;
+}
+.dot:hover { border-color: var(--muted2); }
+.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+
+/* ── DEATH SAVES ── */
+.death-panel {
+  background: rgba(63,31,38,.35); border: 1px solid #7f1d1d; border-radius: 14px;
+  padding: 16px; margin-top: 12px; display: none;
+}
+.death-panel h3 { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 12px; }
+.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.death-success .death-label { color: var(--good); }
+.death-fail .death-label { color: var(--danger); }
+
+/* ── SNEAK ATTACK CARD ── */
+.sneak-card {
+  background: rgba(190,18,60,.08);
+  border: 1px solid rgba(251,113,133,.2);
+  border-radius: 14px; padding: 16px;
+}
+.sneak-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--rogue2-bright); margin-bottom: 8px; }
+.sneak-dice { font-size: 28px; font-weight: 800; color: var(--rogue2-bright); }
+.sneak-note { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+/* ── CUNNING ACTION CARD ── */
+.cunning-card {
+  background: rgba(147,51,234,.08);
+  border: 1px solid rgba(192,132,252,.2);
+  border-radius: 14px; padding: 16px;
+}
+.cunning-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--rogue-bright); margin-bottom: 8px; }
+
+/* ── CONCENTRATION ── */
+.conc-toggle {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  background: var(--panel2); border: 1px solid var(--line); border-radius: 12px;
+  cursor: pointer; margin-bottom: 12px; transition: border-color .15s;
+}
+.conc-toggle:hover { border-color: var(--line2); }
+.conc-toggle.active { border-color: var(--rogue-bright); background: rgba(147,51,234,.07); }
+.conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: background .15s, border-color .15s; }
+.conc-dot.on { background: var(--rogue-bright); border-color: var(--rogue-bright); }
+.conc-label { font-size: 13px; font-weight: 600; color: var(--muted); flex: 1; }
+.conc-toggle.active .conc-label { color: var(--rogue-bright); }
+.conc-body { display: none; }
+.conc-body.open { display: block; }
+.field-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+.text-field {
+  width: 100%; background: var(--panel3); color: var(--text); border: 1px solid var(--line2);
+  border-radius: 10px; padding: 9px 12px; font: inherit; resize: vertical; transition: border-color .15s; margin-bottom: 10px;
+}
+.text-field:focus { outline: none; border-color: var(--rogue-bright); }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--panel2);
+  color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 8px 14px;
+  font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .1s, border-color .1s; white-space: nowrap;
+}
+.btn:hover { background: var(--panel3); border-color: var(--muted2); }
+.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
+.btn.btn-danger:hover { background: var(--danger-dim); }
+.btn.btn-rest { border-color: var(--rogue); color: var(--rogue-bright); }
+.btn.btn-rest:hover { background: var(--rogue-dim); }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+.roll-btn {
+  display: inline-flex; align-items: center; gap: 5px; background: var(--panel2);
+  color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 6px 11px;
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .1s, border-color .1s;
+}
+.roll-btn:hover { background: rgba(147,51,234,.15); border-color: var(--rogue); color: var(--rogue-bright); }
+.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
+
+/* ── ROLL LOG ── */
+.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.roll-log { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; }
+.roll-entry { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
+.roll-entry-label { color: var(--muted); font-size: 12px; }
+.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
+.roll-entry-total.nat20 { color: var(--rogue-bright); }
+.roll-entry-total.nat1 { color: var(--danger); }
+.roll-entry-detail { font-size: 11px; color: var(--muted); }
+.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
+.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
+
+/* ── WEAPON CARDS ── */
+.weapon-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.weapon-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.weapon-card.magic { border-color: rgba(147,51,234,.4); background: rgba(147,51,234,.06); }
+.weapon-name { font-weight: 700; font-size: 14px; }
+.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
+.weapon-props { font-size: 11px; color: var(--muted); }
+.weapon-magic { font-size: 11px; color: var(--rogue-bright); }
+
+/* ── ACTION CARDS ── */
+.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
+.action-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.action-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.action-card-title.atk { color: var(--danger); }
+.action-card-title.cun { color: var(--rogue-bright); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--teal); }
+.action-card-title.oth { color: var(--muted); }
+.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.link-list li a { font-size: 13px; }
+.link-list li { font-size: 13px; }
+
+/* ── FEATURES ── */
+.feature-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.feature-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+
+/* ── REMINDER ── */
+.reminder { background: var(--rogue-dim); border: 1px solid rgba(147,51,234,.25); border-radius: 14px; padding: 16px; }
+.reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(147,51,234,.1); font-size: 13px; color: #e9d5ff; }
+.reminder .reminder-item:last-child { border-bottom: none; }
+.reminder .reminder-item::before { content: '🗡️'; flex-shrink: 0; }
+
+/* ── ITEMS ── */
+.item-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; display: flex; align-items: center; gap: 12px; }
+.item-name { font-weight: 600; font-size: 13px; flex: 1; }
+.item-qty { font-size: 12px; color: var(--muted); white-space: nowrap; }
+.item-note { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.item-magic { font-size: 11px; color: var(--rogue-bright); }
+.items-list { display: flex; flex-direction: column; gap: 8px; }
+
+/* ── EQUIP ── */
+.equip-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.equip-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.equip-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col{grid-template-columns:1fr 1fr} .weapon-grid{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:600px) { .page{padding:12px 14px 50px} .hero-name{font-size:22px} .equip-grid,.three-col{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .weapon-grid{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
+@media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn{display:none} .tab-pane{display:block!important} }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/Dynnoa/Data/assets/Hanabi-portrait.png" alt="Hanabi">
+    <div class="hero-class-icon">🗡️</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Hanabi</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/classes.html#rogue_xphb">Rogue 6</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/subclasses.html#mastermind_xphb">Mastermind</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/races.html#changeling_mpmm">Changeling</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/backgrounds.html#charlatan_xphb">Charlatan</a>
+    </div>
+    <div class="hero-bio">
+      Age: <span>27</span>
+      Gender: <span>Female</span>
+      Height: <span>6'10"</span>
+      Eyes: <span>Jade</span>
+      Hair: <span>Black</span>
+      Skin: <span>White</span>
+      Alignment: <span>Lawful Evil</span>
+      Faith: <span>Agnostic</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val">49/49</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Light armor + DEX +4">16</span></div>
+      <div class="stat-pill"><span class="sp-label">Initiative</span><span class="sp-val">+4</span></div>
+      <div class="stat-pill"><span class="sp-label">Speed</span><span class="sp-val">30 ft</span></div>
+      <div class="stat-pill"><span class="sp-label">Prof.</span><span class="sp-val">+3</span></div>
+      <div class="stat-pill sp-sneak"><span class="sp-label">Sneak Atk</span><span class="sp-val">3d6</span></div>
+      <div class="stat-pill"><span class="sp-label">Passive Perc</span><span class="sp-val">18</span></div>
+      <div class="stat-pill"><span class="sp-label">Passive Ins</span><span class="sp-val">15</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="combat">⚔️ Combat</button>
+  <button class="tab-btn" data-tab="abilities">🎲 Abilities</button>
+  <button class="tab-btn" data-tab="features">📜 Features</button>
+  <button class="tab-btn" data-tab="gear">🎒 Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title">❤️ Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="49" value="49">
+              <span class="hp-max">/ 49</span>
+            </div>
+            <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice (d8)</h3>
+            <div class="dots-row" id="hitDiceDots" data-key="hitDice" data-total="6"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Uncanny Dodge</h3>
+            <div style="font-size:12px;color:var(--muted);margin-top:4px;">Reaction — halve damage from one attack you can see</div>
+          </div>
+        </div>
+
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success"><div class="death-label">Successes</div><div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true"></div></div>
+            <div class="death-fail"><div class="death-label">Failures</div><div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true"></div></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;"><button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Sneak Attack + Cunning Action -->
+      <div class="two-col-eq">
+        <div class="sneak-card">
+          <h3>⚡ Sneak Attack</h3>
+          <div class="sneak-dice">3d6</div>
+          <div class="sneak-note">Once per turn — need adv on attack, or ally adjacent to target (no disadv)</div>
+        </div>
+        <div class="cunning-card">
+          <h3>🎭 Cunning Action</h3>
+          <ul class="link-list" style="margin-top:4px;">
+            <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a> (bonus)</li>
+            <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a> (bonus)</li>
+            <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a> (bonus)</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title">⚄ Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="4">Initiative +4</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="8">Perception +8</button>
+          <button class="roll-btn" data-label="Stealth" data-bonus="7">Stealth +7</button>
+          <button class="roll-btn" data-label="Deception" data-bonus="8">Deception +8</button>
+          <button class="roll-btn" data-label="Persuasion" data-bonus="8">Persuasion +8</button>
+          <button class="roll-btn" data-label="Intimidation" data-bonus="8">Intimidation +8</button>
+          <button class="roll-btn" data-label="Insight" data-bonus="5">Insight +5</button>
+          <button class="roll-btn" data-label="Investigation" data-bonus="4">Investigation +4</button>
+          <button class="roll-btn" data-label="Athletics" data-bonus="7">Athletics +7</button>
+          <button class="roll-btn" data-label="Rapier" data-bonus="7">Rapier +7</button>
+          <button class="roll-btn" data-label="Reszur" data-bonus="7">Reszur +7</button>
+          <button class="roll-btn" data-label="Dagger" data-bonus="7">Dagger +7</button>
+          <button class="roll-btn" data-label="Shortbow" data-bonus="7">Shortbow +7</button>
+        </div>
+        <div class="roll-log" id="rollLog"><div class="roll-log-empty">No rolls yet this session</div></div>
+      </div>
+
+    </div><!-- /left -->
+
+    <div class="stack">
+
+      <!-- Weapons -->
+      <div class="panel">
+        <div class="panel-title">⚔️ Weapons</div>
+        <div class="weapon-grid">
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#rapier_xphb">Rapier</a></div>
+            <div><button class="roll-btn" data-label="Rapier" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d8 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Martial</div>
+          </div>
+          <div class="weapon-card magic">
+            <div class="weapon-name">Reszur <span style="font-size:11px;color:var(--rogue-bright);">✦ Magic</span></div>
+            <div><button class="roll-btn" data-label="Reszur" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light · Thrown (20/60)</div>
+            <div class="weapon-magic">Magic dagger — check DM for properties</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></div>
+            <div><button class="roll-btn" data-label="Dagger" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light · Thrown (20/60)</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a></div>
+            <div><button class="roll-btn" data-label="Shortbow" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 piercing</div>
+            <div class="weapon-props">DEX · Range 80/320 · Two-Handed · Ammo</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--muted);padding:8px 10px;background:rgba(251,113,133,.06);border:1px solid rgba(251,113,133,.15);border-radius:10px;">
+          🗡️ Add <strong style="color:var(--rogue2-bright);">+3d6 Sneak Attack</strong> damage when conditions are met — once per turn
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title">🎯 Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title atk">⚔ Attack</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/items.html#rapier_xphb">Rapier</a></li>
+              <li>Reszur (magic dagger)</li>
+              <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></li>
+              <li><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a></li>
+              <li><a href="https://5e.tools/variantrules.html#unarmed strike_xphb">Grapple / Shove</a></li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title cun">🎭 Mastermind</div>
+            <ul class="link-list">
+              <li style="font-size:12px;color:var(--muted);">Help as bonus action</li>
+              <li style="font-size:12px;">Help from 30 ft away</li>
+              <li style="font-size:12px;">Can Help to grant Sneak Attack without adjacency</li>
+              <li><a href="https://5e.tools/subclasses.html#mastermind_xphb">Master of Intrigue</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="action-section bottom">
+          <div class="action-card">
+            <div class="action-card-title bon">★ Bonus Action</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a> (Mastermind)</li>
+              <li>Off-hand weapon attack</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/classes.html#rogue_xphb">Uncanny Dodge</a></li>
+              <li>Opportunity Attack</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#ready_xphb">Ready</a></li>
+              <li><a href="https://5e.tools/actions.html#search_xphb">Search</a></li>
+              <li>Use item (Potion, Scroll…)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reminders -->
+      <div class="panel">
+        <div class="panel-title">🗡️ Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item">Sneak Attack requires adv OR an ally adj to target — once per turn, any attack</div>
+          <div class="reminder-item">Mastermind Help works from 30 ft — use it to grant Sneak Attack to allies too</div>
+          <div class="reminder-item">Uncanny Dodge (reaction) — halve attack damage from one seen attacker</div>
+          <div class="reminder-item">Changeling Shapechanger — change appearance as an action (Fey creature type)</div>
+          <div class="reminder-item">Thieves' Cant — secret language; hidden messages in normal speech</div>
+          <div class="reminder-item">False Identity — fake documentation and established contacts</div>
+          <div class="reminder-item">Spell Scroll of Invisibility in pack — one use, INT check if not a Wizard</div>
+        </div>
+      </div>
+
+    </div><!-- /right -->
+  </div>
+</div>
+
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">💪 Ability Scores</div>
+        <div class="abilities-grid">
+          <div class="ability-card"><div class="ab-label">Strength</div><div class="ab-score">12</div><div class="ab-mod">+1</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Dexterity</div><div class="ab-score">18</div><div class="ab-mod">+4</div></div>
+          <div class="ability-card"><div class="ab-label">Constitution</div><div class="ab-score">15</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Intelligence</div><div class="ab-score">13</div><div class="ab-mod">+1</div></div>
+          <div class="ability-card"><div class="ab-label">Wisdom</div><div class="ab-score">15</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card"><div class="ab-label">Charisma</div><div class="ab-score">20</div><div class="ab-mod">+5</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--muted);">★ = Saving throw proficiency</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🛡 Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Strength</div><div class="stat-ability">STR</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dexterity</div><div class="stat-ability">DEX</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-ability">CON</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Intelligence</div><div class="stat-ability">INT</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Wisdom</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Charisma</div><div class="stat-ability">CHA</div><div class="stat-bonus">+5</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">🎲 Skills</div>
+        <div style="font-size:11px;color:var(--muted2);margin-bottom:8px;padding:4px 10px;">
+          <span style="color:var(--rogue2-bright);">◆</span> = Expertise (double prof) &nbsp;
+          <span style="color:var(--rogue-bright);">●</span> = Proficient
+        </div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot expertise"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-tag">EXP</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus">+8</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus">+8</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot expertise"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-tag">EXP</div><div class="stat-bonus">+8</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus">+8</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="panel-title">👁 Senses & Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">18</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Insight</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">15</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;">🗣 Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Common</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Thieves' Cant</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Draconic</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Dwarvish</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Gnomish</span>
+        </div>
+        <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Disguise Kit</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">INT/CHA</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Thieves' Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title">📜 Features & Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🧬 Race — Changeling (Fey)</div>
+        <ul class="link-list">
+          <li><strong>Creature Type:</strong> Fey</li>
+          <li><a href="https://5e.tools/races.html#changeling_mpmm">Shapechanger</a> — change appearance as an Action</li>
+          <li>Changeling Instincts — 2 skill proficiencies from Deception, Insight, Intimidation, Persuasion</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🗡️ Class — Rogue 6</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/classes.html#rogue_xphb">Expertise</a> — Athletics, Perception (double prof)</li>
+          <li><a href="https://5e.tools/classes.html#rogue_xphb">Sneak Attack</a> — 3d6 extra damage</li>
+          <li><a href="https://5e.tools/classes.html#rogue_xphb">Thieves' Cant</a></li>
+          <li><a href="https://5e.tools/classes.html#rogue_xphb">Cunning Action</a> — Dash/Disengage/Hide as bonus</li>
+          <li><a href="https://5e.tools/classes.html#rogue_xphb">Uncanny Dodge</a> — reaction, halve damage</li>
+          <li><a href="https://5e.tools/classes.html#rogue_xphb">Expertise ×2</a> — 2 more at level 6</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🎭 Subclass — Mastermind</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/subclasses.html#mastermind_xphb">Master of Intrigue</a> — Disguise Kit, Forgery Kit, Gaming Set prof; mimic accents/speech patterns</li>
+          <li><a href="https://5e.tools/subclasses.html#mastermind_xphb">Master of Tactics</a> — Help as bonus action from 30 ft; can target creatures that can see/hear you</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🃏 Background — Charlatan</div>
+        <ul class="link-list">
+          <li>False Identity — fake documentation, established acquaintances, disguise persona</li>
+          <li>Set of Weighted Dice (con artist tools)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🛡 Proficiencies</div>
+        <ul class="link-list">
+          <li>Light Armor</li>
+          <li>Simple Weapons</li>
+          <li>Hand Crossbow, Longsword, Rapier, Shortsword</li>
+          <li>Thieves' Tools, Disguise Kit</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> Spend Hit Dice (d8 + CON +2)</li>
+          <li><strong>Long Rest:</strong> Full HP, all Hit Dice restored</li>
+          <li>No spell slots or class resources to restore</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title">🎒 Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">⚔️ Weapons</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#rapier_xphb">Rapier</a> — 1d8 piercing, Finesse</li>
+          <li>Reszur — 1d4 piercing, Magic, Finesse, Light, Thrown 20/60</li>
+          <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> — 1d4 piercing, Light, Thrown 20/60</li>
+          <li><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a> — 1d6 piercing, Range 80/320</li>
+          <li><a href="https://5e.tools/items.html#arrow_xphb">Arrows</a> ×20</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🛡️ Armor & Worn</div>
+        <ul class="link-list">
+          <li>Fine Clothes (light armor)</li>
+          <li><a href="https://5e.tools/items.html#disguise kit_xphb">Disguise Kit</a></li>
+          <li><a href="https://5e.tools/items.html#thieves tools_xphb">Thieves' Tools</a></li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪄 Magic Items & Consumables</div>
+        <ul class="link-list">
+          <li>Reszur (magic dagger) — confirm properties with DM</li>
+          <li><a href="https://5e.tools/items.html#potion of healing_xphb">Potion of Healing</a> ×3 — 2d4+2 HP</li>
+          <li>Spell Scroll — Invisibility ×1</li>
+          <li><a href="https://5e.tools/items.html#dust of dryness_xdmg">Dust of Dryness</a> ×3</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🎒 Pack & Misc</div>
+        <ul class="link-list">
+          <li>Pouches ×2</li>
+          <li>Set of Weighted Dice</li>
+          <li>Letters ×7</li>
+          <li>Diary</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+<script>
+const STORE_PREFIX = "hanabi_v1_";
+const HP_MAX = 49;
+
+function save(k, v) { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); }
+function load(k, fallback) {
+  try { const v = JSON.parse(localStorage.getItem(STORE_PREFIX + k)); return v === null ? fallback : v; }
+  catch { return fallback; }
+}
+
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+/* ── DOTS ── */
+function makeDots(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const total = Number(el.dataset.total || 0);
+  const key = el.dataset.key;
+  const isSuccess = el.dataset.success === 'true';
+  const isFail = el.dataset.fail === 'true';
+  const used = load(key, []);
+  el.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'dot';
+    const isUsed = used.includes(i);
+    if (isSuccess && isUsed) btn.classList.add('success');
+    else if (isFail && isUsed) btn.classList.add('fail');
+    else if (isUsed) btn.classList.add('used');
+    btn.textContent = i + 1;
+    btn.addEventListener('click', () => {
+      const cur = load(key, []);
+      const idx = cur.indexOf(i);
+      idx >= 0 ? cur.splice(idx, 1) : cur.push(i);
+      save(key, cur);
+      makeDots(id);
+    });
+    el.appendChild(btn);
+  }
+}
+
+/* ── HP ── */
+function updateHp() {
+  const el = document.getElementById('hpCurrent');
+  const val = Number(el.value);
+  el.classList.remove('hp-warn', 'hp-danger');
+  const dp = document.getElementById('deathSavePanel');
+  if (val === 0) { el.classList.add('hp-danger'); dp.style.display = ''; }
+  else {
+    dp.style.display = 'none';
+    if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
+    else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
+  }
+}
+function bindInput(id, key) {
+  const el = document.getElementById(id); if (!el) return;
+  el.value = load(key, el.value);
+  el.addEventListener('input', () => { save(key, el.value); if (id === 'hpCurrent') updateHp(); });
+}
+
+/* ── INSPIRATION ── */
+(function() {
+  const pill = document.getElementById('inspirationPill');
+  const val_el = document.getElementById('inspirationVal');
+  let on = load('inspiration', false);
+  const update = () => { val_el.textContent = on ? '✦ ON' : '—'; pill.classList.toggle('on', on); };
+  update();
+  pill.addEventListener('click', () => { on = !on; save('inspiration', on); update(); });
+})();
+
+/* ── ROLL LOG ── */
+function addRoll(label, bonus) {
+  const die = Math.floor(Math.random() * 20) + 1;
+  const total = die + bonus;
+  const isNat20 = die === 20, isNat1 = die === 1;
+  const bonusStr = bonus >= 0 ? `+${bonus}` : `${bonus}`;
+  const log = document.getElementById('rollLog');
+  const empty = log.querySelector('.roll-log-empty');
+  if (empty) empty.remove();
+  const div = document.createElement('div');
+  div.className = 'roll-entry';
+  div.innerHTML = `
+    <div><div class="roll-entry-label">${label}</div><div class="roll-entry-detail">d20 (${die}) ${bonusStr}</div></div>
+    <div class="roll-entry-total${isNat20?' nat20':isNat1?' nat1':''}">${total}${isNat20?' 🎉':isNat1?' 💀':''}</div>
+    <div class="roll-entry-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+  `;
+  log.insertBefore(div, log.firstChild);
+  while (log.children.length > 12) log.removeChild(log.lastChild);
+}
+document.querySelectorAll('.roll-btn').forEach(btn => {
+  btn.addEventListener('click', () => addRoll(btn.dataset.label, Number(btn.dataset.bonus || 0)));
+});
+
+/* ── RESTS ── */
+document.getElementById('longRestBtn').addEventListener('click', () => {
+  save('hpCurrent', HP_MAX); save('hpTemp', '0');
+  save('hitDice', []); save('deathSuccess', []); save('deathFail', []);
+  document.getElementById('hpCurrent').value = HP_MAX;
+  document.getElementById('hpTemp').value = '0';
+  updateHp();
+  ['hitDiceDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+});
+document.getElementById('shortRestBtn').addEventListener('click', () => {
+  alert('Short Rest: Spend Hit Dice to recover HP.\nRoll d8 + CON mod (+2) per die spent.');
+});
+document.getElementById('clearDeathBtn').addEventListener('click', () => {
+  save('deathSuccess',[]); save('deathFail',[]);
+  makeDots('deathSuccessDots'); makeDots('deathFailDots');
+});
+document.getElementById('clearSessionBtn').addEventListener('click', () => {
+  if (!confirm('Clear all saved tracking data?')) return;
+  Object.keys(localStorage).forEach(k => { if (k.startsWith(STORE_PREFIX)) localStorage.removeItem(k); });
+  location.reload();
+});
+
+/* ── INIT ── */
+['hitDiceDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+bindInput('hpCurrent','hpCurrent');
+bindInput('hpTemp','hpTemp');
+updateHp();
+</script>
+</body>
+</html>

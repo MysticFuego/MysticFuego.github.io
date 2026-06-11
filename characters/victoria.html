@@ -1,0 +1,1463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Victoria – Character Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  /* Sea Druid teal/seafoam theme */
+  --druid: #0e7490;
+  --druid-bright: #22d3ee;
+  --druid-dim: #041920;
+  --fey: #0d9488;
+  --fey-bright: #2dd4bf;
+  --fey-dim: #021915;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; color: #a5d0fb; }
+.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #020e14 0%, #041820 40%, #020d10 100%);
+  border: 1px solid var(--line2); border-radius: 20px;
+  padding: 28px 32px; margin-bottom: 20px; overflow: hidden;
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(14,116,144,.1) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(13,148,136,.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--fey) 0%, var(--druid-bright) 50%, var(--fey-bright) 100%);
+  border-radius: 20px 20px 0 0;
+}
+.hero-avatar-wrap { position: relative; flex-shrink: 0; }
+.hero-avatar {
+  width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
+  border: 2px solid var(--line2); background: var(--panel);
+  box-shadow: 0 0 0 4px rgba(14,116,144,.2), 0 8px 32px rgba(0,0,0,.6);
+}
+.hero-class-icon {
+  position: absolute; bottom: -8px; right: -8px;
+  width: 32px; height: 32px; background: var(--druid);
+  border-radius: 10px; border: 2px solid var(--bg);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.hero-info { flex: 1; min-width: 0; }
+.hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #e0f8ff; letter-spacing: .02em; line-height: 1.1; }
+.hero-sub { color: var(--muted); margin-top: 6px; font-size: 13px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.hero-sub .sep { color: var(--line2); }
+.hero-bio { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-bio span { color: var(--text); }
+.stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.stat-pill {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line2);
+  border-radius: 12px; padding: 8px 14px; min-width: 64px; gap: 1px;
+}
+.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
+.stat-pill.sp-hp .sp-val { color: var(--good); }
+.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
+.stat-pill.sp-spell .sp-val { color: var(--druid-bright); }
+#inspirationPill { cursor: pointer; transition: background .15s, border-color .15s; user-select: none; }
+#inspirationPill.on { background: rgba(14,116,144,.2); border-color: var(--druid-bright); }
+#inspirationPill.on .sp-val { color: var(--druid-bright); }
+
+/* ── TABS ── */
+.tabs-bar { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-btn { flex: 1; min-width: 90px; padding: 9px 14px; border: none; border-radius: 10px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; transition: background .15s, color .15s; white-space: nowrap; }
+.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── LAYOUT ── */
+.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.stack { display: grid; gap: 16px; align-content: start; }
+
+/* ── PANELS ── */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.panel-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.panel-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* ── ABILITY SCORES ── */
+.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ability-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 10px; text-align: center; position: relative; }
+.ability-card .ab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; }
+.ability-card .ab-mod { font-size: 15px; font-weight: 700; color: var(--good); }
+.ability-card .ab-mod.neg { color: var(--danger); }
+.ability-card .ab-mod.zero { color: var(--muted); }
+.ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--druid-bright); }
+
+/* ── STAT ROWS ── */
+.stat-list { display: flex; flex-direction: column; gap: 2px; }
+.stat-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; transition: background .1s; }
+.stat-row:hover { background: rgba(255,255,255,.03); }
+.prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; }
+.prof-dot.filled { background: var(--druid-bright); border-color: var(--druid-bright); }
+.stat-name { flex: 1; color: var(--text); font-size: 13px; }
+.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
+.stat-bonus { font-size: 13px; font-weight: 700; width: 36px; text-align: right; color: var(--good); }
+.stat-bonus.neg { color: var(--danger); }
+.stat-bonus.zero { color: var(--muted); }
+
+/* ── TRACKERS ── */
+.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.tracker-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.tracker-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+.hp-display { display: flex; align-items: baseline; gap: 6px; }
+.hp-input { width: 72px; background: var(--panel3); color: var(--text); border: 1.5px solid var(--line2); border-radius: 10px; padding: 8px 10px; font-size: 22px; font-weight: 800; text-align: center; transition: border-color .15s, color .15s; }
+.hp-input:focus { outline: none; border-color: var(--druid); }
+.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
+.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
+.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
+.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
+
+/* ── DOTS ── */
+.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.dot { width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--line2); background: var(--panel3); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700; transition: background .1s, border-color .1s; display: flex; align-items: center; justify-content: center; }
+.dot:hover { border-color: var(--muted2); }
+.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.dot.slot-used { background: rgba(14,116,144,.25); color: var(--druid-bright); border-color: var(--druid); }
+.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.dot.fey { background: rgba(13,148,136,.2); color: var(--fey-bright); border-color: var(--fey); }
+
+/* ── DEATH SAVES ── */
+.death-panel { background: rgba(63,31,38,.35); border: 1px solid #7f1d1d; border-radius: 14px; padding: 16px; margin-top: 12px; display: none; }
+.death-panel h3 { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 12px; }
+.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.death-success .death-label { color: var(--good); }
+.death-fail .death-label { color: var(--danger); }
+
+/* ── BALM CARD ── */
+.balm-card { background: rgba(13,148,136,.08); border: 1px solid rgba(45,212,191,.2); border-radius: 14px; padding: 16px; }
+.balm-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--fey-bright); margin-bottom: 8px; }
+
+/* ── WILD SHAPE CARD ── */
+.wild-card { background: rgba(14,116,144,.08); border: 1px solid rgba(34,211,238,.2); border-radius: 14px; padding: 16px; }
+.wild-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--druid-bright); margin-bottom: 8px; }
+
+/* ── CONCENTRATION ── */
+.conc-toggle { display: flex; align-items: center; gap: 10px; padding: 12px 14px; background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; cursor: pointer; margin-bottom: 12px; transition: border-color .15s; }
+.conc-toggle:hover { border-color: var(--line2); }
+.conc-toggle.active { border-color: var(--fey-bright); background: rgba(13,148,136,.07); }
+.conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: all .15s; }
+.conc-dot.on { background: var(--fey-bright); border-color: var(--fey-bright); }
+.conc-label { font-size: 13px; font-weight: 600; color: var(--muted); flex: 1; }
+.conc-toggle.active .conc-label { color: var(--fey-bright); }
+.conc-body { display: none; }
+.conc-body.open { display: block; }
+.field-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+.text-field { width: 100%; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 9px 12px; font: inherit; resize: vertical; transition: border-color .15s; margin-bottom: 10px; }
+.text-field:focus { outline: none; border-color: var(--fey-bright); }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 6px; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 8px 14px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .1s, border-color .1s; white-space: nowrap; }
+.btn:hover { background: var(--panel3); border-color: var(--muted2); }
+.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
+.btn.btn-danger:hover { background: var(--danger-dim); }
+.btn.btn-rest { border-color: var(--druid); color: var(--druid-bright); }
+.btn.btn-rest:hover { background: var(--druid-dim); }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.roll-btn { display: inline-flex; align-items: center; gap: 5px; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 6px 11px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .1s, border-color .1s; }
+.roll-btn:hover { background: rgba(14,116,144,.15); border-color: var(--druid); color: var(--druid-bright); }
+.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
+
+/* ── ROLL LOG ── */
+.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.roll-log { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; }
+.roll-entry { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
+.roll-entry-label { color: var(--muted); font-size: 12px; }
+.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
+.roll-entry-total.nat20 { color: var(--druid-bright); }
+.roll-entry-total.nat1 { color: var(--danger); }
+.roll-entry-detail { font-size: 11px; color: var(--muted); }
+.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
+.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
+
+/* ── WEAPON CARDS ── */
+.weapon-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.weapon-card.magic { border-color: rgba(14,116,144,.4); background: rgba(14,116,144,.06); }
+.weapon-name { font-weight: 700; font-size: 14px; }
+.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
+.weapon-props { font-size: 11px; color: var(--muted); }
+
+/* ── ACTION CARDS ── */
+.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
+.action-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.action-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.action-card-title.atk { color: var(--danger); }
+.action-card-title.mag { color: var(--druid-bright); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--fey-bright); }
+.action-card-title.oth { color: var(--muted); }
+.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.link-list li { font-size: 13px; }
+.link-list li a { font-size: 13px; }
+
+/* ── SPELL SYSTEM ── */
+.spell-search-wrap { position: relative; margin-bottom: 14px; }
+.spell-search-wrap::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; }
+.spell-search { width: 100%; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 10px 12px 10px 36px; font: inherit; font-size: 13px; transition: border-color .15s; }
+.spell-search:focus { outline: none; border-color: var(--druid-bright); }
+.spells-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.spell-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; transition: border-color .15s; }
+.spell-card:hover { border-color: var(--line2); }
+.spell-card.conc-spell { border-left: 3px solid var(--fey-bright); }
+.spell-card.ritual-spell { border-left: 3px solid var(--warn); }
+.spell-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.spell-card-name { font-weight: 700; font-size: 13px; flex: 1; }
+.prep-toggle { background: none; border: 1.5px solid var(--line2); border-radius: 7px; color: var(--muted2); cursor: pointer; font-size: 12px; padding: 2px 7px; transition: all .15s; flex-shrink: 0; line-height: 1.4; }
+.prep-toggle:hover { border-color: var(--druid-bright); color: var(--druid-bright); }
+.prep-toggle.on { background: rgba(14,116,144,.15); border-color: var(--druid-bright); color: var(--druid-bright); }
+.spell-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.sbadge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; border: 1px solid; text-transform: uppercase; letter-spacing: .05em; }
+.sbadge.cantrip { background: rgba(8,145,178,.12); color: #67e8f9; border-color: rgba(8,145,178,.3); }
+.sbadge.ritual { background: rgba(251,191,36,.1); color: var(--warn); border-color: rgba(251,191,36,.25); }
+.sbadge.conc { background: rgba(45,212,191,.1); color: var(--fey-bright); border-color: rgba(45,212,191,.25); }
+.spell-level-header { grid-column: 1 / -1; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); padding: 14px 0 8px; display: flex; align-items: center; gap: 8px; }
+.spell-level-header::after { content:''; flex:1; height:1px; background:var(--line); }
+.spell-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; }
+.spell-meta-item { font-size: 11px; color: var(--muted); }
+.spell-meta-item span { color: var(--text); }
+.spell-dmg { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); padding: 4px 8px; background: rgba(251,191,36,.08); border-radius: 6px; }
+.prep-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+
+/* ── FEATURES ── */
+.feature-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.feature-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+
+/* ── REMINDER ── */
+.reminder { background: var(--druid-dim); border: 1px solid rgba(14,116,144,.3); border-radius: 14px; padding: 16px; }
+.reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(14,116,144,.1); font-size: 13px; color: #a5f3fc; }
+.reminder .reminder-item:last-child { border-bottom: none; }
+.reminder .reminder-item::before { content: '🌊'; flex-shrink: 0; }
+
+/* ── GEAR ── */
+.equip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.equip-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.equip-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:600px) { .page{padding:12px 14px 50px} .hero-name{font-size:22px} .spells-grid,.equip-grid,.three-col{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
+@media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn,.spell-search-wrap{display:none} .tab-pane{display:block!important} }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/Dynnoa/Data/Victoria-portrait.png" alt="Victoria">
+    <div class="hero-class-icon">🌊</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Victoria</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/classes.html#druid_xphb">Druid 6</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/subclasses.html#circle of dreams_xge">Circle of Dreams</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/races.html#sea elf_mpmm">Sea Elf</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/backgrounds.html#criminal_xphb">Criminal</a>
+    </div>
+    <div class="hero-bio">
+      Age: <span>21</span>
+      Gender: <span>Female</span>
+      Height: <span>5'11"</span>
+      Eyes: <span>Yellow</span>
+      Hair: <span>Blue</span>
+      Skin: <span>Blue</span>
+      Alignment: <span>Neutral Good</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">52/52</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Leather 11 + DEX +2 = 13 (or 15 with shield)">13</span></div>
+      <div class="stat-pill"><span class="sp-label">Initiative</span><span class="sp-val">+2</span></div>
+      <div class="stat-pill"><span class="sp-label">Speed</span><span class="sp-val">30 ft</span></div>
+      <div class="stat-pill"><span class="sp-label">Prof.</span><span class="sp-val">+3</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell DC</span><span class="sp-val">14</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell Atk</span><span class="sp-val">+6</span></div>
+      <div class="stat-pill"><span class="sp-label">Passive Perc</span><span class="sp-val">16</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="combat">⚔️ Combat</button>
+  <button class="tab-btn" data-tab="spells">✨ Spells</button>
+  <button class="tab-btn" data-tab="abilities">🎲 Abilities</button>
+  <button class="tab-btn" data-tab="features">📜 Features</button>
+  <button class="tab-btn" data-tab="gear">🎒 Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title">❤️ Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="52" value="52">
+              <span class="hp-max">/ 52</span>
+            </div>
+            <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice (d8)</h3>
+            <div class="dots-row" id="hitDiceDots" data-key="hitDice" data-total="6"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Wild Shape</h3>
+            <div class="dots-row" id="wildShapeDots" data-key="wildShape" data-total="2"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:6px;">CR 2 max · Recharges short/long rest</div>
+          </div>
+        </div>
+
+        <!-- Spell slots -->
+        <div style="margin-top:14px;">
+          <div class="panel-title" style="margin-bottom:10px;">✨ Spell Slots</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+            <div class="tracker-card">
+              <h3>Level 1 <span style="color:var(--druid-bright)">(4)</span></h3>
+              <div class="dots-row" id="slot1Dots" data-key="spellSlots1" data-total="4" data-slot="true"></div>
+            </div>
+            <div class="tracker-card">
+              <h3>Level 2 <span style="color:var(--druid-bright)">(3)</span></h3>
+              <div class="dots-row" id="slot2Dots" data-key="spellSlots2" data-total="3" data-slot="true"></div>
+            </div>
+            <div class="tracker-card">
+              <h3>Level 3 <span style="color:var(--druid-bright)">(3)</span></h3>
+              <div class="dots-row" id="slot3Dots" data-key="spellSlots3" data-total="3" data-slot="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success"><div class="death-label">Successes</div><div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true"></div></div>
+            <div class="death-fail"><div class="death-label">Failures</div><div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true"></div></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;"><button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Balm of the Summer Court -->
+      <div class="balm-card">
+        <h3>🌸 Balm of the Summer Court</h3>
+        <div style="font-size:13px;color:var(--text);margin-bottom:8px;">Bonus action — choose a creature within 120 ft, expend any number of d6s to restore <strong style="color:var(--fey-bright);">that many d6 HP</strong>. Target also gains temp HP equal to the roll.</div>
+        <div style="font-size:12px;color:var(--muted);margin-bottom:10px;">Pool of <strong style="color:var(--fey-bright);">6d6</strong> — replenishes on long rest</div>
+        <div class="dots-row" id="balmDots" data-key="balmPool" data-total="6" data-fey="true"></div>
+      </div>
+
+      <!-- Concentration -->
+      <div class="panel">
+        <div class="panel-title">🔮 Concentration</div>
+        <div class="conc-toggle" id="concToggle">
+          <div class="conc-dot" id="concDot"></div>
+          <div class="conc-label" id="concLabel">Not Concentrating</div>
+        </div>
+        <div class="conc-body" id="concBody">
+          <div class="field-label">Spell</div>
+          <input id="concSpell" class="text-field" type="text" placeholder="Spell name…">
+          <div class="field-label">Notes</div>
+          <textarea id="concNotes" class="text-field" rows="2" placeholder="Reminders…"></textarea>
+          <button class="btn btn-danger" id="clearConcBtn" style="font-size:12px;">Clear Concentration</button>
+        </div>
+      </div>
+
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title">⚄ Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="2">Initiative +2</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="6">Perception +6</button>
+          <button class="roll-btn" data-label="Animal Handling" data-bonus="6">Animal Handling +6</button>
+          <button class="roll-btn" data-label="Insight" data-bonus="6">Insight +6</button>
+          <button class="roll-btn" data-label="Stealth" data-bonus="5">Stealth +5</button>
+          <button class="roll-btn" data-label="Deception" data-bonus="3">Deception +3</button>
+          <button class="roll-btn" data-label="Spell Attack" data-bonus="6">Spell Atk +6</button>
+          <button class="roll-btn" data-label="Thorn Whip" data-bonus="6">Thorn Whip +6</button>
+          <button class="roll-btn" data-label="Dagger" data-bonus="5">Dagger +5</button>
+        </div>
+        <div class="roll-log" id="rollLog"><div class="roll-log-empty">No rolls yet this session</div></div>
+      </div>
+
+    </div><!-- /left -->
+
+    <div class="stack">
+
+      <!-- Wild Shape + weapons -->
+      <div class="panel">
+        <div class="panel-title">🐾 Wild Shape & Weapons</div>
+        <div class="wild-card" style="margin-bottom:12px;">
+          <h3>🐾 Wild Shape — CR 2</h3>
+          <div style="font-size:13px;color:var(--text);margin-bottom:6px;">Transform into any beast you've seen, CR 2 or lower</div>
+          <ul style="list-style:none;font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px;">
+            <li>✅ Swim speed beasts allowed (Sea Elf)</li>
+            <li>❌ No fly speed yet (requires level 8)</li>
+            <li>Keep mental stats, lose physical ones</li>
+            <li>Retain class features, can't cast spells</li>
+          </ul>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:10px;">
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></div>
+            <div><button class="roll-btn" data-label="Dagger" data-bonus="5">+5 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 2 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light · Thrown 20/60</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/spells.html#thorn whip_xphb">Thorn Whip</a> <span style="font-size:11px;color:var(--muted);">(cantrip)</span></div>
+            <div><button class="roll-btn" data-label="Thorn Whip" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">2d6 piercing · pull 10 ft toward you</div>
+            <div class="weapon-props">Melee spell attack · reach 30 ft</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title">🎯 Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title mag">🌊 Spells</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#call lightning_xphb">Call Lightning</a></li>
+              <li><a href="https://5e.tools/spells.html#tidal wave_xge">Tidal Wave</a></li>
+              <li><a href="https://5e.tools/spells.html#sleet storm_xphb">Sleet Storm</a></li>
+              <li><a href="https://5e.tools/spells.html#conjure animals_xphb">Conjure Animals</a></li>
+              <li><a href="https://5e.tools/spells.html#moonbeam_xphb">Moonbeam</a></li>
+              <li><a href="https://5e.tools/spells.html#entangle_xphb">Entangle</a></li>
+              <li><a href="https://5e.tools/spells.html#spike growth_xphb">Spike Growth</a></li>
+              <li><a href="https://5e.tools/spells.html#faerie fire_xphb">Faerie Fire</a></li>
+              <li><a href="https://5e.tools/spells.html#dispel magic_xphb">Dispel Magic</a></li>
+              <li><a href="https://5e.tools/spells.html#revivify_xphb">Revivify</a></li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title atk">⚔ Attack</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#thorn whip_xphb">Thorn Whip</a></li>
+              <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></li>
+              <li>Wild Shape attack (beast form)</li>
+            </ul>
+          </div>
+        </div>
+        <div class="action-section bottom">
+          <div class="action-card">
+            <div class="action-card-title bon">★ Bonus</div>
+            <ul class="link-list">
+              <li>Balm of the Summer Court</li>
+              <li><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a></li>
+              <li><a href="https://5e.tools/spells.html#flame blade_xphb">Flame Blade</a> (ongoing)</li>
+              <li><a href="https://5e.tools/spells.html#healing spirit_xge">Healing Spirit</a> (ongoing)</li>
+              <li>Wild Shape (enter/exit)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#absorb elements_xge">Absorb Elements</a></li>
+              <li>Opportunity Attack</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li>Use Broom of Flying</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reminders -->
+      <div class="panel">
+        <div class="panel-title">🌊 Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item">WIS spellcaster — Spell DC 14, attack +6</div>
+          <div class="reminder-item">Balm of the Summer Court — bonus action heal up to 6d6 within 120 ft; target gains temp HP equal to roll</div>
+          <div class="reminder-item">Wild Shape 2×/short rest — CR 2, swim speed ok, no fly</div>
+          <div class="reminder-item">Hearth of Moonlight and Shadow — during rest, invisible 30 ft sphere blocks scrying and detection</div>
+          <div class="reminder-item">Child of the Sea — breathe water, resistance to cold damage, swim speed 30 ft</div>
+          <div class="reminder-item">Friend of the Sea — communicate simple ideas to any beast with a swim speed</div>
+          <div class="reminder-item">Ritual spells (Detect Magic, Speak with Animals, etc.) cost no slots when cast as rituals</div>
+          <div class="reminder-item">Feywater Necklace & Broom of Flying equipped — confirm effects with DM</div>
+        </div>
+      </div>
+
+    </div><!-- /right -->
+  </div>
+</div>
+
+<!-- ═══ TAB: SPELLS ═══ -->
+<div class="tab-pane" id="tab-spells">
+
+  <div class="prep-panel" style="margin-bottom:16px;">
+    <div class="panel-title">
+      ⚡ Prepared Spells
+      <span id="preparedCount" style="font-size:12px;color:var(--druid-bright);font-weight:700;margin-left:4px;text-transform:none;letter-spacing:0;">0 / 9</span>
+      <span style="font-size:11px;color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0;margin-left:6px;">WIS mod (3) + Druid level (6) = 9 max</span>
+    </div>
+    <div id="preparedEmpty" style="color:var(--muted);font-size:13px;padding:4px 0 8px;">Click ✦ on any spell below to mark it prepared.</div>
+    <div class="spells-grid" id="preparedList"></div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">📖 Full Spell List</div>
+    <div class="spell-search-wrap">
+      <input id="spellSearch" class="spell-search" type="search" placeholder="Filter spells by name…">
+    </div>
+
+    <div class="spells-grid" id="spellGrid">
+
+      <!-- CANTRIP -->
+      <div class="spell-level-header">Cantrips</div>
+
+      <div class="spell-card" data-name="thorn whip" data-level="0">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#thorn whip_xphb">Thorn Whip</a></div></div>
+        <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Components <span>V, S, M</span></div></div>
+        <div class="spell-dmg">Spell atk +6 · 2d6 piercing · pull target 10 ft closer</div>
+      </div>
+
+      <!-- LEVEL 1 -->
+      <div class="spell-level-header" data-level="1">Level 1 <span style="color:var(--druid-bright);margin-left:6px;font-size:11px;">— 4 slots</span></div>
+
+      <div class="spell-card" data-name="absorb elements" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#absorb elements_xge">Absorb Elements</a></div><button class="prep-toggle" data-spell="absorb elements">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Reaction</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>1 round</span></div></div>
+        <div class="spell-dmg">Halve incoming elemental dmg · next melee +1d6 same type</div>
+      </div>
+
+      <div class="spell-card" data-name="animal friendship" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#animal friendship_xphb">Animal Friendship</a></div><button class="prep-toggle" data-spell="animal friendship">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>24 hours</span></div><div class="spell-meta-item">Save <span>WIS DC 14</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="beast bond" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#beast bond_xge">Beast Bond</a></div><button class="prep-toggle" data-spell="beast bond">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+        <div class="spell-dmg">Telepathic bond with a beast; it has advantage on attacks against creatures you attack</div>
+      </div>
+
+      <div class="spell-card" data-name="charm person" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#charm person_xphb">Charm Person</a></div><button class="prep-toggle" data-spell="charm person">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div><div class="spell-meta-item">Save <span>WIS DC 14</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="create or destroy water" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#create or destroy water_xphb">Create or Destroy Water</a></div><button class="prep-toggle" data-spell="create or destroy water">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="cure wounds" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#cure wounds_xphb">Cure Wounds</a></div><button class="prep-toggle" data-spell="cure wounds">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+        <div class="spell-dmg">Heals 1d8 + 3</div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="detect magic" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#detect magic_xphb">Detect Magic</a></div><button class="prep-toggle" data-spell="detect magic">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="detect poison and disease" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#detect poison and disease_xphb">Detect Poison and Disease</a></div><button class="prep-toggle" data-spell="detect poison and disease">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="earth tremor" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#earth tremor_xge">Earth Tremor</a></div><button class="prep-toggle" data-spell="earth tremor">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>10 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">1d6 bludgeoning · difficult terrain on fail</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="entangle" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#entangle_xphb">Entangle</a></div><button class="prep-toggle" data-spell="entangle">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>90 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>STR DC 14</span></div></div>
+        <div class="spell-dmg">20 ft square restrained on fail · difficult terrain</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="faerie fire" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#faerie fire_xphb">Faerie Fire</a></div><button class="prep-toggle" data-spell="faerie fire">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">Outlined · adv on attacks · can't be invisible</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="fog cloud" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#fog cloud_xphb">Fog Cloud</a></div><button class="prep-toggle" data-spell="fog cloud">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="goodberry" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#goodberry_xphb">Goodberry</a></div><button class="prep-toggle" data-spell="goodberry">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>24 hours</span></div></div>
+        <div class="spell-dmg">Up to 10 berries, each heals 1 HP and provides nourishment</div>
+      </div>
+
+      <div class="spell-card" data-name="healing word" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a></div><button class="prep-toggle" data-spell="healing word">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Bonus</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+        <div class="spell-dmg">Heals 1d4 + 3</div>
+      </div>
+
+      <div class="spell-card" data-name="ice knife" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#ice knife_xphb">Ice Knife</a></div><button class="prep-toggle" data-spell="ice knife">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">Spell atk +6 · 1d10 piercing · 2d6 cold in 5 ft on fail</div>
+      </div>
+
+      <div class="spell-card" data-name="jump" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#jump_xphb">Jump</a></div><button class="prep-toggle" data-spell="jump">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 min</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="longstrider" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#longstrider_xphb">Longstrider</a></div><button class="prep-toggle" data-spell="longstrider">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">+10 ft speed for 1 hour</div>
+      </div>
+
+      <div class="spell-card" data-name="protection from evil and good" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from evil and good_xphb">Protection from Evil &amp; Good</a></div><button class="prep-toggle" data-spell="protection from evil and good">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="purify food and drink" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#purify food and drink_xphb">Purify Food and Drink</a></div><button class="prep-toggle" data-spell="purify food and drink">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>10 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="snare" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#snare_xge">Snare</a></div><button class="prep-toggle" data-spell="snare">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>1 min</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>8 hours</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="speak with animals" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#speak with animals_xphb">Speak with Animals</a></div><button class="prep-toggle" data-spell="speak with animals">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="thunderwave" data-level="1">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#thunderwave_xphb">Thunderwave</a></div><button class="prep-toggle" data-spell="thunderwave">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Save <span>CON DC 14</span></div></div>
+        <div class="spell-dmg">2d8 thunder · pushed 10 ft on fail</div>
+      </div>
+
+      <!-- LEVEL 2 -->
+      <div class="spell-level-header" data-level="2">Level 2 <span style="color:var(--druid-bright);margin-left:6px;font-size:11px;">— 3 slots</span></div>
+
+      <div class="spell-card" data-name="air bubble" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#air bubble_scc">Air Bubble</a></div><button class="prep-toggle" data-spell="air bubble">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>24 hours</span></div></div>
+        <div class="spell-dmg">Up to 10 creatures can breathe underwater</div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="animal messenger" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#animal messenger_xphb">Animal Messenger</a></div><button class="prep-toggle" data-spell="animal messenger">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>24 hours</span></div></div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="augury" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#augury_xphb">Augury</a></div><button class="prep-toggle" data-spell="augury">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>1 min</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="barkskin" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#barkskin_xphb">Barkskin</a></div><button class="prep-toggle" data-spell="barkskin">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">Target's AC can't be lower than 16</div>
+      </div>
+
+      <div class="spell-card" data-name="continual flame" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#continual flame_xphb">Continual Flame</a></div><button class="prep-toggle" data-spell="continual flame">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>Permanent</span></div><div class="spell-meta-item">Components <span>V, S, M (50gp)</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="darkvision" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#darkvision_xphb">Darkvision</a></div><button class="prep-toggle" data-spell="darkvision">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>8 hours</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="dust devil" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#dust devil_xge">Dust Devil</a></div><button class="prep-toggle" data-spell="dust devil">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>STR DC 14</span></div></div>
+        <div class="spell-dmg">1d8 bludgeoning · pushed 10 ft · bonus action to move 30 ft</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="earthbind" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#earthbind_xge">Earthbind</a></div><button class="prep-toggle" data-spell="earthbind">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>300 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>STR DC 14</span></div></div>
+        <div class="spell-dmg">Flying speed drops to 0 — airborne creatures fall</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="enhance ability" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#enhance ability_xphb">Enhance Ability</a></div><button class="prep-toggle" data-spell="enhance ability">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="enlarge reduce" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#enlarge/reduce_xphb">Enlarge/Reduce</a></div><button class="prep-toggle" data-spell="enlarge reduce">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>CON DC 14</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="find traps" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#find traps_xphb">Find Traps</a></div><button class="prep-toggle" data-spell="find traps">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="flame blade" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#flame blade_xphb">Flame Blade</a></div><button class="prep-toggle" data-spell="flame blade">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Bonus</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+        <div class="spell-dmg">Spell atk +6 · 3d6 fire · scimitar-like blade · sheds light</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="flaming sphere" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#flaming sphere_xphb">Flaming Sphere</a></div><button class="prep-toggle" data-spell="flaming sphere">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">2d6 fire on contact · bonus action to ram</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="gust of wind" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#gust of wind_xphb">Gust of Wind</a></div><button class="prep-toggle" data-spell="gust of wind">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self (60 ft)</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>STR DC 14</span></div></div>
+        <div class="spell-dmg">60 ft line of wind · pushed 15 ft on fail</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="healing spirit" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#healing spirit_xge">Healing Spirit</a></div><button class="prep-toggle" data-spell="healing spirit">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Bonus</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div></div>
+        <div class="spell-dmg">Spirit heals 1d6 HP when creature ends turn in its space (3+WIS = 6 times total)</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="heat metal" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#heat metal_xphb">Heat Metal</a></div><button class="prep-toggle" data-spell="heat metal">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div></div>
+        <div class="spell-dmg">2d8 fire · holder disadv on attacks/checks · bonus action to repeat</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="hold person" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#hold person_xphb">Hold Person</a></div><button class="prep-toggle" data-spell="hold person">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>WIS DC 14</span></div></div>
+        <div class="spell-dmg">Paralyze humanoid · attacks vs it have adv · crits on hit</div>
+      </div>
+
+      <div class="spell-card" data-name="lesser restoration" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#lesser restoration_xphb">Lesser Restoration</a></div><button class="prep-toggle" data-spell="lesser restoration">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+        <div class="spell-dmg">End one disease or condition (blinded/deafened/paralyzed/poisoned)</div>
+      </div>
+
+      <div class="spell-card" data-name="locate object" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#locate object_xphb">Locate Object</a></div><button class="prep-toggle" data-spell="locate object">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="moonbeam" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#moonbeam_xphb">Moonbeam</a></div><button class="prep-toggle" data-spell="moonbeam">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>CON DC 14</span></div></div>
+        <div class="spell-dmg">2d10 radiant each turn in beam · shapechangers disadv</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="pass without trace" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#pass without trace_xphb">Pass without Trace</a></div><button class="prep-toggle" data-spell="pass without trace">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">+10 to Stealth for self and allies within 30 ft</div>
+      </div>
+
+      <div class="spell-card" data-name="protection from poison" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from poison_xphb">Protection from Poison</a></div><button class="prep-toggle" data-spell="protection from poison">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="spike growth" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#spike growth_xphb">Spike Growth</a></div><button class="prep-toggle" data-spell="spike growth">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>150 ft</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+        <div class="spell-dmg">2d4 piercing per 5 ft moved through · difficult terrain</div>
+      </div>
+
+      <div class="spell-card" data-name="summon beast" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#summon beast_xphb">Summon Beast</a></div><button class="prep-toggle" data-spell="summon beast">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>90 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div><div class="spell-meta-item">Components <span>V, S, M (feather/tuft/fin)</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="warding wind" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#warding wind_xge">Warding Wind</a></div><button class="prep-toggle" data-spell="warding wind">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+        <div class="spell-dmg">10 ft radius: deafened · ranged attacks disadv · gaseous forms pushed away</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="wither and bloom" data-level="2">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#wither and bloom_scc">Wither and Bloom</a></div><button class="prep-toggle" data-spell="wither and bloom">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Save <span>CON DC 14</span></div></div>
+        <div class="spell-dmg">2d6 necrotic to enemies (half save) · one creature in area regains 1d6+3 HP</div>
+      </div>
+
+      <!-- LEVEL 3 -->
+      <div class="spell-level-header" data-level="3">Level 3 <span style="color:var(--druid-bright);margin-left:6px;font-size:11px;">— 3 slots</span></div>
+
+      <div class="spell-card conc-spell" data-name="aura of vitality" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#aura of vitality_xphb">Aura of Vitality</a></div><button class="prep-toggle" data-spell="aura of vitality">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self (30 ft)</span></div><div class="spell-meta-item">Duration <span>1 min</span></div></div>
+        <div class="spell-dmg">Bonus action: heal creature in aura 2d6 HP</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="call lightning" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#call lightning_xphb">Call Lightning</a></div><button class="prep-toggle" data-spell="call lightning">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>10 min</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">3d10 lightning bolt as bonus action each turn (4d10 in storm)</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="conjure animals" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#conjure animals_xphb">Conjure Animals</a></div><button class="prep-toggle" data-spell="conjure animals">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="daylight" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#daylight_xphb">Daylight</a></div><button class="prep-toggle" data-spell="daylight">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">60 ft radius bright light, 120 ft dim</div>
+      </div>
+
+      <div class="spell-card" data-name="dispel magic" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#dispel magic_xphb">Dispel Magic</a></div><button class="prep-toggle" data-spell="dispel magic">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="elemental weapon" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#elemental weapon_xphb">Elemental Weapon</a></div><button class="prep-toggle" data-spell="elemental weapon">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">+1 to hit · +1d4 of chosen elemental damage type</div>
+      </div>
+
+      <div class="spell-card" data-name="erupting earth" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#erupting earth_xge">Erupting Earth</a></div><button class="prep-toggle" data-spell="erupting earth">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">3d12 bludgeoning · difficult terrain remains</div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="feign death" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#feign death_xphb">Feign Death</a></div><button class="prep-toggle" data-spell="feign death">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="flame arrows" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#flame arrows_xge">Flame Arrows</a></div><button class="prep-toggle" data-spell="flame arrows">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">+1d6 fire damage on 12 pieces of ammunition</div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="meld into stone" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#meld into stone_xphb">Meld into Stone</a></div><button class="prep-toggle" data-spell="meld into stone">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>8 hours</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="plant growth" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#plant growth_xphb">Plant Growth</a></div><button class="prep-toggle" data-spell="plant growth">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>150 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div></div>
+        <div class="spell-dmg">100 ft radius difficult terrain (½ movement per 1 ft)</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="protection from energy" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from energy_xphb">Protection from Energy</a></div><button class="prep-toggle" data-spell="protection from energy">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">Resistance to one energy type (acid/cold/fire/lightning/thunder)</div>
+      </div>
+
+      <div class="spell-card" data-name="revivify" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#revivify_xphb">Revivify</a></div><button class="prep-toggle" data-spell="revivify">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Touch</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Components <span>V, S, M (300gp diamond)</span></div></div>
+        <div class="spell-dmg">Revive creature dead &lt; 1 min — returns with 1 HP</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="sleet storm" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#sleet storm_xphb">Sleet Storm</a></div><button class="prep-toggle" data-spell="sleet storm">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>150 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">40 ft radius difficult terrain · prone on fail · heavily obscured</div>
+      </div>
+
+      <div class="spell-card" data-name="speak with plants" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#speak with plants_xphb">Speak with Plants</a></div><button class="prep-toggle" data-spell="speak with plants">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>Self</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="summon fey" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#summon fey_xphb">Summon Fey</a></div><button class="prep-toggle" data-spell="summon fey">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>90 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div><div class="spell-meta-item">Components <span>V, S, M (flower)</span></div></div>
+      </div>
+
+      <div class="spell-card" data-name="tidal wave" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#tidal wave_xge">Tidal Wave</a></div><button class="prep-toggle" data-spell="tidal wave">✦</button></div>
+        <div class="spell-badges"></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>Instant</span></div><div class="spell-meta-item">Save <span>DEX DC 14</span></div></div>
+        <div class="spell-dmg">4d8 bludgeoning · knocked prone on fail · extinguishes flames</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="wall of water" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#wall of water_xge">Wall of Water</a></div><button class="prep-toggle" data-spell="wall of water">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>60 ft</span></div><div class="spell-meta-item">Duration <span>10 min</span></div></div>
+        <div class="spell-dmg">30×10 ft wall · fire spells passing through deal half · ranged atks disadv</div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="water breathing" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#water breathing_xphb">Water Breathing</a></div><button class="prep-toggle" data-spell="water breathing">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>24 hours</span></div></div>
+        <div class="spell-dmg">Up to 10 creatures can breathe underwater (no slot as ritual)</div>
+      </div>
+
+      <div class="spell-card ritual-spell" data-name="water walk" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#water walk_xphb">Water Walk</a></div><button class="prep-toggle" data-spell="water walk">✦</button></div>
+        <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>30 ft</span></div><div class="spell-meta-item">Duration <span>1 hour</span></div></div>
+        <div class="spell-dmg">Up to 10 creatures walk on liquid surfaces (no slot as ritual)</div>
+      </div>
+
+      <div class="spell-card conc-spell" data-name="wind wall" data-level="3">
+        <div class="spell-card-header"><div class="spell-card-name"><a href="https://5e.tools/spells.html#wind wall_xphb">Wind Wall</a></div><button class="prep-toggle" data-spell="wind wall">✦</button></div>
+        <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
+        <div class="spell-meta"><div class="spell-meta-item">Action <span>Action</span></div><div class="spell-meta-item">Range <span>120 ft</span></div><div class="spell-meta-item">Duration <span>1 min</span></div><div class="spell-meta-item">Save <span>STR DC 14</span></div></div>
+        <div class="spell-dmg">3d8 bludgeoning · scattered ranged ammo · stops gases/tiny creatures</div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">💪 Ability Scores</div>
+        <div class="abilities-grid">
+          <div class="ability-card"><div class="ab-label">Strength</div><div class="ab-score">12</div><div class="ab-mod">+1</div></div>
+          <div class="ability-card"><div class="ab-label">Dexterity</div><div class="ab-score">15</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card"><div class="ab-label">Constitution</div><div class="ab-score">14</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Intelligence</div><div class="ab-score">8</div><div class="ab-mod neg">−1</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Wisdom</div><div class="ab-score">16</div><div class="ab-mod">+3</div></div>
+          <div class="ability-card"><div class="ab-label">Charisma</div><div class="ab-score">10</div><div class="ab-mod zero">+0</div></div>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--muted);padding:8px 10px;background:rgba(14,116,144,.06);border:1px solid rgba(14,116,144,.15);border-radius:10px;">
+          ⚠️ INT save proficiency is unusual for a Druid — the prof bonus (+3) applies to INT saves despite the −1 modifier, giving <strong style="color:var(--druid-bright);">+2 total</strong>.
+        </div>
+        <div style="margin-top:8px;font-size:12px;color:var(--muted);">★ = Saving throw proficiency</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🛡 Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Strength</div><div class="stat-ability">STR</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Dexterity</div><div class="stat-ability">DEX</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-ability">CON</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Intelligence</div><div class="stat-ability">INT</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Wisdom</div><div class="stat-ability">WIS</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Charisma</div><div class="stat-ability">CHA</div><div class="stat-bonus zero">+0</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">🎲 Skills</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus zero">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus zero">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus zero">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">+3</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">👁 Senses & Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name">Darkvision (Sea Elf)</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">60 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Swim Speed</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">30 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">16</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;">🗣 Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Common</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Aquan</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Druidic</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Elvish</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title">📜 Features & Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🌊 Race — Sea Elf</div>
+        <ul class="link-list">
+          <li>Darkvision 60 ft</li>
+          <li>Swim speed 30 ft</li>
+          <li><strong>Child of the Sea</strong> — breathe water, cold resistance</li>
+          <li><strong>Friend of the Sea</strong> — communicate with swimming beasts</li>
+          <li>Fey Ancestry — adv vs charm, immune to magic sleep</li>
+          <li>Trance — 4 hours rest = long rest</li>
+          <li>Keen Senses — Perception proficiency</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🌿 Class — Druid 6</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Spellcasting (WIS)</a></li>
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Druidic</a> — secret language</li>
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Wild Shape</a> — 2×/short rest, CR 2</li>
+          <li><a href="https://5e.tools/classes.html#druid_xphb">Ritual Casting</a></li>
+          <li>Timeless Body (at level 18)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🌸 Subclass — Circle of Dreams</div>
+        <ul class="link-list">
+          <li><strong>Balm of the Summer Court</strong> — 6d6 pool, bonus action heal within 120 ft (+ temp HP)</li>
+          <li><strong>Hearth of Moonlight and Shadow</strong> — during rest, 30 ft sphere hides from scrying and eavesdropping</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🗡 Background — Criminal</div>
+        <ul class="link-list">
+          <li>Criminal Contact — a reliable contact in criminal underground</li>
+          <li>Stealth & Deception proficiencies</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🛡 Proficiencies</div>
+        <ul class="link-list">
+          <li>Light & Medium Armor, Shields</li>
+          <li>Clubs, Daggers, Darts, Javelins, Maces, Quarterstaffs, Scimitars, Sickles, Slings, Spears</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> Wild Shape recharges, Balm does NOT</li>
+          <li><strong>Long Rest:</strong> Full HP, all spell slots, Balm pool restores</li>
+          <li>Sea Elf Trance: 4 hours = long rest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title">🎒 Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">⚔️ Weapons</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> — 1d4 piercing, Finesse, Light, Thrown 20/60</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🛡️ Armor & Worn</div>
+        <ul class="link-list">
+          <li>Leather Armor — AC 11 + DEX</li>
+          <li>Dark Common Clothes with Hood</li>
+          <li>Feywater Necklace (magic item — confirm with DM)</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪄 Magic Items</div>
+        <ul class="link-list">
+          <li>Feywater Necklace — arcane focus, magical</li>
+          <li>Broom of Flying — fly speed 50 ft</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🎒 Pack & Misc</div>
+        <ul class="link-list">
+          <li>Crowbar</li>
+          <li>Pouch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+<script>
+const STORE_PREFIX = "victoria_v1_";
+const HP_MAX = 52;
+
+function save(k, v) { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); }
+function load(k, fallback) {
+  try { const v = JSON.parse(localStorage.getItem(STORE_PREFIX + k)); return v === null ? fallback : v; }
+  catch { return fallback; }
+}
+
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+/* ── DOTS ── */
+function makeDots(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const total = Number(el.dataset.total || 0);
+  const key = el.dataset.key;
+  const isSuccess = el.dataset.success === 'true';
+  const isFail = el.dataset.fail === 'true';
+  const isSlot = el.dataset.slot === 'true';
+  const isFey = el.dataset.fey === 'true';
+  const used = load(key, []);
+  el.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'dot';
+    const isUsed = used.includes(i);
+    if (isSuccess && isUsed) btn.classList.add('success');
+    else if (isFail && isUsed) btn.classList.add('fail');
+    else if (isSlot && isUsed) btn.classList.add('slot-used');
+    else if (isFey && isUsed) btn.classList.add('fey');
+    else if (isUsed) btn.classList.add('used');
+    btn.textContent = i + 1;
+    btn.addEventListener('click', () => {
+      const cur = load(key, []);
+      const idx = cur.indexOf(i);
+      idx >= 0 ? cur.splice(idx, 1) : cur.push(i);
+      save(key, cur);
+      makeDots(id);
+    });
+    el.appendChild(btn);
+  }
+}
+
+/* ── HP ── */
+function updateHp() {
+  const el = document.getElementById('hpCurrent');
+  const val = Number(el.value);
+  el.classList.remove('hp-warn', 'hp-danger');
+  const dp = document.getElementById('deathSavePanel');
+  if (val === 0) { el.classList.add('hp-danger'); dp.style.display = ''; }
+  else {
+    dp.style.display = 'none';
+    if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
+    else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
+  }
+  const pill = document.getElementById('hpPill');
+  if (pill) pill.textContent = val + '/' + HP_MAX;
+}
+function bindInput(id, key) {
+  const el = document.getElementById(id); if (!el) return;
+  el.value = load(key, el.value);
+  el.addEventListener('input', () => { save(key, el.value); if (id === 'hpCurrent') updateHp(); });
+}
+function bindText(id, key) {
+  const el = document.getElementById(id); if (!el) return;
+  el.value = load(key, '');
+  el.addEventListener('input', () => save(key, el.value));
+}
+
+/* ── INSPIRATION ── */
+(function() {
+  const pill = document.getElementById('inspirationPill');
+  const val_el = document.getElementById('inspirationVal');
+  let on = load('inspiration', false);
+  const update = () => { val_el.textContent = on ? '✦ ON' : '—'; pill.classList.toggle('on', on); };
+  update();
+  pill.addEventListener('click', () => { on = !on; save('inspiration', on); update(); });
+})();
+
+/* ── CONCENTRATION ── */
+(function() {
+  const toggle = document.getElementById('concToggle');
+  const dot = document.getElementById('concDot');
+  const label = document.getElementById('concLabel');
+  const body = document.getElementById('concBody');
+  let on = load('concActive', false);
+  const update = () => { toggle.classList.toggle('active', on); dot.classList.toggle('on', on); body.classList.toggle('open', on); label.textContent = on ? 'Concentrating' : 'Not Concentrating'; };
+  update();
+  toggle.addEventListener('click', () => { on = !on; save('concActive', on); update(); });
+  bindText('concSpell', 'concSpell');
+  bindText('concNotes', 'concNotes');
+  document.getElementById('clearConcBtn').addEventListener('click', () => {
+    on = false; save('concActive', false); save('concSpell', ''); save('concNotes', '');
+    document.getElementById('concSpell').value = '';
+    document.getElementById('concNotes').value = '';
+    update();
+  });
+})();
+
+/* ── ROLL LOG ── */
+function addRoll(label, bonus) {
+  const die = Math.floor(Math.random() * 20) + 1;
+  const total = die + bonus;
+  const isNat20 = die === 20, isNat1 = die === 1;
+  const bonusStr = bonus >= 0 ? `+${bonus}` : `${bonus}`;
+  const log = document.getElementById('rollLog');
+  const empty = log.querySelector('.roll-log-empty');
+  if (empty) empty.remove();
+  const div = document.createElement('div');
+  div.className = 'roll-entry';
+  div.innerHTML = `
+    <div><div class="roll-entry-label">${label}</div><div class="roll-entry-detail">d20 (${die}) ${bonusStr}</div></div>
+    <div class="roll-entry-total${isNat20?' nat20':isNat1?' nat1':''}">${total}${isNat20?' 🎉':isNat1?' 💀':''}</div>
+    <div class="roll-entry-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+  `;
+  log.insertBefore(div, log.firstChild);
+  while (log.children.length > 12) log.removeChild(log.lastChild);
+}
+document.querySelectorAll('.roll-btn').forEach(btn => {
+  btn.addEventListener('click', () => addRoll(btn.dataset.label, Number(btn.dataset.bonus || 0)));
+});
+
+/* ── RESTS ── */
+document.getElementById('longRestBtn').addEventListener('click', () => {
+  save('hpCurrent', HP_MAX); save('hpTemp', '0');
+  save('spellSlots1',[]); save('spellSlots2',[]); save('spellSlots3',[]);
+  save('hitDice',[]); save('wildShape',[]); save('balmPool',[]);
+  save('deathSuccess',[]); save('deathFail',[]);
+  document.getElementById('hpCurrent').value = HP_MAX;
+  document.getElementById('hpTemp').value = '0';
+  updateHp();
+  ['slot1Dots','slot2Dots','slot3Dots','hitDiceDots','wildShapeDots','balmDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+});
+document.getElementById('shortRestBtn').addEventListener('click', () => {
+  save('wildShape', []);
+  makeDots('wildShapeDots');
+  alert('Short Rest: Wild Shape recharged.\nYou may also spend Hit Dice (d8 + CON mod +2) to recover HP.\nBalm of the Summer Court does NOT recharge on short rest.');
+});
+document.getElementById('clearDeathBtn').addEventListener('click', () => {
+  save('deathSuccess',[]); save('deathFail',[]);
+  makeDots('deathSuccessDots'); makeDots('deathFailDots');
+});
+document.getElementById('clearSessionBtn').addEventListener('click', () => {
+  if (!confirm('Clear all saved tracking data?')) return;
+  Object.keys(localStorage).forEach(k => { if (k.startsWith(STORE_PREFIX)) localStorage.removeItem(k); });
+  location.reload();
+});
+
+/* ── PREPARED SYSTEM ── */
+const PREP_KEY = 'preparedSpells';
+const MAX_PREPARED = 9;
+
+function loadPrepared() {
+  try { return JSON.parse(localStorage.getItem(STORE_PREFIX + PREP_KEY)) || []; }
+  catch { return []; }
+}
+function savePrepared(list) { localStorage.setItem(STORE_PREFIX + PREP_KEY, JSON.stringify(list)); }
+
+function buildPreparedSection() {
+  const prepared = loadPrepared();
+  const list = document.getElementById('preparedList');
+  const empty = document.getElementById('preparedEmpty');
+  const count = document.getElementById('preparedCount');
+  const over = prepared.length > MAX_PREPARED;
+  count.textContent = `${prepared.length} / ${MAX_PREPARED}`;
+  count.style.color = over ? 'var(--danger)' : prepared.length === MAX_PREPARED ? 'var(--warn)' : 'var(--druid-bright)';
+  list.innerHTML = '';
+  if (prepared.length === 0) { empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  prepared.forEach(spellName => {
+    const src = document.querySelector(`#spellGrid .spell-card[data-name="${spellName}"]`);
+    if (!src) return;
+    const clone = src.cloneNode(true);
+    const btn = clone.querySelector('.prep-toggle');
+    if (btn) {
+      btn.textContent = '✕'; btn.classList.add('on');
+      btn.addEventListener('click', e => { e.stopPropagation(); togglePrepared(spellName); });
+    }
+    list.appendChild(clone);
+  });
+}
+
+function togglePrepared(spellName) {
+  const card = document.querySelector(`#spellGrid .spell-card[data-name="${spellName}"]`);
+  if (card && card.dataset.level === '0') return;
+  let prepared = loadPrepared();
+  const idx = prepared.indexOf(spellName);
+  idx >= 0 ? prepared.splice(idx, 1) : prepared.push(spellName);
+  savePrepared(prepared);
+  refreshPreparedUI();
+}
+
+function refreshPreparedUI() {
+  const prepared = loadPrepared();
+  document.querySelectorAll('#spellGrid .prep-toggle').forEach(btn => {
+    const name = btn.dataset.spell;
+    const isOn = prepared.includes(name);
+    btn.classList.toggle('on', isOn);
+    btn.textContent = isOn ? '✦ on' : '✦';
+  });
+  buildPreparedSection();
+}
+
+document.querySelectorAll('#spellGrid .prep-toggle').forEach(btn => {
+  btn.addEventListener('click', e => { e.stopPropagation(); togglePrepared(btn.dataset.spell); });
+});
+
+document.getElementById('spellSearch').addEventListener('input', function() {
+  const q = this.value.toLowerCase().trim();
+  document.querySelectorAll('#spellGrid .spell-card, #spellGrid .spell-level-header').forEach(el => {
+    if (el.classList.contains('spell-level-header')) el.style.display = q ? 'none' : '';
+    else el.style.display = !q || (el.dataset.name || '').includes(q) ? '' : 'none';
+  });
+});
+
+/* ── INIT ── */
+['hitDiceDots','wildShapeDots','balmDots','slot1Dots','slot2Dots','slot3Dots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+bindInput('hpCurrent','hpCurrent');
+bindInput('hpTemp','hpTemp');
+updateHp();
+refreshPreparedUI();
+</script>
+</body>
+</html>

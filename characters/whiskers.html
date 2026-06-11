@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Whiskers – Character Sheet</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  --teal: #0891b2;
+  /* Tabaxi silver/slate theme */
+  --cat: #475569;
+  --cat-bright: #94a3b8;
+  --cat-dim: #0f1319;
+  --cat2: #6366f1;
+  --cat2-bright: #a5b4fc;
+  /* Rogue red accent */
+  --rogue: #be123c;
+  --rogue-bright: #fb7185;
+  /* Fighter gold accent */
+  --fighter: #b45309;
+  --fighter-bright: #fbbf24;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; color: #a5d0fb; }
+.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #050608 0%, #0d1018 40%, #07080e 100%);
+  border: 1px solid var(--line2); border-radius: 20px;
+  padding: 28px 32px; margin-bottom: 20px; overflow: hidden;
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(190,18,60,.07) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(180,83,9,.05) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--rogue) 0%, var(--cat-bright) 50%, var(--fighter-bright) 100%);
+  border-radius: 20px 20px 0 0;
+}
+.hero-avatar-wrap { position: relative; flex-shrink: 0; }
+.hero-avatar { width: 120px; height: 120px; border-radius: 18px; object-fit: cover; border: 2px solid var(--line2); background: var(--panel); box-shadow: 0 0 0 4px rgba(148,163,184,.1), 0 8px 32px rgba(0,0,0,.6); }
+.hero-class-icon { position: absolute; bottom: -8px; right: -8px; width: 32px; height: 32px; background: var(--cat); border-radius: 10px; border: 2px solid var(--bg); display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.hero-info { flex: 1; min-width: 0; }
+.hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #f1f5f9; letter-spacing: .02em; line-height: 1.1; }
+.hero-sub { color: var(--muted); margin-top: 6px; font-size: 13px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.hero-sub .sep { color: var(--line2); }
+.hero-bio { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-bio span { color: var(--text); }
+.stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.stat-pill { display: flex; flex-direction: column; align-items: center; background: rgba(255,255,255,.04); border: 1px solid var(--line2); border-radius: 12px; padding: 8px 14px; min-width: 64px; gap: 1px; }
+.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
+.stat-pill.sp-hp .sp-val { color: var(--good); }
+.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
+.stat-pill.sp-sneak .sp-val { color: var(--rogue-bright); }
+.stat-pill.sp-crit .sp-val { color: var(--fighter-bright); }
+#inspirationPill { cursor: pointer; transition: background .15s; user-select: none; }
+#inspirationPill.on { background: rgba(71,85,105,.25); border-color: var(--cat-bright); }
+#inspirationPill.on .sp-val { color: var(--cat-bright); }
+
+/* ── CLASS BADGES ── */
+.class-badges { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+.class-badge { font-size: 12px; font-weight: 700; padding: 4px 12px; border-radius: 8px; border: 1px solid; }
+.class-badge.rogue { background: rgba(190,18,60,.15); color: var(--rogue-bright); border-color: rgba(251,113,133,.3); }
+.class-badge.fighter { background: rgba(180,83,9,.15); color: var(--fighter-bright); border-color: rgba(251,191,36,.3); }
+
+/* ── TABS ── */
+.tabs-bar { display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap; }
+.tab-btn { flex: 1; min-width: 90px; padding: 9px 14px; border: none; border-radius: 10px; background: transparent; color: var(--muted); font-size: 13px; font-weight: 600; cursor: pointer; transition: background .15s, color .15s; white-space: nowrap; }
+.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── LAYOUT ── */
+.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.stack { display: grid; gap: 16px; align-content: start; }
+
+/* ── PANELS ── */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.panel-title { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+.panel-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* ── ABILITY SCORES ── */
+.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ability-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 14px 10px; text-align: center; position: relative; }
+.ability-card .ab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; }
+.ability-card .ab-mod { font-size: 15px; font-weight: 700; color: var(--good); }
+.ability-card .ab-mod.neg { color: var(--danger); }
+.ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--cat-bright); }
+
+/* ── STAT ROWS ── */
+.stat-list { display: flex; flex-direction: column; gap: 2px; }
+.stat-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; transition: background .1s; }
+.stat-row:hover { background: rgba(255,255,255,.03); }
+.prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; }
+.prof-dot.filled { background: var(--cat-bright); border-color: var(--cat-bright); }
+.prof-dot.expertise { background: var(--rogue-bright); border-color: var(--rogue-bright); width: 12px; height: 12px; }
+.stat-name { flex: 1; color: var(--text); font-size: 13px; }
+.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
+.stat-tag { font-size: 10px; color: var(--rogue-bright); font-weight: 700; text-transform: uppercase; }
+.stat-bonus { font-size: 13px; font-weight: 700; width: 36px; text-align: right; color: var(--good); }
+.stat-bonus.neg { color: var(--danger); }
+.stat-bonus.zero { color: var(--muted); }
+
+/* ── TRACKERS ── */
+.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.tracker-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.tracker-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+.hp-display { display: flex; align-items: baseline; gap: 6px; }
+.hp-input { width: 72px; background: var(--panel3); color: var(--text); border: 1.5px solid var(--line2); border-radius: 10px; padding: 8px 10px; font-size: 22px; font-weight: 800; text-align: center; transition: border-color .15s, color .15s; }
+.hp-input:focus { outline: none; border-color: var(--cat); }
+.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
+.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
+.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
+.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
+
+/* ── DOTS ── */
+.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.dot { width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--line2); background: var(--panel3); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700; transition: background .1s, border-color .1s; display: flex; align-items: center; justify-content: center; }
+.dot:hover { border-color: var(--muted2); }
+.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+
+/* ── DEATH SAVES ── */
+.death-panel { background: rgba(63,31,38,.35); border: 1px solid #7f1d1d; border-radius: 14px; padding: 16px; margin-top: 12px; display: none; }
+.death-panel h3 { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 12px; }
+.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.death-success .death-label { color: var(--good); }
+.death-fail .death-label { color: var(--danger); }
+
+/* ── HIGHLIGHT CARDS ── */
+.highlight-card { border-radius: 14px; padding: 16px; }
+.highlight-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+.highlight-card.rogue-card { background: rgba(190,18,60,.08); border: 1px solid rgba(251,113,133,.2); }
+.highlight-card.rogue-card h3 { color: var(--rogue-bright); }
+.highlight-card.fighter-card { background: rgba(180,83,9,.08); border: 1px solid rgba(251,191,36,.2); }
+.highlight-card.fighter-card h3 { color: var(--fighter-bright); }
+.highlight-card.cat-card { background: rgba(71,85,105,.08); border: 1px solid rgba(148,163,184,.2); }
+.highlight-card.cat-card h3 { color: var(--cat-bright); }
+
+/* ── BUTTONS ── */
+.btn { display: inline-flex; align-items: center; gap: 6px; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 8px 14px; font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .1s, border-color .1s; white-space: nowrap; }
+.btn:hover { background: var(--panel3); border-color: var(--muted2); }
+.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
+.btn.btn-danger:hover { background: var(--danger-dim); }
+.btn.btn-rest { border-color: var(--cat); color: var(--cat-bright); }
+.btn.btn-rest:hover { background: var(--cat-dim); }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.roll-btn { display: inline-flex; align-items: center; gap: 5px; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 6px 11px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .1s, border-color .1s; }
+.roll-btn:hover { background: rgba(71,85,105,.2); border-color: var(--cat-bright); color: var(--cat-bright); }
+.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
+
+/* ── ROLL LOG ── */
+.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.roll-log { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; }
+.roll-entry { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
+.roll-entry-label { color: var(--muted); font-size: 12px; }
+.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
+.roll-entry-total.nat20 { color: var(--fighter-bright); }
+.roll-entry-total.nat19 { color: var(--warn); }
+.roll-entry-total.nat1 { color: var(--danger); }
+.roll-entry-detail { font-size: 11px; color: var(--muted); }
+.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
+.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
+
+/* ── WEAPON CARDS ── */
+.weapon-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.weapon-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.weapon-name { font-weight: 700; font-size: 14px; }
+.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
+.weapon-props { font-size: 11px; color: var(--muted); }
+
+/* ── ACTION CARDS ── */
+.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
+.action-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.action-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.action-card-title.atk { color: var(--rogue-bright); }
+.action-card-title.sur { color: var(--fighter-bright); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--teal); }
+.action-card-title.oth { color: var(--muted); }
+.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.link-list li { font-size: 13px; }
+.link-list li a { font-size: 13px; }
+
+/* ── FEATURES ── */
+.feature-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.feature-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+
+/* ── REMINDER ── */
+.reminder { background: var(--cat-dim); border: 1px solid rgba(71,85,105,.3); border-radius: 14px; padding: 16px; }
+.reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(71,85,105,.15); font-size: 13px; color: #cbd5e1; }
+.reminder .reminder-item:last-child { border-bottom: none; }
+.reminder .reminder-item::before { content: '🐱'; flex-shrink: 0; }
+
+/* ── GEAR ── */
+.equip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.equip-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.equip-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col{grid-template-columns:1fr 1fr} .weapon-grid{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:600px) { .page{padding:12px 14px 50px} .hero-name{font-size:22px} .equip-grid,.three-col{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .weapon-grid{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
+@media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn{display:none} .tab-pane{display:block!important} }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/Dynnoa/Data/assets/Whiskers-portrait.png" alt="Whiskers">
+    <div class="hero-class-icon">🐱</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Whiskers</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/races.html#tabaxi_vgm">Tabaxi</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/backgrounds.html#far traveler_scag">Far Traveler</a>
+      <span class="sep">•</span>
+      Chaotic Good
+    </div>
+    <div class="class-badges">
+      <span class="class-badge rogue">🗡 Rogue 3 — Assassin</span>
+      <span class="class-badge fighter">⚔️ Fighter 3 — Champion</span>
+    </div>
+    <div class="hero-bio">
+      Age: <span>34 (cat years)</span>
+      Gender: <span>Male</span>
+      Height: <span>3'11"</span>
+      Eyes: <span>Green</span>
+      Hair: <span>Black</span>
+      Skin: <span>Pink</span>
+      Faith: <span>Skuma</span>
+      Size: <span>Small</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">49/49</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Leather 11 + DEX +4">15</span></div>
+      <div class="stat-pill"><span class="sp-label">Initiative</span><span class="sp-val">+4</span></div>
+      <div class="stat-pill"><span class="sp-label">Speed</span><span class="sp-val">25 ft</span></div>
+      <div class="stat-pill"><span class="sp-label">Prof.</span><span class="sp-val">+3</span></div>
+      <div class="stat-pill sp-sneak"><span class="sp-label">Sneak Atk</span><span class="sp-val">2d6</span></div>
+      <div class="stat-pill sp-crit"><span class="sp-label">Crit Range</span><span class="sp-val">19–20</span></div>
+      <div class="stat-pill"><span class="sp-label">Passive Perc</span><span class="sp-val">15</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="combat">⚔️ Combat</button>
+  <button class="tab-btn" data-tab="abilities">🎲 Abilities</button>
+  <button class="tab-btn" data-tab="features">📜 Features</button>
+  <button class="tab-btn" data-tab="gear">🎒 Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title">❤️ Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="49" value="49">
+              <span class="hp-max">/ 49</span>
+            </div>
+            <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice</h3>
+            <div style="font-size:11px;color:var(--muted);margin-bottom:6px;">d8 ×3 (Rogue)</div>
+            <div class="dots-row" id="hitDiceRogue" data-key="hitDiceRogue" data-total="3"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;margin-bottom:6px;">d10 ×3 (Fighter)</div>
+            <div class="dots-row" id="hitDiceFighter" data-key="hitDiceFighter" data-total="3"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Action Surge</h3>
+            <div class="dots-row" id="actionSurgeDots" data-key="actionSurge" data-total="1"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;">1×/short rest — take an extra action on your turn</div>
+          </div>
+        </div>
+
+        <!-- Second Wind -->
+        <div style="margin-top:12px;">
+          <div class="tracker-card">
+            <h3>Second Wind</h3>
+            <div class="dots-row" id="secondWindDots" data-key="secondWind" data-total="1"></div>
+            <div style="font-size:12px;color:var(--muted);margin-top:6px;">Bonus action — regain <strong style="color:var(--fighter-bright);">1d10 + 3 HP</strong> · 1×/short rest</div>
+          </div>
+        </div>
+
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success"><div class="death-label">Successes</div><div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true"></div></div>
+            <div class="death-fail"><div class="death-label">Failures</div><div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true"></div></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;"><button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button></div>
+        </div>
+
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Key abilities highlight -->
+      <div class="three-col">
+        <div class="highlight-card rogue-card">
+          <h3>⚡ Sneak Attack</h3>
+          <div style="font-size:22px;font-weight:800;color:var(--rogue-bright);margin-bottom:4px;">2d6</div>
+          <div style="font-size:12px;color:var(--muted);">Once/turn · adv on attack, OR ally adj to target · finesse/ranged</div>
+        </div>
+        <div class="highlight-card fighter-card">
+          <h3>💀 Improved Critical</h3>
+          <div style="font-size:22px;font-weight:800;color:var(--fighter-bright);margin-bottom:4px;">19–20</div>
+          <div style="font-size:12px;color:var(--muted);">Critical hit on 19 or 20, not just 20</div>
+        </div>
+        <div class="highlight-card cat-card">
+          <h3>🐱 Feline Agility</h3>
+          <div style="font-size:16px;font-weight:700;color:var(--cat-bright);margin-bottom:4px;">×2 Speed</div>
+          <div style="font-size:12px;color:var(--muted);">Double move speed for a turn · resets when you move 0 ft</div>
+        </div>
+      </div>
+
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title">⚄ Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="4" data-adv="true">Initiative +4</button>
+          <button class="roll-btn" data-label="Stealth" data-bonus="10">Stealth +10</button>
+          <button class="roll-btn" data-label="Sleight of Hand" data-bonus="10">Sleight of Hand +10</button>
+          <button class="roll-btn" data-label="Acrobatics" data-bonus="7">Acrobatics +7</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="5">Perception +5</button>
+          <button class="roll-btn" data-label="Investigation" data-bonus="6">Investigation +6</button>
+          <button class="roll-btn" data-label="Shortsword (Main)" data-bonus="7">Shortsword +7</button>
+          <button class="roll-btn" data-label="Shortsword (Off-hand)" data-bonus="7">Off-hand +7</button>
+          <button class="roll-btn" data-label="Cat's Claws" data-bonus="7">Cat's Claws +7</button>
+        </div>
+        <div class="roll-log" id="rollLog"><div class="roll-log-empty">No rolls yet this session</div></div>
+      </div>
+
+    </div><!-- /left -->
+
+    <div class="stack">
+
+      <!-- Weapons -->
+      <div class="panel">
+        <div class="panel-title">⚔️ Weapons & Attacks</div>
+        <div class="weapon-grid">
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#shortsword_xphb">Shortsword (Main)</a></div>
+            <div><button class="roll-btn" data-label="Shortsword (Main)" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name"><a href="https://5e.tools/items.html#shortsword_xphb">Shortsword (Off-hand)</a></div>
+            <div><button class="roll-btn" data-label="Shortsword (Off-hand)" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 piercing</div>
+            <div class="weapon-props">DEX · Bonus action · TWF adds modifier</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">Cat's Claws</div>
+            <div><button class="roll-btn" data-label="Cat's Claws" data-bonus="7">+7 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 slashing</div>
+            <div class="weapon-props">DEX · Unarmed · Climb speed 20 ft</div>
+          </div>
+          <div class="weapon-card" style="border-color:rgba(251,113,133,.25);background:rgba(190,18,60,.06);">
+            <div class="weapon-name" style="color:var(--rogue-bright);">+ Sneak Attack</div>
+            <div style="font-size:13px;color:var(--warn);font-weight:600;">+2d6 damage</div>
+            <div class="weapon-props">Once per turn · adv OR ally adj to target · no disadv</div>
+          </div>
+        </div>
+        <div style="margin-top:10px;font-size:12px;color:var(--muted);padding:8px 10px;background:rgba(251,191,36,.06);border:1px solid rgba(251,191,36,.15);border-radius:10px;">
+          💀 <strong style="color:var(--fighter-bright);">Crit on 19–20</strong> — with Assassinate (advantage on surprised targets), crits are common on the first round
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title">🎯 Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title atk">🗡 Attack</div>
+            <ul class="link-list">
+              <li>Shortsword (main hand)</li>
+              <li>Cat's Claws (unarmed)</li>
+              <li>Grapple / Shove</li>
+              <li style="font-size:12px;color:var(--muted);font-style:italic;">Action Surge: 2 attack actions</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title sur">⚔️ Fighter / Rogue</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/classes.html#fighter_xphb">Action Surge</a> — 2nd full action</li>
+              <li style="font-size:12px;color:var(--muted);">Assassinate — adv vs unsurprised, auto-crit vs surprised</li>
+            </ul>
+          </div>
+        </div>
+        <div class="action-section bottom">
+          <div class="action-card">
+            <div class="action-card-title bon">★ Bonus Action</div>
+            <ul class="link-list">
+              <li>Off-hand shortsword attack</li>
+              <li><a href="https://5e.tools/classes.html#fighter_xphb">Second Wind</a> (1d10+3 HP)</li>
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a> (Cunning)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li>Opportunity Attack</li>
+              <li>Uncanny Dodge (at Rogue 5)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#ready_xphb">Ready</a></li>
+              <li><a href="https://5e.tools/actions.html#search_xphb">Search</a></li>
+              <li>Use item</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Reminders -->
+      <div class="panel">
+        <div class="panel-title">🐱 Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item">Assassinate — advantage against any creature that hasn't acted yet; auto-crit if target is surprised</div>
+          <div class="reminder-item">Improved Critical (Champion) — crits on 19 AND 20, not just 20</div>
+          <div class="reminder-item">Action Surge — 1×/short rest, take a full extra action on your turn</div>
+          <div class="reminder-item">Second Wind — 1×/short rest bonus action, heal 1d10+3</div>
+          <div class="reminder-item">Feline Agility — double your speed for one turn, can't reuse until you move 0 ft on a turn</div>
+          <div class="reminder-item">Remarkable Athlete — advantage on initiative rolls (already in roll bonus)</div>
+          <div class="reminder-item">Two-Weapon Fighting Style — off-hand attack adds DEX modifier (+4) to damage</div>
+          <div class="reminder-item">Sneak Attack only needs adv OR an ally adjacent to target (no disadv required)</div>
+          <div class="reminder-item">Small size — disadvantage with heavy weapons; can move through space of larger creatures</div>
+          <div class="reminder-item">Thieves' Cant — can send and receive secret messages in normal speech</div>
+        </div>
+      </div>
+
+    </div><!-- /right -->
+  </div>
+</div>
+
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">💪 Ability Scores</div>
+        <div class="abilities-grid">
+          <div class="ability-card"><div class="ab-label">Strength</div><div class="ab-score">9</div><div class="ab-mod neg">−1</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Dexterity</div><div class="ab-score">18</div><div class="ab-mod">+4</div></div>
+          <div class="ability-card"><div class="ab-label">Constitution</div><div class="ab-score">15</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card prof-save"><div class="ab-label">Intelligence</div><div class="ab-score">17</div><div class="ab-mod">+3</div></div>
+          <div class="ability-card"><div class="ab-label">Wisdom</div><div class="ab-score">15</div><div class="ab-mod">+2</div></div>
+          <div class="ability-card"><div class="ab-label">Charisma</div><div class="ab-score">16</div><div class="ab-mod">+3</div></div>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--muted);">★ = Saving throw proficiency (Rogue: DEX + INT)</div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🛡 Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Strength</div><div class="stat-ability">STR</div><div class="stat-bonus neg">−1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dexterity</div><div class="stat-ability">DEX</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-ability">CON</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Intelligence</div><div class="stat-ability">INT</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Wisdom</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Charisma</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">🎲 Skills</div>
+        <div style="font-size:11px;color:var(--muted2);margin-bottom:8px;padding:4px 10px;">
+          <span style="color:var(--rogue-bright);">◆</span> = Expertise (double prof) &nbsp;
+          <span style="color:var(--cat-bright);">●</span> = Proficient
+        </div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot expertise"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-tag">EXP</div><div class="stat-bonus">+10</div></div>
+          <div class="stat-row"><div class="prof-dot expertise"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-tag">EXP</div><div class="stat-bonus">+10</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">👁 Senses & Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name">Darkvision</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">60 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Climb Speed</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">20 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Base Speed</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">25 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">15</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Investigation</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">16</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;">🗣 Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Common</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Sylvan</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Thieves' Cant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title">📜 Features & Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🐱 Race — Tabaxi (Small)</div>
+        <ul class="link-list">
+          <li>Darkvision 60 ft</li>
+          <li>Climb speed 20 ft</li>
+          <li><strong>Cat's Claws</strong> — 1d6 + STR slashing unarmed strike</li>
+          <li><strong>Feline Agility</strong> — double speed for one turn (resets on 0-ft move)</li>
+          <li>Cat's Talent — Perception & Stealth proficiency</li>
+          <li>Speed 25 ft (Small)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title" style="color:rgba(251,113,133,.8);">🗡 Rogue 3 — Assassin</div>
+        <ul class="link-list">
+          <li>Expertise (×2) — Stealth & Sleight of Hand</li>
+          <li>Sneak Attack — 2d6 extra damage</li>
+          <li>Thieves' Cant</li>
+          <li>Cunning Action — Dash/Disengage/Hide as bonus</li>
+          <li><strong>Assassinate</strong> — adv vs unsurprised targets; auto-crit vs surprised</li>
+          <li>Bonus Proficiencies — disguise kit, poisoner's kit</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title" style="color:rgba(251,191,36,.8);">⚔️ Fighter 3 — Champion</div>
+        <ul class="link-list">
+          <li>Two-Weapon Fighting Style — off-hand adds modifier</li>
+          <li>Second Wind — 1d10+3 HP (bonus action, 1×/short rest)</li>
+          <li>Action Surge — extra action (1×/short rest)</li>
+          <li><strong>Improved Critical</strong> — crit on 19–20</li>
+          <li><strong>Remarkable Athlete</strong> — adv on Initiative & STR (Athletics)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🌍 Background — Far Traveler</div>
+        <ul class="link-list">
+          <li>All Eyes on You — foreigners attract attention; may be seen as exotic</li>
+          <li>Poorly wrought maps of homeland</li>
+          <li>Small piece of jewelry from homeland</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🛡 Proficiencies</div>
+        <ul class="link-list">
+          <li>Light & Medium Armor, Shields</li>
+          <li>Simple & Martial Weapons</li>
+          <li>Hand Crossbow, Longsword, Rapier, Shortsword</li>
+          <li>Thieves' Tools, Disguise Kit, Poisoner's Kit</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> Action Surge & Second Wind recharge; spend Hit Dice</li>
+          <li><strong>Long Rest:</strong> Full HP, all resources reset</li>
+          <li>Hit Dice: 3×d8 (Rogue) + 3×d10 (Fighter)</li>
+        </ul>
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="panel-title">🎯 First-Round Combo</div>
+      <div style="background:rgba(190,18,60,.08);border:1px solid rgba(251,113,133,.2);border-radius:14px;padding:16px;font-size:13px;color:#fecdd3;line-height:1.8;">
+        <strong style="color:var(--rogue-bright);">Ideal opening (target surprised):</strong><br>
+        1. Hide / Sneak into position before combat<br>
+        2. Attack with Action (Shortsword) → <strong>auto-crit</strong> (Assassinate) + Sneak Attack 2d6 → <strong>all dice doubled</strong><br>
+        3. Attack with Bonus Action (off-hand Shortsword) → another crit if lucky (19-20), + Sneak Attack if no other attack qualified<br>
+        4. If needed: <strong>Action Surge</strong> → two more attacks this turn<br>
+        5. Total potential: 4 attacks in one round on a surprised target
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title">🎒 Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">⚔️ Weapons</div>
+        <ul class="link-list">
+          <li><a href="https://5e.tools/items.html#shortsword_xphb">Shortsword</a> — 1d6 piercing, Finesse, Light (×2 for dual wielding)</li>
+          <li>Cat's Claws — 1d6 slashing, Unarmed</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🛡️ Armor & Worn</div>
+        <ul class="link-list">
+          <li>Leather Armor — AC 11 + DEX</li>
+          <li>Traveler's Clothes</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪄 Mysterious Items</div>
+        <ul class="link-list">
+          <li>Black Sphere — unknown properties</li>
+          <li>Constinium Powder — unknown properties</li>
+          <li>Small Piece of Jewelry (homeland style)</li>
+          <li>Poorly Wrought Maps from Homeland</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🎒 Dungeoneer's Pack</div>
+        <ul class="link-list">
+          <li>Waterskin ×2</li>
+          <li>Rations ×10</li>
+          <li>Hempen Rope (50 ft)</li>
+          <li>Torch ×10</li>
+          <li>Piton ×10</li>
+          <li>Tinderbox</li>
+          <li>Hammer</li>
+          <li>Crowbar</li>
+          <li>Pouch</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+<script>
+const STORE_PREFIX = "whiskers_v1_";
+const HP_MAX = 49;
+
+function save(k, v) { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); }
+function load(k, fallback) {
+  try { const v = JSON.parse(localStorage.getItem(STORE_PREFIX + k)); return v === null ? fallback : v; }
+  catch { return fallback; }
+}
+
+/* ── TABS ── */
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tab = btn.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+  });
+});
+
+/* ── DOTS ── */
+function makeDots(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const total = Number(el.dataset.total || 0);
+  const key = el.dataset.key;
+  const isSuccess = el.dataset.success === 'true';
+  const isFail = el.dataset.fail === 'true';
+  const used = load(key, []);
+  el.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const btn = document.createElement('button');
+    btn.className = 'dot';
+    const isUsed = used.includes(i);
+    if (isSuccess && isUsed) btn.classList.add('success');
+    else if (isFail && isUsed) btn.classList.add('fail');
+    else if (isUsed) btn.classList.add('used');
+    btn.textContent = i + 1;
+    btn.addEventListener('click', () => {
+      const cur = load(key, []);
+      const idx = cur.indexOf(i);
+      idx >= 0 ? cur.splice(idx, 1) : cur.push(i);
+      save(key, cur);
+      makeDots(id);
+    });
+    el.appendChild(btn);
+  }
+}
+
+/* ── HP ── */
+function updateHp() {
+  const el = document.getElementById('hpCurrent');
+  const val = Number(el.value);
+  el.classList.remove('hp-warn', 'hp-danger');
+  const dp = document.getElementById('deathSavePanel');
+  if (val === 0) { el.classList.add('hp-danger'); dp.style.display = ''; }
+  else {
+    dp.style.display = 'none';
+    if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
+    else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
+  }
+  const pill = document.getElementById('hpPill');
+  if (pill) pill.textContent = val + '/' + HP_MAX;
+}
+function bindInput(id, key) {
+  const el = document.getElementById(id); if (!el) return;
+  el.value = load(key, el.value);
+  el.addEventListener('input', () => { save(key, el.value); if (id === 'hpCurrent') updateHp(); });
+}
+
+/* ── INSPIRATION ── */
+(function() {
+  const pill = document.getElementById('inspirationPill');
+  const val_el = document.getElementById('inspirationVal');
+  let on = load('inspiration', false);
+  const update = () => { val_el.textContent = on ? '✦ ON' : '—'; pill.classList.toggle('on', on); };
+  update();
+  pill.addEventListener('click', () => { on = !on; save('inspiration', on); update(); });
+})();
+
+/* ── ROLL LOG — marks 19 as special crit too ── */
+function addRoll(label, bonus) {
+  const die = Math.floor(Math.random() * 20) + 1;
+  const total = die + bonus;
+  const isNat20 = die === 20;
+  const isNat19 = die === 19;
+  const isNat1 = die === 1;
+  const bonusStr = bonus >= 0 ? `+${bonus}` : `${bonus}`;
+  const log = document.getElementById('rollLog');
+  const empty = log.querySelector('.roll-log-empty');
+  if (empty) empty.remove();
+  const div = document.createElement('div');
+  div.className = 'roll-entry';
+  let suffix = isNat20 ? ' 🎉' : isNat19 ? ' 💀' : isNat1 ? ' 😿' : '';
+  let cls = isNat20 ? ' nat20' : isNat19 ? ' nat19' : isNat1 ? ' nat1' : '';
+  div.innerHTML = `
+    <div><div class="roll-entry-label">${label}</div><div class="roll-entry-detail">d20 (${die}) ${bonusStr}</div></div>
+    <div class="roll-entry-total${cls}">${total}${suffix}</div>
+    <div class="roll-entry-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
+  `;
+  log.insertBefore(div, log.firstChild);
+  while (log.children.length > 12) log.removeChild(log.lastChild);
+}
+document.querySelectorAll('.roll-btn').forEach(btn => {
+  btn.addEventListener('click', () => addRoll(btn.dataset.label, Number(btn.dataset.bonus || 0)));
+});
+
+/* ── RESTS ── */
+document.getElementById('longRestBtn').addEventListener('click', () => {
+  save('hpCurrent', HP_MAX); save('hpTemp', '0');
+  save('hitDiceRogue',[]); save('hitDiceFighter',[]);
+  save('actionSurge',[]); save('secondWind',[]);
+  save('deathSuccess',[]); save('deathFail',[]);
+  document.getElementById('hpCurrent').value = HP_MAX;
+  document.getElementById('hpTemp').value = '0';
+  updateHp();
+  ['hitDiceRogue','hitDiceFighter','actionSurgeDots','secondWindDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+});
+document.getElementById('shortRestBtn').addEventListener('click', () => {
+  save('actionSurge',[]); save('secondWind',[]);
+  makeDots('actionSurgeDots'); makeDots('secondWindDots');
+  alert('Short Rest: Action Surge & Second Wind recharged.\nYou may also spend Hit Dice to recover HP:\n  d8 + CON mod (+2) per Rogue die\n  d10 + CON mod (+2) per Fighter die');
+});
+document.getElementById('clearDeathBtn').addEventListener('click', () => {
+  save('deathSuccess',[]); save('deathFail',[]);
+  makeDots('deathSuccessDots'); makeDots('deathFailDots');
+});
+document.getElementById('clearSessionBtn').addEventListener('click', () => {
+  if (!confirm('Clear all saved tracking data?')) return;
+  Object.keys(localStorage).forEach(k => { if (k.startsWith(STORE_PREFIX)) localStorage.removeItem(k); });
+  location.reload();
+});
+
+/* ── INIT ── */
+['hitDiceRogue','hitDiceFighter','actionSurgeDots','secondWindDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
+localStorage.removeItem(STORE_PREFIX + 'hpCurrent');
+bindInput('hpCurrent','hpCurrent');
+bindInput('hpTemp','hpTemp');
+updateHp();
+</script>
+</body>
+</html>
