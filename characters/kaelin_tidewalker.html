@@ -341,6 +341,12 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   text-align: center;
 }
 .temp-hp-input:focus { outline: none; border-color: var(--teal); }
+.dmg-heal-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.hp-adjust-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; font-family: inherit; }
+.btn-dmg { background: var(--danger-dim); color: var(--danger); border: 1px solid #7f1d1d; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
+.btn-dmg:hover { background: #5f1a1a; }
+.btn-heal { background: var(--good-dim); color: var(--good); border: 1px solid #166534; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
+.btn-heal:hover { background: #0d4a26; }
 
 /* Resource dots */
 .dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -705,7 +711,7 @@ input[type="search"]::-webkit-search-cancel-button { display: none; }
       <a href="https://5e.tools/backgrounds.html#outlander_phb">Outlander</a>
     </div>
     <div class="stat-bar">
-      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val">10/10</span></div>
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">10</span></div>
       <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Leather 11 + DEX +1 + Shield +2">14</span></div>
       <div class="stat-pill"><span class="sp-label">Initiative</span><span class="sp-val">+1</span></div>
       <div class="stat-pill"><span class="sp-label">Speed</span><span class="sp-val">30 ft</span></div>
@@ -748,6 +754,11 @@ input[type="search"]::-webkit-search-cancel-button { display: none; }
             <div class="temp-hp-row">
               <span>Temp HP:</span>
               <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0">
+            </div>
+            <div class="dmg-heal-row">
+              <input id="hpAdjust" class="hp-adjust-input" type="number" min="1" placeholder="Amt">
+              <button class="btn-dmg" id="dmgBtn">🗡 Dmg</button>
+              <button class="btn-heal" id="healBtn">✚ Heal</button>
             </div>
           </div>
           <div class="tracker-card">
@@ -1453,6 +1464,8 @@ function updateHp() {
     if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
     else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
   }
+  const pill = document.getElementById('hpPill');
+  if (pill) pill.textContent = val + '/' + HP_MAX;
 }
 
 function bindInput(id, key) {
@@ -1581,6 +1594,22 @@ makeDots('deathFailDots');
 bindInput('hpCurrent', 'hpCurrent');
 bindInput('hpTemp', 'hpTemp');
 updateHp();
+document.getElementById('dmgBtn').addEventListener('click', () => {
+  const amt = Number(document.getElementById('hpAdjust').value);
+  if (!amt || amt < 1) return;
+  const hp = document.getElementById('hpCurrent');
+  hp.value = Math.max(0, Number(hp.value) - amt);
+  save('hpCurrent', hp.value);
+  updateHp();
+});
+document.getElementById('healBtn').addEventListener('click', () => {
+  const amt = Number(document.getElementById('hpAdjust').value);
+  if (!amt || amt < 1) return;
+  const hp = document.getElementById('hpCurrent');
+  hp.value = Math.min(HP_MAX, Number(hp.value) + amt);
+  save('hpCurrent', hp.value);
+  updateHp();
+});
 </script>
 </body>
 </html>

@@ -164,6 +164,12 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 .hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
 .temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
 .temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
+.dmg-heal-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.hp-adjust-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; font-family: inherit; }
+.btn-dmg { background: var(--danger-dim); color: var(--danger); border: 1px solid #7f1d1d; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
+.btn-dmg:hover { background: #5f1a1a; }
+.btn-heal { background: var(--good-dim); color: var(--good); border: 1px solid #166534; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
+.btn-heal:hover { background: #0d4a26; }
 
 /* ── DOTS ── */
 .dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -414,6 +420,11 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
               <span class="hp-max">/ 48</span>
             </div>
             <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+            <div class="dmg-heal-row">
+              <input id="hpAdjust" class="hp-adjust-input" type="number" min="1" placeholder="Amt">
+              <button class="btn-dmg" id="dmgBtn">🗡 Dmg</button>
+              <button class="btn-heal" id="healBtn">✚ Heal</button>
+            </div>
           </div>
           <div class="tracker-card">
             <h3>Hit Dice (d8)</h3>
@@ -1679,6 +1690,22 @@ document.getElementById('longRestBtn').addEventListener('click', () => {
 });
 buildDomainSection();
 refreshPreparedUI();
+document.getElementById('dmgBtn').addEventListener('click', () => {
+  const amt = Number(document.getElementById('hpAdjust').value);
+  if (!amt || amt < 1) return;
+  const hp = document.getElementById('hpCurrent');
+  hp.value = Math.max(0, Number(hp.value) - amt);
+  save('hpCurrent', hp.value);
+  updateHp();
+});
+document.getElementById('healBtn').addEventListener('click', () => {
+  const amt = Number(document.getElementById('hpAdjust').value);
+  if (!amt || amt < 1) return;
+  const hp = document.getElementById('hpCurrent');
+  hp.value = Math.min(HP_MAX, Number(hp.value) + amt);
+  save('hpCurrent', hp.value);
+  updateHp();
+});
 </script>
 </body>
 </html>
