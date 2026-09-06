@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jebrael Crux – Character Sheet</title>
+<link rel="stylesheet" href="sheet.css">
+<style>
+/* jebrael_crux — palette and character-specific styling only.
+   Everything shared lives in sheet.css. */
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  /* Centaur rogue — deep sea teal and brass */
+  --c1: #0f766e;
+  --c1b: #2dd4bf;
+  --c1d: #042f2a;
+  --c2: #b45309;
+  --c2b: #fbbf24;
+  --sheet-accent: var(--c1b);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #04120f 0%, #071a17 40%, #04120f 100%);
+  border: 1px solid var(--line2); border-radius: 20px;
+  padding: 28px 32px; margin-bottom: 20px; overflow: hidden;
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(15,118,110,.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(180,83,9,.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--c2) 0%, var(--c1b) 50%, var(--c2b) 100%);
+  border-radius: 20px 20px 0 0;
+}
+.hero-avatar {
+  width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
+  border: 2px solid var(--line2); background: var(--panel);
+  box-shadow: 0 0 0 4px rgba(15,118,110,.18), 0 8px 32px rgba(0,0,0,.6);
+}
+.hero-class-icon {
+  position: absolute; bottom: -8px; right: -8px;
+  width: 32px; height: 32px; background: var(--c1);
+  border-radius: 10px; border: 2px solid var(--bg);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #ccfbf1; letter-spacing: .02em; line-height: 1.1; }
+.stat-pill.sp-spell .sp-val { color: var(--c1b); }
+.stat-pill.sp-mastery .sp-val { color: var(--c2b); font-size: 13px; }
+#inspirationPill.on { background: rgba(15,118,110,.18); border-color: var(--c1b); }
+#inspirationPill.on .sp-val { color: var(--c1b); }
+.ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; }
+.ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--c1b); }
+.prof-dot.filled { background: var(--c1b); border-color: var(--c1b); }
+.prof-dot.expertise { background: var(--c2b); border-color: var(--c2b); box-shadow: 0 0 0 2px rgba(180,83,9,.12); }
+.hp-input:focus { outline: none; border-color: var(--c1); }
+.temp-hp-input:focus { outline: none; border-color: var(--c1); }
+.dot.slot-used { background: rgba(15,118,110,.18); color: var(--c1b); border-color: var(--c1); }
+.conc-toggle.active { border-color: var(--c2b); background: rgba(180,83,9,.12); }
+.conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: all .15s; }
+.conc-dot.on { background: var(--c2b); border-color: var(--c2b); }
+.conc-toggle.active .conc-label { color: var(--c2b); }
+.text-field:focus { outline: none; border-color: var(--c2b); }
+.btn.btn-rest { border-color: var(--c1); color: var(--c1b); }
+.btn.btn-rest:hover { background: var(--c1d); }
+.roll-btn:hover { background: rgba(15,118,110,.18); border-color: var(--c1); color: var(--c1b); }
+.roll-entry-total.nat20 { color: var(--c1b); }
+.weapon-card.magic { border-color: rgba(15,118,110,.18); background: rgba(180,83,9,.12); }
+.weapon-magic { font-size: 11px; color: var(--c1b); }
+.action-card-title.atk { color: var(--danger); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--c2b); }
+.action-card-title.mag { color: var(--c1b); }
+.action-card-title.oth { color: var(--muted); }
+.spell-search:focus { outline: none; border-color: var(--c1b); }
+.spell-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; transition: border-color .15s; }
+.spell-card.conc-spell { border-left: 3px solid var(--c2b); }
+.spell-card.ritual-spell { border-left: 3px solid var(--c1b); }
+.prep-toggle:hover { border-color: var(--c1b); color: var(--c1b); }
+.prep-toggle.on { background: rgba(15,118,110,.18); border-color: var(--c1b); color: var(--c1b); }
+.sbadge.conc { background: rgba(180,83,9,.12); color: var(--c2b); border-color: rgba(180,83,9,.12); }
+.sbadge.ritual { background: rgba(15,118,110,.18); color: var(--c1b); border-color: rgba(15,118,110,.18); }
+.sbadge.cantrip { background: rgba(148,163,184,.12); color: var(--muted); border-color: var(--line2); }
+.mastery-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; padding: 2px 7px; border-radius: 6px; margin-left: 6px;
+  background: rgba(180,83,9,.12); color: var(--c2b); border: 1px solid rgba(180,83,9,.12); }
+
+/* ── REMINDER ── */
+.reminder { background: var(--c1d); border: 1px solid rgba(15,118,110,.18); border-radius: 14px; padding: 16px; }
+.reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(180,83,9,.12); font-size: 13px; color: #99f6e4; }
+.reminder .reminder-item::before { content: '🐎'; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/tokenizer/pc-images/jebrael_crux.Avatar.webp?1761673406951" alt="Jebrael Crux">
+    <div class="hero-class-icon">🐎</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Jebrael Crux</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/classes.html#rogue_xphb">Rogue 1</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/races.html#centaur_mpmm">Centaur</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/backgrounds.html#sailor_xphb">Sailor</a>
+    </div>
+    <div class="hero-bio">
+      Age: <span>—</span>
+      Gender: <span>—</span>
+      Height: <span>—</span>
+      Eyes: <span>—</span>
+      Hair: <span>—</span>
+      Skin: <span>—</span>
+      Size: <span>Medium</span>
+      Type: <span>Fey</span>
+      Alignment: <span>—</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">10</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Leather Armor 11 + DEX +4">15</span></div>
+      <div class="stat-pill "><span class="sp-label">Initiative</span><span class="sp-val">+4</span></div>
+      <div class="stat-pill "><span class="sp-label">Speed</span><span class="sp-val">40 ft</span></div>
+      <div class="stat-pill "><span class="sp-label">Prof.</span><span class="sp-val">+2</span></div>
+      <div class="stat-pill "><span class="sp-label">Passive Perc</span><span class="sp-val">12</span></div>
+      <div class="stat-pill "><span class="sp-label">Passive Ins</span><span class="sp-val">10</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Heroic Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="combat">⚔️ Combat</button>
+  <button class="tab-btn" data-tab="abilities">🎲 Abilities</button>
+  <button class="tab-btn" data-tab="features">📜 Features</button>
+  <button class="tab-btn" data-tab="gear">🎒 Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title">❤️ Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="10" value="10">
+              <span class="hp-max">/ 10</span>
+            </div>
+            <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+            <div class="dmg-heal-row">
+              <input id="hpAdjust" class="hp-adjust-input" type="number" min="1" placeholder="Amt">
+              <button class="btn-dmg" id="dmgBtn">🗡 Dmg</button>
+              <button class="btn-heal" id="healBtn">✚ Heal</button>
+            </div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice (d8)</h3>
+            <div class="dots-row" id="hitDiceDots" data-key="hitDice" data-total="1" data-label="Hit die"></div>
+          </div>
+        </div>
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success"><div class="death-label">Successes</div><div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true" data-label="Death save success"></div></div>
+            <div class="death-fail"><div class="death-label">Failures</div><div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true" data-label="Death save failure"></div></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;"><button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title">⚄ Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="4">Initiative +4</button>
+          <button class="roll-btn" data-label="Acrobatics" data-bonus="6">Acrobatics +6</button>
+          <button class="roll-btn" data-label="Athletics" data-bonus="5">Athletics +5</button>
+          <button class="roll-btn" data-label="Intimidation" data-bonus="5">Intimidation +5</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="2">Perception +2</button>
+          <button class="roll-btn" data-label="Sleight of Hand" data-bonus="6">Sleight of Hand +6</button>
+          <button class="roll-btn" data-label="Stealth" data-bonus="8">Stealth +8</button>
+          <button class="roll-btn" data-label="Survival" data-bonus="2">Survival +2</button>
+          <button class="roll-btn" data-label="Unarmed Strike" data-bonus="5">Unarmed Strike +5</button>
+          <button class="roll-btn" data-label="N.E.S.T. Shortbow" data-bonus="6">N.E.S.T. Shortbow +6</button>
+          <button class="roll-btn" data-label="N.E.S.T. Shortsword" data-bonus="6">N.E.S.T. Shortsword +6</button>
+          <button class="roll-btn" data-label="N.E.S.T. Dagger" data-bonus="6">N.E.S.T. Dagger +6</button>
+        </div>
+        <div class="roll-log" id="rollLog"><div class="roll-log-empty">No rolls yet this session</div></div>
+      </div>
+
+    </div><!-- /left -->
+
+    <div class="stack">
+      <!-- Weapons -->
+      <div class="panel">
+        <div class="panel-title">⚔️ Weapons</div>
+        <div class="weapon-grid">
+          <div class="weapon-card">
+            <div class="weapon-name">Unarmed Strike</div>
+            <div><button class="roll-btn" data-label="Unarmed Strike" data-bonus="5">+5 to hit</button></div>
+            <div class="weapon-dmg">4 bludgeoning</div>
+            <div class="weapon-props">STR · —</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Shortbow<span class="mastery-tag">Vex</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Shortbow" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 piercing</div>
+            <div class="weapon-props">DEX · Ammunition · Two-Handed · Range 80/320</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Shortsword<span class="mastery-tag">Vex</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Shortsword" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Dagger<span class="mastery-tag">Nick</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Dagger" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light · Thrown · Range 20/60</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title">🎯 Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title atk">⚔ Attack</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/items.html#shortsword_xphb">Shortsword</a> +6 (1d6+4) — Vex</li>
+              <li><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a> +6 (1d6+4) — Vex</li>
+              <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> +6 (1d4+4) — Nick</li>
+              <li><strong>Hooves</strong> +5 (1d6+3 bludgeoning)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title bon">✦ Bonus Action</div>
+            <ul class="link-list">
+              <li><strong>Charge</strong> — move 30 ft straight, hit in melee, then a free hoof attack</li>
+              <li>Nick (off-hand dagger, part of the Attack action)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li>Opportunity Attack</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a></li>
+              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#search_xphb">Search</a></li>
+              <li><a href="https://5e.tools/actions.html#study_xphb">Study</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Don't Forget -->
+      <div class="panel">
+        <div class="panel-title">🐎 Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item"><strong>Sneak Attack 1d6</strong> — once per turn, with a Finesse or Ranged weapon, and you need advantage <em>or</em> an ally within 5 ft of the target.</div>
+          <div class="reminder-item"><strong>Charge</strong> (Centaur): move 30 ft straight at a target, hit it in melee, then take a <em>bonus action</em> hoof attack — 1d6+3.</div>
+          <div class="reminder-item"><strong>Hooves</strong> replace your normal unarmed strike: 1d6 + STR bludgeoning.</div>
+          <div class="reminder-item"><strong>Vex</strong> on both swords and bow: a hit gives you advantage on your next attack against that target — which also turns on Sneak Attack.</div>
+          <div class="reminder-item"><strong>Speed 40 ft</strong>, but <strong>Equine Build</strong> makes any hands-and-feet climb cost 4 extra feet per foot. Look for stairs.</div>
+          <div class="reminder-item">Expertise: Stealth +8 and Intimidation +5. Cunning Action does not arrive until level 2 — hiding still costs your action.</div>
+        </div>
+      </div>
+    </div><!-- /right -->
+  </div>
+</div>
+
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="panel">
+    <div class="panel-title">💪 Ability Scores</div>
+    <div class="abilities-grid">
+        <div class="ability-card">
+          <div class="ab-label">STR</div>
+          <div class="ab-score">16</div>
+          <div class="ab-mod ">+3</div>
+        </div>
+        <div class="ability-card prof-save">
+          <div class="ab-label">DEX</div>
+          <div class="ab-score">18</div>
+          <div class="ab-mod ">+4</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">CON</div>
+          <div class="ab-score">14</div>
+          <div class="ab-mod ">+2</div>
+        </div>
+        <div class="ability-card prof-save">
+          <div class="ab-label">INT</div>
+          <div class="ab-score">10</div>
+          <div class="ab-mod zero">+0</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">WIS</div>
+          <div class="ab-score">11</div>
+          <div class="ab-mod zero">+0</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">CHA</div>
+          <div class="ab-score">12</div>
+          <div class="ab-mod ">+1</div>
+        </div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">🛡 Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Strength</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dexterity</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Intelligence</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Wisdom</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Charisma</div><div class="stat-bonus">+1</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🎲 Skills</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot expertise"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot expertise"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-bonus">+8</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">+2</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">👁 Senses &amp; Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">12</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Insight</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">10</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Investigation</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">10</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;">🗣 Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Thieves&#x27; Cant</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Common</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Undercommon</span>
+        </div>
+        <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Thieves&#x27; Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX +6</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Navigator&#x27;s Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">WIS +2</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title">📜 Features &amp; Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🐎 Species — Centaur (Fey)</div>
+        <ul class="link-list">
+          <li><strong>Charge</strong> — 30 ft straight + melee hit → bonus-action hoof attack</li>
+          <li><strong>Hooves</strong> — unarmed strike deals 1d6 + STR bludgeoning</li>
+          <li><strong>Equine Build</strong> — carry as one size larger; climbs cost 4 extra ft per ft</li>
+          <li><strong>Natural Affinity</strong> — one nature skill proficiency</li>
+          <li>Speed 40 ft · Creature type Fey</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🗡 Class — Rogue 1</div>
+        <ul class="link-list">
+          <li><strong>Sneak Attack</strong> — 1d6, once per turn</li>
+          <li><strong>Expertise</strong> — Stealth and Intimidation</li>
+          <li><strong>Weapon Mastery</strong> — Dagger (Nick) and Shortbow (Vex)</li>
+          <li><strong>Thieves' Cant</strong></li>
+          <li>Cunning Action comes at level 2</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">⚓ Background — Sailor</div>
+        <ul class="link-list">
+          <li>Acrobatics and Perception proficiency</li>
+          <li>Navigator's Tools</li>
+          <li>Ship's Passage — you can usually find a berth for the party</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">✨ Origin Feat</div>
+        <ul class="link-list">
+          <li><strong>Savage Attacker</strong> — once per turn, reroll a weapon's damage dice and keep either</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🛡 Proficiencies</div>
+        <ul class="link-list">
+          <li>Light armour</li>
+          <li>Handcrossbow</li>
+          <li>Rapier</li>
+          <li>Scimitar</li>
+          <li>Shortsword</li>
+          <li>Simple weapons</li>
+          <li>Whip</li>
+          <li>Submachine Gun, Improvised</li>
+          <li><strong>Weapon Mastery:</strong> Dagger, Shortbow</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> spend Hit Dice (d8 + CON +2)</li>
+          <li><strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)</li>
+          <li>No class resources to recharge yet — Cunning Action arrives at level 2</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title">🎒 Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">Worn & Equipped</div>
+        <ul class="link-list">
+          <li>Leather Armor</li>
+          <li>Quiver</li>
+          <li>Backpack</li>
+          <li>Bell</li>
+          <li>Hooded Lantern</li>
+          <li>Tinderbox</li>
+          <li>Waterskin</li>
+          <li>Traveler&#x27;s Clothes</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Weapons</div>
+        <ul class="link-list">
+          <li>Unarmed Strike</li>
+          <li>N.E.S.T. Shortbow</li>
+          <li>N.E.S.T. Shortsword</li>
+          <li>N.E.S.T. Dagger</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Consumables</div>
+        <ul class="link-list">
+          <li>Arrow ×17</li>
+          <li>Candle ×10</li>
+          <li>Oil ×7</li>
+          <li>Rations ×5</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Carried</div>
+        <ul class="link-list">
+          <li>Thieves&#x27; Tools</li>
+          <li>Ball Bearings</li>
+          <li>Crowbar</li>
+          <li>Rope</li>
+          <li>Navigator&#x27;s Tools</li>
+          <li>Rope</li>
+          <li>Food materials ×4</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪙 Coin</div>
+        <ul class="link-list">
+          <li>27 GP · 6 SP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* jebrael_crux — everything unique to this character. The engine is sheet.js. */
+const SHEET = {
+  prefix: 'jebrael_crux_v1_',
+  hpMax: 10,
+  shortRest: { keys: [],
+               msg: 'Spend Hit Dice (d8 + CON +2) to recover HP.\nRogue has no short-rest resources at level 1.' }
+};
+</script>
+<script src="sheet.js"></script>
+</body>
+</html>

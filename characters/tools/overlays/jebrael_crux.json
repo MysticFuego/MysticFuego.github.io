@@ -1,0 +1,88 @@
+{
+  "slug": "jebrael_crux",
+  "icon": "🐎",
+  "links": {
+    "class": "https://5e.tools/classes.html#rogue_xphb",
+    "race": "https://5e.tools/races.html#centaur_mpmm",
+    "background": "https://5e.tools/backgrounds.html#sailor_xphb"
+  },
+  "theme": {
+    "theme_name": "Centaur rogue — deep sea teal and brass",
+    "c1": "#0f766e", "c1b": "#2dd4bf", "c1d": "#042f2a",
+    "c2": "#b45309", "c2b": "#fbbf24",
+    "hero_a": "#04120f", "hero_b": "#071a17",
+    "glow1": "rgba(15,118,110,.18)", "glow2": "rgba(180,83,9,.12)",
+    "name_color": "#ccfbf1",
+    "reminder_icon": "🐎", "reminder_text": "#99f6e4"
+  },
+  "bio": {},
+  "short_rest": {
+    "keys": [],
+    "msg": "Spend Hit Dice (d8 + CON +2) to recover HP.\nRogue has no short-rest resources at level 1."
+  },
+  "rest": [
+    "<strong>Short Rest:</strong> spend Hit Dice (d8 + CON +2)",
+    "<strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)",
+    "No class resources to recharge yet — Cunning Action arrives at level 2"
+  ],
+  "actions": {
+    "attack": [
+      "<a href=\"https://5e.tools/items.html#shortsword_xphb\">Shortsword</a> +6 (1d6+4) — Vex",
+      "<a href=\"https://5e.tools/items.html#shortbow_xphb\">Shortbow</a> +6 (1d6+4) — Vex",
+      "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +6 (1d4+4) — Nick",
+      "<strong>Hooves</strong> +5 (1d6+3 bludgeoning)"
+    ],
+    "bonus": [
+      "<strong>Charge</strong> — move 30 ft straight, hit in melee, then a free hoof attack",
+      "Nick (off-hand dagger, part of the Attack action)"
+    ],
+    "reaction": [
+      "Opportunity Attack"
+    ],
+    "other": [
+      "<a href=\"https://5e.tools/actions.html#dash_xphb\">Dash</a>",
+      "<a href=\"https://5e.tools/actions.html#disengage_xphb\">Disengage</a>",
+      "<a href=\"https://5e.tools/actions.html#dodge_xphb\">Dodge</a>",
+      "<a href=\"https://5e.tools/actions.html#help_xphb\">Help</a>",
+      "<a href=\"https://5e.tools/actions.html#hide_xphb\">Hide</a>",
+      "<a href=\"https://5e.tools/actions.html#search_xphb\">Search</a>",
+      "<a href=\"https://5e.tools/actions.html#study_xphb\">Study</a>"
+    ]
+  },
+  "reminders": [
+    "<strong>Sneak Attack 1d6</strong> — once per turn, with a Finesse or Ranged weapon, and you need advantage <em>or</em> an ally within 5 ft of the target.",
+    "<strong>Charge</strong> (Centaur): move 30 ft straight at a target, hit it in melee, then take a <em>bonus action</em> hoof attack — 1d6+3.",
+    "<strong>Hooves</strong> replace your normal unarmed strike: 1d6 + STR bludgeoning.",
+    "<strong>Vex</strong> on both swords and bow: a hit gives you advantage on your next attack against that target — which also turns on Sneak Attack.",
+    "<strong>Speed 40 ft</strong>, but <strong>Equine Build</strong> makes any hands-and-feet climb cost 4 extra feet per foot. Look for stairs.",
+    "Expertise: Stealth +8 and Intimidation +5. Cunning Action does not arrive until level 2 — hiding still costs your action."
+  ],
+  "features": [
+    { "title": "🐎 Species — Centaur (Fey)",
+      "bullets": [
+        "<strong>Charge</strong> — 30 ft straight + melee hit → bonus-action hoof attack",
+        "<strong>Hooves</strong> — unarmed strike deals 1d6 + STR bludgeoning",
+        "<strong>Equine Build</strong> — carry as one size larger; climbs cost 4 extra ft per ft",
+        "<strong>Natural Affinity</strong> — one nature skill proficiency",
+        "Speed 40 ft · Creature type Fey"
+      ] },
+    { "title": "🗡 Class — Rogue 1",
+      "bullets": [
+        "<strong>Sneak Attack</strong> — 1d6, once per turn",
+        "<strong>Expertise</strong> — Stealth and Intimidation",
+        "<strong>Weapon Mastery</strong> — Dagger (Nick) and Shortbow (Vex)",
+        "<strong>Thieves' Cant</strong>",
+        "Cunning Action comes at level 2"
+      ] },
+    { "title": "⚓ Background — Sailor",
+      "bullets": [
+        "Acrobatics and Perception proficiency",
+        "Navigator's Tools",
+        "Ship's Passage — you can usually find a berth for the party"
+      ] },
+    { "title": "✨ Origin Feat",
+      "bullets": [
+        "<strong>Savage Attacker</strong> — once per turn, reroll a weapon's damage dice and keep either"
+      ] }
+  ]
+}

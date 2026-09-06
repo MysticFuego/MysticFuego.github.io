@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mimic – Character Sheet</title>
+<link rel="stylesheet" href="sheet.css">
+<style>
+/* mimic — palette and character-specific styling only.
+   Everything shared lives in sheet.css. */
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  /* Plasmoid ranger — moss green and acid */
+  --c1: #15803d;
+  --c1b: #4ade80;
+  --c1d: #052e16;
+  --c2: #65a30d;
+  --c2b: #a3e635;
+  --sheet-accent: var(--c1b);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #04120a 0%, #071a0e 40%, #04120a 100%);
+  border: 1px solid var(--line2); border-radius: 20px;
+  padding: 28px 32px; margin-bottom: 20px; overflow: hidden;
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(21,128,61,.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(101,163,13,.12) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--c2) 0%, var(--c1b) 50%, var(--c2b) 100%);
+  border-radius: 20px 20px 0 0;
+}
+.hero-avatar {
+  width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
+  border: 2px solid var(--line2); background: var(--panel);
+  box-shadow: 0 0 0 4px rgba(21,128,61,.18), 0 8px 32px rgba(0,0,0,.6);
+}
+.hero-class-icon {
+  position: absolute; bottom: -8px; right: -8px;
+  width: 32px; height: 32px; background: var(--c1);
+  border-radius: 10px; border: 2px solid var(--bg);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #dcfce7; letter-spacing: .02em; line-height: 1.1; }
+.stat-pill.sp-spell .sp-val { color: var(--c1b); }
+.stat-pill.sp-mastery .sp-val { color: var(--c2b); font-size: 13px; }
+#inspirationPill.on { background: rgba(21,128,61,.18); border-color: var(--c1b); }
+#inspirationPill.on .sp-val { color: var(--c1b); }
+.ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; }
+.ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--c1b); }
+.prof-dot.filled { background: var(--c1b); border-color: var(--c1b); }
+.prof-dot.expertise { background: var(--c2b); border-color: var(--c2b); box-shadow: 0 0 0 2px rgba(101,163,13,.12); }
+.hp-input:focus { outline: none; border-color: var(--c1); }
+.temp-hp-input:focus { outline: none; border-color: var(--c1); }
+.dot.slot-used { background: rgba(21,128,61,.18); color: var(--c1b); border-color: var(--c1); }
+.conc-toggle.active { border-color: var(--c2b); background: rgba(101,163,13,.12); }
+.conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: all .15s; }
+.conc-dot.on { background: var(--c2b); border-color: var(--c2b); }
+.conc-toggle.active .conc-label { color: var(--c2b); }
+.text-field:focus { outline: none; border-color: var(--c2b); }
+.btn.btn-rest { border-color: var(--c1); color: var(--c1b); }
+.btn.btn-rest:hover { background: var(--c1d); }
+.roll-btn:hover { background: rgba(21,128,61,.18); border-color: var(--c1); color: var(--c1b); }
+.roll-entry-total.nat20 { color: var(--c1b); }
+.weapon-card.magic { border-color: rgba(21,128,61,.18); background: rgba(101,163,13,.12); }
+.weapon-magic { font-size: 11px; color: var(--c1b); }
+.action-card-title.atk { color: var(--danger); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--c2b); }
+.action-card-title.mag { color: var(--c1b); }
+.action-card-title.oth { color: var(--muted); }
+.spell-search:focus { outline: none; border-color: var(--c1b); }
+.spell-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; transition: border-color .15s; }
+.spell-card.conc-spell { border-left: 3px solid var(--c2b); }
+.spell-card.ritual-spell { border-left: 3px solid var(--c1b); }
+.prep-toggle:hover { border-color: var(--c1b); color: var(--c1b); }
+.prep-toggle.on { background: rgba(21,128,61,.18); border-color: var(--c1b); color: var(--c1b); }
+.sbadge.conc { background: rgba(101,163,13,.12); color: var(--c2b); border-color: rgba(101,163,13,.12); }
+.sbadge.ritual { background: rgba(21,128,61,.18); color: var(--c1b); border-color: rgba(21,128,61,.18); }
+.sbadge.cantrip { background: rgba(148,163,184,.12); color: var(--muted); border-color: var(--line2); }
+.mastery-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; padding: 2px 7px; border-radius: 6px; margin-left: 6px;
+  background: rgba(101,163,13,.12); color: var(--c2b); border: 1px solid rgba(101,163,13,.12); }
+
+/* ── REMINDER ── */
+.reminder { background: var(--c1d); border: 1px solid rgba(21,128,61,.18); border-radius: 14px; padding: 16px; }
+.reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(101,163,13,.12); font-size: 13px; color: #bbf7d0; }
+.reminder .reminder-item::before { content: '🏹'; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/tokenizer/pc-images/mimic.Avatar.webp?1761673041561" alt="Mimic">
+    <div class="hero-class-icon">🏹</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Mimic</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/classes.html#ranger_xphb">Ranger 1</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/races.html#plasmoid_aag">Plasmoid</a>
+      <span class="sep">•</span>
+      Variant Survivor (Veteran of the Civil War)
+    </div>
+    <div class="hero-bio">
+      Age: <span>—</span>
+      Gender: <span>—</span>
+      Height: <span>—</span>
+      Eyes: <span>—</span>
+      Hair: <span>—</span>
+      Skin: <span>—</span>
+      Size: <span>Small</span>
+      Type: <span>Ooze</span>
+      Alignment: <span>—</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">13</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Studded Leather Armor 12 + DEX +4">16</span></div>
+      <div class="stat-pill "><span class="sp-label">Initiative</span><span class="sp-val">+4</span></div>
+      <div class="stat-pill "><span class="sp-label">Speed</span><span class="sp-val">30 ft</span></div>
+      <div class="stat-pill "><span class="sp-label">Prof.</span><span class="sp-val">+2</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell DC</span><span class="sp-val">13</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell Atk</span><span class="sp-val">+5</span></div>
+      <div class="stat-pill "><span class="sp-label">Passive Perc</span><span class="sp-val">15</span></div>
+      <div class="stat-pill "><span class="sp-label">Passive Ins</span><span class="sp-val">15</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Heroic Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="combat">⚔️ Combat</button>
+  <button class="tab-btn" data-tab="spells">✨ Spells</button>
+  <button class="tab-btn" data-tab="abilities">🎲 Abilities</button>
+  <button class="tab-btn" data-tab="features">📜 Features</button>
+  <button class="tab-btn" data-tab="gear">🎒 Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title">❤️ Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="13" value="13">
+              <span class="hp-max">/ 13</span>
+            </div>
+            <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+            <div class="dmg-heal-row">
+              <input id="hpAdjust" class="hp-adjust-input" type="number" min="1" placeholder="Amt">
+              <button class="btn-dmg" id="dmgBtn">🗡 Dmg</button>
+              <button class="btn-heal" id="healBtn">✚ Heal</button>
+            </div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice (d10)</h3>
+            <div class="dots-row" id="hitDiceDots" data-key="hitDice" data-total="1" data-label="Hit die"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hunter&#x27;s Mark (free)</h3>
+            <div class="dots-row" id="favoredEnemyDots" data-key="favoredEnemy" data-total="2" data-label="Hunter&#x27;s Mark (free)"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;">Favored Enemy — 2 free casts, no slot · returns on a long rest</div>
+          </div>
+          <div class="tracker-card">
+            <h3>Magic Initiate Spell</h3>
+            <div class="dots-row" id="magicInitiateDots" data-key="magicInitiate" data-total="1" data-label="Magic Initiate Spell"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;">One free level-1 wizard spell · returns on a long rest</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="panel-title" style="margin-bottom:10px;">✨ Spell Slots</div>
+          <div class="slot-grid" style="grid-template-columns:repeat(1,1fr);">
+            <div class="tracker-card">
+              <h3>Level 1 <span style="color:var(--c1b)">(2)</span></h3>
+              <div class="dots-row" id="slot1Dots" data-key="spellSlots1" data-total="2" data-slot="true" data-label="Level 1 slot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success"><div class="death-label">Successes</div><div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true" data-label="Death save success"></div></div>
+            <div class="death-fail"><div class="death-label">Failures</div><div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true" data-label="Death save failure"></div></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;"><button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Concentration -->
+      <div class="panel">
+        <div class="panel-title">🔮 Concentration</div>
+        <div class="conc-toggle" id="concToggle">
+          <div class="conc-dot" id="concDot"></div>
+          <div class="conc-label" id="concLabel">Not Concentrating</div>
+        </div>
+        <div class="conc-body" id="concBody">
+          <div class="field-label">Spell</div>
+          <input id="concSpell" class="text-field" type="text" placeholder="Spell name…">
+          <div class="field-label" style="margin-top:10px;">Notes</div>
+          <input id="concNotes" class="text-field" type="text" placeholder="Target, rounds remaining…">
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn btn-danger" id="clearConcBtn" style="font-size:12px;">Clear Concentration</button>
+          </div>
+        </div>
+      </div>
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title">⚄ Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="4">Initiative +4</button>
+          <button class="roll-btn" data-label="Athletics" data-bonus="2">Athletics +2</button>
+          <button class="roll-btn" data-label="Insight" data-bonus="5">Insight +5</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="5">Perception +5</button>
+          <button class="roll-btn" data-label="Stealth" data-bonus="6">Stealth +6</button>
+          <button class="roll-btn" data-label="Survival" data-bonus="5">Survival +5</button>
+          <button class="roll-btn" data-label="Spell Attack" data-bonus="5">Spell Atk +5</button>
+          <button class="roll-btn" data-label="Unarmed Strike" data-bonus="2">Unarmed Strike +2</button>
+          <button class="roll-btn" data-label="N.E.S.T. Scimitar" data-bonus="6">N.E.S.T. Scimitar +6</button>
+          <button class="roll-btn" data-label="N.E.S.T. Shortsword" data-bonus="6">N.E.S.T. Shortsword +6</button>
+          <button class="roll-btn" data-label="N.E.S.T. Longbow" data-bonus="6">N.E.S.T. Longbow +6</button>
+        </div>
+        <div class="roll-log" id="rollLog"><div class="roll-log-empty">No rolls yet this session</div></div>
+      </div>
+
+    </div><!-- /left -->
+
+    <div class="stack">
+      <!-- Weapons -->
+      <div class="panel">
+        <div class="panel-title">⚔️ Weapons</div>
+        <div class="weapon-grid">
+          <div class="weapon-card">
+            <div class="weapon-name">Unarmed Strike</div>
+            <div><button class="roll-btn" data-label="Unarmed Strike" data-bonus="2">+2 to hit</button></div>
+            <div class="weapon-dmg">1 bludgeoning</div>
+            <div class="weapon-props">STR · —</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Scimitar<span class="mastery-tag">Nick</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Scimitar" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 slashing</div>
+            <div class="weapon-props">DEX · Finesse · Light</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Shortsword<span class="mastery-tag">Vex</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Shortsword" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">1d6 + 4 piercing</div>
+            <div class="weapon-props">DEX · Finesse · Light</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Longbow<span class="mastery-tag">Slow</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Longbow" data-bonus="6">+6 to hit</button></div>
+            <div class="weapon-dmg">1d8 + 4 piercing</div>
+            <div class="weapon-props">DEX · Ammunition · Heavy · Two-Handed · Range 150/600</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title">🎯 Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title atk">⚔ Attack</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/items.html#scimitar_xphb">Scimitar</a> +6 (1d6+4) — Nick</li>
+              <li><a href="https://5e.tools/items.html#shortsword_xphb">Shortsword</a> +6 (1d6+4) — Vex</li>
+              <li><a href="https://5e.tools/items.html#longbow_xphb">Longbow</a> +6 (1d8+4) — Slow</li>
+              <li><a href="https://5e.tools/spells.html#poison spray_xphb">Poison Spray</a> — CON save DC 13</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title bon">✦ Bonus Action</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#hunter's mark_xphb">Hunter's Mark</a> — +1d6 per hit, 2 free casts</li>
+              <li>Nick (off-hand scimitar, part of the Attack action)</li>
+              <li><strong>Shape Self</strong> — extrude or reabsorb a pseudopod</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li>Opportunity Attack</li>
+              <li><a href="https://5e.tools/spells.html#ensnaring strike_xphb">Ensnaring Strike</a> (on a hit, if cast)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title mag">✨ Magic</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#hunter's mark_xphb">Hunter's Mark</a> — always prepared, free ×2</li>
+              <li><a href="https://5e.tools/spells.html#cure wounds_xphb">Cure Wounds</a> — 2d8+3</li>
+              <li><a href="https://5e.tools/spells.html#entangle_xphb">Entangle</a> — 20 ft square, STR save DC 13</li>
+              <li><a href="https://5e.tools/spells.html#fog cloud_xphb">Fog Cloud</a> — 20 ft heavily obscured</li>
+              <li><a href="https://5e.tools/spells.html#goodberry_xphb">Goodberry</a> — 10 berries, 1 HP each</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a></li>
+              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#search_xphb">Search</a></li>
+              <li><strong>Shape Self</strong> — take or drop a humanlike shape</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Don't Forget -->
+      <div class="panel">
+        <div class="panel-title">🏹 Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item"><strong>Hunter's Mark is always prepared</strong> and you get 2 free casts per long rest. Open with it — it is +1d6 on every hit.</div>
+          <div class="reminder-item"><strong>Vex</strong> (Shortsword): hit a creature and you have advantage on your next attack against it.</div>
+          <div class="reminder-item"><strong>Nick</strong> (Scimitar): the off-hand attack rides along with the Attack action — it does <em>not</em> cost your Bonus Action.</div>
+          <div class="reminder-item"><strong>Natural Resilience:</strong> resistance to acid and poison, and advantage on saves against being poisoned.</div>
+          <div class="reminder-item"><strong>Amorphous:</strong> you squeeze through a 1-inch gap with nothing worn or carried, and have advantage on grapple checks.</div>
+          <div class="reminder-item">Hold Breath 1 hour, Darkvision 60 ft, and Stealth +6 — you are the scout.</div>
+          <div class="reminder-item">Magic Initiate (Wizard) gives you two cantrips plus one free level-1 casting per long rest.</div>
+        </div>
+      </div>
+    </div><!-- /right -->
+  </div>
+</div>
+
+<!-- ═══ TAB: SPELLS ═══ -->
+<div class="tab-pane" id="tab-spells">
+  <div class="panel">
+    <div class="panel-title">✨ Prepared</div>
+    <div class="slot-info">Prepared spells count against your limit; cantrips are always known.
+      <strong id="preparedCount" style="margin-left:8px;">0 / 2</strong></div>
+    <div class="spells-grid" id="preparedList"></div>
+    <div id="preparedEmpty" style="color:var(--muted);font-size:13px;padding:8px 0;">
+      Nothing prepared yet — tap ✦ on any spell below.</div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">📖 Full Spell List</div>
+    <div class="spell-search-wrap">
+      <input id="spellSearch" class="spell-search" type="search" placeholder="Filter spells…">
+    </div>
+    <div class="spells-grid" id="spellGrid">
+        <div class="spell-level-header">Cantrips</div>
+        <div class="spell-card" data-name="minor illusion" data-level="0">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Minor Illusion</div>
+            
+          </div>
+          <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>SM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="poison spray" data-level="0">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Poison Spray</div>
+            
+          </div>
+          <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          <div class="spell-dmg">1d12 poison</div>
+        </div>
+        <div class="spell-level-header">Level 1</div>
+        <div class="spell-card ritual-spell" data-name="alarm" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Alarm</div>
+            <button class="prep-toggle" data-spell="alarm" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>8 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="animal friendship" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Animal Friendship</div>
+            <button class="prep-toggle" data-spell="animal friendship" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>24 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="cure wounds" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Cure Wounds</div>
+            <button class="prep-toggle" data-spell="cure wounds" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="detect magic" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Detect Magic</div>
+            <button class="prep-toggle" data-spell="detect magic" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="detect poison and disease" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Detect Poison and Disease</div>
+            <button class="prep-toggle" data-spell="detect poison and disease" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="ensnaring strike" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Ensnaring Strike</div>
+            <button class="prep-toggle" data-spell="ensnaring strike" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Bonus</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          <div class="spell-dmg">1d6 piercing · 1d6 piercing</div>
+        </div>
+        <div class="spell-card conc-spell" data-name="entangle" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Entangle</div>
+            <button class="prep-toggle" data-spell="entangle" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>90 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="fog cloud" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Fog Cloud</div>
+            <button class="prep-toggle" data-spell="fog cloud" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>120 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="goodberry" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Goodberry</div>
+            <button class="prep-toggle" data-spell="goodberry" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>24 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="hail of thorns" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Hail of Thorns</div>
+            <button class="prep-toggle" data-spell="hail of thorns" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Bonus</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          <div class="spell-dmg">1d10 piercing</div>
+        </div>
+        <div class="spell-card conc-spell" data-name="hunter&#x27;s mark" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Hunter&#x27;s Mark</div>
+            <button class="prep-toggle" data-spell="hunter&#x27;s mark" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Bonus</span></div>
+            <div class="spell-meta-item">Range <span>90 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          <div class="spell-dmg">1d6 force</div>
+        </div>
+        <div class="spell-card" data-name="jump" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Jump</div>
+            <button class="prep-toggle" data-spell="jump" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Bonus</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="longstrider" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Longstrider</div>
+            <button class="prep-toggle" data-spell="longstrider" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card ritual-spell" data-name="speak with animals" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Speak with Animals</div>
+            <button class="prep-toggle" data-spell="speak with animals" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+    </div>
+  </div>
+</div>
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="panel">
+    <div class="panel-title">💪 Ability Scores</div>
+    <div class="abilities-grid">
+        <div class="ability-card prof-save">
+          <div class="ab-label">STR</div>
+          <div class="ab-score">11</div>
+          <div class="ab-mod zero">+0</div>
+        </div>
+        <div class="ability-card prof-save">
+          <div class="ab-label">DEX</div>
+          <div class="ab-score">18</div>
+          <div class="ab-mod ">+4</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">CON</div>
+          <div class="ab-score">16</div>
+          <div class="ab-mod ">+3</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">INT</div>
+          <div class="ab-score">13</div>
+          <div class="ab-mod ">+1</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">WIS</div>
+          <div class="ab-score">17</div>
+          <div class="ab-mod ">+3</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">CHA</div>
+          <div class="ab-score">16</div>
+          <div class="ab-mod ">+3</div>
+        </div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">🛡 Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Strength</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dexterity</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intelligence</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Wisdom</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Charisma</div><div class="stat-bonus">+3</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🎲 Skills</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-bonus">+6</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">+5</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">👁 Senses &amp; Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name">Darkvision</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">60 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">15</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Insight</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">15</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Investigation</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">11</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;">🗣 Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Common</span>
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Common Sign Language</span>
+        </div>
+        <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Artisan&#x27;s Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">INT +3</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Cook&#x27;s Utensils</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">WIS +5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">3 eyed skull</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">INT +3</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title">📜 Features &amp; Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🫧 Species — Plasmoid (Ooze)</div>
+        <ul class="link-list">
+          <li><strong>Amorphous</strong> — squeeze through a 1-inch gap; advantage on grapple checks</li>
+          <li><strong>Natural Resilience</strong> — acid and poison resistance, advantage vs poisoned</li>
+          <li><strong>Shape Self</strong> — reshape your body; pseudopod as a bonus action</li>
+          <li><strong>Hold Breath</strong> — 1 hour</li>
+          <li>Darkvision 60 ft · Small size</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🏹 Class — Ranger 1</div>
+        <ul class="link-list">
+          <li><strong>Favored Enemy</strong> — Hunter's Mark always prepared, 2 free casts</li>
+          <li><strong>Weapon Mastery</strong> — two weapon kinds (Nick, Vex)</li>
+          <li><strong>Spellcasting</strong> — Wisdom, save DC 13, attack +5</li>
+          <li>Prepares 2 spells</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🎖 Background — Variant Survivor</div>
+        <ul class="link-list">
+          <li><strong>Makeshift Meals</strong> — on a short rest, feed 2 creatures for 1 HP each</li>
+          <li>Veteran of the Civil War</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">✨ Origin Feat</div>
+        <ul class="link-list">
+          <li><strong>Magic Initiate (Wizard)</strong> — 2 cantrips plus one level-1 spell free each long rest</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🛡 Proficiencies</div>
+        <ul class="link-list">
+          <li>Light armour</li>
+          <li>Medium armour</li>
+          <li>Shields</li>
+          <li>Martial weapons</li>
+          <li>Simple weapons</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> spend Hit Dice (d10 + CON +3); Makeshift Meals feeds 2 allies</li>
+          <li><strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)</li>
+          <li>Hunter's Mark free casts and the Magic Initiate spell reset on a long rest</li>
+          <li>Prepared spells can be swapped after a long rest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title">🎒 Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">Worn & Equipped</div>
+        <ul class="link-list">
+          <li>Studded Leather Armor</li>
+          <li>Quiver</li>
+          <li>Sprig of Mistletoe</li>
+          <li>Backpack</li>
+          <li>Tinderbox</li>
+          <li>Waterskin</li>
+          <li>Climber&#x27;s Kit</li>
+          <li>Pair of Thick Gloves</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Weapons</div>
+        <ul class="link-list">
+          <li>Unarmed Strike</li>
+          <li>N.E.S.T. Scimitar</li>
+          <li>N.E.S.T. Shortsword</li>
+          <li>N.E.S.T. Longbow</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Consumables</div>
+        <ul class="link-list">
+          <li>Arrow ×20</li>
+          <li>Oil ×2</li>
+          <li>Rations ×10</li>
+          <li>Torch ×10</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Carried</div>
+        <ul class="link-list">
+          <li>Bedroll</li>
+          <li>Rope</li>
+          <li>Cook&#x27;s Utensils</li>
+          <li>Shovel</li>
+          <li>Cloak with a Hood</li>
+          <li>3 eyed skull</li>
+          <li>Herb materials ×2</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪙 Coin</div>
+        <ul class="link-list">
+          <li>7 GP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* mimic — everything unique to this character. The engine is sheet.js. */
+const SHEET = {
+  prefix: 'mimic_v1_',
+  hpMax: 13,
+  maxPrepared: 2,
+  shortRest: { keys: [],
+               msg: 'Spend Hit Dice (d10 + CON +3) to recover HP.\nMakeshift Meals: feed 2 creatures, each regains 1 HP.' }
+};
+</script>
+<script src="sheet.js"></script>
+</body>
+</html>

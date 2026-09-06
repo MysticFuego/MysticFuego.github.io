@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Anta – Character Sheet</title>
+<link rel="stylesheet" href="sheet.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+/* anta — palette and character-specific styling only.
+   Everything shared lives in sheet.css. */
 
 :root {
   --bg: #07090f;
@@ -30,17 +32,8 @@
   --cleric-bright: #f59e0b;
   --cleric-dim: #1c1207;
   --teal: #0891b2;
+  --sheet-accent: var(--cleric-bright);
 }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg2); }
-::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; color: #a5d0fb; }
-
-.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
 
 /* ── HERO ── */
 .hero {
@@ -67,7 +60,6 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   background: linear-gradient(90deg, var(--cleric-bright) 0%, #d97706 50%, #92400e 100%);
   border-radius: 20px 20px 0 0;
 }
-.hero-avatar-wrap { position: relative; flex-shrink: 0; }
 .hero-avatar {
   width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
   border: 2px solid var(--line2); background: var(--panel);
@@ -80,131 +72,18 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   border-radius: 10px; border: 2px solid var(--bg);
   display: flex; align-items: center; justify-content: center; font-size: 16px;
 }
-.hero-info { flex: 1; min-width: 0; }
 .hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #fff8e8; letter-spacing: .02em; line-height: 1.1; }
-.hero-sub { color: var(--muted); margin-top: 6px; font-size: 13px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.hero-sub .sep { color: var(--line2); }
-.hero-bio { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-bio span { color: var(--text); }
-
-.stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-.stat-pill {
-  display: flex; flex-direction: column; align-items: center;
-  background: rgba(255,255,255,.04); border: 1px solid var(--line2);
-  border-radius: 12px; padding: 8px 14px; min-width: 64px; gap: 1px;
-}
-.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
-.stat-pill.sp-hp .sp-val { color: var(--good); }
-.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
 .stat-pill.sp-spell .sp-val { color: var(--cleric-bright); }
-#inspirationPill { cursor: pointer; transition: background .15s, border-color .15s; user-select: none; }
 #inspirationPill.on { background: rgba(180,83,9,.2); border-color: var(--cleric-bright); }
 #inspirationPill.on .sp-val { color: var(--cleric-bright); }
-
-/* ── TABS ── */
-.tabs-bar {
-  display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line);
-  border-radius: 14px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap;
-}
-.tab-btn {
-  flex: 1; min-width: 90px; padding: 9px 14px; border: none; border-radius: 10px;
-  background: transparent; color: var(--muted); font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: background .15s, color .15s; white-space: nowrap;
-}
-.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
-.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
-
-/* ── LAYOUT ── */
-.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
-.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-.stack { display: grid; gap: 16px; align-content: start; }
-
-/* ── PANELS ── */
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
-.panel-title {
-  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-}
-.panel-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-
-/* ── ABILITY SCORES ── */
-.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.ability-card {
-  background: var(--panel2); border: 1px solid var(--line); border-radius: 14px;
-  padding: 14px 10px; text-align: center; position: relative; overflow: hidden;
-}
-.ability-card .ab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
 .ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; color: var(--text); }
-.ability-card .ab-mod { font-size: 15px; font-weight: 700; color: var(--good); }
-.ability-card .ab-mod.neg { color: var(--danger); }
-.ability-card .ab-mod.zero { color: var(--muted); }
 .ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--cleric-bright); }
-
-/* ── STAT ROWS ── */
-.stat-list { display: flex; flex-direction: column; gap: 2px; }
-.stat-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; transition: background .1s; }
-.stat-row:hover { background: rgba(255,255,255,.03); }
-.prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; }
 .prof-dot.filled { background: var(--cleric-bright); border-color: var(--cleric-bright); }
-.stat-name { flex: 1; color: var(--text); font-size: 13px; }
-.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
-.stat-bonus { font-size: 13px; font-weight: 700; width: 36px; text-align: right; color: var(--good); }
-.stat-bonus.neg { color: var(--danger); }
-.stat-bonus.zero { color: var(--muted); }
-
-/* ── TRACKERS ── */
-.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-.tracker-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.tracker-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
-.hp-display { display: flex; align-items: baseline; gap: 6px; }
-.hp-input {
-  width: 72px; background: var(--panel3); color: var(--text);
-  border: 1.5px solid var(--line2); border-radius: 10px; padding: 8px 10px;
-  font-size: 22px; font-weight: 800; text-align: center; transition: border-color .15s, color .15s;
-}
 .hp-input:focus { outline: none; border-color: var(--accent); }
-.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
-.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
-.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
-.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
-.temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
 .temp-hp-input:focus { outline: none; border-color: var(--teal); }
-.dmg-heal-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
-.hp-adjust-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; font-family: inherit; }
-.btn-dmg { background: var(--danger-dim); color: var(--danger); border: 1px solid #7f1d1d; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
-.btn-dmg:hover { background: #5f1a1a; }
-.btn-heal { background: var(--good-dim); color: var(--good); border: 1px solid #166534; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
-.btn-heal:hover { background: #0d4a26; }
-
-/* ── DOTS ── */
-.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.dot {
-  width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--line2);
-  background: var(--panel3); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700;
-  transition: background .1s, border-color .1s; display: flex; align-items: center; justify-content: center;
-}
-.dot:hover { border-color: var(--muted2); }
-.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
-.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
-.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
 
 /* Spell slot dots — gold for cleric */
 .dot.slot-used { background: rgba(180,83,9,.25); color: var(--cleric-bright); border-color: var(--cleric); }
-
-/* ── DEATH SAVES ── */
-.death-panel {
-  background: rgba(63,31,38,.35); border: 1px solid #7f1d1d; border-radius: 14px;
-  padding: 16px; margin-top: 12px; display: none;
-}
-.death-panel h3 { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 12px; }
-.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
-.death-success .death-label { color: var(--good); }
-.death-fail .death-label { color: var(--danger); }
 
 /* ── CHANNEL DIVINITY ── */
 .cd-card {
@@ -212,142 +91,33 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   border-radius: 14px; padding: 16px;
 }
 .cd-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--cleric-bright); margin-bottom: 10px; }
-
-/* ── CONCENTRATION ── */
-.conc-toggle {
-  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
-  background: var(--panel2); border: 1px solid var(--line); border-radius: 12px;
-  cursor: pointer; margin-bottom: 12px; transition: border-color .15s;
-}
-.conc-toggle:hover { border-color: var(--line2); }
 .conc-toggle.active { border-color: #c084fc; background: rgba(192,132,252,.07); }
 .conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: background .15s, border-color .15s; }
 .conc-dot.on { background: #c084fc; border-color: #c084fc; }
-.conc-label { font-size: 13px; font-weight: 600; color: var(--muted); flex: 1; }
 .conc-toggle.active .conc-label { color: #c084fc; }
-.conc-body { display: none; }
-.conc-body.open { display: block; }
-.field-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
-.text-field {
-  width: 100%; background: var(--panel3); color: var(--text); border: 1px solid var(--line2);
-  border-radius: 10px; padding: 9px 12px; font: inherit; resize: vertical; transition: border-color .15s; margin-bottom: 10px;
-}
 .text-field:focus { outline: none; border-color: #c084fc; }
-
-/* ── BUTTONS ── */
-.btn {
-  display: inline-flex; align-items: center; gap: 6px; background: var(--panel2);
-  color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 8px 14px;
-  font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .1s, border-color .1s; white-space: nowrap;
-}
-.btn:hover { background: var(--panel3); border-color: var(--muted2); }
-.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
-.btn.btn-danger:hover { background: var(--danger-dim); }
 .btn.btn-rest { border-color: var(--cleric); color: var(--cleric-bright); }
 .btn.btn-rest:hover { background: var(--cleric-dim); }
-.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-
-.roll-btn {
-  display: inline-flex; align-items: center; gap: 5px; background: var(--panel2);
-  color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 6px 11px;
-  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .1s, border-color .1s;
-}
 .roll-btn:hover { background: rgba(180,83,9,.15); border-color: var(--cleric); color: var(--cleric-bright); }
-.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
-
-/* ── ROLL LOG ── */
-.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
-.roll-log { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; }
-.roll-entry { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
-.roll-entry-label { color: var(--muted); font-size: 12px; }
-.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
 .roll-entry-total.nat20 { color: var(--cleric-bright); }
-.roll-entry-total.nat1 { color: var(--danger); }
-.roll-entry-detail { font-size: 11px; color: var(--muted); }
-.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
-.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
-
-/* ── WEAPON CARDS ── */
-.weapon-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-.weapon-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
-.weapon-name { font-weight: 700; font-size: 14px; }
-.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
-.weapon-props { font-size: 11px; color: var(--muted); }
-
-/* ── ACTION CARDS ── */
-.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
-.action-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.action-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 .action-card-title.atk { color: var(--danger); }
 .action-card-title.div { color: var(--cleric-bright); }
-.action-card-title.bon { color: var(--warn); }
 .action-card-title.rea { color: var(--teal); }
-.action-card-title.oth { color: var(--muted); }
-.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.link-list li a { font-size: 13px; }
-
-/* ── SPELL SECTION ── */
-.spell-search-wrap { position: relative; margin-bottom: 14px; }
-.spell-search-wrap::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; }
-.spell-search { width: 100%; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 10px 12px 10px 36px; font: inherit; font-size: 13px; transition: border-color .15s; }
 .spell-search:focus { outline: none; border-color: var(--cleric-bright); }
-.spell-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 16px 0 10px; display: flex; align-items: center; gap: 8px; }
-.spell-section-title::after { content:''; flex:1; height:1px; background:var(--line); }
 .slot-info { font-size: 12px; color: var(--cleric-bright); margin-left: 6px; }
-.spells-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
 .spell-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; transition: border-color .15s; position: relative; overflow: hidden; }
-.spell-card:hover { border-color: var(--line2); }
 .spell-card.conc-spell { border-left: 3px solid #c084fc; }
-.spell-card.ritual-spell { border-left: 3px solid var(--warn); }
-.spell-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
-.spell-card-name { font-weight: 700; font-size: 13px; flex: 1; }
-.prep-toggle {
-  background: none; border: 1.5px solid var(--line2); border-radius: 7px;
-  color: var(--muted2); cursor: pointer; font-size: 12px; padding: 2px 7px;
-  transition: all .15s; flex-shrink: 0; line-height: 1.4;
-}
 .prep-toggle:hover { border-color: var(--cleric-bright); color: var(--cleric-bright); }
 .prep-toggle.on { background: rgba(245,158,11,.15); border-color: var(--cleric-bright); color: var(--cleric-bright); }
-.spell-level-header {
-  grid-column: 1 / -1;
-  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--muted); padding: 14px 0 8px; display: flex; align-items: center; gap: 8px;
-}
-.spell-level-header::after { content:''; flex:1; height:1px; background:var(--line); }
-.spell-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-.sbadge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; border: 1px solid; text-transform: uppercase; letter-spacing: .05em; }
 .sbadge.domain { background: rgba(180,83,9,.15); color: var(--cleric-bright); border-color: rgba(245,158,11,.3); }
-.sbadge.cantrip { background: rgba(8,145,178,.12); color: #67e8f9; border-color: rgba(8,145,178,.3); }
 .sbadge.prepared { background: rgba(22,163,74,.12); color: var(--good); border-color: rgba(22,163,74,.3); }
 .sbadge.always { background: rgba(37,99,235,.12); color: #93c5fd; border-color: rgba(37,99,235,.3); }
-.sbadge.ritual { background: rgba(251,191,36,.1); color: var(--warn); border-color: rgba(251,191,36,.25); }
 .sbadge.conc { background: rgba(192,132,252,.1); color: #c084fc; border-color: rgba(192,132,252,.25); }
-.spell-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; }
-.spell-meta-item { font-size: 11px; color: var(--muted); }
-.spell-meta-item span { color: var(--text); }
-.spell-dmg { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); padding: 4px 8px; background: rgba(251,191,36,.08); border-radius: 6px; }
-
-/* ── FEATURES ── */
-.feature-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.feature-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 
 /* ── REMINDER ── */
 .reminder { background: var(--cleric-dim); border: 1px solid rgba(180,83,9,.3); border-radius: 14px; padding: 16px; }
 .reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(180,83,9,.1); font-size: 13px; color: #fde68a; }
-.reminder .reminder-item:last-child { border-bottom: none; }
 .reminder .reminder-item::before { content: '☀️'; flex-shrink: 0; }
-
-/* ── EQUIP ── */
-.equip-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-.equip-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.equip-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
-
-/* ── RESPONSIVE ── */
-@media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col{grid-template-columns:1fr 1fr} .weapon-grid{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:600px) { .page{padding:12px 14px 50px} .hero-name{font-size:22px} .spells-grid,.equip-grid,.three-col{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .weapon-grid{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
-@media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn,.spell-search-wrap{display:none} .tab-pane{display:block!important} }
 </style>
 </head>
 <body>
@@ -363,13 +133,13 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   <div class="hero-info">
     <div class="hero-name">Anta</div>
     <div class="hero-sub">
-      <a href="https://5e.tools/classes.html#cleric_xphb">Cleric 6</a>
+      <a href="https://5e.tools/classes.html#cleric_phb">Cleric 6</a>
       <span class="sep">•</span>
-      <a href="https://5e.tools/subclasses.html#knowledge%20domain_xphb">Knowledge Domain</a>
+      <a href="https://5e.tools/subclasses.html#knowledge%20domain_phb">Knowledge Domain</a>
       <span class="sep">•</span>
-      <a href="https://5e.tools/races.html#half-elf_xphb">Half-Elf</a>
+      <a href="https://5e.tools/races.html#half-elf_phb">Half-Elf</a>
       <span class="sep">•</span>
-      <a href="https://5e.tools/backgrounds.html#acolyte_xphb">Acolyte</a>
+      <a href="https://5e.tools/backgrounds.html#acolyte_phb">Acolyte</a>
     </div>
     <div class="hero-bio">
       Age: <span>280</span>
@@ -444,7 +214,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
         <!-- Spell slots -->
         <div style="margin-top:14px;">
           <div class="panel-title" style="margin-bottom:10px;">✨ Spell Slots</div>
-          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;">
+          <div class="slot-grid">
             <div class="tracker-card">
               <h3>Level 1 <span style="color:var(--cleric-bright)">(4)</span></h3>
               <div class="dots-row" id="slot1Dots" data-key="spellSlots1" data-total="4" data-slot="true"></div>
@@ -520,13 +290,13 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
         <div class="panel-title">⚔️ Weapons</div>
         <div class="weapon-grid">
           <div class="weapon-card">
-            <div class="weapon-name"><a href="https://5e.tools/items.html#mace_xphb">Mace</a></div>
+            <div class="weapon-name"><a href="https://5e.tools/items.html#mace_phb">Mace</a></div>
             <div><button class="roll-btn" data-label="Mace" data-bonus="4">+4 to hit</button></div>
             <div class="weapon-dmg">1d6 + 1 bludgeoning</div>
             <div class="weapon-props">STR · Simple</div>
           </div>
           <div class="weapon-card">
-            <div class="weapon-name"><a href="https://5e.tools/items.html#light%20crossbow_xphb">Light Crossbow</a></div>
+            <div class="weapon-name"><a href="https://5e.tools/items.html#light%20crossbow_phb">Light Crossbow</a></div>
             <div><button class="roll-btn" data-label="Crossbow" data-bonus="2">+2 to hit</button></div>
             <div class="weapon-dmg">1d8 − 1 piercing</div>
             <div class="weapon-props">DEX · Range 80/320 · Loading</div>
@@ -541,19 +311,19 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
           <div class="action-card">
             <div class="action-card-title atk">⚔ Attack</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/items.html#mace_xphb">Mace</a></li>
-              <li><a href="https://5e.tools/items.html#light%20crossbow_xphb">Light Crossbow</a></li>
-              <li><a href="https://5e.tools/spells.html#guiding bolt_xphb">Guiding Bolt</a></li>
-              <li><a href="https://5e.tools/spells.html#sacred flame_xphb">Sacred Flame</a></li>
-              <li><a href="https://5e.tools/spells.html#inflict wounds_xphb">Inflict Wounds</a></li>
+              <li><a href="https://5e.tools/items.html#mace_phb">Mace</a></li>
+              <li><a href="https://5e.tools/items.html#light%20crossbow_phb">Light Crossbow</a></li>
+              <li><a href="https://5e.tools/spells.html#guiding bolt_phb">Guiding Bolt</a></li>
+              <li><a href="https://5e.tools/spells.html#sacred flame_phb">Sacred Flame</a></li>
+              <li><a href="https://5e.tools/spells.html#inflict wounds_phb">Inflict Wounds</a></li>
             </ul>
           </div>
           <div class="action-card">
             <div class="action-card-title div">☀️ Channel Divinity</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/classes.html#cleric_xphb">Turn Undead</a></li>
-              <li><a href="https://5e.tools/subclasses.html#knowledge%20domain_xphb">Knowledge of the Ages</a></li>
-              <li><a href="https://5e.tools/subclasses.html#knowledge%20domain_xphb">Read Thoughts</a></li>
+              <li><a href="https://5e.tools/classes.html#cleric_phb">Turn Undead</a></li>
+              <li><a href="https://5e.tools/subclasses.html#knowledge%20domain_phb">Knowledge of the Ages</a></li>
+              <li><a href="https://5e.tools/subclasses.html#knowledge%20domain_phb">Read Thoughts</a></li>
             </ul>
           </div>
         </div>
@@ -561,26 +331,26 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
           <div class="action-card">
             <div class="action-card-title bon">★ Bonus Action</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a></li>
-              <li><a href="https://5e.tools/spells.html#sanctuary_xphb">Sanctuary</a></li>
-              <li><a href="https://5e.tools/spells.html#spiritual weapon_xphb">Spiritual Weapon</a></li>
-              <li><a href="https://5e.tools/spells.html#shield of faith_xphb">Shield of Faith</a></li>
+              <li><a href="https://5e.tools/spells.html#healing word_phb">Healing Word</a></li>
+              <li><a href="https://5e.tools/spells.html#sanctuary_phb">Sanctuary</a></li>
+              <li><a href="https://5e.tools/spells.html#spiritual weapon_phb">Spiritual Weapon</a></li>
+              <li><a href="https://5e.tools/spells.html#shield of faith_phb">Shield of Faith</a></li>
             </ul>
           </div>
           <div class="action-card">
             <div class="action-card-title rea">↩ Reaction</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/classes.html#cleric_xphb">Opportunity Attack</a></li>
+              <li><a href="https://5e.tools/classes.html#cleric_phb">Opportunity Attack</a></li>
             </ul>
           </div>
           <div class="action-card">
             <div class="action-card-title oth">… Other</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a></li>
-              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
-              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
-              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
-              <li><a href="https://5e.tools/actions.html#ready_xphb">Ready</a></li>
+              <li><a href="https://5e.tools/actions.html#dash_phb">Dash</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_phb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_phb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_phb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#ready_phb">Ready</a></li>
             </ul>
           </div>
         </div>
@@ -635,7 +405,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="guidance" data-level="0" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#guidance_xphb">Guidance</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#guidance_phb">Guidance</a></div>
         </div>
         <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
         <div class="spell-meta">
@@ -649,7 +419,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="sacred flame" data-level="0" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#sacred flame_xphb">Sacred Flame</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#sacred flame_phb">Sacred Flame</a></div>
         </div>
         <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
         <div class="spell-meta">
@@ -663,7 +433,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="mending" data-level="0" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#mending_xphb">Mending</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#mending_phb">Mending</a></div>
         </div>
         <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
         <div class="spell-meta">
@@ -679,7 +449,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="bane" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#bane_xphb">Bane</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#bane_phb">Bane</a></div>
           <button class="prep-toggle" data-spell="bane" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -694,7 +464,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="bless" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#bless_xphb">Bless</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#bless_phb">Bless</a></div>
           <button class="prep-toggle" data-spell="bless" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -709,7 +479,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="ceremony" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#ceremony_xphb">Ceremony</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#ceremony_xge">Ceremony</a></div>
           <button class="prep-toggle" data-spell="ceremony" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -723,7 +493,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="command" data-level="1" data-domain="true">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#command_xphb">Command</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#command_phb">Command</a></div>
           <button class="prep-toggle" data-spell="command" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge domain">Domain</span></div>
@@ -737,7 +507,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="create or destroy water" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#create or destroy water_xphb">Create or Destroy Water</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#create or destroy water_phb">Create or Destroy Water</a></div>
           <button class="prep-toggle" data-spell="create or destroy water" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -751,7 +521,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="cure wounds" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#cure wounds_xphb">Cure Wounds</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#cure wounds_phb">Cure Wounds</a></div>
           <button class="prep-toggle" data-spell="cure wounds" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -766,7 +536,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="detect evil and good" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect evil and good_xphb">Detect Evil and Good</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect evil and good_phb">Detect Evil and Good</a></div>
           <button class="prep-toggle" data-spell="detect evil and good" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -780,7 +550,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="detect magic" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect magic_xphb">Detect Magic</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect magic_phb">Detect Magic</a></div>
           <button class="prep-toggle" data-spell="detect magic" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
@@ -794,7 +564,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="detect poison and disease" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect poison and disease_xphb">Detect Poison and Disease</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect poison and disease_phb">Detect Poison and Disease</a></div>
           <button class="prep-toggle" data-spell="detect poison and disease" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
@@ -808,7 +578,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="guiding bolt" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#guiding bolt_xphb">Guiding Bolt</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#guiding bolt_phb">Guiding Bolt</a></div>
           <button class="prep-toggle" data-spell="guiding bolt" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -823,7 +593,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="healing word" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#healing word_phb">Healing Word</a></div>
           <button class="prep-toggle" data-spell="healing word" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -838,7 +608,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="identify" data-level="1" data-domain="true">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#identify_xphb">Identify</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#identify_phb">Identify</a></div>
           <button class="prep-toggle" data-spell="identify" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge domain">Domain</span><span class="sbadge ritual">Ritual</span></div>
@@ -852,7 +622,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="inflict wounds" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#inflict wounds_xphb">Inflict Wounds</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#inflict wounds_phb">Inflict Wounds</a></div>
           <button class="prep-toggle" data-spell="inflict wounds" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -867,7 +637,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="protection from evil and good" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from evil and good_xphb">Protection from Evil &amp; Good</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from evil and good_phb">Protection from Evil &amp; Good</a></div>
           <button class="prep-toggle" data-spell="protection from evil and good" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -881,7 +651,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="purify food and drink" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#purify food and drink_xphb">Purify Food and Drink</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#purify food and drink_phb">Purify Food and Drink</a></div>
           <button class="prep-toggle" data-spell="purify food and drink" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -895,7 +665,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="sanctuary" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#sanctuary_xphb">Sanctuary</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#sanctuary_phb">Sanctuary</a></div>
           <button class="prep-toggle" data-spell="sanctuary" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -909,7 +679,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="shield of faith" data-level="1" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#shield of faith_xphb">Shield of Faith</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#shield of faith_phb">Shield of Faith</a></div>
           <button class="prep-toggle" data-spell="shield of faith" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -927,7 +697,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="aid" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#aid_xphb">Aid</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#aid_phb">Aid</a></div>
           <button class="prep-toggle" data-spell="aid" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -942,7 +712,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="augury" data-level="2" data-domain="true">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#augury_xphb">Augury</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#augury_phb">Augury</a></div>
           <button class="prep-toggle" data-spell="augury" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge domain">Domain</span><span class="sbadge ritual">Ritual</span></div>
@@ -956,7 +726,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="blindness deafness" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#blindness/deafness_xphb">Blindness/Deafness</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#blindness/deafness_phb">Blindness/Deafness</a></div>
           <button class="prep-toggle" data-spell="blindness deafness" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -970,7 +740,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="borrowed knowledge" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#borrowed knowledge_xphb">Borrowed Knowledge</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#borrowed knowledge_scc">Borrowed Knowledge</a></div>
           <button class="prep-toggle" data-spell="borrowed knowledge" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -985,7 +755,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="calm emotions" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#calm emotions_xphb">Calm Emotions</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#calm emotions_phb">Calm Emotions</a></div>
           <button class="prep-toggle" data-spell="calm emotions" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -999,7 +769,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="continual flame" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#continual flame_xphb">Continual Flame</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#continual flame_phb">Continual Flame</a></div>
           <button class="prep-toggle" data-spell="continual flame" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1013,7 +783,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="enhance ability" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#enhance ability_xphb">Enhance Ability</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#enhance ability_phb">Enhance Ability</a></div>
           <button class="prep-toggle" data-spell="enhance ability" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1027,7 +797,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="find traps" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#find traps_xphb">Find Traps</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#find traps_phb">Find Traps</a></div>
           <button class="prep-toggle" data-spell="find traps" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1041,7 +811,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="gentle repose" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#gentle repose_xphb">Gentle Repose</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#gentle repose_phb">Gentle Repose</a></div>
           <button class="prep-toggle" data-spell="gentle repose" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -1055,7 +825,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="hold person" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#hold person_xphb">Hold Person</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#hold person_phb">Hold Person</a></div>
           <button class="prep-toggle" data-spell="hold person" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1070,7 +840,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="lesser restoration" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#lesser restoration_xphb">Lesser Restoration</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#lesser restoration_phb">Lesser Restoration</a></div>
           <button class="prep-toggle" data-spell="lesser restoration" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1085,7 +855,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="locate object" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#locate object_xphb">Locate Object</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#locate object_phb">Locate Object</a></div>
           <button class="prep-toggle" data-spell="locate object" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1099,7 +869,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="prayer of healing" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#prayer of healing_xphb">Prayer of Healing</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#prayer of healing_phb">Prayer of Healing</a></div>
           <button class="prep-toggle" data-spell="prayer of healing" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1114,7 +884,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="protection from poison" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from poison_xphb">Protection from Poison</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from poison_phb">Protection from Poison</a></div>
           <button class="prep-toggle" data-spell="protection from poison" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1128,7 +898,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="silence" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#silence_xphb">Silence</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#silence_phb">Silence</a></div>
           <button class="prep-toggle" data-spell="silence" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span><span class="sbadge conc">Concentration</span></div>
@@ -1142,7 +912,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="spiritual weapon" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#spiritual weapon_xphb">Spiritual Weapon</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#spiritual weapon_phb">Spiritual Weapon</a></div>
           <button class="prep-toggle" data-spell="spiritual weapon" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1157,7 +927,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="suggestion" data-level="2" data-domain="true">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#suggestion_xphb">Suggestion</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#suggestion_phb">Suggestion</a></div>
           <button class="prep-toggle" data-spell="suggestion" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge domain">Domain</span><span class="sbadge conc">Concentration</span></div>
@@ -1171,7 +941,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="warding bond" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#warding bond_xphb">Warding Bond</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#warding bond_phb">Warding Bond</a></div>
           <button class="prep-toggle" data-spell="warding bond" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1186,7 +956,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="zone of truth" data-level="2" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#zone of truth_xphb">Zone of Truth</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#zone of truth_phb">Zone of Truth</a></div>
           <button class="prep-toggle" data-spell="zone of truth" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1203,7 +973,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="animate dead" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#animate dead_xphb">Animate Dead</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#animate dead_phb">Animate Dead</a></div>
           <button class="prep-toggle" data-spell="animate dead" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1217,7 +987,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="aura of vitality" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#aura of vitality_xphb">Aura of Vitality</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#aura of vitality_phb">Aura of Vitality</a></div>
           <button class="prep-toggle" data-spell="aura of vitality" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1232,7 +1002,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="beacon of hope" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#beacon of hope_xphb">Beacon of Hope</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#beacon of hope_phb">Beacon of Hope</a></div>
           <button class="prep-toggle" data-spell="beacon of hope" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1247,7 +1017,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="bestow curse" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#bestow curse_xphb">Bestow Curse</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#bestow curse_phb">Bestow Curse</a></div>
           <button class="prep-toggle" data-spell="bestow curse" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1261,7 +1031,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="clairvoyance" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#clairvoyance_xphb">Clairvoyance</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#clairvoyance_phb">Clairvoyance</a></div>
           <button class="prep-toggle" data-spell="clairvoyance" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1275,7 +1045,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="create food and water" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#create food and water_xphb">Create Food and Water</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#create food and water_phb">Create Food and Water</a></div>
           <button class="prep-toggle" data-spell="create food and water" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1289,7 +1059,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="daylight" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#daylight_xphb">Daylight</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#daylight_phb">Daylight</a></div>
           <button class="prep-toggle" data-spell="daylight" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1304,7 +1074,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="dispel magic" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#dispel magic_xphb">Dispel Magic</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#dispel magic_phb">Dispel Magic</a></div>
           <button class="prep-toggle" data-spell="dispel magic" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1332,7 +1102,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="feign death" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#feign death_xphb">Feign Death</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#feign death_phb">Feign Death</a></div>
           <button class="prep-toggle" data-spell="feign death" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -1346,7 +1116,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="glyph of warding" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#glyph of warding_xphb">Glyph of Warding</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#glyph of warding_phb">Glyph of Warding</a></div>
           <button class="prep-toggle" data-spell="glyph of warding" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1389,7 +1159,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="magic circle" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#magic circle_xphb">Magic Circle</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#magic circle_phb">Magic Circle</a></div>
           <button class="prep-toggle" data-spell="magic circle" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1403,7 +1173,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="mass healing word" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#mass healing word_xphb">Mass Healing Word</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#mass healing word_phb">Mass Healing Word</a></div>
           <button class="prep-toggle" data-spell="mass healing word" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1418,7 +1188,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="meld into stone" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#meld into stone_xphb">Meld into Stone</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#meld into stone_phb">Meld into Stone</a></div>
           <button class="prep-toggle" data-spell="meld into stone" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -1447,7 +1217,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="nondetection" data-level="3" data-domain="true">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#nondetection_xphb">Nondetection</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#nondetection_phb">Nondetection</a></div>
           <button class="prep-toggle" data-spell="nondetection" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge domain">Domain</span></div>
@@ -1461,7 +1231,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="protection from energy" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from energy_xphb">Protection from Energy</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#protection from energy_phb">Protection from Energy</a></div>
           <button class="prep-toggle" data-spell="protection from energy" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1476,7 +1246,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="remove curse" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#remove curse_xphb">Remove Curse</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#remove curse_phb">Remove Curse</a></div>
           <button class="prep-toggle" data-spell="remove curse" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1490,7 +1260,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="revivify" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#revivify_xphb">Revivify</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#revivify_phb">Revivify</a></div>
           <button class="prep-toggle" data-spell="revivify" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1505,7 +1275,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="sending" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#sending_xphb">Sending</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#sending_phb">Sending</a></div>
           <button class="prep-toggle" data-spell="sending" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1520,7 +1290,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="speak with dead" data-level="3" data-domain="true">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#speak with dead_xphb">Speak with Dead</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#speak with dead_phb">Speak with Dead</a></div>
           <button class="prep-toggle" data-spell="speak with dead" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge domain">Domain</span></div>
@@ -1535,7 +1305,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="spirit guardians" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#spirit guardians_xphb">Spirit Guardians</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#spirit guardians_phb">Spirit Guardians</a></div>
           <button class="prep-toggle" data-spell="spirit guardians" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1550,7 +1320,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="spirit shroud" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#spirit shroud_xphb">Spirit Shroud</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#spirit shroud_tce">Spirit Shroud</a></div>
           <button class="prep-toggle" data-spell="spirit shroud" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge conc">Concentration</span></div>
@@ -1565,7 +1335,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="tongues" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#tongues_xphb">Tongues</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#tongues_phb">Tongues</a></div>
           <button class="prep-toggle" data-spell="tongues" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"></div>
@@ -1579,7 +1349,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
       <div class="spell-card" data-name="water walk" data-level="3" data-domain="false">
         <div class="spell-card-header">
-          <div class="spell-card-name"><a href="https://5e.tools/spells.html#water walk_xphb">Water Walk</a></div>
+          <div class="spell-card-name"><a href="https://5e.tools/spells.html#water walk_phb">Water Walk</a></div>
           <button class="prep-toggle" data-spell="water walk" title="Toggle prepared">✦</button>
         </div>
         <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -1666,6 +1436,10 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
           <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Orc</span>
           <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">Giant</span>
         </div>
+        <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="stat-name" style="color:var(--muted);font-style:italic;">None — Cleric, Half-Elf and Acolyte grant no tool proficiencies</div></div>
+        </div>
       </div>
     </div>
   </div>
@@ -1687,11 +1461,11 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
       <div class="feature-card">
         <div class="feature-card-title">☀️ Class — Cleric 6</div>
         <ul class="link-list">
-          <li><a href="https://5e.tools/classes.html#cleric_xphb">Spellcasting (WIS)</a></li>
-          <li><a href="https://5e.tools/classes.html#cleric_xphb">Channel Divinity (2/rest)</a></li>
-          <li><a href="https://5e.tools/classes.html#cleric_xphb">Turn Undead</a></li>
-          <li><a href="https://5e.tools/classes.html#cleric_xphb">Destroy Undead (CR ½)</a></li>
-          <li><a href="https://5e.tools/classes.html#cleric_xphb">Divine Intervention (6%)</a></li>
+          <li><a href="https://5e.tools/classes.html#cleric_phb">Spellcasting (WIS)</a></li>
+          <li><a href="https://5e.tools/classes.html#cleric_phb">Channel Divinity (2/rest)</a></li>
+          <li><a href="https://5e.tools/classes.html#cleric_phb">Turn Undead</a></li>
+          <li><a href="https://5e.tools/classes.html#cleric_phb">Destroy Undead (CR ½)</a></li>
+          <li><a href="https://5e.tools/classes.html#cleric_phb">Divine Intervention (6%)</a></li>
         </ul>
       </div>
       <div class="feature-card">
@@ -1723,6 +1497,14 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
           <li>Simple Weapons</li>
         </ul>
       </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> Channel Divinity recharged; spend Hit Dice (d8 + CON +1)</li>
+          <li><strong>Long Rest:</strong> Full HP, all spell slots, half Hit Dice restored (3 of 6)</li>
+          <li>Divine Intervention resets after a long rest if used</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -1735,8 +1517,8 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
       <div class="equip-card">
         <div class="equip-card-title">⚔️ Weapons</div>
         <ul class="link-list">
-          <li><a href="https://5e.tools/items.html#mace_xphb">Mace</a> — 1d6 bludgeoning</li>
-          <li><a href="https://5e.tools/items.html#light%20crossbow_xphb">Light Crossbow</a> — 1d8 piercing, range 80/320</li>
+          <li><a href="https://5e.tools/items.html#mace_phb">Mace</a> — 1d6 bludgeoning</li>
+          <li><a href="https://5e.tools/items.html#light%20crossbow_phb">Light Crossbow</a> — 1d8 piercing, range 80/320</li>
         </ul>
       </div>
       <div class="equip-card">
@@ -1777,309 +1559,23 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 </div><!-- /page -->
 
 <script>
-const STORE_PREFIX = "anta_v1_";
-const HP_MAX = 42;
-
-function save(k, v) { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); }
-function load(k, fallback) {
-  try { const v = JSON.parse(localStorage.getItem(STORE_PREFIX + k)); return v === null ? fallback : v; }
-  catch { return fallback; }
-}
-
-/* ── TABS ── */
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + tab).classList.add('active');
-  });
-});
-
-/* ── DOTS ── */
-function makeDots(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const total = Number(el.dataset.total || 0);
-  const key = el.dataset.key;
-  const isSuccess = el.dataset.success === 'true';
-  const isFail = el.dataset.fail === 'true';
-  const isSlot = el.dataset.slot === 'true';
-  const used = load(key, []);
-  el.innerHTML = '';
-  for (let i = 0; i < total; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'dot';
-    const isUsed = used.includes(i);
-    if (isSuccess && isUsed) btn.classList.add('success');
-    else if (isFail && isUsed) btn.classList.add('fail');
-    else if (isSlot && isUsed) btn.classList.add('slot-used');
-    else if (isUsed) btn.classList.add('used');
-    btn.textContent = i + 1;
-    btn.addEventListener('click', () => {
-      const cur = load(key, []);
-      const idx = cur.indexOf(i);
-      idx >= 0 ? cur.splice(idx, 1) : cur.push(i);
-      save(key, cur);
-      makeDots(id);
-    });
-    el.appendChild(btn);
-  }
-}
-
-/* ── HP ── */
-function updateHp() {
-  const el = document.getElementById('hpCurrent');
-  const val = Number(el.value);
-  el.classList.remove('hp-warn', 'hp-danger');
-  const dp = document.getElementById('deathSavePanel');
-  if (val === 0) { el.classList.add('hp-danger'); dp.style.display = ''; }
-  else {
-    dp.style.display = 'none';
-    if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
-    else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
-  }
-  const pill = document.getElementById('hpPill');
-  if (pill) pill.textContent = val + '/' + HP_MAX;
-}
-function bindInput(id, key) {
-  const el = document.getElementById(id); if (!el) return;
-  el.value = load(key, el.value);
-  el.addEventListener('input', () => { save(key, el.value); if (id === 'hpCurrent') updateHp(); });
-}
-function bindText(id, key) {
-  const el = document.getElementById(id); if (!el) return;
-  el.value = load(key, '');
-  el.addEventListener('input', () => save(key, el.value));
-}
-
-/* ── INSPIRATION ── */
-(function() {
-  const pill = document.getElementById('inspirationPill');
-  const val_el = document.getElementById('inspirationVal');
-  let on = load('inspiration', false);
-  const update = () => { val_el.textContent = on ? '✦ ON' : '—'; pill.classList.toggle('on', on); };
-  update();
-  pill.addEventListener('click', () => { on = !on; save('inspiration', on); update(); });
-})();
-
-/* ── CONCENTRATION ── */
-(function() {
-  const toggle = document.getElementById('concToggle');
-  const dot = document.getElementById('concDot');
-  const label = document.getElementById('concLabel');
-  const body = document.getElementById('concBody');
-  let on = load('concActive', false);
-  const update = () => { toggle.classList.toggle('active', on); dot.classList.toggle('on', on); body.classList.toggle('open', on); label.textContent = on ? 'Concentrating' : 'Not Concentrating'; };
-  update();
-  toggle.addEventListener('click', () => { on = !on; save('concActive', on); update(); });
-  bindText('concSpell', 'concSpell');
-  bindText('concNotes', 'concNotes');
-  document.getElementById('clearConcBtn').addEventListener('click', () => {
-    on = false; save('concActive', false); save('concSpell', ''); save('concNotes', '');
-    document.getElementById('concSpell').value = '';
-    document.getElementById('concNotes').value = '';
-    update();
-  });
-})();
-
-/* ── ROLL LOG ── */
-function addRoll(label, bonus) {
-  const die = Math.floor(Math.random() * 20) + 1;
-  const total = die + bonus;
-  const isNat20 = die === 20, isNat1 = die === 1;
-  const bonusStr = bonus >= 0 ? `+${bonus}` : `${bonus}`;
-  const log = document.getElementById('rollLog');
-  const empty = log.querySelector('.roll-log-empty');
-  if (empty) empty.remove();
-  const div = document.createElement('div');
-  div.className = 'roll-entry';
-  div.innerHTML = `
-    <div><div class="roll-entry-label">${label}</div><div class="roll-entry-detail">d20 (${die}) ${bonusStr}</div></div>
-    <div class="roll-entry-total${isNat20?' nat20':isNat1?' nat1':''}">${total}${isNat20?' 🎉':isNat1?' 💀':''}</div>
-    <div class="roll-entry-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
-  `;
-  log.insertBefore(div, log.firstChild);
-  while (log.children.length > 12) log.removeChild(log.lastChild);
-}
-document.querySelectorAll('.roll-btn').forEach(btn => {
-  btn.addEventListener('click', () => addRoll(btn.dataset.label, Number(btn.dataset.bonus || 0)));
-});
-
-/* ── RESTS ── */
-document.getElementById('longRestBtn').addEventListener('click', () => {
-  save('hpCurrent', HP_MAX); save('hpTemp', '0');
-  save('spellSlots1',[]); save('spellSlots2',[]); save('spellSlots3',[]);
-  save('hitDice',[]); save('channelDivinity',[]);
-  save('deathSuccess',[]); save('deathFail',[]);
-  document.getElementById('hpCurrent').value = HP_MAX;
-  document.getElementById('hpTemp').value = '0';
-  updateHp();
-  ['slot1Dots','slot2Dots','slot3Dots','hitDiceDots','cdDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
-});
-document.getElementById('shortRestBtn').addEventListener('click', () => {
-  save('channelDivinity', []);
-  makeDots('cdDots');
-  alert('Short Rest: Channel Divinity recharged. You may also spend Hit Dice (d8 + CON mod +1) to recover HP.');
-});
-document.getElementById('clearDeathBtn').addEventListener('click', () => {
-  save('deathSuccess',[]); save('deathFail',[]);
-  makeDots('deathSuccessDots'); makeDots('deathFailDots');
-});
-document.getElementById('clearSessionBtn').addEventListener('click', () => {
-  if (!confirm('Clear all saved tracking data?')) return;
-  Object.keys(localStorage).forEach(k => { if (k.startsWith(STORE_PREFIX)) localStorage.removeItem(k); });
-  location.reload();
-});
-
-/* ── SPELL FILTER ── */
-document.getElementById('spellSearch').addEventListener('input', function() {
-  const q = this.value.toLowerCase().trim();
-  document.querySelectorAll('#spellGrid .spell-card, #spellGrid .spell-level-header').forEach(el => {
-    if (el.classList.contains('spell-level-header')) {
-      el.style.display = q ? 'none' : '';
-    } else {
-      el.style.display = !q || (el.dataset.name || '').includes(q) ? '' : 'none';
-    }
-  });
-});
-
-/* ── PREPARED SYSTEM ── */
-const PREP_KEY = 'preparedSpells';
-const MAX_PREPARED = 9; // WIS mod (3) + Cleric level (6)
-
-// Domain spells are always prepared and do NOT count against the limit
-const DOMAIN_SPELLS = [
-  { name: 'command',       level: 1, link: 'https://5e.tools/spells.html#command_xphb',       action: 'Action',  range: '60 ft',  duration: '1 round',  note: 'WIS save DC 14',         badges: ['domain'] },
-  { name: 'identify',      level: 1, link: 'https://5e.tools/spells.html#identify_xphb',      action: '1 min',   range: 'Touch',  duration: 'Instant',  note: 'Ritual',                 badges: ['domain','ritual'] },
-  { name: 'augury',        level: 2, link: 'https://5e.tools/spells.html#augury_xphb',        action: '1 min',   range: 'Self',   duration: 'Instant',  note: 'Ritual',                 badges: ['domain','ritual'] },
-  { name: 'suggestion',    level: 2, link: 'https://5e.tools/spells.html#suggestion_xphb',    action: 'Action',  range: '30 ft',  duration: '8 hours',  note: 'WIS save DC 14 · Conc',  badges: ['domain','conc'] },
-  { name: 'nondetection',  level: 3, link: 'https://5e.tools/spells.html#nondetection_xphb',  action: 'Action',  range: 'Touch',  duration: '8 hours',  note: '25gp component',         badges: ['domain'] },
-  { name: 'speak with dead', level: 3, link: 'https://5e.tools/spells.html#speak with dead_xphb', action: 'Action', range: '10 ft', duration: '10 min', note: 'Ask corpse 5 questions', badges: ['domain'] },
-];
-
-function buildDomainSection() {
-  const list = document.getElementById('domainList');
-  list.innerHTML = '';
-  DOMAIN_SPELLS.forEach(sp => {
-    const div = document.createElement('div');
-    div.className = 'spell-card';
-    div.style.borderLeft = '3px solid var(--cleric-bright)';
-    const badgeHTML = sp.badges.map(b => `<span class="sbadge ${b}">${b === 'domain' ? 'Domain' : b === 'ritual' ? 'Ritual' : b === 'conc' ? 'Conc' : b}</span>`).join('');
-    div.innerHTML = `
-      <div class="spell-card-header">
-        <div class="spell-card-name"><a href="${sp.link}">${sp.name.replace(/\b\w/g,c=>c.toUpperCase())}</a></div>
-        <span style="font-size:10px;color:var(--muted);padding:2px 6px;border:1px solid var(--line2);border-radius:6px;">L${sp.level}</span>
-      </div>
-      <div class="spell-badges">${badgeHTML}</div>
-      <div class="spell-meta">
-        <div class="spell-meta-item">Action <span>${sp.action}</span></div>
-        <div class="spell-meta-item">Range <span>${sp.range}</span></div>
-        <div class="spell-meta-item">Duration <span>${sp.duration}</span></div>
-        <div class="spell-meta-item">Note <span>${sp.note}</span></div>
-      </div>
-    `;
-    list.appendChild(div);
-  });
-}
-
-function loadPrepared() {
-  try { return JSON.parse(localStorage.getItem(STORE_PREFIX + PREP_KEY)) || []; }
-  catch { return []; }
-}
-function savePrepared(list) {
-  localStorage.setItem(STORE_PREFIX + PREP_KEY, JSON.stringify(list));
-}
-
-function buildPreparedSection() {
-  const prepared = loadPrepared();
-  const list = document.getElementById('preparedList');
-  const empty = document.getElementById('preparedEmpty');
-  const count = document.getElementById('preparedCount');
-
-  const over = prepared.length > MAX_PREPARED;
-  count.textContent = `${prepared.length} / ${MAX_PREPARED}`;
-  count.style.color = over ? 'var(--danger)' : prepared.length === MAX_PREPARED ? 'var(--warn)' : 'var(--cleric-bright)';
-
-  list.innerHTML = '';
-  if (prepared.length === 0) {
-    empty.style.display = '';
-    return;
-  }
-  empty.style.display = 'none';
-
-  prepared.forEach(spellName => {
-    const src = document.querySelector(`#spellGrid .spell-card[data-name="${spellName}"]`);
-    if (!src) return;
-    const clone = src.cloneNode(true);
-    const btn = clone.querySelector('.prep-toggle');
-    if (btn) {
-      btn.textContent = '✕';
-      btn.classList.add('on');
-      btn.title = 'Remove from prepared';
-      btn.addEventListener('click', (e) => { e.stopPropagation(); togglePrepared(spellName); });
-    }
-    list.appendChild(clone);
-  });
-}
-
-function togglePrepared(spellName) {
-  // Block cantrips (level 0)
-  const card = document.querySelector(`#spellGrid .spell-card[data-name="${spellName}"]`);
-  if (card && card.dataset.level === '0') return;
-
-  let prepared = loadPrepared();
-  const idx = prepared.indexOf(spellName);
-  if (idx >= 0) {
-    prepared.splice(idx, 1);
-  } else {
-    prepared.push(spellName);
-  }
-  savePrepared(prepared);
-  refreshPreparedUI();
-}
-
-function refreshPreparedUI() {
-  const prepared = loadPrepared();
-  document.querySelectorAll('#spellGrid .prep-toggle').forEach(btn => {
-    const name = btn.dataset.spell;
-    const isOn = prepared.includes(name);
-    btn.classList.toggle('on', isOn);
-    btn.textContent = isOn ? '✦ on' : '✦';
-    btn.title = isOn ? 'Remove from prepared' : 'Add to prepared';
-  });
-  buildPreparedSection();
-}
-
-document.querySelectorAll('#spellGrid .prep-toggle').forEach(btn => {
-  btn.addEventListener('click', (e) => { e.stopPropagation(); togglePrepared(btn.dataset.spell); });
-});
-
-buildDomainSection();
-refreshPreparedUI();
-
-/* ── INIT ── */
-['hitDiceDots','cdDots','slot1Dots','slot2Dots','slot3Dots','deathSuccessDots','deathFailDots'].forEach(makeDots);
-bindInput('hpCurrent','hpCurrent');
-bindInput('hpTemp','hpTemp');
-updateHp();
-document.getElementById('dmgBtn').addEventListener('click', () => {
-  const amt = Number(document.getElementById('hpAdjust').value);
-  if (!amt || amt < 1) return;
-  const hp = document.getElementById('hpCurrent');
-  hp.value = Math.max(0, Number(hp.value) - amt);
-  save('hpCurrent', hp.value);
-  updateHp();
-});
-document.getElementById('healBtn').addEventListener('click', () => {
-  const amt = Number(document.getElementById('hpAdjust').value);
-  if (!amt || amt < 1) return;
-  const hp = document.getElementById('hpCurrent');
-  hp.value = Math.min(HP_MAX, Number(hp.value) + amt);
-  save('hpCurrent', hp.value);
-  updateHp();
-});
+/* anta — everything unique to this character. The engine is sheet.js. */
+const SHEET = {
+  prefix: 'anta_v1_',
+  hpMax: 42,
+  maxPrepared: 9,                       // WIS mod (+3) + Cleric level (6)
+  shortRest: { keys: ['channelDivinity'],
+               msg: 'Channel Divinity recharged.\nYou may also spend Hit Dice (d8 + CON mod +1) to recover HP.' },
+  domainSpells: [
+    { name: 'command',       level: 1, link: 'https://5e.tools/spells.html#command_phb',       action: 'Action',  range: '60 ft',  duration: '1 round',  note: 'WIS save DC 14',         badges: ['domain'] },
+    { name: 'identify',      level: 1, link: 'https://5e.tools/spells.html#identify_phb',      action: '1 min',   range: 'Touch',  duration: 'Instant',  note: 'Ritual',                 badges: ['domain','ritual'] },
+    { name: 'augury',        level: 2, link: 'https://5e.tools/spells.html#augury_phb',        action: '1 min',   range: 'Self',   duration: 'Instant',  note: 'Ritual',                 badges: ['domain','ritual'] },
+    { name: 'suggestion',    level: 2, link: 'https://5e.tools/spells.html#suggestion_phb',    action: 'Action',  range: '30 ft',  duration: '8 hours',  note: 'WIS save DC 14 · Conc',  badges: ['domain','conc'] },
+    { name: 'nondetection',  level: 3, link: 'https://5e.tools/spells.html#nondetection_phb',  action: 'Action',  range: 'Touch',  duration: '8 hours',  note: '25gp component',         badges: ['domain'] },
+    { name: 'speak with dead', level: 3, link: 'https://5e.tools/spells.html#speak with dead_phb', action: 'Action', range: '10 ft', duration: '10 min', note: 'Ask corpse 5 questions', badges: ['domain'] },
+  ]
+};
 </script>
+<script src="sheet.js"></script>
 </body>
 </html>

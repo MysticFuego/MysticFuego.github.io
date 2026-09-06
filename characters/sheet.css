@@ -1,0 +1,281 @@
+/* ═══════════════════════════════════════════════════════════════
+   sheet.css — styling shared by every character sheet.
+   Each character file keeps only its own :root palette and the
+   handful of rules unique to it. This file is loaded BEFORE the
+   per-sheet <style>, so a character can always override it.
+   ═══════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; color: #a5d0fb; }
+.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
+.hero-avatar-wrap { position: relative; flex-shrink: 0; }
+.hero-info { flex: 1; min-width: 0; }
+.hero-sub { color: var(--muted); margin-top: 6px; font-size: 13px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.hero-sub .sep { color: var(--line2); }
+.hero-bio { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-bio span { color: var(--text); }
+.stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.stat-pill {
+  display: flex; flex-direction: column; align-items: center;
+  background: rgba(255,255,255,.04); border: 1px solid var(--line2);
+  border-radius: 12px; padding: 8px 14px; min-width: 64px; gap: 1px;
+}
+.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
+.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
+.stat-pill.sp-hp .sp-val { color: var(--good); }
+.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
+#inspirationPill { cursor: pointer; transition: background .15s, border-color .15s; user-select: none; }
+
+/* ── TABS ── */
+.tabs-bar {
+  display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 14px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap;
+}
+.tab-btn {
+  flex: 1; min-width: 90px; padding: 9px 14px; border: none; border-radius: 10px;
+  background: transparent; color: var(--muted); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: background .15s, color .15s; white-space: nowrap;
+}
+.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
+.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
+.tab-pane { display: none; }
+.tab-pane.active { display: block; }
+
+/* ── LAYOUT ── */
+.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
+.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.stack { display: grid; gap: 16px; align-content: start; }
+
+/* ── PANELS ── */
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
+.panel-title {
+  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.panel-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+
+/* ── ABILITY SCORES ── */
+.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.ability-card {
+  background: var(--panel2); border: 1px solid var(--line); border-radius: 14px;
+  padding: 14px 10px; text-align: center; position: relative; overflow: hidden;
+}
+.ability-card .ab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
+.ability-card .ab-mod { font-size: 15px; font-weight: 700; color: var(--good); }
+.ability-card .ab-mod.neg { color: var(--danger); }
+.ability-card .ab-mod.zero { color: var(--muted); }
+
+/* ── STAT ROWS ── */
+.stat-list { display: flex; flex-direction: column; gap: 2px; }
+.stat-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; transition: background .1s; }
+.stat-row:hover { background: rgba(255,255,255,.03); }
+.prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; }
+.stat-name { flex: 1; color: var(--text); font-size: 13px; }
+.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
+.stat-bonus { font-size: 13px; font-weight: 700; width: 36px; text-align: right; color: var(--good); }
+.stat-bonus.neg { color: var(--danger); }
+.stat-bonus.zero { color: var(--muted); }
+
+/* ── TRACKERS ── */
+.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.slot-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
+.tracker-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.tracker-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+.hp-display { display: flex; align-items: baseline; gap: 6px; }
+.hp-input {
+  width: 72px; background: var(--panel3); color: var(--text);
+  border: 1.5px solid var(--line2); border-radius: 10px; padding: 8px 10px;
+  font-size: 22px; font-weight: 800; text-align: center; transition: border-color .15s, color .15s;
+}
+.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
+.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
+.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
+.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
+.temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
+.dmg-heal-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
+.hp-adjust-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; font-family: inherit; }
+.btn-dmg { background: var(--danger-dim); color: var(--danger); border: 1px solid #7f1d1d; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
+.btn-dmg:hover { background: #5f1a1a; }
+.btn-heal { background: var(--good-dim); color: var(--good); border: 1px solid #166534; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
+.btn-heal:hover { background: #0d4a26; }
+
+/* ── DOTS ── */
+.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.dot {
+  width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--line2);
+  background: var(--panel3); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700;
+  transition: background .1s, border-color .1s; display: flex; align-items: center; justify-content: center;
+}
+.dot:hover { border-color: var(--muted2); }
+.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+
+/* ── DEATH SAVES ── */
+.death-panel {
+  background: rgba(63,31,38,.35); border: 1px solid #7f1d1d; border-radius: 14px;
+  padding: 16px; margin-top: 12px; display: none;
+}
+.death-panel h3 { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 12px; }
+.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
+.death-success .death-label { color: var(--good); }
+.death-fail .death-label { color: var(--danger); }
+
+/* ── CONCENTRATION ── */
+.conc-toggle {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  background: var(--panel2); border: 1px solid var(--line); border-radius: 12px;
+  cursor: pointer; margin-bottom: 12px; transition: border-color .15s;
+}
+.conc-toggle:hover { border-color: var(--line2); }
+.conc-label { font-size: 13px; font-weight: 600; color: var(--muted); flex: 1; }
+.conc-body { display: none; }
+.conc-body.open { display: block; }
+.field-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
+.text-field {
+  width: 100%; background: var(--panel3); color: var(--text); border: 1px solid var(--line2);
+  border-radius: 10px; padding: 9px 12px; font: inherit; resize: vertical; transition: border-color .15s; margin-bottom: 10px;
+}
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 6px; background: var(--panel2);
+  color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 8px 14px;
+  font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .1s, border-color .1s; white-space: nowrap;
+}
+.btn:hover { background: var(--panel3); border-color: var(--muted2); }
+.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
+.btn.btn-danger:hover { background: var(--danger-dim); }
+.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+.roll-btn {
+  display: inline-flex; align-items: center; gap: 5px; background: var(--panel2);
+  color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 6px 11px;
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .1s, border-color .1s;
+}
+.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
+
+/* ── ROLL LOG ── */
+.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
+.roll-log { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; }
+.roll-entry { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
+.roll-entry-label { color: var(--muted); font-size: 12px; }
+.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
+.roll-entry-total.nat1 { color: var(--danger); }
+.roll-entry-detail { font-size: 11px; color: var(--muted); }
+.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
+.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
+
+/* ── WEAPON CARDS ── */
+.weapon-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.weapon-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.weapon-name { font-weight: 700; font-size: 14px; }
+.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
+.weapon-props { font-size: 11px; color: var(--muted); }
+
+/* ── ACTION CARDS ── */
+.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
+.action-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.action-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.oth { color: var(--muted); }
+.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.link-list li a { font-size: 13px; }
+.link-list li { font-size: 13px; }
+
+/* ── SPELL SECTION ── */
+.spell-search-wrap { position: relative; margin-bottom: 14px; }
+.spell-search-wrap::before { content: '🔍'; position: absolute; left: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; pointer-events: none; }
+.spell-search { width: 100%; background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 10px 12px 10px 36px; font: inherit; font-size: 13px; transition: border-color .15s; }
+.spell-section-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 16px 0 10px; display: flex; align-items: center; gap: 8px; }
+.spell-section-title::after { content:''; flex:1; height:1px; background:var(--line); }
+.spells-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 10px; }
+.spell-card:hover { border-color: var(--line2); }
+.spell-card.ritual-spell { border-left: 3px solid var(--warn); }
+.spell-card-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+.spell-card-name { font-weight: 700; font-size: 13px; flex: 1; }
+.prep-toggle {
+  background: none; border: 1.5px solid var(--line2); border-radius: 7px;
+  color: var(--muted2); cursor: pointer; font-size: 12px; padding: 2px 7px;
+  transition: all .15s; flex-shrink: 0; line-height: 1.4;
+}
+.spell-level-header {
+  grid-column: 1 / -1;
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+  color: var(--muted); padding: 14px 0 8px; display: flex; align-items: center; gap: 8px;
+}
+.spell-level-header::after { content:''; flex:1; height:1px; background:var(--line); }
+.spell-badges { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.sbadge { font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 999px; border: 1px solid; text-transform: uppercase; letter-spacing: .05em; }
+.sbadge.cantrip { background: rgba(8,145,178,.12); color: #67e8f9; border-color: rgba(8,145,178,.3); }
+.sbadge.ritual { background: rgba(251,191,36,.1); color: var(--warn); border-color: rgba(251,191,36,.25); }
+.spell-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 3px 12px; }
+.spell-meta-item { font-size: 11px; color: var(--muted); }
+.spell-meta-item span { color: var(--text); }
+.spell-dmg { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--warn); padding: 4px 8px; background: rgba(251,191,36,.08); border-radius: 6px; }
+
+/* ── FEATURES ── */
+.feature-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.feature-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
+.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+.reminder .reminder-item:last-child { border-bottom: none; }
+
+/* ── EQUIP ── */
+.equip-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
+.equip-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+.equip-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
+
+/* ── RESPONSIVE ── */
+input[type="search"]::-webkit-search-cancel-button { display: none; }
+
+/* ── HIGHLIGHT CARDS ── */
+.highlight-card {
+  border-radius: 14px; padding: 16px;
+}
+.highlight-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 8px; }
+
+/* ── PREPARED PANEL ── */
+.prep-panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; margin-bottom: 16px; }
+
+/* ─── ROLL MODE CONTROLS (advantage / disadvantage / crit) ─── */
+.roll-mode-bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0 0 12px; }
+.roll-mode-group { display: inline-flex; border: 1px solid var(--line2); border-radius: 10px; overflow: hidden; }
+.roll-mode-btn {
+  border: none; background: transparent; color: var(--muted);
+  font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase;
+  padding: 6px 12px; cursor: pointer; transition: background .12s, color .12s;
+}
+.roll-mode-group .roll-mode-btn + .roll-mode-btn { border-left: 1px solid var(--line2); }
+.roll-mode-btn:hover { color: var(--text); background: rgba(255,255,255,.05); }
+.roll-mode-btn.on { background: rgba(255,255,255,.10); color: var(--text); }
+.roll-mode-btn.adv.on { background: var(--good-dim); color: var(--good); }
+.roll-mode-btn.dis.on { background: var(--danger-dim); color: var(--danger); }
+.roll-mode-btn.crit-btn { border: 1px solid var(--line2); border-radius: 10px; }
+.roll-mode-btn.crit-btn.on { background: var(--warn); color: #1a1205; border-color: var(--warn); }
+
+/* ─── DAMAGE ROLL BUTTONS ─── */
+.dmg-roll-btn {
+  border: 1px solid var(--line2); background: var(--panel3); color: var(--muted);
+  border-radius: 7px; padding: 2px 7px; margin-left: 6px;
+  font-size: 10px; font-weight: 700; cursor: pointer; white-space: nowrap;
+  transition: background .12s, color .12s, border-color .12s;
+}
+.dmg-roll-btn:hover { color: var(--text); border-color: var(--muted2); background: var(--panel2); }
+.dmg-roll-btn.crit { background: var(--warn); color: #1a1205; border-color: var(--warn); }
+.roll-entry-detail s { opacity: .45; }
+.roll-entry-detail strong { color: var(--text); }
+.roll-entry-total.dmg { color: var(--link); }
+.roll-entry-total.crit-dmg { color: var(--warn); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col,.tracker-grid,.slot-grid{grid-template-columns:1fr 1fr} .weapon-grid{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:600px) { .roll-mode-bar{gap:6px} .roll-mode-btn{padding:6px 9px;font-size:10px} .page{padding:12px 14px 50px} .hero-name{font-size:22px} .spells-grid,.equip-grid,.three-col,.tracker-grid,.slot-grid{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .weapon-grid{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
+@media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn,.spell-search-wrap,.roll-mode-bar,.dmg-roll-btn{display:none} .tab-pane{display:block!important} }

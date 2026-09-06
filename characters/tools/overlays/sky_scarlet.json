@@ -1,0 +1,101 @@
+{
+  "slug": "sky_scarlet",
+  "icon": "🎭",
+  "max_prepared": 4,
+  "links": {
+    "class": "https://5e.tools/classes.html#bard_xphb",
+    "race": "https://5e.tools/races.html#human_xphb",
+    "background": "https://5e.tools/backgrounds.html#noble_xphb"
+  },
+  "theme": {
+    "theme_name": "Scarlet bard — crimson and gold",
+    "c1": "#be123c", "c1b": "#fb7185", "c1d": "#2a0710",
+    "c2": "#b45309", "c2b": "#fbbf24",
+    "hero_a": "#14060a", "hero_b": "#22080e",
+    "glow1": "rgba(190,18,60,.18)", "glow2": "rgba(251,191,36,.10)",
+    "name_color": "#ffe4e6",
+    "reminder_icon": "🎭", "reminder_text": "#fecdd3"
+  },
+  "bio": {},
+  "resources": [
+    { "id": "bardicInspiration", "name": "Bardic Inspiration", "total": 5,
+      "note": "d6 · Bonus Action · all uses return on a short rest" },
+    { "id": "luckPoints", "name": "Luck Points", "total": 2,
+      "note": "Lucky feat — spend for advantage, or disadvantage on an attack against you" }
+  ],
+  "short_rest": {
+    "keys": ["bardicInspiration"],
+    "msg": "Bardic Inspiration fully recharged.\nYou may also spend Hit Dice (d8 + CON +1) to recover HP."
+  },
+  "rest": [
+    "<strong>Short Rest:</strong> Bardic Inspiration returns in full; spend Hit Dice (d8 + CON +1)",
+    "<strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)",
+    "Luck Points reset on a long rest",
+    "<strong>Resourceful</strong> grants Heroic Inspiration every time you finish a long rest"
+  ],
+  "actions": {
+    "attack": [
+      "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +4 (1d4+2)",
+      "Unarmed Strike +4",
+      "<a href=\"https://5e.tools/spells.html#thunderclap_xphb\">Thunderclap</a> — 5 ft burst, CON save"
+    ],
+    "bonus": [
+      "<strong>Bardic Inspiration</strong> — d6 to an ally within 60 ft",
+      "<a href=\"https://5e.tools/spells.html#healing word_xphb\">Healing Word</a> — 60 ft, 2d4+5",
+      "Nick (off-hand dagger)"
+    ],
+    "reaction": [
+      "Opportunity Attack",
+      "<a href=\"https://5e.tools/spells.html#silvery barbs_scc\">Silvery Barbs</a> — undo an enemy success"
+    ],
+    "magic": [
+      "<a href=\"https://5e.tools/spells.html#charm person_xphb\">Charm Person</a> — WIS save DC 15",
+      "<a href=\"https://5e.tools/spells.html#command_xphb\">Command</a> — WIS save DC 15",
+      "<a href=\"https://5e.tools/spells.html#dissonant whispers_xphb\">Dissonant Whispers</a> — 3d6 psychic",
+      "<a href=\"https://5e.tools/spells.html#tasha's hideous laughter_xphb\">Tasha's Hideous Laughter</a>",
+      "<a href=\"https://5e.tools/spells.html#faerie fire_xphb\">Faerie Fire</a> — advantage for everyone"
+    ],
+    "other": [
+      "<a href=\"https://5e.tools/actions.html#dash_xphb\">Dash</a>",
+      "<a href=\"https://5e.tools/actions.html#disengage_xphb\">Disengage</a>",
+      "<a href=\"https://5e.tools/actions.html#dodge_xphb\">Dodge</a>",
+      "<a href=\"https://5e.tools/actions.html#help_xphb\">Help</a>",
+      "<a href=\"https://5e.tools/actions.html#hide_xphb\">Hide</a>",
+      "<a href=\"https://5e.tools/actions.html#influence_xphb\">Influence</a>",
+      "<a href=\"https://5e.tools/actions.html#search_xphb\">Search</a>"
+    ]
+  },
+  "reminders": [
+    "<strong>Bardic Inspiration is a Bonus Action</strong> — 5 uses, and they all come back on a short rest. Spend them freely.",
+    "<strong>Resourceful:</strong> you gain Heroic Inspiration after every long rest. Spend the old one before you sleep.",
+    "<strong>Lucky:</strong> 2 Luck Points — advantage on one of your d20 tests, or disadvantage on an attack aimed at you.",
+    "Spell save DC 15 is unusually high for level 1. Lead with Charm Person, Command or Tasha's Hideous Laughter.",
+    "Only <strong>two</strong> level-1 slots. Healing Word is a Bonus Action, so you can still attack the same turn.",
+    "Deception +7 and Performance +7 are your best checks by a mile — talk first."
+  ],
+  "features": [
+    { "title": "🧬 Species — Human",
+      "bullets": [
+        "<strong>Resourceful</strong> — Heroic Inspiration after every long rest",
+        "<strong>Skillful</strong> — one extra skill proficiency",
+        "<strong>Versatile</strong> — one Origin feat (Lucky)",
+        "Darkvision 60 ft (from Night Slash)"
+      ] },
+    { "title": "🎵 Class — Bard 1",
+      "bullets": [
+        "<strong>Bardic Inspiration</strong> — d6, Bonus Action, 5/short rest",
+        "<strong>Spellcasting</strong> — Charisma, save DC 15, attack +7",
+        "4 prepared spells + 2 cantrips"
+      ] },
+    { "title": "🏛 Background — Noble",
+      "bullets": [
+        "History, Persuasion and a Gaming Set from the background",
+        "Position of Privilege — people of rank tend to hear you out"
+      ] },
+    { "title": "✨ Origin Feats",
+      "bullets": [
+        "<strong>Lucky</strong> — 2 Luck Points per long rest",
+        "<strong>Skilled</strong> — three extra proficiencies"
+      ] }
+  ]
+}

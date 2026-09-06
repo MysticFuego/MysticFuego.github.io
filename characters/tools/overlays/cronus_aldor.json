@@ -1,0 +1,100 @@
+{
+  "slug": "cronus_aldor",
+  "icon": "⚙️",
+  "max_prepared": 4,
+  "links": {
+    "class": "https://5e.tools/classes.html#artificer_tce",
+    "race": "https://5e.tools/races.html#harengon_mpmm",
+    "background": "https://5e.tools/backgrounds.html#golgari%20agent_ggr"
+  },
+  "theme": {
+    "theme_name": "Golgari artificer — bronze and rot-green",
+    "c1": "#a16207", "c1b": "#fbbf24", "c1d": "#1c1207",
+    "c2": "#15803d", "c2b": "#4ade80",
+    "hero_a": "#0d0f08", "hero_b": "#16180c",
+    "glow1": "rgba(161,98,7,.18)", "glow2": "rgba(21,128,61,.12)",
+    "name_color": "#fef3c7",
+    "reminder_icon": "⚙️", "reminder_text": "#fde68a"
+  },
+  "bio": {},
+  "adjust": { "init_bonus": 2 },
+  "resources": [
+    { "id": "rabbitHop", "name": "Rabbit Hop", "total": 2,
+      "note": "Bonus Action · jump 10 ft, no opportunity attacks · returns on a long rest" }
+  ],
+  "short_rest": {
+    "keys": [],
+    "msg": "Spend Hit Dice (d8 + CON +3) to recover HP.\nRabbit Hop does NOT return on a short rest."
+  },
+  "rest": [
+    "<strong>Short Rest:</strong> spend Hit Dice (d8 + CON +3)",
+    "<strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)",
+    "Rabbit Hop uses reset on a long rest",
+    "Prepared spells can be swapped after a long rest"
+  ],
+  "actions": {
+    "attack": [
+      "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +5 (1d4+3) — Nick",
+      "<a href=\"https://5e.tools/items.html#sling_xphb\">Sling</a> +5 (1d4+3) — Slow",
+      "Unarmed Strike +2"
+    ],
+    "bonus": [
+      "<strong>Rabbit Hop</strong> — jump 10 ft without provoking",
+      "Nick (off-hand dagger, part of the Attack action)"
+    ],
+    "reaction": [
+      "Opportunity Attack",
+      "<strong>Lucky Footwork</strong> — failed DEX save, add a d4"
+    ],
+    "magic": [
+      "<a href=\"https://5e.tools/spells.html#cure wounds_xphb\">Cure Wounds</a> — 2d8+4",
+      "<a href=\"https://5e.tools/spells.html#faerie fire_xphb\">Faerie Fire</a> — advantage for everyone",
+      "<a href=\"https://5e.tools/spells.html#grease_xphb\">Grease</a> — 10 ft square, DEX save DC 14",
+      "<a href=\"https://5e.tools/spells.html#tasha's caustic brew_tce\">Tasha's Caustic Brew</a> — 2d4 acid/turn",
+      "<a href=\"https://5e.tools/spells.html#ray of sickness_xphb\">Ray of Sickness</a> — 2d8 poison",
+      "<strong>Tinker's Magic</strong> — conjure a small mundane item"
+    ],
+    "other": [
+      "<a href=\"https://5e.tools/actions.html#dash_xphb\">Dash</a>",
+      "<a href=\"https://5e.tools/actions.html#disengage_xphb\">Disengage</a>",
+      "<a href=\"https://5e.tools/actions.html#dodge_xphb\">Dodge</a>",
+      "<a href=\"https://5e.tools/actions.html#help_xphb\">Help</a>",
+      "<a href=\"https://5e.tools/actions.html#hide_xphb\">Hide</a>",
+      "<a href=\"https://5e.tools/actions.html#search_xphb\">Search</a>",
+      "<a href=\"https://5e.tools/actions.html#utilize_xphb\">Utilize</a>"
+    ]
+  },
+  "reminders": [
+    "<strong>Hare-Trigger</strong> is already baked into the Initiative +5 pill — proficiency is added to every initiative roll.",
+    "<strong>Savage Attacker:</strong> once per turn, roll your weapon's damage dice twice and keep the better result.",
+    "<strong>Lucky Footwork</strong> is a Reaction on a <em>failed</em> DEX save — add a d4 and it may turn into a success.",
+    "<strong>Rabbit Hop:</strong> 2 per long rest, Bonus Action, 10 ft with no opportunity attacks. Good for disengaging.",
+    "You are <strong>Small</strong> — Heavy weapons give you disadvantage.",
+    "All four tool kits sit at +6. Smith's, Tinker's and Poisoner's are your best non-magic answers to a problem."
+  ],
+  "features": [
+    { "title": "🐇 Species — Harengon",
+      "bullets": [
+        "<strong>Hare-Trigger</strong> — add proficiency to initiative",
+        "<strong>Leporine Senses</strong> — Perception proficiency",
+        "<strong>Lucky Footwork</strong> — reaction, d4 on a failed DEX save",
+        "<strong>Rabbit Hop</strong> — bonus-action 10 ft jump, 2/long rest",
+        "Small size · Speed 30 ft"
+      ] },
+    { "title": "⚙️ Class — Artificer 1",
+      "bullets": [
+        "<strong>Spellcasting</strong> — Intelligence, save DC 14, attack +6",
+        "<strong>Tinker's Magic</strong> — Mending known; conjure small mundane items",
+        "Prepares 4 spells; can swap them after a long rest"
+      ] },
+    { "title": "🍄 Background — Golgari Agent",
+      "bullets": [
+        "<strong>Undercity Paths</strong> — travel the city at double speed out of combat",
+        "Nature and Survival proficiency"
+      ] },
+    { "title": "✨ Origin Feat",
+      "bullets": [
+        "<strong>Savage Attacker</strong> — once per turn, reroll a weapon's damage dice and keep either"
+      ] }
+  ]
+}

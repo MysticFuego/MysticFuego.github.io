@@ -1,0 +1,104 @@
+{
+  "slug": "mimic",
+  "icon": "🏹",
+  "max_prepared": 2,
+  "links": {
+    "class": "https://5e.tools/classes.html#ranger_xphb",
+    "race": "https://5e.tools/races.html#plasmoid_aag",
+    "background": null
+  },
+  "theme": {
+    "theme_name": "Plasmoid ranger — moss green and acid",
+    "c1": "#15803d", "c1b": "#4ade80", "c1d": "#052e16",
+    "c2": "#65a30d", "c2b": "#a3e635",
+    "hero_a": "#04120a", "hero_b": "#071a0e",
+    "glow1": "rgba(21,128,61,.18)", "glow2": "rgba(101,163,13,.12)",
+    "name_color": "#dcfce7",
+    "reminder_icon": "🏹", "reminder_text": "#bbf7d0"
+  },
+  "bio": {},
+  "resources": [
+    { "id": "favoredEnemy", "name": "Hunter's Mark (free)", "total": 2,
+      "note": "Favored Enemy — 2 free casts, no slot · returns on a long rest" },
+    { "id": "magicInitiate", "name": "Magic Initiate Spell", "total": 1,
+      "note": "One free level-1 wizard spell · returns on a long rest" }
+  ],
+  "short_rest": {
+    "keys": [],
+    "msg": "Spend Hit Dice (d10 + CON +3) to recover HP.\nMakeshift Meals: feed 2 creatures, each regains 1 HP."
+  },
+  "rest": [
+    "<strong>Short Rest:</strong> spend Hit Dice (d10 + CON +3); Makeshift Meals feeds 2 allies",
+    "<strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)",
+    "Hunter's Mark free casts and the Magic Initiate spell reset on a long rest",
+    "Prepared spells can be swapped after a long rest"
+  ],
+  "actions": {
+    "attack": [
+      "<a href=\"https://5e.tools/items.html#scimitar_xphb\">Scimitar</a> +6 (1d6+4) — Nick",
+      "<a href=\"https://5e.tools/items.html#shortsword_xphb\">Shortsword</a> +6 (1d6+4) — Vex",
+      "<a href=\"https://5e.tools/items.html#longbow_xphb\">Longbow</a> +6 (1d8+4) — Slow",
+      "<a href=\"https://5e.tools/spells.html#poison spray_xphb\">Poison Spray</a> — CON save DC 13"
+    ],
+    "bonus": [
+      "<a href=\"https://5e.tools/spells.html#hunter's mark_xphb\">Hunter's Mark</a> — +1d6 per hit, 2 free casts",
+      "Nick (off-hand scimitar, part of the Attack action)",
+      "<strong>Shape Self</strong> — extrude or reabsorb a pseudopod"
+    ],
+    "reaction": [
+      "Opportunity Attack",
+      "<a href=\"https://5e.tools/spells.html#ensnaring strike_xphb\">Ensnaring Strike</a> (on a hit, if cast)"
+    ],
+    "magic": [
+      "<a href=\"https://5e.tools/spells.html#hunter's mark_xphb\">Hunter's Mark</a> — always prepared, free ×2",
+      "<a href=\"https://5e.tools/spells.html#cure wounds_xphb\">Cure Wounds</a> — 2d8+3",
+      "<a href=\"https://5e.tools/spells.html#entangle_xphb\">Entangle</a> — 20 ft square, STR save DC 13",
+      "<a href=\"https://5e.tools/spells.html#fog cloud_xphb\">Fog Cloud</a> — 20 ft heavily obscured",
+      "<a href=\"https://5e.tools/spells.html#goodberry_xphb\">Goodberry</a> — 10 berries, 1 HP each"
+    ],
+    "other": [
+      "<a href=\"https://5e.tools/actions.html#dash_xphb\">Dash</a>",
+      "<a href=\"https://5e.tools/actions.html#disengage_xphb\">Disengage</a>",
+      "<a href=\"https://5e.tools/actions.html#dodge_xphb\">Dodge</a>",
+      "<a href=\"https://5e.tools/actions.html#help_xphb\">Help</a>",
+      "<a href=\"https://5e.tools/actions.html#hide_xphb\">Hide</a>",
+      "<a href=\"https://5e.tools/actions.html#search_xphb\">Search</a>",
+      "<strong>Shape Self</strong> — take or drop a humanlike shape"
+    ]
+  },
+  "reminders": [
+    "<strong>Hunter's Mark is always prepared</strong> and you get 2 free casts per long rest. Open with it — it is +1d6 on every hit.",
+    "<strong>Vex</strong> (Shortsword): hit a creature and you have advantage on your next attack against it.",
+    "<strong>Nick</strong> (Scimitar): the off-hand attack rides along with the Attack action — it does <em>not</em> cost your Bonus Action.",
+    "<strong>Natural Resilience:</strong> resistance to acid and poison, and advantage on saves against being poisoned.",
+    "<strong>Amorphous:</strong> you squeeze through a 1-inch gap with nothing worn or carried, and have advantage on grapple checks.",
+    "Hold Breath 1 hour, Darkvision 60 ft, and Stealth +6 — you are the scout.",
+    "Magic Initiate (Wizard) gives you two cantrips plus one free level-1 casting per long rest."
+  ],
+  "features": [
+    { "title": "🫧 Species — Plasmoid (Ooze)",
+      "bullets": [
+        "<strong>Amorphous</strong> — squeeze through a 1-inch gap; advantage on grapple checks",
+        "<strong>Natural Resilience</strong> — acid and poison resistance, advantage vs poisoned",
+        "<strong>Shape Self</strong> — reshape your body; pseudopod as a bonus action",
+        "<strong>Hold Breath</strong> — 1 hour",
+        "Darkvision 60 ft · Small size"
+      ] },
+    { "title": "🏹 Class — Ranger 1",
+      "bullets": [
+        "<strong>Favored Enemy</strong> — Hunter's Mark always prepared, 2 free casts",
+        "<strong>Weapon Mastery</strong> — two weapon kinds (Nick, Vex)",
+        "<strong>Spellcasting</strong> — Wisdom, save DC 13, attack +5",
+        "Prepares 2 spells"
+      ] },
+    { "title": "🎖 Background — Variant Survivor",
+      "bullets": [
+        "<strong>Makeshift Meals</strong> — on a short rest, feed 2 creatures for 1 HP each",
+        "Veteran of the Civil War"
+      ] },
+    { "title": "✨ Origin Feat",
+      "bullets": [
+        "<strong>Magic Initiate (Wizard)</strong> — 2 cantrips plus one level-1 spell free each long rest"
+      ] }
+  ]
+}

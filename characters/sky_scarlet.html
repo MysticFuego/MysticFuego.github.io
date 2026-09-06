@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sky Scarlet – Character Sheet</title>
+<link rel="stylesheet" href="sheet.css">
+<style>
+/* sky_scarlet — palette and character-specific styling only.
+   Everything shared lives in sheet.css. */
+
+:root {
+  --bg: #07090f;
+  --bg2: #0d1117;
+  --panel: #111827;
+  --panel2: #1a2235;
+  --panel3: #0f1825;
+  --line: #1e2d42;
+  --line2: #253347;
+  --text: #e8edf5;
+  --muted: #6b7e99;
+  --muted2: #4a5c75;
+  --link: #7eb8f7;
+  --good: #4ade80;
+  --good-dim: #14532d;
+  --warn: #fbbf24;
+  --danger: #f87171;
+  --danger-dim: #3f1f26;
+  /* Scarlet bard — crimson and gold */
+  --c1: #be123c;
+  --c1b: #fb7185;
+  --c1d: #2a0710;
+  --c2: #b45309;
+  --c2b: #fbbf24;
+  --sheet-accent: var(--c1b);
+}
+
+/* ── HERO ── */
+.hero {
+  position: relative;
+  background: linear-gradient(135deg, #14060a 0%, #22080e 40%, #14060a 100%);
+  border: 1px solid var(--line2); border-radius: 20px;
+  padding: 28px 32px; margin-bottom: 20px; overflow: hidden;
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 80% 50%, rgba(190,18,60,.18) 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 80%, rgba(251,191,36,.10) 0%, transparent 50%);
+  pointer-events: none;
+}
+.hero-border-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--c2) 0%, var(--c1b) 50%, var(--c2b) 100%);
+  border-radius: 20px 20px 0 0;
+}
+.hero-avatar {
+  width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
+  border: 2px solid var(--line2); background: var(--panel);
+  box-shadow: 0 0 0 4px rgba(190,18,60,.18), 0 8px 32px rgba(0,0,0,.6);
+}
+.hero-class-icon {
+  position: absolute; bottom: -8px; right: -8px;
+  width: 32px; height: 32px; background: var(--c1);
+  border-radius: 10px; border: 2px solid var(--bg);
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+}
+.hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #ffe4e6; letter-spacing: .02em; line-height: 1.1; }
+.stat-pill.sp-spell .sp-val { color: var(--c1b); }
+.stat-pill.sp-mastery .sp-val { color: var(--c2b); font-size: 13px; }
+#inspirationPill.on { background: rgba(190,18,60,.18); border-color: var(--c1b); }
+#inspirationPill.on .sp-val { color: var(--c1b); }
+.ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; }
+.ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--c1b); }
+.prof-dot.filled { background: var(--c1b); border-color: var(--c1b); }
+.prof-dot.expertise { background: var(--c2b); border-color: var(--c2b); box-shadow: 0 0 0 2px rgba(251,191,36,.10); }
+.hp-input:focus { outline: none; border-color: var(--c1); }
+.temp-hp-input:focus { outline: none; border-color: var(--c1); }
+.dot.slot-used { background: rgba(190,18,60,.18); color: var(--c1b); border-color: var(--c1); }
+.conc-toggle.active { border-color: var(--c2b); background: rgba(251,191,36,.10); }
+.conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: all .15s; }
+.conc-dot.on { background: var(--c2b); border-color: var(--c2b); }
+.conc-toggle.active .conc-label { color: var(--c2b); }
+.text-field:focus { outline: none; border-color: var(--c2b); }
+.btn.btn-rest { border-color: var(--c1); color: var(--c1b); }
+.btn.btn-rest:hover { background: var(--c1d); }
+.roll-btn:hover { background: rgba(190,18,60,.18); border-color: var(--c1); color: var(--c1b); }
+.roll-entry-total.nat20 { color: var(--c1b); }
+.weapon-card.magic { border-color: rgba(190,18,60,.18); background: rgba(251,191,36,.10); }
+.weapon-magic { font-size: 11px; color: var(--c1b); }
+.action-card-title.atk { color: var(--danger); }
+.action-card-title.bon { color: var(--warn); }
+.action-card-title.rea { color: var(--c2b); }
+.action-card-title.mag { color: var(--c1b); }
+.action-card-title.oth { color: var(--muted); }
+.spell-search:focus { outline: none; border-color: var(--c1b); }
+.spell-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 14px; transition: border-color .15s; }
+.spell-card.conc-spell { border-left: 3px solid var(--c2b); }
+.spell-card.ritual-spell { border-left: 3px solid var(--c1b); }
+.prep-toggle:hover { border-color: var(--c1b); color: var(--c1b); }
+.prep-toggle.on { background: rgba(190,18,60,.18); border-color: var(--c1b); color: var(--c1b); }
+.sbadge.conc { background: rgba(251,191,36,.10); color: var(--c2b); border-color: rgba(251,191,36,.10); }
+.sbadge.ritual { background: rgba(190,18,60,.18); color: var(--c1b); border-color: rgba(190,18,60,.18); }
+.sbadge.cantrip { background: rgba(148,163,184,.12); color: var(--muted); border-color: var(--line2); }
+.mastery-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: .06em; padding: 2px 7px; border-radius: 6px; margin-left: 6px;
+  background: rgba(251,191,36,.10); color: var(--c2b); border: 1px solid rgba(251,191,36,.10); }
+
+/* ── REMINDER ── */
+.reminder { background: var(--c1d); border: 1px solid rgba(190,18,60,.18); border-radius: 14px; padding: 16px; }
+.reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(251,191,36,.10); font-size: 13px; color: #fecdd3; }
+.reminder .reminder-item::before { content: '🎭'; flex-shrink: 0; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-border-accent"></div>
+  <div class="hero-avatar-wrap">
+    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/tokenizer/pc-images/sky_scarlet.Avatar.webp?1761673298861" alt="Sky Scarlet">
+    <div class="hero-class-icon">🎭</div>
+  </div>
+  <div class="hero-info">
+    <div class="hero-name">Sky Scarlet</div>
+    <div class="hero-sub">
+      <a href="https://5e.tools/classes.html#bard_xphb">Bard 1</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/races.html#human_xphb">Human</a>
+      <span class="sep">•</span>
+      <a href="https://5e.tools/backgrounds.html#noble_xphb">Noble</a>
+    </div>
+    <div class="hero-bio">
+      Age: <span>—</span>
+      Gender: <span>—</span>
+      Height: <span>—</span>
+      Eyes: <span>—</span>
+      Hair: <span>—</span>
+      Skin: <span>—</span>
+      Size: <span>Medium</span>
+      Type: <span>Humanoid</span>
+      Alignment: <span>—</span>
+    </div>
+    <div class="stat-bar">
+      <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">9</span></div>
+      <div class="stat-pill sp-ac"><span class="sp-label">AC</span><span class="sp-val" title="Leather Armor 11 + DEX +1">12</span></div>
+      <div class="stat-pill "><span class="sp-label">Initiative</span><span class="sp-val">+1</span></div>
+      <div class="stat-pill "><span class="sp-label">Speed</span><span class="sp-val">30 ft</span></div>
+      <div class="stat-pill "><span class="sp-label">Prof.</span><span class="sp-val">+2</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell DC</span><span class="sp-val">15</span></div>
+      <div class="stat-pill sp-spell"><span class="sp-label">Spell Atk</span><span class="sp-val">+7</span></div>
+      <div class="stat-pill "><span class="sp-label">Passive Perc</span><span class="sp-val">11</span></div>
+      <div class="stat-pill "><span class="sp-label">Passive Ins</span><span class="sp-val">9</span></div>
+      <div class="stat-pill" id="inspirationPill" title="Click to toggle Heroic Inspiration">
+        <span class="sp-label">Inspiration</span>
+        <span class="sp-val" id="inspirationVal">—</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<div class="tabs-bar">
+  <button class="tab-btn active" data-tab="combat">⚔️ Combat</button>
+  <button class="tab-btn" data-tab="spells">✨ Spells</button>
+  <button class="tab-btn" data-tab="abilities">🎲 Abilities</button>
+  <button class="tab-btn" data-tab="features">📜 Features</button>
+  <button class="tab-btn" data-tab="gear">🎒 Gear</button>
+</div>
+
+<!-- ═══ TAB: COMBAT ═══ -->
+<div class="tab-pane active" id="tab-combat">
+  <div class="two-col">
+    <div class="stack">
+
+      <!-- Trackers -->
+      <div class="panel">
+        <div class="panel-title">❤️ Trackers</div>
+        <div class="tracker-grid">
+          <div class="tracker-card">
+            <h3>Hit Points</h3>
+            <div class="hp-display">
+              <input id="hpCurrent" class="hp-input" type="number" min="0" max="9" value="9">
+              <span class="hp-max">/ 9</span>
+            </div>
+            <div class="temp-hp-row">Temp HP: <input id="hpTemp" class="temp-hp-input" type="number" min="0" value="0"></div>
+            <div class="dmg-heal-row">
+              <input id="hpAdjust" class="hp-adjust-input" type="number" min="1" placeholder="Amt">
+              <button class="btn-dmg" id="dmgBtn">🗡 Dmg</button>
+              <button class="btn-heal" id="healBtn">✚ Heal</button>
+            </div>
+          </div>
+          <div class="tracker-card">
+            <h3>Hit Dice (d8)</h3>
+            <div class="dots-row" id="hitDiceDots" data-key="hitDice" data-total="1" data-label="Hit die"></div>
+          </div>
+          <div class="tracker-card">
+            <h3>Bardic Inspiration</h3>
+            <div class="dots-row" id="bardicInspirationDots" data-key="bardicInspiration" data-total="5" data-label="Bardic Inspiration"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;">d6 · Bonus Action · all uses return on a short rest</div>
+          </div>
+          <div class="tracker-card">
+            <h3>Luck Points</h3>
+            <div class="dots-row" id="luckPointsDots" data-key="luckPoints" data-total="2" data-label="Luck Points"></div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;">Lucky feat — spend for advantage, or disadvantage on an attack against you</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div class="panel-title" style="margin-bottom:10px;">✨ Spell Slots</div>
+          <div class="slot-grid" style="grid-template-columns:repeat(1,1fr);">
+            <div class="tracker-card">
+              <h3>Level 1 <span style="color:var(--c1b)">(2)</span></h3>
+              <div class="dots-row" id="slot1Dots" data-key="spellSlots1" data-total="2" data-slot="true" data-label="Level 1 slot"></div>
+            </div>
+          </div>
+        </div>
+        <div class="death-panel" id="deathSavePanel">
+          <h3>☠️ Death Saving Throws</h3>
+          <div class="death-grid">
+            <div class="death-success"><div class="death-label">Successes</div><div class="dots-row" id="deathSuccessDots" data-key="deathSuccess" data-total="3" data-success="true" data-label="Death save success"></div></div>
+            <div class="death-fail"><div class="death-label">Failures</div><div class="dots-row" id="deathFailDots" data-key="deathFail" data-total="3" data-fail="true" data-label="Death save failure"></div></div>
+          </div>
+          <div class="btn-row" style="margin-top:10px;"><button class="btn btn-danger" id="clearDeathBtn" style="font-size:12px;">Clear Saves</button></div>
+        </div>
+        <div class="btn-row">
+          <button class="btn btn-rest" id="longRestBtn">🌙 Long Rest</button>
+          <button class="btn" id="shortRestBtn">⏳ Short Rest</button>
+          <button class="btn btn-danger" id="clearSessionBtn">🗑 Clear Data</button>
+        </div>
+      </div>
+
+      <!-- Concentration -->
+      <div class="panel">
+        <div class="panel-title">🔮 Concentration</div>
+        <div class="conc-toggle" id="concToggle">
+          <div class="conc-dot" id="concDot"></div>
+          <div class="conc-label" id="concLabel">Not Concentrating</div>
+        </div>
+        <div class="conc-body" id="concBody">
+          <div class="field-label">Spell</div>
+          <input id="concSpell" class="text-field" type="text" placeholder="Spell name…">
+          <div class="field-label" style="margin-top:10px;">Notes</div>
+          <input id="concNotes" class="text-field" type="text" placeholder="Target, rounds remaining…">
+          <div class="btn-row" style="margin-top:10px;">
+            <button class="btn btn-danger" id="clearConcBtn" style="font-size:12px;">Clear Concentration</button>
+          </div>
+        </div>
+      </div>
+      <!-- Common Rolls -->
+      <div class="panel">
+        <div class="panel-title">⚄ Common Rolls</div>
+        <div class="roll-buttons">
+          <button class="roll-btn" data-label="Initiative" data-bonus="1">Initiative +1</button>
+          <button class="roll-btn" data-label="Athletics" data-bonus="4">Athletics +4</button>
+          <button class="roll-btn" data-label="Deception" data-bonus="7">Deception +7</button>
+          <button class="roll-btn" data-label="History" data-bonus="2">History +2</button>
+          <button class="roll-btn" data-label="Investigation" data-bonus="2">Investigation +2</button>
+          <button class="roll-btn" data-label="Perception" data-bonus="1">Perception +1</button>
+          <button class="roll-btn" data-label="Performance" data-bonus="7">Performance +7</button>
+          <button class="roll-btn" data-label="Religion" data-bonus="2">Religion +2</button>
+          <button class="roll-btn" data-label="Stealth" data-bonus="3">Stealth +3</button>
+          <button class="roll-btn" data-label="Spell Attack" data-bonus="7">Spell Atk +7</button>
+          <button class="roll-btn" data-label="Unarmed Strike" data-bonus="4">Unarmed Strike +4</button>
+          <button class="roll-btn" data-label="N.E.S.T. Dagger" data-bonus="4">N.E.S.T. Dagger +4</button>
+          <button class="roll-btn" data-label="Moonstone Dagger" data-bonus="4">Moonstone Dagger +4</button>
+          <button class="roll-btn" data-label="Dagger" data-bonus="4">Dagger +4</button>
+        </div>
+        <div class="roll-log" id="rollLog"><div class="roll-log-empty">No rolls yet this session</div></div>
+      </div>
+
+    </div><!-- /left -->
+
+    <div class="stack">
+      <!-- Weapons -->
+      <div class="panel">
+        <div class="panel-title">⚔️ Weapons</div>
+        <div class="weapon-grid">
+          <div class="weapon-card">
+            <div class="weapon-name">Unarmed Strike</div>
+            <div><button class="roll-btn" data-label="Unarmed Strike" data-bonus="4">+4 to hit</button></div>
+            <div class="weapon-dmg">3 bludgeoning</div>
+            <div class="weapon-props">STR · —</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">N.E.S.T. Dagger<span class="mastery-tag">Nick</span></div>
+            <div><button class="roll-btn" data-label="N.E.S.T. Dagger" data-bonus="4">+4 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 2 piercing</div>
+            <div class="weapon-props">STR · Finesse · Light · Thrown · Range 20/60</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">Moonstone Dagger<span class="mastery-tag">Nick</span></div>
+            <div><button class="roll-btn" data-label="Moonstone Dagger" data-bonus="4">+4 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 2 piercing</div>
+            <div class="weapon-props">STR · Finesse · Light · Thrown · Range 20/60</div>
+          </div>
+          <div class="weapon-card">
+            <div class="weapon-name">Dagger<span class="mastery-tag">Nick</span></div>
+            <div><button class="roll-btn" data-label="Dagger" data-bonus="4">+4 to hit</button></div>
+            <div class="weapon-dmg">1d4 + 2 piercing</div>
+            <div class="weapon-props">STR · Finesse · Light · Thrown · Range 20/60</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Actions -->
+      <div class="panel">
+        <div class="panel-title">🎯 Actions</div>
+        <div class="action-section">
+          <div class="action-card">
+            <div class="action-card-title atk">⚔ Attack</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> +4 (1d4+2)</li>
+              <li>Unarmed Strike +4</li>
+              <li><a href="https://5e.tools/spells.html#thunderclap_xphb">Thunderclap</a> — 5 ft burst, CON save</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title bon">✦ Bonus Action</div>
+            <ul class="link-list">
+              <li><strong>Bardic Inspiration</strong> — d6 to an ally within 60 ft</li>
+              <li><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a> — 60 ft, 2d4+5</li>
+              <li>Nick (off-hand dagger)</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title rea">↩ Reaction</div>
+            <ul class="link-list">
+              <li>Opportunity Attack</li>
+              <li><a href="https://5e.tools/spells.html#silvery barbs_scc">Silvery Barbs</a> — undo an enemy success</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title mag">✨ Magic</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#charm person_xphb">Charm Person</a> — WIS save DC 15</li>
+              <li><a href="https://5e.tools/spells.html#command_xphb">Command</a> — WIS save DC 15</li>
+              <li><a href="https://5e.tools/spells.html#dissonant whispers_xphb">Dissonant Whispers</a> — 3d6 psychic</li>
+              <li><a href="https://5e.tools/spells.html#tasha's hideous laughter_xphb">Tasha's Hideous Laughter</a></li>
+              <li><a href="https://5e.tools/spells.html#faerie fire_xphb">Faerie Fire</a> — advantage for everyone</li>
+            </ul>
+          </div>
+          <div class="action-card">
+            <div class="action-card-title oth">… Other</div>
+            <ul class="link-list">
+              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a></li>
+              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#influence_xphb">Influence</a></li>
+              <li><a href="https://5e.tools/actions.html#search_xphb">Search</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Don't Forget -->
+      <div class="panel">
+        <div class="panel-title">🎭 Don't Forget</div>
+        <div class="reminder">
+          <div class="reminder-item"><strong>Bardic Inspiration is a Bonus Action</strong> — 5 uses, and they all come back on a short rest. Spend them freely.</div>
+          <div class="reminder-item"><strong>Resourceful:</strong> you gain Heroic Inspiration after every long rest. Spend the old one before you sleep.</div>
+          <div class="reminder-item"><strong>Lucky:</strong> 2 Luck Points — advantage on one of your d20 tests, or disadvantage on an attack aimed at you.</div>
+          <div class="reminder-item">Spell save DC 15 is unusually high for level 1. Lead with Charm Person, Command or Tasha's Hideous Laughter.</div>
+          <div class="reminder-item">Only <strong>two</strong> level-1 slots. Healing Word is a Bonus Action, so you can still attack the same turn.</div>
+          <div class="reminder-item">Deception +7 and Performance +7 are your best checks by a mile — talk first.</div>
+        </div>
+      </div>
+    </div><!-- /right -->
+  </div>
+</div>
+
+<!-- ═══ TAB: SPELLS ═══ -->
+<div class="tab-pane" id="tab-spells">
+  <div class="panel">
+    <div class="panel-title">✨ Prepared</div>
+    <div class="slot-info">Prepared spells count against your limit; cantrips are always known.
+      <strong id="preparedCount" style="margin-left:8px;">0 / 4</strong></div>
+    <div class="spells-grid" id="preparedList"></div>
+    <div id="preparedEmpty" style="color:var(--muted);font-size:13px;padding:8px 0;">
+      Nothing prepared yet — tap ✦ on any spell below.</div>
+  </div>
+
+  <div class="panel">
+    <div class="panel-title">📖 Full Spell List</div>
+    <div class="spell-search-wrap">
+      <input id="spellSearch" class="spell-search" type="search" placeholder="Filter spells…">
+    </div>
+    <div class="spells-grid" id="spellGrid">
+        <div class="spell-level-header">Cantrips</div>
+        <div class="spell-card conc-spell" data-name="dancing lights" data-level="0">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Dancing Lights</div>
+            
+          </div>
+          <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>120 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="thunderclap" data-level="0">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Thunderclap</div>
+            
+          </div>
+          <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>S</span></div>
+          </div>
+          <div class="spell-dmg">1d6 thunder</div>
+        </div>
+        <div class="spell-level-header">Level 1</div>
+        <div class="spell-card" data-name="animal friendship" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Animal Friendship</div>
+            <button class="prep-toggle" data-spell="animal friendship" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>24 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="bane" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Bane</div>
+            <button class="prep-toggle" data-spell="bane" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="charm person" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Charm Person</div>
+            <button class="prep-toggle" data-spell="charm person" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="color spray" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Color Spray</div>
+            <button class="prep-toggle" data-spell="color spray" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="command" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Command</div>
+            <button class="prep-toggle" data-spell="command" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card ritual-spell" data-name="comprehend languages" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Comprehend Languages</div>
+            <button class="prep-toggle" data-spell="comprehend languages" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="cure wounds" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Cure Wounds</div>
+            <button class="prep-toggle" data-spell="cure wounds" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="detect magic" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Detect Magic</div>
+            <button class="prep-toggle" data-spell="detect magic" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="disguise self" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Disguise Self</div>
+            <button class="prep-toggle" data-spell="disguise self" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="dissonant whispers" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Dissonant Whispers</div>
+            <button class="prep-toggle" data-spell="dissonant whispers" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          <div class="spell-dmg">3d6 psychic</div>
+        </div>
+        <div class="spell-card" data-name="distort value" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Distort Value</div>
+            <button class="prep-toggle" data-spell="distort value" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>8 hour</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="earth tremor" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Earth Tremor</div>
+            <button class="prep-toggle" data-spell="earth tremor" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>10 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          <div class="spell-dmg">1d6 bludgeoning</div>
+        </div>
+        <div class="spell-card conc-spell" data-name="faerie fire" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Faerie Fire</div>
+            <button class="prep-toggle" data-spell="faerie fire" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="feather fall" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Feather Fall</div>
+            <button class="prep-toggle" data-spell="feather fall" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Reaction</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="healing word" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Healing Word</div>
+            <button class="prep-toggle" data-spell="healing word" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Bonus</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="heroism" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Heroism</div>
+            <button class="prep-toggle" data-spell="heroism" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card ritual-spell" data-name="identify" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Identify</div>
+            <button class="prep-toggle" data-spell="identify" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card ritual-spell" data-name="illusory script" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Illusory Script</div>
+            <button class="prep-toggle" data-spell="illusory script" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>10 day</span></div>
+            <div class="spell-meta-item">Components <span>SM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="longstrider" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Longstrider</div>
+            <button class="prep-toggle" data-spell="longstrider" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="silent image" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Silent Image</div>
+            <button class="prep-toggle" data-spell="silent image" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="silvery barbs" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Silvery Barbs</div>
+            <button class="prep-toggle" data-spell="silvery barbs" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Reaction</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>V</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="sleep" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Sleep</div>
+            <button class="prep-toggle" data-spell="sleep" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card ritual-spell" data-name="speak with animals" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Speak with Animals</div>
+            <button class="prep-toggle" data-spell="speak with animals" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card conc-spell" data-name="tasha&#x27;s hideous laughter" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Tasha&#x27;s Hideous Laughter</div>
+            <button class="prep-toggle" data-spell="tasha&#x27;s hideous laughter" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>30 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 minute</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="thunderwave" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Thunderwave</div>
+            <button class="prep-toggle" data-spell="thunderwave" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VS</span></div>
+          </div>
+          <div class="spell-dmg">2d8 thunder</div>
+        </div>
+        <div class="spell-card ritual-spell" data-name="unseen servant" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Unseen Servant</div>
+            <button class="prep-toggle" data-spell="unseen servant" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>1 hour</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          
+        </div>
+        <div class="spell-card" data-name="wardaway" data-level="1">
+          <div class="spell-card-header">
+            <div class="spell-card-name">Wardaway</div>
+            <button class="prep-toggle" data-spell="wardaway" title="Add to prepared">✦</button>
+          </div>
+          <div class="spell-badges"></div>
+          <div class="spell-meta">
+            <div class="spell-meta-item">Cast <span>1 Action</span></div>
+            <div class="spell-meta-item">Range <span>60 ft</span></div>
+            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Components <span>VSM</span></div>
+          </div>
+          <div class="spell-dmg">2d4 force</div>
+        </div>
+    </div>
+  </div>
+</div>
+<!-- ═══ TAB: ABILITIES ═══ -->
+<div class="tab-pane" id="tab-abilities">
+  <div class="panel">
+    <div class="panel-title">💪 Ability Scores</div>
+    <div class="abilities-grid">
+        <div class="ability-card">
+          <div class="ab-label">STR</div>
+          <div class="ab-score">15</div>
+          <div class="ab-mod ">+2</div>
+        </div>
+        <div class="ability-card prof-save">
+          <div class="ab-label">DEX</div>
+          <div class="ab-score">12</div>
+          <div class="ab-mod ">+1</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">CON</div>
+          <div class="ab-score">12</div>
+          <div class="ab-mod ">+1</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">INT</div>
+          <div class="ab-score">10</div>
+          <div class="ab-mod zero">+0</div>
+        </div>
+        <div class="ability-card">
+          <div class="ab-label">WIS</div>
+          <div class="ab-score">9</div>
+          <div class="ab-mod neg">−1</div>
+        </div>
+        <div class="ability-card prof-save">
+          <div class="ab-label">CHA</div>
+          <div class="ab-score">20</div>
+          <div class="ab-mod ">+5</div>
+        </div>
+    </div>
+  </div>
+  <div class="two-col">
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">🛡 Saving Throws</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Strength</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dexterity</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Constitution</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intelligence</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Wisdom</div><div class="stat-bonus">−1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Charisma</div><div class="stat-bonus">+7</div></div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">🎲 Skills</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Acrobatics</div><div class="stat-ability">DEX</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Animal Handling</div><div class="stat-ability">WIS</div><div class="stat-bonus">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Arcana</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Athletics</div><div class="stat-ability">STR</div><div class="stat-bonus">+4</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Deception</div><div class="stat-ability">CHA</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">History</div><div class="stat-ability">INT</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Insight</div><div class="stat-ability">WIS</div><div class="stat-bonus">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Intimidation</div><div class="stat-ability">CHA</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Investigation</div><div class="stat-ability">INT</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Medicine</div><div class="stat-ability">WIS</div><div class="stat-bonus">−1</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Nature</div><div class="stat-ability">INT</div><div class="stat-bonus">+0</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Perception</div><div class="stat-ability">WIS</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Performance</div><div class="stat-ability">CHA</div><div class="stat-bonus">+7</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Persuasion</div><div class="stat-ability">CHA</div><div class="stat-bonus">+5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Religion</div><div class="stat-ability">INT</div><div class="stat-bonus">+2</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Sleight of Hand</div><div class="stat-ability">DEX</div><div class="stat-bonus">+1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Stealth</div><div class="stat-ability">DEX</div><div class="stat-bonus">+3</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Survival</div><div class="stat-ability">WIS</div><div class="stat-bonus">−1</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="panel">
+        <div class="panel-title">👁 Senses &amp; Languages</div>
+        <div class="stat-list" style="margin-bottom:14px;">
+          <div class="stat-row"><div class="stat-name">Darkvision</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">60 ft</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Perception</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">11</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Insight</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">9</div></div>
+          <div class="stat-row"><div class="stat-name">Passive Investigation</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;">12</div></div>
+        </div>
+        <div class="panel-title" style="margin-top:0;">🗣 Languages</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:4px;">
+          <span style="background:var(--panel2);border:1px solid var(--line);border-radius:8px;padding:4px 10px;font-size:12px;">— not recorded in the export</span>
+        </div>
+        <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
+        <div class="stat-list">
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Flute</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Lute</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Viol</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dice</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">WIS +1</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Lyre</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Hackers tool</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">INT +2</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: FEATURES ═══ -->
+<div class="tab-pane" id="tab-features">
+  <div class="panel">
+    <div class="panel-title">📜 Features &amp; Traits</div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-card-title">🧬 Species — Human</div>
+        <ul class="link-list">
+          <li><strong>Resourceful</strong> — Heroic Inspiration after every long rest</li>
+          <li><strong>Skillful</strong> — one extra skill proficiency</li>
+          <li><strong>Versatile</strong> — one Origin feat (Lucky)</li>
+          <li>Darkvision 60 ft (from Night Slash)</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🎵 Class — Bard 1</div>
+        <ul class="link-list">
+          <li><strong>Bardic Inspiration</strong> — d6, Bonus Action, 5/short rest</li>
+          <li><strong>Spellcasting</strong> — Charisma, save DC 15, attack +7</li>
+          <li>4 prepared spells + 2 cantrips</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🏛 Background — Noble</div>
+        <ul class="link-list">
+          <li>History, Persuasion and a Gaming Set from the background</li>
+          <li>Position of Privilege — people of rank tend to hear you out</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">✨ Origin Feats</div>
+        <ul class="link-list">
+          <li><strong>Lucky</strong> — 2 Luck Points per long rest</li>
+          <li><strong>Skilled</strong> — three extra proficiencies</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">🛡 Proficiencies</div>
+        <ul class="link-list">
+          <li>Light armour</li>
+          <li>Simple weapons</li>
+        </ul>
+      </div>
+      <div class="feature-card">
+        <div class="feature-card-title">💤 Rest Recovery</div>
+        <ul class="link-list">
+          <li><strong>Short Rest:</strong> Bardic Inspiration returns in full; spend Hit Dice (d8 + CON +1)</li>
+          <li><strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)</li>
+          <li>Luck Points reset on a long rest</li>
+          <li><strong>Resourceful</strong> grants Heroic Inspiration every time you finish a long rest</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ TAB: GEAR ═══ -->
+<div class="tab-pane" id="tab-gear">
+  <div class="panel">
+    <div class="panel-title">🎒 Equipment</div>
+    <div class="equip-grid">
+      <div class="equip-card">
+        <div class="equip-card-title">Worn & Equipped</div>
+        <ul class="link-list">
+          <li>Leather Armor</li>
+          <li>Backpack</li>
+          <li>Bell</li>
+          <li>Bullseye Lantern</li>
+          <li>Costume ×3</li>
+          <li>Tinderbox</li>
+          <li>Waterskin</li>
+          <li>Fine Clothes</li>
+          <li>Backpack</li>
+          <li>Bell</li>
+          <li>Bullseye Lantern</li>
+          <li>Costume ×3</li>
+          <li>Tinderbox</li>
+          <li>Waterskin</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Weapons</div>
+        <ul class="link-list">
+          <li>Unarmed Strike</li>
+          <li>N.E.S.T. Dagger</li>
+          <li>Moonstone Dagger</li>
+          <li>Dagger</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Consumables</div>
+        <ul class="link-list">
+          <li>Oil ×8</li>
+          <li>Rations ×9</li>
+          <li>Oil ×8</li>
+          <li>Rations ×9</li>
+          <li>Potion of Healing ×3</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">Carried</div>
+        <ul class="link-list">
+          <li>Lyre</li>
+          <li>Bedroll</li>
+          <li>Mirror</li>
+          <li>Gaming Set</li>
+          <li>Perfume</li>
+          <li>Hackers tool</li>
+          <li>Leather Armor</li>
+          <li>Lute</li>
+          <li>Bedroll</li>
+          <li>Mirror</li>
+        </ul>
+      </div>
+      <div class="equip-card">
+        <div class="equip-card-title">🪙 Coin</div>
+        <ul class="link-list">
+          <li>17 GP</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+/* sky_scarlet — everything unique to this character. The engine is sheet.js. */
+const SHEET = {
+  prefix: 'sky_scarlet_v1_',
+  hpMax: 9,
+  maxPrepared: 4,
+  shortRest: { keys: ['bardicInspiration'],
+               msg: 'Bardic Inspiration fully recharged.\nYou may also spend Hit Dice (d8 + CON +1) to recover HP.' }
+};
+</script>
+<script src="sheet.js"></script>
+</body>
+</html>

@@ -4,8 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hanabi – Character Sheet</title>
+<link rel="stylesheet" href="sheet.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+/* hanabi — palette and character-specific styling only.
+   Everything shared lives in sheet.css. */
 
 :root {
   --bg: #07090f;
@@ -32,17 +34,8 @@
   --rogue-dim: #1a0a2e;
   --rogue2: #be123c;
   --rogue2-bright: #fb7185;
+  --sheet-accent: var(--rogue-bright);
 }
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 14px; line-height: 1.5; }
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--bg2); }
-::-webkit-scrollbar-thumb { background: var(--line2); border-radius: 3px; }
-a { color: var(--link); text-decoration: none; }
-a:hover { text-decoration: underline; color: #a5d0fb; }
-
-.page { max-width: 1440px; margin: 0 auto; padding: 20px 24px 60px; }
 
 /* ── HERO ── */
 .hero {
@@ -69,7 +62,6 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   background: linear-gradient(90deg, var(--rogue2) 0%, var(--rogue) 50%, var(--rogue-bright) 100%);
   border-radius: 20px 20px 0 0;
 }
-.hero-avatar-wrap { position: relative; flex-shrink: 0; }
 .hero-avatar {
   width: 120px; height: 120px; border-radius: 18px; object-fit: cover;
   border: 2px solid var(--line2); background: var(--panel);
@@ -81,25 +73,8 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   border-radius: 10px; border: 2px solid var(--bg);
   display: flex; align-items: center; justify-content: center; font-size: 16px;
 }
-.hero-info { flex: 1; min-width: 0; }
 .hero-name { font-family: 'Cinzel', serif; font-size: 28px; font-weight: 700; color: #f5f0ff; letter-spacing: .02em; line-height: 1.1; }
-.hero-sub { color: var(--muted); margin-top: 6px; font-size: 13px; display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-.hero-sub .sep { color: var(--line2); }
-.hero-bio { margin-top: 8px; font-size: 12px; color: var(--muted); display: flex; gap: 14px; flex-wrap: wrap; }
-.hero-bio span { color: var(--text); }
-
-.stat-bar { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
-.stat-pill {
-  display: flex; flex-direction: column; align-items: center;
-  background: rgba(255,255,255,.04); border: 1px solid var(--line2);
-  border-radius: 12px; padding: 8px 14px; min-width: 64px; gap: 1px;
-}
-.stat-pill .sp-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; }
-.stat-pill .sp-val { font-size: 16px; font-weight: 700; color: var(--text); }
-.stat-pill.sp-hp .sp-val { color: var(--good); }
-.stat-pill.sp-ac .sp-val { color: #7eb8f7; }
 .stat-pill.sp-sneak .sp-val { color: var(--rogue2-bright); }
-#inspirationPill { cursor: pointer; transition: background .15s, border-color .15s; user-select: none; }
 #inspirationPill.on { background: rgba(147,51,234,.2); border-color: var(--rogue-bright); }
 #inspirationPill.on .sp-val { color: var(--rogue-bright); }
 
@@ -114,107 +89,13 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 .coin.gp .coin-val { color: var(--warn); }
 .coin.sp .coin-val { color: #cbd5e1; }
 .coin.cp .coin-val { color: #b45309; }
-
-/* ── TABS ── */
-.tabs-bar {
-  display: flex; gap: 4px; background: var(--panel); border: 1px solid var(--line);
-  border-radius: 14px; padding: 5px; margin-bottom: 20px; flex-wrap: wrap;
-}
-.tab-btn {
-  flex: 1; min-width: 90px; padding: 9px 14px; border: none; border-radius: 10px;
-  background: transparent; color: var(--muted); font-size: 13px; font-weight: 600;
-  cursor: pointer; transition: background .15s, color .15s; white-space: nowrap;
-}
-.tab-btn:hover { background: rgba(255,255,255,.05); color: var(--text); }
-.tab-btn.active { background: var(--panel2); color: var(--text); box-shadow: 0 1px 3px rgba(0,0,0,.4); }
-.tab-pane { display: none; }
-.tab-pane.active { display: block; }
-
-/* ── LAYOUT ── */
-.two-col { display: grid; grid-template-columns: 1.1fr .9fr; gap: 18px; }
-.two-col-eq { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
-.stack { display: grid; gap: 16px; align-content: start; }
-
-/* ── PANELS ── */
-.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 20px; }
-.panel-title {
-  font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
-  color: var(--muted); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
-}
-.panel-title::after { content: ''; flex: 1; height: 1px; background: var(--line); }
-
-/* ── ABILITY SCORES ── */
-.abilities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; }
-.ability-card {
-  background: var(--panel2); border: 1px solid var(--line); border-radius: 14px;
-  padding: 14px 10px; text-align: center; position: relative; overflow: hidden;
-}
-.ability-card .ab-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; color: var(--muted); }
 .ability-card .ab-score { font-size: 32px; font-weight: 800; line-height: 1; margin: 6px 0 4px; color: var(--text); }
-.ability-card .ab-mod { font-size: 15px; font-weight: 700; color: var(--good); }
-.ability-card .ab-mod.neg { color: var(--danger); }
 .ability-card.prof-save::after { content: '★'; position: absolute; top: 6px; right: 8px; font-size: 10px; color: var(--rogue-bright); }
-
-/* ── STAT ROWS ── */
-.stat-list { display: flex; flex-direction: column; gap: 2px; }
-.stat-row { display: flex; align-items: center; gap: 10px; padding: 7px 10px; border-radius: 8px; transition: background .1s; }
-.stat-row:hover { background: rgba(255,255,255,.03); }
-.prof-dot { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--muted2); flex-shrink: 0; }
 .prof-dot.filled { background: var(--rogue-bright); border-color: var(--rogue-bright); }
 .prof-dot.expertise { background: var(--rogue2-bright); border-color: var(--rogue2-bright); width: 12px; height: 12px; }
-.stat-name { flex: 1; color: var(--text); font-size: 13px; }
-.stat-ability { font-size: 11px; color: var(--muted); width: 28px; }
 .stat-tag { font-size: 10px; color: var(--rogue2-bright); font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
-.stat-bonus { font-size: 13px; font-weight: 700; width: 36px; text-align: right; color: var(--good); }
-.stat-bonus.neg { color: var(--danger); }
-.stat-bonus.zero { color: var(--muted); }
-
-/* ── TRACKERS ── */
-.tracker-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
-.tracker-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.tracker-card h3 { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
-.hp-display { display: flex; align-items: baseline; gap: 6px; }
-.hp-input {
-  width: 72px; background: var(--panel3); color: var(--text);
-  border: 1.5px solid var(--line2); border-radius: 10px; padding: 8px 10px;
-  font-size: 22px; font-weight: 800; text-align: center; transition: border-color .15s, color .15s;
-}
 .hp-input:focus { outline: none; border-color: var(--rogue); }
-.hp-input.hp-warn { border-color: var(--warn); color: var(--warn); }
-.hp-input.hp-danger { border-color: var(--danger); color: var(--danger); }
-.hp-max { font-size: 16px; color: var(--muted); font-weight: 600; }
-.temp-hp-row { display: flex; align-items: center; gap: 8px; margin-top: 10px; font-size: 12px; color: var(--muted); }
-.temp-hp-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; }
-.dmg-heal-row { display: flex; align-items: center; gap: 6px; margin-top: 8px; }
-.hp-adjust-input { width: 52px; background: var(--panel3); color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 4px 6px; font-size: 13px; text-align: center; font-family: inherit; }
-.btn-dmg { background: var(--danger-dim); color: var(--danger); border: 1px solid #7f1d1d; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
-.btn-dmg:hover { background: #5f1a1a; }
-.btn-heal { background: var(--good-dim); color: var(--good); border: 1px solid #166534; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .1s; }
-.btn-heal:hover { background: #0d4a26; }
-
-/* ── DOTS ── */
-.dots-row { display: flex; gap: 8px; flex-wrap: wrap; }
-.dot {
-  width: 34px; height: 34px; border-radius: 10px; border: 1.5px solid var(--line2);
-  background: var(--panel3); color: var(--muted); cursor: pointer; font-size: 12px; font-weight: 700;
-  transition: background .1s, border-color .1s; display: flex; align-items: center; justify-content: center;
-}
-.dot:hover { border-color: var(--muted2); }
-.dot.used { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
-.dot.success { background: var(--good-dim); color: var(--good); border-color: #166534; }
-.dot.fail { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
-
-/* ── DEATH SAVES ── */
-.death-panel {
-  background: rgba(63,31,38,.35); border: 1px solid #7f1d1d; border-radius: 14px;
-  padding: 16px; margin-top: 12px; display: none;
-}
-.death-panel h3 { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 12px; }
-.death-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.death-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px; }
-.death-success .death-label { color: var(--good); }
-.death-fail .death-label { color: var(--danger); }
+.dot.slot-used { background: rgba(147,51,234,.25); color: var(--rogue-bright); border-color: var(--rogue); }
 
 /* ── SNEAK ATTACK CARD ── */
 .sneak-card {
@@ -233,93 +114,24 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   border-radius: 14px; padding: 16px;
 }
 .cunning-card h3 { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--rogue-bright); margin-bottom: 8px; }
-
-/* ── CONCENTRATION ── */
-.conc-toggle {
-  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
-  background: var(--panel2); border: 1px solid var(--line); border-radius: 12px;
-  cursor: pointer; margin-bottom: 12px; transition: border-color .15s;
-}
-.conc-toggle:hover { border-color: var(--line2); }
 .conc-toggle.active { border-color: var(--rogue-bright); background: rgba(147,51,234,.07); }
 .conc-dot { width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--muted2); transition: background .15s, border-color .15s; }
 .conc-dot.on { background: var(--rogue-bright); border-color: var(--rogue-bright); }
-.conc-label { font-size: 13px; font-weight: 600; color: var(--muted); flex: 1; }
 .conc-toggle.active .conc-label { color: var(--rogue-bright); }
-.conc-body { display: none; }
-.conc-body.open { display: block; }
-.field-label { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; margin-bottom: 5px; }
-.text-field {
-  width: 100%; background: var(--panel3); color: var(--text); border: 1px solid var(--line2);
-  border-radius: 10px; padding: 9px 12px; font: inherit; resize: vertical; transition: border-color .15s; margin-bottom: 10px;
-}
 .text-field:focus { outline: none; border-color: var(--rogue-bright); }
-
-/* ── BUTTONS ── */
-.btn {
-  display: inline-flex; align-items: center; gap: 6px; background: var(--panel2);
-  color: var(--text); border: 1px solid var(--line2); border-radius: 10px; padding: 8px 14px;
-  font: inherit; font-size: 13px; font-weight: 500; cursor: pointer; transition: background .1s, border-color .1s; white-space: nowrap;
-}
-.btn:hover { background: var(--panel3); border-color: var(--muted2); }
-.btn.btn-danger { border-color: #7f1d1d; color: var(--danger); }
-.btn.btn-danger:hover { background: var(--danger-dim); }
 .btn.btn-rest { border-color: var(--rogue); color: var(--rogue-bright); }
 .btn.btn-rest:hover { background: var(--rogue-dim); }
-.btn-row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-
-.roll-btn {
-  display: inline-flex; align-items: center; gap: 5px; background: var(--panel2);
-  color: var(--text); border: 1px solid var(--line2); border-radius: 8px; padding: 6px 11px;
-  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .1s, border-color .1s;
-}
 .roll-btn:hover { background: rgba(147,51,234,.15); border-color: var(--rogue); color: var(--rogue-bright); }
-.roll-btn::before { content: '⚄'; font-size: 12px; opacity: .6; }
-
-/* ── ROLL LOG ── */
-.roll-buttons { display: flex; flex-wrap: wrap; gap: 7px; }
-.roll-log { margin-top: 14px; display: flex; flex-direction: column; gap: 5px; max-height: 200px; overflow-y: auto; }
-.roll-entry { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px; font-size: 13px; }
-.roll-entry-label { color: var(--muted); font-size: 12px; }
-.roll-entry-total { font-size: 18px; font-weight: 800; color: var(--text); min-width: 32px; text-align: center; }
 .roll-entry-total.nat20 { color: var(--rogue-bright); }
-.roll-entry-total.nat1 { color: var(--danger); }
-.roll-entry-detail { font-size: 11px; color: var(--muted); }
-.roll-entry-time { font-size: 11px; color: var(--muted2); margin-left: auto; white-space: nowrap; }
-.roll-log-empty { color: var(--muted2); font-size: 13px; text-align: center; padding: 20px; }
-
-/* ── WEAPON CARDS ── */
-.weapon-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-.weapon-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
 .weapon-card.magic { border-color: rgba(147,51,234,.4); background: rgba(147,51,234,.06); }
-.weapon-name { font-weight: 700; font-size: 14px; }
-.weapon-dmg { font-size: 13px; color: var(--warn); font-weight: 600; }
-.weapon-props { font-size: 11px; color: var(--muted); }
 .weapon-magic { font-size: 11px; color: var(--rogue-bright); }
-
-/* ── ACTION CARDS ── */
-.action-section { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-.action-section.bottom { grid-template-columns: 1fr 1fr 1fr; }
-.action-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.action-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
 .action-card-title.atk { color: var(--danger); }
 .action-card-title.cun { color: var(--rogue-bright); }
-.action-card-title.bon { color: var(--warn); }
 .action-card-title.rea { color: var(--teal); }
-.action-card-title.oth { color: var(--muted); }
-.link-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
-.link-list li a { font-size: 13px; }
-.link-list li { font-size: 13px; }
-
-/* ── FEATURES ── */
-.feature-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.feature-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line); }
-.feature-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
 
 /* ── REMINDER ── */
 .reminder { background: var(--rogue-dim); border: 1px solid rgba(147,51,234,.25); border-radius: 14px; padding: 16px; }
 .reminder .reminder-item { display: flex; gap: 10px; align-items: flex-start; padding: 6px 0; border-bottom: 1px solid rgba(147,51,234,.1); font-size: 13px; color: #e9d5ff; }
-.reminder .reminder-item:last-child { border-bottom: none; }
 .reminder .reminder-item::before { content: '🗡️'; flex-shrink: 0; }
 
 /* ── ITEMS ── */
@@ -329,16 +141,6 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 .item-note { font-size: 11px; color: var(--muted); margin-top: 2px; }
 .item-magic { font-size: 11px; color: var(--rogue-bright); }
 .items-list { display: flex; flex-direction: column; gap: 8px; }
-
-/* ── EQUIP ── */
-.equip-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 12px; }
-.equip-card { background: var(--panel2); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
-.equip-card-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-bottom: 10px; }
-
-/* ── RESPONSIVE ── */
-@media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col{grid-template-columns:1fr 1fr} .weapon-grid{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:600px) { .page{padding:12px 14px 50px} .hero-name{font-size:22px} .equip-grid,.three-col{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .weapon-grid{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
-@media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn{display:none} .tab-pane{display:block!important} }
 </style>
 </head>
 <body>
@@ -354,13 +156,13 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
   <div class="hero-info">
     <div class="hero-name">Hanabi</div>
     <div class="hero-sub">
-      <a href="https://5e.tools/classes.html#rogue_xphb">Rogue 6</a>
+      <a href="https://5e.tools/classes.html#rogue_phb">Rogue 6</a>
       <span class="sep">•</span>
-      <a href="https://5e.tools/subclasses.html#mastermind_xphb">Mastermind</a>
+      <a href="https://5e.tools/subclasses.html#mastermind_xge">Mastermind</a>
       <span class="sep">•</span>
       <a href="https://5e.tools/races.html#changeling_mpmm">Changeling</a>
       <span class="sep">•</span>
-      <a href="https://5e.tools/backgrounds.html#charlatan_xphb">Charlatan</a>
+      <a href="https://5e.tools/backgrounds.html#charlatan_phb">Charlatan</a>
     </div>
     <div class="hero-bio">
       Age: <span>27</span>
@@ -455,9 +257,9 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
         <div class="cunning-card">
           <h3>🎭 Cunning Action</h3>
           <ul class="link-list" style="margin-top:4px;">
-            <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a> (bonus)</li>
-            <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a> (bonus)</li>
-            <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a> (bonus)</li>
+            <li><a href="https://5e.tools/actions.html#dash_phb">Dash</a> (bonus)</li>
+            <li><a href="https://5e.tools/actions.html#disengage_phb">Disengage</a> (bonus)</li>
+            <li><a href="https://5e.tools/actions.html#hide_phb">Hide</a> (bonus)</li>
           </ul>
         </div>
       </div>
@@ -492,7 +294,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
         <div class="panel-title">⚔️ Weapons</div>
         <div class="weapon-grid">
           <div class="weapon-card">
-            <div class="weapon-name"><a href="https://5e.tools/items.html#rapier_xphb">Rapier</a></div>
+            <div class="weapon-name"><a href="https://5e.tools/items.html#rapier_phb">Rapier</a></div>
             <div><button class="roll-btn" data-label="Rapier" data-bonus="7">+7 to hit</button></div>
             <div class="weapon-dmg">1d8 + 4 piercing</div>
             <div class="weapon-props">DEX · Finesse · Martial</div>
@@ -505,13 +307,13 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
             <div class="weapon-magic">+1 to attack and damage rolls. Silent on hit — makes no noise when it hits or cuts. Speak "Reszur" to toggle dim light in a 10-ft radius (faint cold glow).</div>
           </div>
           <div class="weapon-card">
-            <div class="weapon-name"><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></div>
+            <div class="weapon-name"><a href="https://5e.tools/items.html#dagger_phb">Dagger</a></div>
             <div><button class="roll-btn" data-label="Dagger" data-bonus="7">+7 to hit</button></div>
             <div class="weapon-dmg">1d4 + 4 piercing</div>
             <div class="weapon-props">DEX · Finesse · Light · Thrown (20/60)</div>
           </div>
           <div class="weapon-card">
-            <div class="weapon-name"><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a></div>
+            <div class="weapon-name"><a href="https://5e.tools/items.html#shortbow_phb">Shortbow</a></div>
             <div><button class="roll-btn" data-label="Shortbow" data-bonus="7">+7 to hit</button></div>
             <div class="weapon-dmg">1d6 + 4 piercing</div>
             <div class="weapon-props">DEX · Range 80/320 · Two-Handed · Ammo</div>
@@ -529,11 +331,11 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
           <div class="action-card">
             <div class="action-card-title atk">⚔ Attack</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/items.html#rapier_xphb">Rapier</a></li>
+              <li><a href="https://5e.tools/items.html#rapier_phb">Rapier</a></li>
               <li>Reszur (magic dagger)</li>
-              <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></li>
-              <li><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a></li>
-              <li><a href="https://5e.tools/variantrules.html#unarmed strike_xphb">Grapple / Shove</a></li>
+              <li><a href="https://5e.tools/items.html#dagger_phb">Dagger</a></li>
+              <li><a href="https://5e.tools/items.html#shortbow_phb">Shortbow</a></li>
+              <li>Grapple / Shove</li>
             </ul>
           </div>
           <div class="action-card">
@@ -542,7 +344,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
               <li style="font-size:12px;color:var(--muted);">Help as bonus action</li>
               <li style="font-size:12px;">Help from 30 ft away</li>
               <li style="font-size:12px;">Can Help to grant Sneak Attack without adjacency</li>
-              <li><a href="https://5e.tools/subclasses.html#mastermind_xphb">Master of Intrigue</a></li>
+              <li><a href="https://5e.tools/subclasses.html#mastermind_xge">Master of Intrigue</a></li>
             </ul>
           </div>
         </div>
@@ -550,28 +352,28 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
           <div class="action-card">
             <div class="action-card-title bon">★ Bonus Action</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/actions.html#dash_xphb">Dash</a> (Cunning)</li>
-              <li><a href="https://5e.tools/actions.html#disengage_xphb">Disengage</a> (Cunning)</li>
-              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a> (Cunning)</li>
-              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a> (Mastermind)</li>
+              <li><a href="https://5e.tools/actions.html#dash_phb">Dash</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#disengage_phb">Disengage</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#hide_phb">Hide</a> (Cunning)</li>
+              <li><a href="https://5e.tools/actions.html#help_phb">Help</a> (Mastermind)</li>
               <li>Off-hand weapon attack</li>
             </ul>
           </div>
           <div class="action-card">
             <div class="action-card-title rea">↩ Reaction</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/classes.html#rogue_xphb">Uncanny Dodge</a></li>
+              <li><a href="https://5e.tools/classes.html#rogue_phb">Uncanny Dodge</a></li>
               <li>Opportunity Attack</li>
             </ul>
           </div>
           <div class="action-card">
             <div class="action-card-title oth">… Other</div>
             <ul class="link-list">
-              <li><a href="https://5e.tools/actions.html#dodge_xphb">Dodge</a></li>
-              <li><a href="https://5e.tools/actions.html#help_xphb">Help</a></li>
-              <li><a href="https://5e.tools/actions.html#hide_xphb">Hide</a></li>
-              <li><a href="https://5e.tools/actions.html#ready_xphb">Ready</a></li>
-              <li><a href="https://5e.tools/actions.html#search_xphb">Search</a></li>
+              <li><a href="https://5e.tools/actions.html#dodge_phb">Dodge</a></li>
+              <li><a href="https://5e.tools/actions.html#help_phb">Help</a></li>
+              <li><a href="https://5e.tools/actions.html#hide_phb">Hide</a></li>
+              <li><a href="https://5e.tools/actions.html#ready_phb">Ready</a></li>
+              <li><a href="https://5e.tools/actions.html#search_phb">Search</a></li>
               <li>Use item (Potion, Scroll…)</li>
             </ul>
           </div>
@@ -670,8 +472,10 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
         </div>
         <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
         <div class="stat-list">
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Disguise Kit</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">INT/CHA</div></div>
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Thieves' Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Thieves' Tools <span style="color:var(--muted2);font-size:11px;">· Rogue</span></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Disguise Kit <span style="color:var(--muted2);font-size:11px;">· Charlatan / Mastermind</span></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Forgery Kit <span style="color:var(--muted2);font-size:11px;">· Charlatan / Mastermind</span></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Gaming Set <span style="color:var(--muted2);font-size:11px;">· Mastermind — pick one</span></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">varies</div></div>
         </div>
       </div>
     </div>
@@ -694,19 +498,19 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
       <div class="feature-card">
         <div class="feature-card-title">🗡️ Class — Rogue 6</div>
         <ul class="link-list">
-          <li><a href="https://5e.tools/classes.html#rogue_xphb">Expertise</a> — Athletics, Perception (double prof)</li>
-          <li><a href="https://5e.tools/classes.html#rogue_xphb">Sneak Attack</a> — 3d6 extra damage</li>
-          <li><a href="https://5e.tools/classes.html#rogue_xphb">Thieves' Cant</a></li>
-          <li><a href="https://5e.tools/classes.html#rogue_xphb">Cunning Action</a> — Dash/Disengage/Hide as bonus</li>
-          <li><a href="https://5e.tools/classes.html#rogue_xphb">Uncanny Dodge</a> — reaction, halve damage</li>
-          <li><a href="https://5e.tools/classes.html#rogue_xphb">Expertise ×2</a> — 2 more at level 6</li>
+          <li><a href="https://5e.tools/classes.html#rogue_phb">Expertise</a> — Athletics, Perception (double prof)</li>
+          <li><a href="https://5e.tools/classes.html#rogue_phb">Sneak Attack</a> — 3d6 extra damage</li>
+          <li><a href="https://5e.tools/classes.html#rogue_phb">Thieves' Cant</a></li>
+          <li><a href="https://5e.tools/classes.html#rogue_phb">Cunning Action</a> — Dash/Disengage/Hide as bonus</li>
+          <li><a href="https://5e.tools/classes.html#rogue_phb">Uncanny Dodge</a> — reaction, halve damage</li>
+          <li><a href="https://5e.tools/classes.html#rogue_phb">Expertise ×2</a> — 2 more at level 6</li>
         </ul>
       </div>
       <div class="feature-card">
         <div class="feature-card-title">🎭 Subclass — Mastermind</div>
         <ul class="link-list">
-          <li><a href="https://5e.tools/subclasses.html#mastermind_xphb">Master of Intrigue</a> — Disguise Kit, Forgery Kit, Gaming Set prof; mimic accents/speech patterns</li>
-          <li><a href="https://5e.tools/subclasses.html#mastermind_xphb">Master of Tactics</a> — Help as bonus action from 30 ft; can target creatures that can see/hear you</li>
+          <li><a href="https://5e.tools/subclasses.html#mastermind_xge">Master of Intrigue</a> — Disguise Kit, Forgery Kit, Gaming Set prof; mimic accents/speech patterns</li>
+          <li><a href="https://5e.tools/subclasses.html#mastermind_xge">Master of Tactics</a> — Help as bonus action from 30 ft; can target creatures that can see/hear you</li>
         </ul>
       </div>
       <div class="feature-card">
@@ -729,7 +533,7 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
         <div class="feature-card-title">💤 Rest Recovery</div>
         <ul class="link-list">
           <li><strong>Short Rest:</strong> Spend Hit Dice (d8 + CON +2)</li>
-          <li><strong>Long Rest:</strong> Full HP, all Hit Dice restored</li>
+          <li><strong>Long Rest:</strong> Full HP, half Hit Dice restored (3 of 6)</li>
           <li>No spell slots or class resources to restore</li>
         </ul>
       </div>
@@ -745,28 +549,28 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
       <div class="equip-card">
         <div class="equip-card-title">⚔️ Weapons</div>
         <ul class="link-list">
-          <li><a href="https://5e.tools/items.html#rapier_xphb">Rapier</a> — 1d8 piercing, Finesse</li>
+          <li><a href="https://5e.tools/items.html#rapier_phb">Rapier</a> — 1d8 piercing, Finesse</li>
           <li>Reszur (+1) — 1d4+5 piercing, Finesse, Light, Thrown 20/60 · Silent on hit · Speak name to glow (dim 10 ft)</li>
-          <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> — 1d4 piercing, Light, Thrown 20/60</li>
-          <li><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a> — 1d6 piercing, Range 80/320</li>
-          <li><a href="https://5e.tools/items.html#arrow_xphb">Arrows</a> ×20</li>
+          <li><a href="https://5e.tools/items.html#dagger_phb">Dagger</a> — 1d4 piercing, Light, Thrown 20/60</li>
+          <li><a href="https://5e.tools/items.html#shortbow_phb">Shortbow</a> — 1d6 piercing, Range 80/320</li>
+          <li><a href="https://5e.tools/items.html#arrow_phb">Arrows</a> ×20</li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">🛡️ Armor & Worn</div>
         <ul class="link-list">
           <li>Fine Clothes (light armor)</li>
-          <li><a href="https://5e.tools/items.html#disguise kit_xphb">Disguise Kit</a></li>
-          <li><a href="https://5e.tools/items.html#thieves tools_xphb">Thieves' Tools</a></li>
+          <li><a href="https://5e.tools/items.html#disguise kit_phb">Disguise Kit</a></li>
+          <li><a href="https://5e.tools/items.html#thieves'%20tools_phb">Thieves' Tools</a></li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">🪄 Magic Items & Consumables</div>
         <ul class="link-list">
           <li>Reszur (+1 Dagger) — +1 attack &amp; damage · silent on hit/cut · speak "Reszur" to shed dim light in 10-ft radius (cold glow), speak again to extinguish</li>
-          <li><a href="https://5e.tools/items.html#potion of healing_xphb">Potion of Healing</a> ×3 — 2d4+2 HP</li>
+          <li><a href="https://5e.tools/items.html#potion of healing_dmg">Potion of Healing</a> ×3 — 2d4+2 HP</li>
           <li>Spell Scroll — Invisibility ×1</li>
-          <li><a href="https://5e.tools/items.html#dust of dryness_xdmg">Dust of Dryness</a> ×3</li>
+          <li><a href="https://5e.tools/items.html#dust of dryness_dmg">Dust of Dryness</a> ×3</li>
         </ul>
       </div>
       <div class="equip-card">
@@ -784,152 +588,14 @@ a:hover { text-decoration: underline; color: #a5d0fb; }
 
 </div><!-- /page -->
 <script>
-const STORE_PREFIX = "hanabi_v1_";
-const HP_MAX = 49;
-
-function save(k, v) { localStorage.setItem(STORE_PREFIX + k, JSON.stringify(v)); }
-function load(k, fallback) {
-  try { const v = JSON.parse(localStorage.getItem(STORE_PREFIX + k)); return v === null ? fallback : v; }
-  catch { return fallback; }
-}
-
-/* ── TABS ── */
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tab = btn.dataset.tab;
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('tab-' + tab).classList.add('active');
-  });
-});
-
-/* ── DOTS ── */
-function makeDots(id) {
-  const el = document.getElementById(id);
-  if (!el) return;
-  const total = Number(el.dataset.total || 0);
-  const key = el.dataset.key;
-  const isSuccess = el.dataset.success === 'true';
-  const isFail = el.dataset.fail === 'true';
-  const used = load(key, []);
-  el.innerHTML = '';
-  for (let i = 0; i < total; i++) {
-    const btn = document.createElement('button');
-    btn.className = 'dot';
-    const isUsed = used.includes(i);
-    if (isSuccess && isUsed) btn.classList.add('success');
-    else if (isFail && isUsed) btn.classList.add('fail');
-    else if (isUsed) btn.classList.add('used');
-    btn.textContent = i + 1;
-    btn.addEventListener('click', () => {
-      const cur = load(key, []);
-      const idx = cur.indexOf(i);
-      idx >= 0 ? cur.splice(idx, 1) : cur.push(i);
-      save(key, cur);
-      makeDots(id);
-    });
-    el.appendChild(btn);
-  }
-}
-
-/* ── HP ── */
-function updateHp() {
-  const el = document.getElementById('hpCurrent');
-  const val = Number(el.value);
-  el.classList.remove('hp-warn', 'hp-danger');
-  const dp = document.getElementById('deathSavePanel');
-  if (val === 0) { el.classList.add('hp-danger'); dp.style.display = ''; }
-  else {
-    dp.style.display = 'none';
-    if (val <= Math.floor(HP_MAX * 0.25)) el.classList.add('hp-danger');
-    else if (val <= Math.floor(HP_MAX * 0.5)) el.classList.add('hp-warn');
-  }
-  const pill = document.getElementById('hpPill');
-  if (pill) pill.textContent = val + '/' + HP_MAX;
-}
-function bindInput(id, key) {
-  const el = document.getElementById(id); if (!el) return;
-  el.value = load(key, el.value);
-  el.addEventListener('input', () => { save(key, el.value); if (id === 'hpCurrent') updateHp(); });
-}
-
-/* ── INSPIRATION ── */
-(function() {
-  const pill = document.getElementById('inspirationPill');
-  const val_el = document.getElementById('inspirationVal');
-  let on = load('inspiration', false);
-  const update = () => { val_el.textContent = on ? '✦ ON' : '—'; pill.classList.toggle('on', on); };
-  update();
-  pill.addEventListener('click', () => { on = !on; save('inspiration', on); update(); });
-})();
-
-/* ── ROLL LOG ── */
-function addRoll(label, bonus) {
-  const die = Math.floor(Math.random() * 20) + 1;
-  const total = die + bonus;
-  const isNat20 = die === 20, isNat1 = die === 1;
-  const bonusStr = bonus >= 0 ? `+${bonus}` : `${bonus}`;
-  const log = document.getElementById('rollLog');
-  const empty = log.querySelector('.roll-log-empty');
-  if (empty) empty.remove();
-  const div = document.createElement('div');
-  div.className = 'roll-entry';
-  div.innerHTML = `
-    <div><div class="roll-entry-label">${label}</div><div class="roll-entry-detail">d20 (${die}) ${bonusStr}</div></div>
-    <div class="roll-entry-total${isNat20?' nat20':isNat1?' nat1':''}">${total}${isNat20?' 🎉':isNat1?' 💀':''}</div>
-    <div class="roll-entry-time">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})}</div>
-  `;
-  log.insertBefore(div, log.firstChild);
-  while (log.children.length > 12) log.removeChild(log.lastChild);
-}
-document.querySelectorAll('.roll-btn').forEach(btn => {
-  btn.addEventListener('click', () => addRoll(btn.dataset.label, Number(btn.dataset.bonus || 0)));
-});
-
-/* ── RESTS ── */
-document.getElementById('longRestBtn').addEventListener('click', () => {
-  save('hpCurrent', HP_MAX); save('hpTemp', '0');
-  save('hitDice', []); save('deathSuccess', []); save('deathFail', []);
-  document.getElementById('hpCurrent').value = HP_MAX;
-  document.getElementById('hpTemp').value = '0';
-  updateHp();
-  ['hitDiceDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
-});
-document.getElementById('shortRestBtn').addEventListener('click', () => {
-  alert('Short Rest: Spend Hit Dice to recover HP.\nRoll d8 + CON mod (+2) per die spent.');
-});
-document.getElementById('clearDeathBtn').addEventListener('click', () => {
-  save('deathSuccess',[]); save('deathFail',[]);
-  makeDots('deathSuccessDots'); makeDots('deathFailDots');
-});
-document.getElementById('clearSessionBtn').addEventListener('click', () => {
-  if (!confirm('Clear all saved tracking data?')) return;
-  Object.keys(localStorage).forEach(k => { if (k.startsWith(STORE_PREFIX)) localStorage.removeItem(k); });
-  location.reload();
-});
-
-/* ── INIT ── */
-['hitDiceDots','deathSuccessDots','deathFailDots'].forEach(makeDots);
-bindInput('hpCurrent','hpCurrent');
-bindInput('hpTemp','hpTemp');
-updateHp();
-document.getElementById('dmgBtn').addEventListener('click', () => {
-  const amt = Number(document.getElementById('hpAdjust').value);
-  if (!amt || amt < 1) return;
-  const hp = document.getElementById('hpCurrent');
-  hp.value = Math.max(0, Number(hp.value) - amt);
-  save('hpCurrent', hp.value);
-  updateHp();
-});
-document.getElementById('healBtn').addEventListener('click', () => {
-  const amt = Number(document.getElementById('hpAdjust').value);
-  if (!amt || amt < 1) return;
-  const hp = document.getElementById('hpCurrent');
-  hp.value = Math.min(HP_MAX, Number(hp.value) + amt);
-  save('hpCurrent', hp.value);
-  updateHp();
-});
+/* hanabi — everything unique to this character. The engine is sheet.js. */
+const SHEET = {
+  prefix: 'hanabi_v1_',
+  hpMax: 49,
+  shortRest: { keys: [],
+               msg: 'Spend Hit Dice to recover HP.\nRoll d8 + CON mod (+2) per die spent.' }
+};
 </script>
+<script src="sheet.js"></script>
 </body>
 </html>
