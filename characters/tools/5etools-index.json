@@ -1,0 +1,11274 @@
+{
+"spells": {
+"acid splash": [
+"PHB",
+"XPHB"
+],
+"aid": [
+"PHB",
+"XPHB"
+],
+"alarm": [
+"PHB",
+"XPHB"
+],
+"alter self": [
+"PHB",
+"XPHB"
+],
+"animal friendship": [
+"PHB",
+"XPHB"
+],
+"animal messenger": [
+"PHB",
+"XPHB"
+],
+"animal shapes": [
+"PHB",
+"XPHB"
+],
+"animate dead": [
+"PHB",
+"XPHB"
+],
+"animate objects": [
+"PHB",
+"XPHB"
+],
+"antilife shell": [
+"PHB",
+"XPHB"
+],
+"antimagic field": [
+"PHB",
+"XPHB"
+],
+"antipathy/sympathy": [
+"PHB",
+"XPHB"
+],
+"arcane eye": [
+"PHB",
+"XPHB"
+],
+"arcane gate": [
+"PHB",
+"XPHB"
+],
+"arcane lock": [
+"PHB",
+"XPHB"
+],
+"armor of agathys": [
+"PHB",
+"XPHB"
+],
+"arms of hadar": [
+"PHB",
+"XPHB"
+],
+"astral projection": [
+"PHB",
+"XPHB"
+],
+"augury": [
+"PHB",
+"XPHB"
+],
+"aura of life": [
+"PHB",
+"XPHB"
+],
+"aura of purity": [
+"PHB",
+"XPHB"
+],
+"aura of vitality": [
+"PHB",
+"XPHB"
+],
+"awaken": [
+"PHB",
+"XPHB"
+],
+"bane": [
+"PHB",
+"XPHB"
+],
+"banishing smite": [
+"PHB",
+"XPHB"
+],
+"banishment": [
+"PHB",
+"XPHB"
+],
+"barkskin": [
+"PHB",
+"XPHB"
+],
+"beacon of hope": [
+"PHB",
+"XPHB"
+],
+"beast sense": [
+"PHB",
+"XPHB"
+],
+"bestow curse": [
+"PHB",
+"XPHB"
+],
+"bigby's hand": [
+"PHB",
+"XPHB"
+],
+"blade barrier": [
+"PHB",
+"XPHB"
+],
+"blade ward": [
+"PHB",
+"XPHB"
+],
+"bless": [
+"PHB",
+"XPHB"
+],
+"blight": [
+"PHB",
+"XPHB"
+],
+"blinding smite": [
+"PHB",
+"XPHB"
+],
+"blindness/deafness": [
+"PHB",
+"XPHB"
+],
+"blink": [
+"PHB",
+"XPHB"
+],
+"blur": [
+"PHB",
+"XPHB"
+],
+"branding smite": [
+"PHB"
+],
+"burning hands": [
+"PHB",
+"XPHB"
+],
+"call lightning": [
+"PHB",
+"XPHB"
+],
+"calm emotions": [
+"PHB",
+"XPHB"
+],
+"chain lightning": [
+"PHB",
+"XPHB"
+],
+"charm person": [
+"PHB",
+"XPHB"
+],
+"chill touch": [
+"PHB",
+"XPHB"
+],
+"chromatic orb": [
+"PHB",
+"XPHB"
+],
+"circle of death": [
+"PHB",
+"XPHB"
+],
+"circle of power": [
+"PHB",
+"XPHB"
+],
+"clairvoyance": [
+"PHB",
+"XPHB"
+],
+"clone": [
+"PHB",
+"XPHB"
+],
+"cloud of daggers": [
+"PHB",
+"XPHB"
+],
+"cloudkill": [
+"PHB",
+"XPHB"
+],
+"color spray": [
+"PHB",
+"XPHB"
+],
+"command": [
+"PHB",
+"XPHB"
+],
+"commune": [
+"PHB",
+"XPHB"
+],
+"commune with nature": [
+"PHB",
+"XPHB"
+],
+"compelled duel": [
+"PHB",
+"XPHB"
+],
+"comprehend languages": [
+"PHB",
+"XPHB"
+],
+"compulsion": [
+"PHB",
+"XPHB"
+],
+"cone of cold": [
+"PHB",
+"XPHB"
+],
+"confusion": [
+"PHB",
+"XPHB"
+],
+"conjure animals": [
+"PHB",
+"XPHB"
+],
+"conjure barrage": [
+"PHB",
+"XPHB"
+],
+"conjure celestial": [
+"PHB",
+"XPHB"
+],
+"conjure elemental": [
+"PHB",
+"XPHB"
+],
+"conjure fey": [
+"PHB",
+"XPHB"
+],
+"conjure minor elementals": [
+"PHB",
+"XPHB"
+],
+"conjure volley": [
+"PHB",
+"XPHB"
+],
+"conjure woodland beings": [
+"PHB",
+"XPHB"
+],
+"contact other plane": [
+"PHB",
+"XPHB"
+],
+"contagion": [
+"PHB",
+"XPHB"
+],
+"contingency": [
+"PHB",
+"XPHB"
+],
+"continual flame": [
+"PHB",
+"XPHB"
+],
+"control water": [
+"PHB",
+"XPHB"
+],
+"control weather": [
+"PHB",
+"XPHB"
+],
+"cordon of arrows": [
+"PHB",
+"XPHB"
+],
+"counterspell": [
+"PHB",
+"XPHB"
+],
+"create food and water": [
+"PHB",
+"XPHB"
+],
+"create or destroy water": [
+"PHB",
+"XPHB"
+],
+"create undead": [
+"PHB",
+"XPHB"
+],
+"creation": [
+"PHB",
+"XPHB"
+],
+"crown of madness": [
+"PHB",
+"XPHB"
+],
+"crusader's mantle": [
+"PHB",
+"XPHB"
+],
+"cure wounds": [
+"PHB",
+"XPHB"
+],
+"dancing lights": [
+"PHB",
+"XPHB"
+],
+"darkness": [
+"PHB",
+"XPHB"
+],
+"darkvision": [
+"PHB",
+"XPHB"
+],
+"daylight": [
+"PHB",
+"XPHB"
+],
+"death ward": [
+"PHB",
+"XPHB"
+],
+"delayed blast fireball": [
+"PHB",
+"XPHB"
+],
+"demiplane": [
+"PHB",
+"XPHB"
+],
+"destructive wave": [
+"PHB",
+"XPHB"
+],
+"detect evil and good": [
+"PHB",
+"XPHB"
+],
+"detect magic": [
+"PHB",
+"XPHB"
+],
+"detect poison and disease": [
+"PHB",
+"XPHB"
+],
+"detect thoughts": [
+"PHB",
+"XPHB"
+],
+"dimension door": [
+"PHB",
+"XPHB"
+],
+"disguise self": [
+"PHB",
+"XPHB"
+],
+"disintegrate": [
+"PHB",
+"XPHB"
+],
+"dispel evil and good": [
+"PHB",
+"XPHB"
+],
+"dispel magic": [
+"PHB",
+"XPHB"
+],
+"dissonant whispers": [
+"PHB",
+"XPHB"
+],
+"divination": [
+"PHB",
+"XPHB"
+],
+"divine favor": [
+"PHB",
+"XPHB"
+],
+"divine word": [
+"PHB",
+"XPHB"
+],
+"dominate beast": [
+"PHB",
+"XPHB"
+],
+"dominate monster": [
+"PHB",
+"XPHB"
+],
+"dominate person": [
+"PHB",
+"XPHB"
+],
+"drawmij's instant summons": [
+"PHB",
+"XPHB"
+],
+"dream": [
+"PHB",
+"XPHB"
+],
+"druidcraft": [
+"PHB",
+"XPHB"
+],
+"earthquake": [
+"PHB",
+"XPHB"
+],
+"eldritch blast": [
+"PHB",
+"XPHB"
+],
+"elemental weapon": [
+"PHB",
+"XPHB"
+],
+"enhance ability": [
+"PHB",
+"XPHB"
+],
+"enlarge/reduce": [
+"PHB",
+"XPHB"
+],
+"ensnaring strike": [
+"PHB",
+"XPHB"
+],
+"entangle": [
+"PHB",
+"XPHB"
+],
+"enthrall": [
+"PHB",
+"XPHB"
+],
+"etherealness": [
+"PHB",
+"XPHB"
+],
+"evard's black tentacles": [
+"PHB",
+"XPHB"
+],
+"expeditious retreat": [
+"PHB",
+"XPHB"
+],
+"eyebite": [
+"PHB",
+"XPHB"
+],
+"fabricate": [
+"PHB",
+"XPHB"
+],
+"faerie fire": [
+"PHB",
+"XPHB"
+],
+"false life": [
+"PHB",
+"XPHB"
+],
+"fear": [
+"PHB",
+"XPHB"
+],
+"feather fall": [
+"PHB",
+"XPHB"
+],
+"feeblemind": [
+"PHB"
+],
+"feign death": [
+"PHB",
+"XPHB"
+],
+"find familiar": [
+"PHB",
+"XPHB"
+],
+"find steed": [
+"PHB",
+"XPHB"
+],
+"find the path": [
+"PHB",
+"XPHB"
+],
+"find traps": [
+"PHB",
+"XPHB"
+],
+"finger of death": [
+"PHB",
+"XPHB"
+],
+"fire bolt": [
+"PHB",
+"XPHB"
+],
+"fire shield": [
+"PHB",
+"XPHB"
+],
+"fire storm": [
+"PHB",
+"XPHB"
+],
+"fireball": [
+"PHB",
+"XPHB"
+],
+"flame blade": [
+"PHB",
+"XPHB"
+],
+"flame strike": [
+"PHB",
+"XPHB"
+],
+"flaming sphere": [
+"PHB",
+"XPHB"
+],
+"flesh to stone": [
+"PHB",
+"XPHB"
+],
+"fly": [
+"PHB",
+"XPHB"
+],
+"fog cloud": [
+"PHB",
+"XPHB"
+],
+"forbiddance": [
+"PHB",
+"XPHB"
+],
+"forcecage": [
+"PHB",
+"XPHB"
+],
+"foresight": [
+"PHB",
+"XPHB"
+],
+"freedom of movement": [
+"PHB",
+"XPHB"
+],
+"friends": [
+"PHB",
+"XPHB"
+],
+"gaseous form": [
+"PHB",
+"XPHB"
+],
+"gate": [
+"PHB",
+"XPHB"
+],
+"geas": [
+"PHB",
+"XPHB"
+],
+"gentle repose": [
+"PHB",
+"XPHB"
+],
+"giant insect": [
+"PHB",
+"XPHB"
+],
+"glibness": [
+"PHB",
+"XPHB"
+],
+"globe of invulnerability": [
+"PHB",
+"XPHB"
+],
+"glyph of warding": [
+"PHB",
+"XPHB"
+],
+"goodberry": [
+"PHB",
+"XPHB"
+],
+"grasping vine": [
+"PHB",
+"XPHB"
+],
+"grease": [
+"PHB",
+"XPHB"
+],
+"greater invisibility": [
+"PHB",
+"XPHB"
+],
+"greater restoration": [
+"PHB",
+"XPHB"
+],
+"guardian of faith": [
+"PHB",
+"XPHB"
+],
+"guards and wards": [
+"PHB",
+"XPHB"
+],
+"guidance": [
+"PHB",
+"XPHB"
+],
+"guiding bolt": [
+"PHB",
+"XPHB"
+],
+"gust of wind": [
+"PHB",
+"XPHB"
+],
+"hail of thorns": [
+"PHB",
+"XPHB"
+],
+"hallow": [
+"PHB",
+"XPHB"
+],
+"hallucinatory terrain": [
+"PHB",
+"XPHB"
+],
+"harm": [
+"PHB",
+"XPHB"
+],
+"haste": [
+"PHB",
+"XPHB"
+],
+"heal": [
+"PHB",
+"XPHB"
+],
+"healing word": [
+"PHB",
+"XPHB"
+],
+"heat metal": [
+"PHB",
+"XPHB"
+],
+"hellish rebuke": [
+"PHB",
+"XPHB"
+],
+"heroes' feast": [
+"PHB",
+"XPHB"
+],
+"heroism": [
+"PHB",
+"XPHB"
+],
+"hex": [
+"PHB",
+"XPHB"
+],
+"hold monster": [
+"PHB",
+"XPHB"
+],
+"hold person": [
+"PHB",
+"XPHB"
+],
+"holy aura": [
+"PHB",
+"XPHB"
+],
+"hunger of hadar": [
+"PHB",
+"XPHB"
+],
+"hunter's mark": [
+"PHB",
+"XPHB"
+],
+"hypnotic pattern": [
+"PHB",
+"XPHB"
+],
+"ice storm": [
+"PHB",
+"XPHB"
+],
+"identify": [
+"PHB",
+"XPHB"
+],
+"illusory script": [
+"PHB",
+"XPHB"
+],
+"imprisonment": [
+"PHB",
+"XPHB"
+],
+"incendiary cloud": [
+"PHB",
+"XPHB"
+],
+"inflict wounds": [
+"PHB",
+"XPHB"
+],
+"insect plague": [
+"PHB",
+"XPHB"
+],
+"invisibility": [
+"PHB",
+"XPHB"
+],
+"jump": [
+"PHB",
+"XPHB"
+],
+"knock": [
+"PHB",
+"XPHB"
+],
+"legend lore": [
+"PHB",
+"XPHB"
+],
+"leomund's secret chest": [
+"PHB",
+"XPHB"
+],
+"leomund's tiny hut": [
+"PHB",
+"XPHB"
+],
+"lesser restoration": [
+"PHB",
+"XPHB"
+],
+"levitate": [
+"PHB",
+"XPHB"
+],
+"light": [
+"PHB",
+"XPHB"
+],
+"lightning arrow": [
+"PHB",
+"XPHB"
+],
+"lightning bolt": [
+"PHB",
+"XPHB"
+],
+"locate animals or plants": [
+"PHB",
+"XPHB"
+],
+"locate creature": [
+"PHB",
+"XPHB"
+],
+"locate object": [
+"PHB",
+"XPHB"
+],
+"longstrider": [
+"PHB",
+"XPHB"
+],
+"mage armor": [
+"PHB",
+"XPHB"
+],
+"mage hand": [
+"PHB",
+"XPHB"
+],
+"magic circle": [
+"PHB",
+"XPHB"
+],
+"magic jar": [
+"PHB",
+"XPHB"
+],
+"magic missile": [
+"PHB",
+"XPHB"
+],
+"magic mouth": [
+"PHB",
+"XPHB"
+],
+"magic weapon": [
+"PHB",
+"XPHB"
+],
+"major image": [
+"PHB",
+"XPHB"
+],
+"mass cure wounds": [
+"PHB",
+"XPHB"
+],
+"mass heal": [
+"PHB",
+"XPHB"
+],
+"mass healing word": [
+"PHB",
+"XPHB"
+],
+"mass suggestion": [
+"PHB",
+"XPHB"
+],
+"maze": [
+"PHB",
+"XPHB"
+],
+"meld into stone": [
+"PHB",
+"XPHB"
+],
+"melf's acid arrow": [
+"PHB",
+"XPHB"
+],
+"mending": [
+"PHB",
+"XPHB"
+],
+"message": [
+"PHB",
+"XPHB"
+],
+"meteor swarm": [
+"PHB",
+"XPHB"
+],
+"mind blank": [
+"PHB",
+"XPHB"
+],
+"minor illusion": [
+"PHB",
+"XPHB"
+],
+"mirage arcane": [
+"PHB",
+"XPHB"
+],
+"mirror image": [
+"PHB",
+"XPHB"
+],
+"mislead": [
+"PHB",
+"XPHB"
+],
+"misty step": [
+"PHB",
+"XPHB"
+],
+"modify memory": [
+"PHB",
+"XPHB"
+],
+"moonbeam": [
+"PHB",
+"XPHB"
+],
+"mordenkainen's faithful hound": [
+"PHB",
+"XPHB"
+],
+"mordenkainen's magnificent mansion": [
+"PHB",
+"XPHB"
+],
+"mordenkainen's private sanctum": [
+"PHB",
+"XPHB"
+],
+"mordenkainen's sword": [
+"PHB",
+"XPHB"
+],
+"move earth": [
+"PHB",
+"XPHB"
+],
+"nondetection": [
+"PHB",
+"XPHB"
+],
+"nystul's magic aura": [
+"PHB",
+"XPHB"
+],
+"otiluke's freezing sphere": [
+"PHB",
+"XPHB"
+],
+"otiluke's resilient sphere": [
+"PHB",
+"XPHB"
+],
+"otto's irresistible dance": [
+"PHB",
+"XPHB"
+],
+"pass without trace": [
+"PHB",
+"XPHB"
+],
+"passwall": [
+"PHB",
+"XPHB"
+],
+"phantasmal force": [
+"PHB",
+"XPHB"
+],
+"phantasmal killer": [
+"PHB",
+"XPHB"
+],
+"phantom steed": [
+"PHB",
+"XPHB"
+],
+"planar ally": [
+"PHB",
+"XPHB"
+],
+"planar binding": [
+"PHB",
+"XPHB"
+],
+"plane shift": [
+"PHB",
+"XPHB"
+],
+"plant growth": [
+"PHB",
+"XPHB"
+],
+"poison spray": [
+"PHB",
+"XPHB"
+],
+"polymorph": [
+"PHB",
+"XPHB"
+],
+"power word heal": [
+"PHB",
+"XPHB"
+],
+"power word kill": [
+"PHB",
+"XPHB"
+],
+"power word stun": [
+"PHB",
+"XPHB"
+],
+"prayer of healing": [
+"PHB",
+"XPHB"
+],
+"prestidigitation": [
+"PHB",
+"XPHB"
+],
+"prismatic spray": [
+"PHB",
+"XPHB"
+],
+"prismatic wall": [
+"PHB",
+"XPHB"
+],
+"produce flame": [
+"PHB",
+"XPHB"
+],
+"programmed illusion": [
+"PHB",
+"XPHB"
+],
+"project image": [
+"PHB",
+"XPHB"
+],
+"protection from energy": [
+"PHB",
+"XPHB"
+],
+"protection from evil and good": [
+"PHB",
+"XPHB"
+],
+"protection from poison": [
+"PHB",
+"XPHB"
+],
+"purify food and drink": [
+"PHB",
+"XPHB"
+],
+"raise dead": [
+"PHB",
+"XPHB"
+],
+"rary's telepathic bond": [
+"PHB",
+"XPHB"
+],
+"ray of enfeeblement": [
+"PHB",
+"XPHB"
+],
+"ray of frost": [
+"PHB",
+"XPHB"
+],
+"ray of sickness": [
+"PHB",
+"XPHB"
+],
+"regenerate": [
+"PHB",
+"XPHB"
+],
+"reincarnate": [
+"PHB",
+"XPHB"
+],
+"remove curse": [
+"PHB",
+"XPHB"
+],
+"resistance": [
+"PHB",
+"XPHB"
+],
+"resurrection": [
+"PHB",
+"XPHB"
+],
+"reverse gravity": [
+"PHB",
+"XPHB"
+],
+"revivify": [
+"PHB",
+"XPHB"
+],
+"rope trick": [
+"PHB",
+"XPHB"
+],
+"sacred flame": [
+"PHB",
+"XPHB"
+],
+"sanctuary": [
+"PHB",
+"XPHB"
+],
+"scorching ray": [
+"PHB",
+"XPHB"
+],
+"scrying": [
+"PHB",
+"XPHB"
+],
+"searing smite": [
+"PHB",
+"XPHB"
+],
+"see invisibility": [
+"PHB",
+"XPHB"
+],
+"seeming": [
+"PHB",
+"XPHB"
+],
+"sending": [
+"PHB",
+"XPHB"
+],
+"sequester": [
+"PHB",
+"XPHB"
+],
+"shapechange": [
+"PHB",
+"XPHB"
+],
+"shatter": [
+"PHB",
+"XPHB"
+],
+"shield": [
+"PHB",
+"XPHB"
+],
+"shield of faith": [
+"PHB",
+"XPHB"
+],
+"shillelagh": [
+"PHB",
+"XPHB"
+],
+"shocking grasp": [
+"PHB",
+"XPHB"
+],
+"silence": [
+"PHB",
+"XPHB"
+],
+"silent image": [
+"PHB",
+"XPHB"
+],
+"simulacrum": [
+"PHB",
+"XPHB"
+],
+"sleep": [
+"PHB",
+"XPHB"
+],
+"sleet storm": [
+"PHB",
+"XPHB"
+],
+"slow": [
+"PHB",
+"XPHB"
+],
+"spare the dying": [
+"PHB",
+"XPHB"
+],
+"speak with animals": [
+"PHB",
+"XPHB"
+],
+"speak with dead": [
+"PHB",
+"XPHB"
+],
+"speak with plants": [
+"PHB",
+"XPHB"
+],
+"spider climb": [
+"PHB",
+"XPHB"
+],
+"spike growth": [
+"PHB",
+"XPHB"
+],
+"spirit guardians": [
+"PHB",
+"XPHB"
+],
+"spiritual weapon": [
+"PHB",
+"XPHB"
+],
+"staggering smite": [
+"PHB",
+"XPHB"
+],
+"stinking cloud": [
+"PHB",
+"XPHB"
+],
+"stone shape": [
+"PHB",
+"XPHB"
+],
+"stoneskin": [
+"PHB",
+"XPHB"
+],
+"storm of vengeance": [
+"PHB",
+"XPHB"
+],
+"suggestion": [
+"PHB",
+"XPHB"
+],
+"sunbeam": [
+"PHB",
+"XPHB"
+],
+"sunburst": [
+"PHB",
+"XPHB"
+],
+"swift quiver": [
+"PHB",
+"XPHB"
+],
+"symbol": [
+"PHB",
+"XPHB"
+],
+"tasha's hideous laughter": [
+"PHB",
+"XPHB"
+],
+"telekinesis": [
+"PHB",
+"XPHB"
+],
+"telepathy": [
+"PHB",
+"XPHB"
+],
+"teleport": [
+"PHB",
+"XPHB"
+],
+"teleportation circle": [
+"PHB",
+"XPHB"
+],
+"tenser's floating disk": [
+"PHB",
+"XPHB"
+],
+"thaumaturgy": [
+"PHB",
+"XPHB"
+],
+"thorn whip": [
+"PHB",
+"XPHB"
+],
+"thunderous smite": [
+"PHB",
+"XPHB"
+],
+"thunderwave": [
+"PHB",
+"XPHB"
+],
+"time stop": [
+"PHB",
+"XPHB"
+],
+"tongues": [
+"PHB",
+"XPHB"
+],
+"transport via plants": [
+"PHB",
+"XPHB"
+],
+"tree stride": [
+"PHB",
+"XPHB"
+],
+"true polymorph": [
+"PHB",
+"XPHB"
+],
+"true resurrection": [
+"PHB",
+"XPHB"
+],
+"true seeing": [
+"PHB",
+"XPHB"
+],
+"true strike": [
+"PHB",
+"XPHB"
+],
+"tsunami": [
+"PHB",
+"XPHB"
+],
+"unseen servant": [
+"PHB",
+"XPHB"
+],
+"vampiric touch": [
+"PHB",
+"XPHB"
+],
+"vicious mockery": [
+"PHB",
+"XPHB"
+],
+"wall of fire": [
+"PHB",
+"XPHB"
+],
+"wall of force": [
+"PHB",
+"XPHB"
+],
+"wall of ice": [
+"PHB",
+"XPHB"
+],
+"wall of stone": [
+"PHB",
+"XPHB"
+],
+"wall of thorns": [
+"PHB",
+"XPHB"
+],
+"warding bond": [
+"PHB",
+"XPHB"
+],
+"water breathing": [
+"PHB",
+"XPHB"
+],
+"water walk": [
+"PHB",
+"XPHB"
+],
+"web": [
+"PHB",
+"XPHB"
+],
+"weird": [
+"PHB",
+"XPHB"
+],
+"wind walk": [
+"PHB",
+"XPHB"
+],
+"wind wall": [
+"PHB",
+"XPHB"
+],
+"wish": [
+"PHB",
+"XPHB"
+],
+"witch bolt": [
+"PHB",
+"XPHB"
+],
+"word of recall": [
+"PHB",
+"XPHB"
+],
+"wrathful smite": [
+"PHB",
+"XPHB"
+],
+"zone of truth": [
+"PHB",
+"XPHB"
+],
+"arcane vigor": [
+"XPHB"
+],
+"befuddlement": [
+"XPHB"
+],
+"charm monster": [
+"XGE",
+"XPHB"
+],
+"divine smite": [
+"XPHB"
+],
+"dragon's breath": [
+"XGE",
+"XPHB"
+],
+"elementalism": [
+"XPHB"
+],
+"fount of moonlight": [
+"XPHB"
+],
+"ice knife": [
+"XGE",
+"XPHB"
+],
+"jallarzi's storm of radiance": [
+"XPHB"
+],
+"mind sliver": [
+"TCE",
+"XPHB"
+],
+"mind spike": [
+"XGE",
+"XPHB"
+],
+"power word fortify": [
+"XPHB"
+],
+"shining smite": [
+"XPHB"
+],
+"sorcerous burst": [
+"XPHB"
+],
+"starry wisp": [
+"XPHB"
+],
+"steel wind strike": [
+"XGE",
+"XPHB"
+],
+"summon aberration": [
+"TCE",
+"XPHB"
+],
+"summon beast": [
+"TCE",
+"XPHB"
+],
+"summon celestial": [
+"TCE",
+"XPHB"
+],
+"summon construct": [
+"TCE",
+"XPHB"
+],
+"summon dragon": [
+"XPHB"
+],
+"summon elemental": [
+"TCE",
+"XPHB"
+],
+"summon fey": [
+"TCE",
+"XPHB"
+],
+"summon fiend": [
+"TCE",
+"XPHB"
+],
+"summon undead": [
+"TCE",
+"XPHB"
+],
+"synaptic static": [
+"XGE",
+"XPHB"
+],
+"tasha's bubbling cauldron": [
+"XPHB"
+],
+"thunderclap": [
+"XGE",
+"XPHB"
+],
+"toll the dead": [
+"XGE",
+"XPHB"
+],
+"vitriolic sphere": [
+"XGE",
+"XPHB"
+],
+"word of radiance": [
+"XGE",
+"XPHB"
+],
+"yolande's regal presence": [
+"XPHB"
+],
+"encode thoughts": [
+"GGR"
+],
+"abi-dalzim's horrid wilting": [
+"XGE"
+],
+"absorb elements": [
+"XGE"
+],
+"aganazzar's scorcher": [
+"XGE"
+],
+"beast bond": [
+"XGE"
+],
+"bones of the earth": [
+"XGE"
+],
+"catapult": [
+"XGE"
+],
+"catnap": [
+"XGE"
+],
+"cause fear": [
+"XGE"
+],
+"ceremony": [
+"XGE"
+],
+"chaos bolt": [
+"XGE"
+],
+"control flames": [
+"XGE"
+],
+"control winds": [
+"XGE"
+],
+"create bonfire": [
+"XGE"
+],
+"create homunculus": [
+"XGE"
+],
+"crown of stars": [
+"XGE"
+],
+"danse macabre": [
+"XGE"
+],
+"dawn": [
+"XGE"
+],
+"druid grove": [
+"XGE"
+],
+"dust devil": [
+"XGE"
+],
+"earth tremor": [
+"XGE"
+],
+"earthbind": [
+"XGE"
+],
+"elemental bane": [
+"XGE"
+],
+"enemies abound": [
+"XGE"
+],
+"enervation": [
+"XGE"
+],
+"erupting earth": [
+"XGE"
+],
+"far step": [
+"XGE"
+],
+"find greater steed": [
+"XGE"
+],
+"flame arrows": [
+"XGE"
+],
+"frostbite": [
+"XGE"
+],
+"guardian of nature": [
+"XGE"
+],
+"gust": [
+"XGE"
+],
+"healing spirit": [
+"XGE"
+],
+"holy weapon": [
+"XGE"
+],
+"illusory dragon": [
+"XGE"
+],
+"immolation": [
+"XGE"
+],
+"infernal calling": [
+"XGE"
+],
+"infestation": [
+"XGE"
+],
+"investiture of flame": [
+"XGE"
+],
+"investiture of ice": [
+"XGE"
+],
+"investiture of stone": [
+"XGE"
+],
+"investiture of wind": [
+"XGE"
+],
+"invulnerability": [
+"XGE"
+],
+"life transference": [
+"XGE"
+],
+"maddening darkness": [
+"XGE"
+],
+"maelstrom": [
+"XGE"
+],
+"magic stone": [
+"XGE"
+],
+"mass polymorph": [
+"XGE"
+],
+"maximilian's earthen grasp": [
+"XGE"
+],
+"melf's minute meteors": [
+"XGE"
+],
+"mental prison": [
+"XGE"
+],
+"mighty fortress": [
+"XGE"
+],
+"mold earth": [
+"XGE"
+],
+"negative energy flood": [
+"XGE"
+],
+"power word pain": [
+"XGE"
+],
+"primal savagery": [
+"XGE"
+],
+"primordial ward": [
+"XGE"
+],
+"psychic scream": [
+"XGE"
+],
+"pyrotechnics": [
+"XGE"
+],
+"scatter": [
+"XGE"
+],
+"shadow blade": [
+"XGE"
+],
+"shadow of moil": [
+"XGE"
+],
+"shape water": [
+"XGE"
+],
+"sickening radiance": [
+"XGE"
+],
+"skill empowerment": [
+"XGE"
+],
+"skywrite": [
+"XGE"
+],
+"snare": [
+"XGE"
+],
+"snilloc's snowball swarm": [
+"XGE"
+],
+"soul cage": [
+"XGE"
+],
+"storm sphere": [
+"XGE"
+],
+"summon greater demon": [
+"XGE"
+],
+"summon lesser demons": [
+"XGE"
+],
+"temple of the gods": [
+"XGE"
+],
+"tenser's transformation": [
+"XGE"
+],
+"thunder step": [
+"XGE"
+],
+"tidal wave": [
+"XGE"
+],
+"tiny servant": [
+"XGE"
+],
+"transmute rock": [
+"XGE"
+],
+"wall of light": [
+"XGE"
+],
+"wall of sand": [
+"XGE"
+],
+"wall of water": [
+"XGE"
+],
+"warding wind": [
+"XGE"
+],
+"watery sphere": [
+"XGE"
+],
+"whirlwind": [
+"XGE"
+],
+"wrath of nature": [
+"XGE"
+],
+"zephyr strike": [
+"XGE"
+],
+"borrowed knowledge": [
+"SCC"
+],
+"kinetic jaunt": [
+"SCC"
+],
+"silvery barbs": [
+"SCC"
+],
+"vortex warp": [
+"SCC"
+],
+"wither and bloom": [
+"SCC"
+],
+"blade of disaster": [
+"TCE"
+],
+"booming blade": [
+"TCE"
+],
+"dream of the blue veil": [
+"TCE"
+],
+"green-flame blade": [
+"TCE"
+],
+"intellect fortress": [
+"TCE"
+],
+"lightning lure": [
+"TCE"
+],
+"spirit shroud": [
+"TCE"
+],
+"summon shadowspawn": [
+"TCE"
+],
+"sword burst": [
+"TCE"
+],
+"tasha's caustic brew": [
+"TCE"
+],
+"tasha's mind whip": [
+"TCE"
+],
+"tasha's otherworldly guise": [
+"TCE"
+],
+"dark star": [
+"EGW"
+],
+"fortune's favor": [
+"EGW"
+],
+"gift of alacrity": [
+"EGW"
+],
+"gravity fissure": [
+"EGW"
+],
+"gravity sinkhole": [
+"EGW"
+],
+"immovable object": [
+"EGW"
+],
+"magnify gravity": [
+"EGW"
+],
+"pulse wave": [
+"EGW"
+],
+"ravenous void": [
+"EGW"
+],
+"reality break": [
+"EGW"
+],
+"sapping sting": [
+"EGW"
+],
+"temporal shunt": [
+"EGW"
+],
+"tether essence": [
+"EGW"
+],
+"time ravage": [
+"EGW"
+],
+"wristpocket": [
+"EGW"
+]
+},
+"actions": {
+"activate an item": [
+"DMG"
+],
+"attack": [
+"PHB",
+"XPHB"
+],
+"cast a spell": [
+"PHB"
+],
+"climb onto a bigger creature": [
+"DMG"
+],
+"dash": [
+"PHB",
+"XPHB"
+],
+"disarm": [
+"DMG"
+],
+"disengage": [
+"PHB",
+"XPHB"
+],
+"dodge": [
+"PHB",
+"XPHB"
+],
+"don or doff a shield": [
+"PHB",
+"XPHB"
+],
+"end concentration": [
+"PHB",
+"XPHB"
+],
+"escape a grapple": [
+"PHB",
+"XPHB"
+],
+"grapple": [
+"PHB"
+],
+"healing surge": [
+"DMG"
+],
+"help": [
+"PHB",
+"XPHB"
+],
+"hide": [
+"PHB",
+"XPHB"
+],
+"identify a spell": [
+"XGE"
+],
+"improvising an action": [
+"PHB",
+"XPHB"
+],
+"influence": [
+"XPHB"
+],
+"magic": [
+"XPHB"
+],
+"mark": [
+"DMG"
+],
+"opportunity attack": [
+"PHB",
+"XPHB"
+],
+"other activity": [
+"PHB"
+],
+"overrun": [
+"DMG"
+],
+"ready": [
+"PHB",
+"XPHB"
+],
+"search": [
+"PHB",
+"XPHB"
+],
+"shove": [
+"PHB"
+],
+"shove aside": [
+"DMG"
+],
+"stabilize a creature": [
+"PHB"
+],
+"study": [
+"XPHB"
+],
+"tumble": [
+"DMG"
+],
+"two-weapon fighting": [
+"PHB",
+"XPHB"
+],
+"use an object": [
+"PHB"
+],
+"utilize": [
+"XPHB"
+],
+"waking someone": [
+"XGE"
+]
+},
+"variantrules": {
+"ability check": [
+"XPHB"
+],
+"ability score and modifier": [
+"XPHB"
+],
+"action": [
+"XPHB"
+],
+"action options": [
+"DMG"
+],
+"adamantine weapons": [
+"XGE"
+],
+"advantage": [
+"XPHB"
+],
+"adventure": [
+"XPHB"
+],
+"alien technology": [
+"DMG"
+],
+"alignment": [
+"XPHB"
+],
+"ally": [
+"XPHB"
+],
+"alternatives to epic boons": [
+"DMG"
+],
+"area of effect": [
+"XPHB"
+],
+"armor class": [
+"XPHB"
+],
+"armor training": [
+"XPHB"
+],
+"attack roll": [
+"XPHB"
+],
+"attitude": [
+"XPHB"
+],
+"attunement": [
+"XPHB"
+],
+"automatic success": [
+"DMG"
+],
+"bonus action": [
+"XPHB"
+],
+"breaking objects": [
+"XPHB"
+],
+"bright light": [
+"XPHB"
+],
+"burrow speed": [
+"XPHB"
+],
+"campaign": [
+"XPHB"
+],
+"cantrip": [
+"XPHB"
+],
+"carrying capacity": [
+"XPHB"
+],
+"challenge rating": [
+"XPHB"
+],
+"character sheet": [
+"XPHB"
+],
+"cleaving through creatures": [
+"DMG"
+],
+"climb speed": [
+"XPHB"
+],
+"climbing": [
+"XPHB"
+],
+"condition": [
+"XPHB"
+],
+"cone [area of effect]": [
+"XPHB"
+],
+"cover": [
+"XPHB"
+],
+"crashing": [
+"AAG"
+],
+"crawling": [
+"XPHB"
+],
+"creature": [
+"XPHB"
+],
+"creature type": [
+"XPHB"
+],
+"crew": [
+"AAG"
+],
+"critical hit": [
+"XPHB"
+],
+"cube [area of effect]": [
+"XPHB"
+],
+"curses": [
+"XPHB"
+],
+"customizing ability scores": [
+"PHB"
+],
+"customizing your origin": [
+"TCE"
+],
+"cylinder [area of effect]": [
+"XPHB"
+],
+"d20 test": [
+"XPHB"
+],
+"damage": [
+"XPHB"
+],
+"damage roll": [
+"XPHB"
+],
+"damage threshold": [
+"XPHB"
+],
+"damage types": [
+"XPHB"
+],
+"darkness": [
+"XPHB"
+],
+"dead": [
+"XPHB"
+],
+"death saving throw": [
+"XPHB"
+],
+"diagonals": [
+"DMG"
+],
+"difficult terrain": [
+"XPHB"
+],
+"difficulty class": [
+"XPHB"
+],
+"dim light": [
+"XPHB"
+],
+"disadvantage": [
+"XPHB"
+],
+"downtime activity: building a stronghold": [
+"DMG"
+],
+"downtime activity: buying a magic item": [
+"XGE"
+],
+"downtime activity: carousing": [
+"DMG",
+"XGE"
+],
+"downtime activity: crafting": [
+"PHB"
+],
+"downtime activity: crafting a magic item": [
+"DMG"
+],
+"downtime activity: crafting an item": [
+"XGE"
+],
+"downtime activity: crime": [
+"XGE"
+],
+"downtime activity: gaining renown": [
+"DMG"
+],
+"downtime activity: gambling": [
+"XGE"
+],
+"downtime activity: performing sacred rites": [
+"DMG"
+],
+"downtime activity: pit fighting": [
+"XGE"
+],
+"downtime activity: practicing a profession": [
+"PHB"
+],
+"downtime activity: recuperating": [
+"PHB"
+],
+"downtime activity: relaxation": [
+"XGE"
+],
+"downtime activity: religious service": [
+"XGE"
+],
+"downtime activity: research": [
+"XGE"
+],
+"downtime activity: researching": [
+"PHB"
+],
+"downtime activity: running a business": [
+"DMG"
+],
+"downtime activity: scribing a spell scroll": [
+"XGE"
+],
+"downtime activity: selling a magic item": [
+"XGE"
+],
+"downtime activity: selling magic items": [
+"DMG"
+],
+"downtime activity: sowing rumors": [
+"DMG"
+],
+"downtime activity: training": [
+"PHB",
+"XGE"
+],
+"downtime activity: training to gain levels": [
+"DMG"
+],
+"downtime activity: work": [
+"XGE"
+],
+"downtime and franchise activity: explore territory": [
+"AI"
+],
+"downtime and franchise activity: franchise restructuring": [
+"AI"
+],
+"downtime and franchise activity: headquarters modification": [
+"AI"
+],
+"downtime and franchise activity: marketeering": [
+"AI"
+],
+"downtime and franchise activity: philanthropic enterprise": [
+"AI"
+],
+"downtime and franchise activity: running a franchise": [
+"AI"
+],
+"downtime and franchise activity: schmoozing": [
+"AI"
+],
+"downtime and franchise activity: scrutineering": [
+"AI"
+],
+"downtime and franchise activity: shady business practice": [
+"AI"
+],
+"downtime and franchise activity: team building": [
+"AI"
+],
+"downtime revisited": [
+"XGE"
+],
+"emanation [area of effect]": [
+"XPHB"
+],
+"emrakul's madness": [
+"PSI"
+],
+"encounter": [
+"XPHB"
+],
+"encounters at sea": [
+"GoS"
+],
+"encumbrance": [
+"PHB"
+],
+"enemy": [
+"XPHB"
+],
+"equipment sizes": [
+"PHB"
+],
+"experience points": [
+"XPHB"
+],
+"expertise": [
+"XPHB"
+],
+"explosives": [
+"DMG"
+],
+"facing": [
+"DMG"
+],
+"falling": [
+"XGE"
+],
+"familiars": [
+"MM",
+"VGM"
+],
+"fear and horror": [
+"DMG"
+],
+"fear and stress": [
+"VRGR"
+],
+"feats": [
+"PHB"
+],
+"firearms": [
+"DMG"
+],
+"flanking": [
+"DMG"
+],
+"fly speed": [
+"XPHB"
+],
+"flying": [
+"XPHB"
+],
+"friendly [attitude]": [
+"XPHB"
+],
+"grappling": [
+"XPHB"
+],
+"haunted traps": [
+"VRGR"
+],
+"hazard": [
+"XPHB"
+],
+"healing": [
+"DMG",
+"XPHB"
+],
+"heavily obscured": [
+"XPHB"
+],
+"hero points": [
+"DMG"
+],
+"heroic inspiration": [
+"XPHB"
+],
+"high jump": [
+"XPHB"
+],
+"hit point dice": [
+"XPHB"
+],
+"hit points": [
+"XPHB"
+],
+"hitting cover": [
+"DMG"
+],
+"hostile [attitude]": [
+"XPHB"
+],
+"hover": [
+"XPHB"
+],
+"human languages": [
+"SCAG"
+],
+"illusions": [
+"XPHB"
+],
+"immunity": [
+"XPHB"
+],
+"improvised weapons": [
+"XPHB"
+],
+"indifferent [attitude]": [
+"XPHB"
+],
+"initiative": [
+"XPHB"
+],
+"initiative variants": [
+"DMG"
+],
+"injuries": [
+"DMG"
+],
+"inspiration": [
+"DMG",
+"PHB"
+],
+"jumping": [
+"XPHB"
+],
+"knocking out a creature": [
+"XPHB"
+],
+"level advancement without xp": [
+"DMG"
+],
+"lightly obscured": [
+"XPHB"
+],
+"line [area of effect]": [
+"XPHB"
+],
+"long jump": [
+"XPHB"
+],
+"long rest": [
+"XPHB"
+],
+"loyalty": [
+"DMG"
+],
+"madness": [
+"DMG"
+],
+"magical effect": [
+"XPHB"
+],
+"massive damage": [
+"DMG"
+],
+"milestones": [
+"DMG"
+],
+"mixing potions": [
+"DMG"
+],
+"monster": [
+"XPHB"
+],
+"morale": [
+"DMG"
+],
+"more difficult identification": [
+"DMG"
+],
+"multiclassing": [
+"PHB"
+],
+"mysterious islands": [
+"GoS"
+],
+"new ability scores: honor and sanity": [
+"DMG"
+],
+"nonplayer character": [
+"XPHB"
+],
+"object": [
+"XPHB"
+],
+"occupied space": [
+"XPHB"
+],
+"ocean environs": [
+"GoS"
+],
+"officers and crew": [
+"GoS"
+],
+"optional class features": [
+"TCE"
+],
+"passive perception": [
+"XPHB"
+],
+"per day": [
+"XPHB"
+],
+"planar effects": [
+"DMG"
+],
+"player character": [
+"XPHB"
+],
+"player characters as lycanthropes": [
+"MM"
+],
+"player characters as vampires": [
+"MM"
+],
+"playing on a grid": [
+"PHB"
+],
+"plot points": [
+"DMG"
+],
+"possession": [
+"XPHB"
+],
+"proficiency": [
+"XPHB"
+],
+"proficiency dice": [
+"DMG"
+],
+"prophet's gambit": [
+"CoS"
+],
+"random ships": [
+"GoS"
+],
+"reaction": [
+"XPHB"
+],
+"renown": [
+"DMG"
+],
+"resistance": [
+"XPHB"
+],
+"rest variants": [
+"DMG"
+],
+"ritual": [
+"XPHB"
+],
+"round down": [
+"XPHB"
+],
+"save": [
+"XPHB"
+],
+"saving throw": [
+"XPHB"
+],
+"scroll mishaps": [
+"DMG"
+],
+"shape-shifting": [
+"XPHB"
+],
+"shared campaign variant rules": [
+"XGE"
+],
+"ship repairs": [
+"AAG"
+],
+"ship stat blocks": [
+"GoS"
+],
+"ship-to-ship combat": [
+"AAG"
+],
+"ships in combat": [
+"GoS"
+],
+"short rest": [
+"XPHB"
+],
+"sidekicks": [
+"ESK",
+"TCE"
+],
+"simultaneous effects": [
+"XGE",
+"XPHB"
+],
+"size": [
+"XPHB"
+],
+"skill": [
+"XPHB"
+],
+"skill variants": [
+"DMG"
+],
+"skills with different abilities": [
+"PHB"
+],
+"sleep": [
+"XGE"
+],
+"speed": [
+"XPHB"
+],
+"spell": [
+"XPHB"
+],
+"spell attack": [
+"XPHB"
+],
+"spell points": [
+"DMG"
+],
+"spellcasting": [
+"XGE"
+],
+"spellcasting focus": [
+"XPHB"
+],
+"sphere [area of effect]": [
+"XPHB"
+],
+"stable": [
+"XPHB"
+],
+"stat block": [
+"XPHB"
+],
+"superior ship upgrades": [
+"GoS"
+],
+"survivors": [
+"VRGR"
+],
+"swim speed": [
+"XPHB"
+],
+"swimming": [
+"XPHB"
+],
+"target": [
+"XPHB"
+],
+"telepathy": [
+"XPHB"
+],
+"teleportation": [
+"XPHB"
+],
+"temporary hit points": [
+"XPHB"
+],
+"tool proficiencies": [
+"XGE"
+],
+"travel at sea": [
+"GoS"
+],
+"tying knots": [
+"XGE"
+],
+"unarmed strike": [
+"XPHB"
+],
+"unoccupied space": [
+"XPHB"
+],
+"vulnerability": [
+"XPHB"
+],
+"wands that don't recharge": [
+"DMG"
+],
+"weapon": [
+"XPHB"
+],
+"weapon attack": [
+"XPHB"
+]
+},
+"races": {
+"aarakocra": [
+"DMG",
+"EEPC",
+"MPMM"
+],
+"aasimar": [
+"DMG",
+"MPMM",
+"VGM",
+"XPHB"
+],
+"aetherborn": [
+"PSK"
+],
+"astral elf": [
+"AAG"
+],
+"autognome": [
+"AAG"
+],
+"aven": [
+"PSA",
+"PSD"
+],
+"boggart": [
+"LFL"
+],
+"bugbear": [
+"ERLW",
+"MPMM",
+"VGM"
+],
+"bullywug": [
+"DMG"
+],
+"centaur": [
+"GGR",
+"MOT",
+"MPMM"
+],
+"changeling": [
+"EFA",
+"ERLW",
+"MPMM"
+],
+"custom lineage": [
+"TCE"
+],
+"deep gnome": [
+"MPMM"
+],
+"dhampir": [
+"RHW",
+"VRGR"
+],
+"dragonborn": [
+"PHB",
+"XPHB"
+],
+"dragonborn (chromatic)": [
+"FTD"
+],
+"dragonborn (gem)": [
+"FTD"
+],
+"dragonborn (metallic)": [
+"FTD"
+],
+"duergar": [
+"MPMM"
+],
+"dwarf": [
+"PHB",
+"XPHB"
+],
+"dwarf (kaladesh)": [
+"PSK"
+],
+"eladrin": [
+"MPMM"
+],
+"elf": [
+"LFL",
+"PHB",
+"XPHB"
+],
+"elf (kaladesh)": [
+"PSK"
+],
+"elf (zendikar)": [
+"PSZ"
+],
+"faerie": [
+"LFL"
+],
+"fairy": [
+"MPMM",
+"WBtW"
+],
+"firbolg": [
+"MPMM",
+"VGM"
+],
+"flamekin": [
+"LFL"
+],
+"genasi": [
+"EEPC",
+"MPMM"
+],
+"giff": [
+"AAG"
+],
+"gith": [
+"MTF"
+],
+"githyanki": [
+"MPMM"
+],
+"githzerai": [
+"MPMM"
+],
+"gnoll": [
+"DMG"
+],
+"gnome": [
+"PHB",
+"XPHB"
+],
+"gnome (deep)": [
+"DMG"
+],
+"goblin": [
+"DMG",
+"ERLW",
+"GGR",
+"MPMM",
+"PSZ",
+"VGM"
+],
+"goblin (dankwood)": [
+"AWM"
+],
+"goliath": [
+"MPMM",
+"VGM",
+"XPHB"
+],
+"grimlock": [
+"DMG"
+],
+"grung": [
+"OGA"
+],
+"hadozee": [
+"AAG"
+],
+"half-elf": [
+"PHB"
+],
+"half-orc": [
+"PHB"
+],
+"halfling": [
+"PHB",
+"XPHB"
+],
+"harengon": [
+"MPMM",
+"WBtW"
+],
+"hexblood": [
+"RHW",
+"VRGR"
+],
+"hobgoblin": [
+"DMG",
+"ERLW",
+"MPMM",
+"VGM"
+],
+"human": [
+"PHB",
+"XPHB"
+],
+"human (innistrad)": [
+"PSI"
+],
+"human (ixalan)": [
+"PSX"
+],
+"human (kaladesh)": [
+"PSK"
+],
+"human (zendikar)": [
+"PSZ"
+],
+"kalashtar": [
+"EFA",
+"ERLW"
+],
+"kender": [
+"DSotDQ"
+],
+"kenku": [
+"DMG",
+"MPMM",
+"VGM"
+],
+"khenra": [
+"PSA"
+],
+"khoravar": [
+"EFA"
+],
+"kithkin": [
+"LFL"
+],
+"kobold": [
+"DMG",
+"MPMM",
+"VGM"
+],
+"kor": [
+"PSZ"
+],
+"kuo-toa": [
+"DMG"
+],
+"leonin": [
+"MOT"
+],
+"lizardfolk": [
+"DMG",
+"MPMM",
+"VGM"
+],
+"locathah": [
+"LR"
+],
+"lorwyn changeling": [
+"LFL"
+],
+"loxodon": [
+"GGR"
+],
+"lupin": [
+"RHW"
+],
+"merfolk": [
+"DMG",
+"PSZ"
+],
+"minotaur": [
+"GGR",
+"MOT",
+"MPMM"
+],
+"minotaur (amonkhet)": [
+"PSA"
+],
+"naga": [
+"PSA"
+],
+"orc": [
+"DMG",
+"EGW",
+"ERLW",
+"MPMM",
+"VGM",
+"XPHB"
+],
+"orc (ixalan)": [
+"PSX"
+],
+"owlin": [
+"SCC"
+],
+"plasmoid": [
+"AAG"
+],
+"reborn": [
+"RHW",
+"VRGR"
+],
+"rimekin": [
+"LFL"
+],
+"satyr": [
+"MOT",
+"MPMM"
+],
+"sea elf": [
+"MPMM"
+],
+"shadar-kai": [
+"MPMM"
+],
+"shifter": [
+"EFA",
+"ERLW",
+"MPMM"
+],
+"simic hybrid": [
+"GGR"
+],
+"siren": [
+"PSX"
+],
+"skeleton": [
+"DMG"
+],
+"tabaxi": [
+"MPMM",
+"VGM"
+],
+"thri-kreen": [
+"AAG"
+],
+"tiefling": [
+"PHB",
+"XPHB"
+],
+"tortle": [
+"MPMM",
+"TTP"
+],
+"triton": [
+"MOT",
+"MPMM",
+"VGM"
+],
+"troglodyte": [
+"DMG"
+],
+"vampire": [
+"PSZ"
+],
+"vedalken": [
+"GGR",
+"PSK"
+],
+"verdan": [
+"AI"
+],
+"warforged": [
+"EFA",
+"ERLW"
+],
+"yuan-ti": [
+"MPMM"
+],
+"yuan-ti pureblood": [
+"VGM"
+],
+"zombie": [
+"DMG"
+]
+},
+"backgrounds": {
+"aberrant heir": [
+"EFA"
+],
+"acolyte": [
+"PHB",
+"XPHB"
+],
+"agent of the ninth quill": [
+"AU"
+],
+"anthropologist": [
+"ToA"
+],
+"archaeologist": [
+"EFA",
+"ToA"
+],
+"artisan": [
+"XPHB"
+],
+"astral drifter": [
+"AAG"
+],
+"athlete": [
+"MOT"
+],
+"augen trust (spy)": [
+"EGW"
+],
+"azorius functionary": [
+"GGR"
+],
+"baldur's gate acolyte": [
+"BGDIA"
+],
+"baldur's gate charlatan": [
+"BGDIA"
+],
+"baldur's gate criminal": [
+"BGDIA"
+],
+"baldur's gate entertainer": [
+"BGDIA"
+],
+"baldur's gate folk hero": [
+"BGDIA"
+],
+"baldur's gate guild artisan": [
+"BGDIA"
+],
+"baldur's gate hermit": [
+"BGDIA"
+],
+"baldur's gate noble": [
+"BGDIA"
+],
+"baldur's gate outlander": [
+"BGDIA"
+],
+"baldur's gate sage": [
+"BGDIA"
+],
+"baldur's gate sailor": [
+"BGDIA"
+],
+"baldur's gate soldier": [
+"BGDIA"
+],
+"baldur's gate urchin": [
+"BGDIA"
+],
+"bejeweled conclave spy": [
+"AU"
+],
+"boros legionnaire": [
+"GGR"
+],
+"carouser": [
+"ABH"
+],
+"celebrity adventurer's scion": [
+"AI"
+],
+"charlatan": [
+"PHB",
+"XPHB"
+],
+"chondathan freebooter": [
+"FRHoF"
+],
+"city watch": [
+"SCAG"
+],
+"clan crafter": [
+"SCAG"
+],
+"cloistered scholar": [
+"SCAG"
+],
+"cobalt scholar (sage)": [
+"EGW"
+],
+"cosmic dawn experiment": [
+"AU"
+],
+"courtier": [
+"SCAG"
+],
+"covenant of the grave recruit": [
+"AU"
+],
+"criminal": [
+"PHB",
+"XPHB"
+],
+"crucible storm chaser": [
+"AU"
+],
+"custom background": [
+"PHB"
+],
+"dead magic dweller": [
+"FRHoF"
+],
+"dimir operative": [
+"GGR"
+],
+"dragon cultist": [
+"FRHoF"
+],
+"emerald enclave caretaker": [
+"FRHoF"
+],
+"entertainer": [
+"PHB",
+"XPHB"
+],
+"faceless": [
+"BGDIA"
+],
+"faction agent": [
+"SCAG"
+],
+"failed merchant": [
+"AI"
+],
+"familiar trainer": [
+"AU"
+],
+"far traveler": [
+"SCAG"
+],
+"farmer": [
+"XPHB"
+],
+"feylost": [
+"WBtW"
+],
+"fisher": [
+"GoS"
+],
+"flaming fist mercenary": [
+"FRHoF"
+],
+"folk hero": [
+"PHB"
+],
+"gambler": [
+"AI"
+],
+"gate warden": [
+"SatO"
+],
+"genie touched": [
+"FRHoF"
+],
+"giant foundling": [
+"BGG"
+],
+"golgari agent": [
+"GGR"
+],
+"grinner": [
+"EGW"
+],
+"gruul anarch": [
+"GGR"
+],
+"guard": [
+"XPHB"
+],
+"guide": [
+"XPHB"
+],
+"guild artisan": [
+"PHB"
+],
+"harper": [
+"FRHoF"
+],
+"haunted one": [
+"RHW",
+"VRGR"
+],
+"hermit": [
+"PHB",
+"XPHB"
+],
+"horizon weaver initiate": [
+"AU"
+],
+"house agent": [
+"EFA",
+"ERLW"
+],
+"house cannith heir": [
+"EFA"
+],
+"house deneith heir": [
+"EFA"
+],
+"house ghallanda heir": [
+"EFA"
+],
+"house jorasco heir": [
+"EFA"
+],
+"house kundarak heir": [
+"EFA"
+],
+"house lyrandar heir": [
+"EFA"
+],
+"house medani heir": [
+"EFA"
+],
+"house orien heir": [
+"EFA"
+],
+"house phiarlan heir": [
+"EFA"
+],
+"house sivis heir": [
+"EFA"
+],
+"house tharashk heir": [
+"EFA"
+],
+"house thuranni heir": [
+"EFA"
+],
+"house vadalis heir": [
+"EFA"
+],
+"ice fisher": [
+"FRHoF"
+],
+"inheritor": [
+"SCAG"
+],
+"initiate": [
+"PSA"
+],
+"initiate (dissenter)": [
+"PSA"
+],
+"inquisitive": [
+"EFA"
+],
+"inquisitor": [
+"PSI"
+],
+"investigator": [
+"RHW",
+"VRGR"
+],
+"izzet engineer": [
+"GGR"
+],
+"knight of solamnia": [
+"DSotDQ"
+],
+"knight of the gauntlet": [
+"FRHoF"
+],
+"knight of the order": [
+"SCAG"
+],
+"lords' alliance vassal": [
+"FRHoF"
+],
+"lorehold student": [
+"SCC"
+],
+"lorwyn expert": [
+"LFL"
+],
+"luxonborn (acolyte)": [
+"EGW"
+],
+"mage of high sorcery": [
+"DSotDQ"
+],
+"marine": [
+"GoS"
+],
+"mercenary veteran": [
+"SCAG"
+],
+"merchant": [
+"XPHB"
+],
+"mist wanderer": [
+"RHW"
+],
+"moonwell pilgrim": [
+"FRHoF"
+],
+"mulhorandi tomb raider": [
+"FRHoF"
+],
+"myriad operative (criminal)": [
+"EGW"
+],
+"mythalkeeper": [
+"FRHoF"
+],
+"noble": [
+"PHB",
+"XPHB"
+],
+"orzhov representative": [
+"GGR"
+],
+"outlander": [
+"PHB"
+],
+"phantasmic circus trouper": [
+"AU"
+],
+"plaintiff": [
+"AI"
+],
+"planar philosopher": [
+"SatO"
+],
+"prismari student": [
+"SCC"
+],
+"purple dragon squire": [
+"FRHoF"
+],
+"quandrix student": [
+"SCC"
+],
+"rakdos cultist": [
+"GGR"
+],
+"rashemi wanderer": [
+"FRHoF"
+],
+"revelry pirate (sailor)": [
+"EGW"
+],
+"rewarded": [
+"BMT"
+],
+"rival intern": [
+"AI"
+],
+"ruined": [
+"BMT"
+],
+"rune carver": [
+"BGG"
+],
+"sage": [
+"PHB",
+"XPHB"
+],
+"sailor": [
+"PHB",
+"XPHB"
+],
+"scribe": [
+"XPHB"
+],
+"seer apprentice": [
+"AU"
+],
+"selesnya initiate": [
+"GGR"
+],
+"shadowmasters exile": [
+"FRHoF"
+],
+"shadowmoor expert": [
+"LFL"
+],
+"shipwright": [
+"GoS"
+],
+"silverquill student": [
+"SCC"
+],
+"simic scientist": [
+"GGR"
+],
+"smuggler": [
+"GoS"
+],
+"soldier": [
+"PHB",
+"XPHB"
+],
+"spellfire initiate": [
+"FRHoF"
+],
+"spirit medium": [
+"RHW"
+],
+"urban bounty hunter": [
+"SCAG"
+],
+"urchin": [
+"PHB"
+],
+"uthgardt tribe member": [
+"SCAG"
+],
+"vampire devotee": [
+"ABH"
+],
+"vampire survivor": [
+"ABH"
+],
+"variant city watch (investigator)": [
+"SCAG"
+],
+"variant criminal (spy)": [
+"PHB"
+],
+"variant entertainer (gladiator)": [
+"PHB"
+],
+"variant guild artisan (guild merchant)": [
+"PHB"
+],
+"variant noble (knight)": [
+"PHB"
+],
+"variant noble (retainers)": [
+"PHB"
+],
+"variant sailor (pirate)": [
+"PHB"
+],
+"vizier": [
+"PSA"
+],
+"vizier (dissenter)": [
+"PSA"
+],
+"volstrucker agent": [
+"EGW"
+],
+"ward of the sheltering hands": [
+"AU"
+],
+"waterdhavian noble": [
+"SCAG"
+],
+"wayfarer": [
+"XPHB"
+],
+"wildspacer": [
+"AAG"
+],
+"witchlight hand": [
+"WBtW"
+],
+"witherbloom student": [
+"SCC"
+],
+"zhentarim mercenary": [
+"FRHoF"
+]
+},
+"items": {
+"+1 all-purpose tool": [
+"TCE"
+],
+"+1 amulet of the devout": [
+"TCE"
+],
+"+1 arcane grimoire": [
+"TCE"
+],
+"+1 bloodwell vial": [
+"TCE"
+],
+"+1 dragonhide belt": [
+"FTD"
+],
+"+1 fate dealer's deck": [
+"BMT"
+],
+"+1 moon sickle": [
+"TCE"
+],
+"+1 rhythm-maker's drum": [
+"TCE"
+],
+"+1 rod of the pact keeper": [
+"DMG",
+"XDMG"
+],
+"+1 wand of the war mage": [
+"DMG",
+"XDMG"
+],
+"+1 wraps of unarmed power": [
+"XDMG"
+],
+"+1 wraps of unarmed prowess": [
+"BMT"
+],
+"+2 all-purpose tool": [
+"TCE"
+],
+"+2 amulet of the devout": [
+"TCE"
+],
+"+2 arcane grimoire": [
+"TCE"
+],
+"+2 bloodwell vial": [
+"TCE"
+],
+"+2 dragonhide belt": [
+"FTD"
+],
+"+2 fate dealer's deck": [
+"BMT"
+],
+"+2 moon sickle": [
+"TCE"
+],
+"+2 rhythm-maker's drum": [
+"TCE"
+],
+"+2 rod of the pact keeper": [
+"DMG",
+"XDMG"
+],
+"+2 wand of the war mage": [
+"DMG",
+"XDMG"
+],
+"+2 wraps of unarmed power": [
+"XDMG"
+],
+"+2 wraps of unarmed prowess": [
+"BMT"
+],
+"+3 all-purpose tool": [
+"TCE"
+],
+"+3 amulet of the devout": [
+"TCE"
+],
+"+3 arcane grimoire": [
+"TCE"
+],
+"+3 bloodwell vial": [
+"TCE"
+],
+"+3 dragonhide belt": [
+"FTD"
+],
+"+3 fate dealer's deck": [
+"BMT"
+],
+"+3 moon sickle": [
+"TCE"
+],
+"+3 rhythm-maker's drum": [
+"TCE"
+],
+"+3 rod of the pact keeper": [
+"DMG",
+"XDMG"
+],
+"+3 wand of the war mage": [
+"DMG",
+"XDMG"
+],
+"+3 wraps of unarmed power": [
+"XDMG"
+],
+"+3 wraps of unarmed prowess": [
+"BMT"
+],
+"abacus": [
+"PHB"
+],
+"abracadabrus": [
+"IDRotF"
+],
+"accounting and valuation of all things": [
+"CoA"
+],
+"acid": [
+"XPHB"
+],
+"acid (vial)": [
+"PHB"
+],
+"acid absorbing tattoo": [
+"TCE"
+],
+"adamantine bar": [
+"WDH"
+],
+"adjustable stilts": [
+"WDH"
+],
+"adventurer's ring": [
+"FRHoF"
+],
+"adze of annam": [
+"BGG"
+],
+"aerenal trinket": [
+"ERLW"
+],
+"airship": [
+"DMG",
+"XPHB"
+],
+"akmon, hammer of purphoros": [
+"MOT"
+],
+"alchemical compendium": [
+"TCE"
+],
+"alchemist's doom": [
+"SCC"
+],
+"alchemist's fire": [
+"XPHB"
+],
+"alchemist's fire (flask)": [
+"PHB"
+],
+"alchemy jug": [
+"DMG",
+"XDMG"
+],
+"alchemy jug (blue)": [
+"CM"
+],
+"alchemy jug (orange)": [
+"CM"
+],
+"ale (gallon)": [
+"PHB"
+],
+"ale (mug)": [
+"PHB",
+"XPHB"
+],
+"alexandrite": [
+"DMG",
+"XDMG"
+],
+"amber": [
+"DMG",
+"XDMG"
+],
+"amber runestone": [
+"NRH-TLT"
+],
+"amethyst": [
+"DMG",
+"XDMG"
+],
+"amethyst lodestone": [
+"FTD"
+],
+"amulet": [
+"PHB",
+"XPHB"
+],
+"amulet of appearance": [
+"CoA"
+],
+"amulet of betrayal": [
+"CoA"
+],
+"amulet of dinosaur feathers (sun empire)": [
+"PSX"
+],
+"amulet of duplicity": [
+"CoA"
+],
+"amulet of harmony": [
+"NRH-AT"
+],
+"amulet of health": [
+"DMG",
+"XDMG"
+],
+"amulet of proof against detection and location": [
+"DMG",
+"XDMG"
+],
+"amulet of protection from turning": [
+"TftYP"
+],
+"amulet of the black skull": [
+"ToA"
+],
+"amulet of the drunkard": [
+"EGW"
+],
+"amulet of the inferno": [
+"CoA"
+],
+"amulet of the planes": [
+"DMG",
+"XDMG"
+],
+"animated shield": [
+"DMG",
+"XDMG"
+],
+"antigravity belt": [
+"QftIS"
+],
+"antitoxin": [
+"XPHB"
+],
+"antitoxin (vial)": [
+"PHB"
+],
+"apparatus of kwalish": [
+"DMG",
+"XDMG"
+],
+"aquamarine": [
+"DMG",
+"XDMG"
+],
+"arcanaloth's music box": [
+"ToA"
+],
+"arcane battery": [
+"NF"
+],
+"arcane cannon": [
+"EGW"
+],
+"arcane chatelaine": [
+"AU"
+],
+"arcane propulsion arm": [
+"ERLW"
+],
+"arcanist's bestiary": [
+"AU"
+],
+"argonnessen trinket": [
+"ERLW"
+],
+"armor of invulnerability": [
+"DMG",
+"XDMG"
+],
+"armor of vulnerability (bludgeoning)": [
+"DMG"
+],
+"armor of vulnerability (piercing)": [
+"DMG"
+],
+"armor of vulnerability (slashing)": [
+"DMG"
+],
+"arrow-catching shield": [
+"DMG",
+"XDMG"
+],
+"ascendant dragon vessel": [
+"FTD"
+],
+"ascendant dragon-touched focus": [
+"FTD"
+],
+"ascendant scaled ornament": [
+"FTD"
+],
+"assassin's blood": [
+"DMG",
+"XDMG"
+],
+"astral shard": [
+"TCE"
+],
+"astromancy archive": [
+"TCE"
+],
+"atlas of endless horizons": [
+"TCE"
+],
+"axe beak": [
+"FRHoF",
+"IDRotF"
+],
+"axe of the dwarvish lords": [
+"DMG",
+"XDMG"
+],
+"azorius guild signet": [
+"GGR"
+],
+"azorius keyrune": [
+"GGR"
+],
+"azuredge": [
+"WDH"
+],
+"azurite": [
+"DMG",
+"XDMG"
+],
+"baba yaga's dancing broom": [
+"XDMG"
+],
+"baba yaga's mortar and pestle": [
+"TCE"
+],
+"baba yaga's pestle": [
+"TCE"
+],
+"backpack": [
+"PHB",
+"XPHB"
+],
+"backpack parachute": [
+"WDH"
+],
+"badge of the watch": [
+"WDH"
+],
+"bag of beans": [
+"DMG",
+"XDMG"
+],
+"bag of devouring": [
+"DMG",
+"XDMG"
+],
+"bag of holding": [
+"DMG",
+"XDMG"
+],
+"bag of tricks, gray": [
+"DMG",
+"XDMG"
+],
+"bag of tricks, rust": [
+"DMG",
+"XDMG"
+],
+"bag of tricks, tan": [
+"DMG",
+"XDMG"
+],
+"balance card": [
+"BMT"
+],
+"balance of harmony": [
+"TftYP"
+],
+"baleful talon": [
+"BMT"
+],
+"ball bearing": [
+"PHB"
+],
+"ball bearings": [
+"XPHB"
+],
+"ball bearings (bag of 1,000)": [
+"PHB"
+],
+"balloon pack": [
+"PotA"
+],
+"banded agate": [
+"DMG",
+"XDMG"
+],
+"banner of the krig rune": [
+"SKT"
+],
+"barking box": [
+"WDH"
+],
+"barrel": [
+"PHB",
+"XPHB"
+],
+"barrier peaks trinket": [
+"LLK"
+],
+"barrier tattoo (large)": [
+"TCE"
+],
+"barrier tattoo (medium)": [
+"TCE"
+],
+"barrier tattoo (small)": [
+"TCE"
+],
+"basic fishing equipment": [
+"AAG"
+],
+"basic poison": [
+"XPHB"
+],
+"basic poison (vial)": [
+"PHB"
+],
+"basket": [
+"PHB",
+"XPHB"
+],
+"battering shield": [
+"EGW"
+],
+"battle standard of infernal power": [
+"BGDIA"
+],
+"bead of force": [
+"DMG",
+"XDMG"
+],
+"bead of nourishment": [
+"XDMG",
+"XGE"
+],
+"bead of refreshment": [
+"XDMG",
+"XGE"
+],
+"bedroll": [
+"PHB",
+"XPHB"
+],
+"bejeweled conclave trinket": [
+"AU"
+],
+"bejeweled gold bracelet": [
+"XDMG"
+],
+"bejeweled ivory drinking horn with gold filigree": [
+"DMG",
+"XDMG"
+],
+"bejeweled ivory drinking horn with gold inlay (brazen coalition)": [
+"PSX"
+],
+"belashyrra's beholder crown": [
+"ERLW"
+],
+"bell": [
+"PHB",
+"XPHB"
+],
+"bell branch": [
+"TCE"
+],
+"bellows of strangulation": [
+"AU"
+],
+"belt of cloud giant strength": [
+"DMG",
+"XDMG"
+],
+"belt of dwarvenkind": [
+"DMG",
+"XDMG"
+],
+"belt of fire giant strength": [
+"DMG",
+"XDMG"
+],
+"belt of frost giant strength": [
+"DMG",
+"XDMG"
+],
+"belt of hill giant strength": [
+"DMG",
+"XDMG"
+],
+"belt of stone giant strength": [
+"DMG",
+"XDMG"
+],
+"belt of storm giant strength": [
+"DMG",
+"XDMG"
+],
+"bigby's beneficent bracelet": [
+"BGG"
+],
+"bit and bridle": [
+"PHB"
+],
+"biza's breath": [
+"JttRC"
+],
+"black chromatic rose": [
+"WBtW"
+],
+"black crystal tablet": [
+"WDMM"
+],
+"black dragon mask": [
+"HotDQ"
+],
+"black dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"black ghost orchid seed": [
+"JttRC"
+],
+"black opal": [
+"DMG",
+"XDMG"
+],
+"black pearl": [
+"DMG",
+"XDMG"
+],
+"black sap": [
+"EGW"
+],
+"black sapphire": [
+"DMG",
+"XDMG"
+],
+"black velvet mask stitched with silver thread": [
+"DMG",
+"XDMG"
+],
+"blackrazor": [
+"DMG",
+"XDMG"
+],
+"blackstaff": [
+"WDH"
+],
+"blade of avernus": [
+"BGDIA"
+],
+"blade of broken mirrors (awakened)": [
+"EGW"
+],
+"blade of broken mirrors (dormant)": [
+"EGW"
+],
+"blade of broken mirrors (exalted)": [
+"EGW"
+],
+"blanket": [
+"PHB",
+"XPHB"
+],
+"blast scepter": [
+"WDMM"
+],
+"blasted goggles": [
+"BMT"
+],
+"blasting powder": [
+"EGW"
+],
+"blemished idol of good fortunes": [
+"AU"
+],
+"blight ichor": [
+"EGW"
+],
+"block and tackle": [
+"PHB",
+"XPHB"
+],
+"blod stone": [
+"SKT"
+],
+"blood amulet": [
+"AU"
+],
+"blood fury tattoo": [
+"TCE"
+],
+"blood of the lycanthrope": [
+"IMR"
+],
+"blood of the lycanthrope antidote": [
+"IMR"
+],
+"blood spear": [
+"CoS"
+],
+"bloodaxe": [
+"EGW"
+],
+"bloodrage greataxe": [
+"BMT"
+],
+"bloodstone": [
+"DMG",
+"XDMG"
+],
+"blue chromatic rose": [
+"WBtW"
+],
+"blue dragon mask": [
+"RoTOS"
+],
+"blue dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"blue quartz": [
+"DMG",
+"XDMG"
+],
+"blue sapphire": [
+"DMG",
+"XDMG"
+],
+"blue spinel": [
+"DMG",
+"XDMG"
+],
+"bob": [
+"ToA"
+],
+"bobbing lily pad": [
+"WBtW"
+],
+"bomb": [
+"DMG",
+"XDMG"
+],
+"bombard": [
+"AAG"
+],
+"bonecounter": [
+"SDW"
+],
+"book": [
+"PHB",
+"XPHB"
+],
+"book of exalted deeds": [
+"DMG",
+"XDMG"
+],
+"book of vile darkness": [
+"DMG",
+"XDMG"
+],
+"book of vile darkness (variant)": [
+"KftGV"
+],
+"bookmark": [
+"ToA"
+],
+"boomerang shield": [
+"BMT"
+],
+"boon companions' bands": [
+"AU"
+],
+"boots of elvenkind": [
+"DMG",
+"XDMG"
+],
+"boots of false tracks": [
+"XDMG",
+"XGE"
+],
+"boots of levitation": [
+"DMG",
+"XDMG"
+],
+"boots of speed": [
+"DMG",
+"XDMG"
+],
+"boots of striding and springing": [
+"DMG",
+"XDMG"
+],
+"boots of the winding path": [
+"EFA"
+],
+"boots of the winterlands": [
+"DMG",
+"XDMG"
+],
+"borderlands tabard": [
+"HotB"
+],
+"boros guild signet": [
+"GGR"
+],
+"boros keyrune": [
+"GGR"
+],
+"bottle of boundless coffee": [
+"SCC"
+],
+"bottle stopper cork embossed with gold leaf and set with amethysts": [
+"DMG",
+"XDMG"
+],
+"bottled breath": [
+"PotA"
+],
+"bowl of commanding water elementals": [
+"DMG",
+"XDMG"
+],
+"box of turquoise animal figurines": [
+"DMG",
+"XDMG"
+],
+"bracelet of rock magic": [
+"TftYP"
+],
+"bracer of flying daggers": [
+"WDH"
+],
+"bracers of archery": [
+"DMG",
+"XDMG"
+],
+"bracers of asmodeus": [
+"CoA"
+],
+"bracers of celerity": [
+"PaBTSO"
+],
+"bracers of defense": [
+"DMG",
+"XDMG"
+],
+"brass dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"brass mug with jade inlay": [
+"DMG",
+"XDMG"
+],
+"brazier of commanding fire elementals": [
+"DMG",
+"XDMG"
+],
+"bread (loaf)": [
+"XPHB"
+],
+"breastplate of balance": [
+"BMT"
+],
+"breathing bubble": [
+"EGW"
+],
+"bridle of capturing": [
+"IMR"
+],
+"bright fungal cloak": [
+"FRHoF"
+],
+"bringers of cosmic dawn trinket": [
+"AU"
+],
+"bronze crown": [
+"DMG",
+"XDMG"
+],
+"bronze dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"bronze spyglass (brazen coalition)": [
+"PSX"
+],
+"brooch of living essence": [
+"EGW"
+],
+"brooch of shielding": [
+"DMG",
+"XDMG"
+],
+"brooch of the elements": [
+"NF"
+],
+"broom of flying": [
+"DMG",
+"XDMG"
+],
+"bucket": [
+"PHB",
+"XPHB"
+],
+"budding blossom rod": [
+"AU"
+],
+"bullseye lantern": [
+"PHB",
+"XPHB"
+],
+"bundle of sheet music representing the lost dirges of a famous composer": [
+"XDMG"
+],
+"burglar's pack": [
+"PHB",
+"XPHB"
+],
+"burnt othur fumes": [
+"DMG",
+"XDMG"
+],
+"butcher's bib": [
+"EGW"
+],
+"calimemnon crystal": [
+"FRAiF"
+],
+"caltrop": [
+"PHB"
+],
+"caltrops": [
+"XPHB"
+],
+"caltrops (bag of 20)": [
+"PHB"
+],
+"camel": [
+"PHB",
+"XPHB"
+],
+"candle": [
+"PHB",
+"XPHB"
+],
+"candle mace": [
+"BGDIA"
+],
+"candle of invocation": [
+"DMG",
+"XDMG"
+],
+"candle of the deep": [
+"XDMG",
+"XGE"
+],
+"canian fork": [
+"CoA"
+],
+"canoe": [
+"ToA"
+],
+"canvas (1 sq. yd.)": [
+"PHB",
+"XDMG"
+],
+"cap of vanishing": [
+"WttHC"
+],
+"cap of water breathing": [
+"DMG",
+"XDMG"
+],
+"cape of enlargement": [
+"PaBTSO"
+],
+"cape of the mountebank": [
+"DMG",
+"XDMG"
+],
+"card sharp's deck": [
+"BMT"
+],
+"carnelian": [
+"DMG",
+"XDMG"
+],
+"carpet of flying, 3 ft. \u00d7 5 ft.": [
+"DMG",
+"XDMG"
+],
+"carpet of flying, 4 ft. \u00d7 6 ft.": [
+"DMG",
+"XDMG"
+],
+"carpet of flying, 5 ft. \u00d7 7 ft.": [
+"DMG",
+"XDMG"
+],
+"carpet of flying, 6 ft. \u00d7 9 ft.": [
+"DMG",
+"XDMG"
+],
+"carriage": [
+"PHB",
+"XPHB"
+],
+"carrion crawler mucus": [
+"DMG",
+"XDMG"
+],
+"cart": [
+"PHB",
+"XPHB"
+],
+"cartographer's map case": [
+"AI"
+],
+"carved bone statuette": [
+"DMG",
+"XDMG"
+],
+"carved harp of exotic wood with ivory inlay and zircon gems": [
+"DMG"
+],
+"carved ivory statuette": [
+"DMG",
+"XDMG"
+],
+"carved jade statuette (river heralds)": [
+"PSX"
+],
+"carved wooden harp with ivory inlay and zircon gems": [
+"XDMG"
+],
+"catapult munition": [
+"SCC"
+],
+"cauldron of plenty": [
+"IDRotF"
+],
+"cauldron of rebirth": [
+"TCE",
+"XDMG"
+],
+"censer of controlling air elementals": [
+"DMG",
+"XDMG"
+],
+"ceremonial electrum dagger with a black pearl in the pommel": [
+"DMG"
+],
+"ceremonial gold armor with black pearls": [
+"XDMG"
+],
+"ceremonial silver dagger with gold pommel and black pearl (legion of dusk)": [
+"PSX"
+],
+"chain": [
+"XPHB"
+],
+"chain (10 feet)": [
+"PHB"
+],
+"chalcedony": [
+"DMG",
+"XDMG"
+],
+"chalk (1 piece)": [
+"PHB"
+],
+"chariot": [
+"PHB",
+"XPHB"
+],
+"charlatan's die": [
+"XDMG",
+"XGE"
+],
+"charm of plant command": [
+"GoS"
+],
+"charred wand of magic missiles": [
+"WDH"
+],
+"chattering staff of skulls": [
+"AU"
+],
+"cheese (wedge)": [
+"XPHB"
+],
+"chest": [
+"PHB",
+"XPHB"
+],
+"chest of preserving": [
+"WDMM"
+],
+"chicken": [
+"PHB",
+"XDMG"
+],
+"chime of exile": [
+"VEoR"
+],
+"chime of opening": [
+"DMG",
+"XDMG"
+],
+"chip of creation": [
+"AitFR-AVT"
+],
+"chronolometer": [
+"AI"
+],
+"chrysoberyl": [
+"DMG",
+"XDMG"
+],
+"chrysoprase": [
+"DMG",
+"XDMG"
+],
+"chunk of meat": [
+"PHB"
+],
+"cinnamon": [
+"PHB",
+"XDMG"
+],
+"circlet of blasting": [
+"DMG",
+"XDMG"
+],
+"circlet of human perfection": [
+"WDMM"
+],
+"citrine": [
+"DMG",
+"XDMG"
+],
+"claw of the wyrm rune": [
+"SKT"
+],
+"claws of the umber hulk": [
+"PotA"
+],
+"cleansing stone": [
+"ERLW"
+],
+"climber's kit": [
+"PHB",
+"XPHB"
+],
+"cloak of arachnida": [
+"DMG",
+"XDMG"
+],
+"cloak of billowing": [
+"WttHC",
+"XDMG",
+"XGE"
+],
+"cloak of displacement": [
+"DMG",
+"XDMG"
+],
+"cloak of elvenkind": [
+"DMG",
+"XDMG"
+],
+"cloak of invisibility": [
+"DMG",
+"XDMG"
+],
+"cloak of many fashions": [
+"XDMG",
+"XGE"
+],
+"cloak of protection": [
+"DMG",
+"XDMG"
+],
+"cloak of the bat": [
+"DMG",
+"XDMG"
+],
+"cloak of the manta ray": [
+"DMG",
+"XDMG"
+],
+"clockwork amulet": [
+"XDMG",
+"XGE"
+],
+"clockwork dog": [
+"SKT"
+],
+"cloth-of-gold vestments": [
+"DMG",
+"XDMG"
+],
+"cloth-of-gold vestments (legion of dusk)": [
+"PSX"
+],
+"clothes of mending": [
+"XDMG",
+"XGE"
+],
+"clothing, cold weather": [
+"IDRotF"
+],
+"cloves": [
+"PHB",
+"XDMG"
+],
+"coiling grasp tattoo": [
+"TCE"
+],
+"coin of decisionry": [
+"AI"
+],
+"coin of delving": [
+"EGW"
+],
+"cold absorbing tattoo": [
+"TCE"
+],
+"comet card": [
+"BMT"
+],
+"command amulet": [
+"XMM"
+],
+"common clothes": [
+"PHB"
+],
+"common glamerweave": [
+"ERLW"
+],
+"common wine (bottle)": [
+"XPHB"
+],
+"common wine (pitcher)": [
+"PHB"
+],
+"component pouch": [
+"PHB",
+"XPHB"
+],
+"concertina": [
+"RMBRE"
+],
+"conch of safe rest": [
+"TTP"
+],
+"conch of teleportation": [
+"SKT"
+],
+"concussion grenade": [
+"QftIS"
+],
+"condensed order": [
+"CoA"
+],
+"conjurer's canopy": [
+"AU"
+],
+"constantori's portrait": [
+"KftGV"
+],
+"copper": [
+"PHB",
+"XDMG"
+],
+"copper (cp)": [
+"PHB"
+],
+"copper alms-coin": [
+"GGR"
+],
+"copper chalice with silver filigree": [
+"DMG",
+"XDMG"
+],
+"copper dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"copper stein with silver filigree (brazen coalition)": [
+"PSX"
+],
+"copper zib": [
+"GGR"
+],
+"coral": [
+"DMG",
+"XDMG"
+],
+"costume": [
+"XPHB"
+],
+"costume clothes": [
+"PHB"
+],
+"cotton cloth (1 sq. yd.)": [
+"PHB",
+"XDMG"
+],
+"covenant of the grave trinket": [
+"AU"
+],
+"covered wagon": [
+"FRHoF"
+],
+"cow": [
+"PHB",
+"XDMG"
+],
+"cracked driftglobe": [
+"CM"
+],
+"crampons": [
+"IDRotF"
+],
+"crook of rao": [
+"TCE"
+],
+"crossbow bolt case": [
+"PHB",
+"XPHB"
+],
+"crowbar": [
+"PHB",
+"XPHB"
+],
+"crown of horns": [
+"FRAiF"
+],
+"crown of lies": [
+"VEoR"
+],
+"crown of the forest": [
+"IMR"
+],
+"crown of the wrath bringer": [
+"BGG"
+],
+"crown of whirling comets": [
+"BMT"
+],
+"crucible keepers trinket": [
+"AU"
+],
+"crusader's shortsword": [
+"CoS"
+],
+"crusading wand of celestial prowess": [
+"AU"
+],
+"crystal ball": [
+"DMG",
+"XDMG"
+],
+"crystal ball of mind reading": [
+"DMG",
+"XDMG"
+],
+"crystal ball of ominous portent": [
+"AUD"
+],
+"crystal ball of telepathy": [
+"DMG",
+"XDMG"
+],
+"crystal ball of true seeing": [
+"DMG",
+"XDMG"
+],
+"crystalline chronicle": [
+"TCE"
+],
+"cube of force": [
+"DMG",
+"XDMG"
+],
+"cube of summoning": [
+"XDMG"
+],
+"cubic gate": [
+"DMG",
+"XDMG"
+],
+"cuddly strixhaven mascot": [
+"SCC"
+],
+"cult of the dragon trinket": [
+"FRHoF"
+],
+"cultist's robe": [
+"HotB"
+],
+"cursed luckstone": [
+"GoS"
+],
+"daern's instant fortress": [
+"DMG",
+"XDMG"
+],
+"dagger of blindsight": [
+"WDMM"
+],
+"dagger of guitar solos": [
+"WDMM"
+],
+"dagger of venom": [
+"DMG",
+"XDMG"
+],
+"damselfly ship": [
+"AAG"
+],
+"dancing monkey fruit": [
+"ToA"
+],
+"danoth's visor (awakened)": [
+"EGW"
+],
+"danoth's visor (dormant)": [
+"EGW"
+],
+"danoth's visor (exalted)": [
+"EGW"
+],
+"daoud's wondrous lanthorn": [
+"QftIS"
+],
+"dark shard amulet": [
+"XDMG",
+"XGE"
+],
+"dawnbringer": [
+"OotA"
+],
+"deathdance": [
+"FRAiF"
+],
+"decanter of endless water": [
+"DMG",
+"XDMG"
+],
+"deck of dimensions": [
+"BMT"
+],
+"deck of illusions": [
+"DMG",
+"XDMG"
+],
+"deck of many more things": [
+"BMT"
+],
+"deck of many things": [
+"BMT",
+"DMG",
+"XDMG"
+],
+"deck of miscellany": [
+"BMT"
+],
+"deck of oracles": [
+"BMT"
+],
+"deck of several things": [
+"LLK"
+],
+"deck of wild cards": [
+"BMT"
+],
+"deck of wonder": [
+"BMT"
+],
+"dekella, bident of thassa": [
+"MOT"
+],
+"delver's claws": [
+"BGG"
+],
+"demon armor": [
+"DMG"
+],
+"demonomicon of iggwilv": [
+"TCE",
+"XDMG"
+],
+"desert clothing": [
+"FRHoF"
+],
+"detailed, life-sized dragonborn skull cast in electrum": [
+"XDMG"
+],
+"devastation orb of air": [
+"PotA"
+],
+"devastation orb of earth": [
+"PotA"
+],
+"devastation orb of fire": [
+"PotA"
+],
+"devastation orb of water": [
+"PotA"
+],
+"devil mask": [
+"FRHoF"
+],
+"devlin's staff of striking": [
+"ToA"
+],
+"devotee's censer": [
+"TCE"
+],
+"diamond": [
+"DMG",
+"XDMG"
+],
+"diamond staff": [
+"AU"
+],
+"dice set": [
+"PHB",
+"XPHB"
+],
+"dictation quill": [
+"AU"
+],
+"dimensional loop": [
+"AI"
+],
+"dimensional shackles": [
+"DMG",
+"XDMG"
+],
+"dimir guild signet": [
+"GGR"
+],
+"dimir keyrune": [
+"GGR"
+],
+"diplomat's pack": [
+"PHB",
+"XPHB"
+],
+"disguise kit": [
+"PHB",
+"XPHB"
+],
+"dispelling stone": [
+"EGW"
+],
+"dissuader": [
+"AU"
+],
+"docent": [
+"ERLW"
+],
+"documancy satchel": [
+"AI"
+],
+"dodecahedron of doom": [
+"WDMM"
+],
+"dogsled": [
+"IDRotF"
+],
+"donjon card": [
+"BMT"
+],
+"donjon's sundering sphere": [
+"BMT"
+],
+"donkey": [
+"PHB"
+],
+"dowsing dagger": [
+"XMtS"
+],
+"draakhorn": [
+"RoT"
+],
+"draconic longsword": [
+"ToA"
+],
+"draft horse": [
+"PHB",
+"XPHB"
+],
+"dragon": [
+"WDH"
+],
+"dragon sensing longsword": [
+"PotA"
+],
+"dragon thighbone club": [
+"SKT"
+],
+"dragon's blood": [
+"ERLW"
+],
+"dragonchess set": [
+"PHB",
+"XPHB"
+],
+"dragongleam": [
+"HotDQ"
+],
+"dragonguard": [
+"LMoP",
+"PaBTSO"
+],
+"dragonstaff of ahghairon": [
+"WDH"
+],
+"dragontooth dagger": [
+"RoT"
+],
+"dread helm": [
+"WttHC",
+"XDMG",
+"XGE"
+],
+"dream weaver": [
+"AU"
+],
+"dreamlily": [
+"ERLW"
+],
+"driftglobe": [
+"DMG",
+"XDMG"
+],
+"drow poison": [
+"DMG"
+],
+"drown": [
+"PotA"
+],
+"dungeoneer's pack": [
+"PHB",
+"XPHB"
+],
+"duplicitous manuscript": [
+"TCE"
+],
+"duskcrusher": [
+"EGW"
+],
+"dust of corrosion": [
+"WBtW"
+],
+"dust of deliciousness": [
+"EGW"
+],
+"dust of disappearance": [
+"DMG",
+"XDMG"
+],
+"dust of dryness": [
+"DMG",
+"XDMG"
+],
+"dust of sneezing and choking": [
+"DMG",
+"XDMG"
+],
+"dust of the mummy": [
+"IMR"
+],
+"dwarven plate": [
+"DMG"
+],
+"dwarven thrower": [
+"DMG",
+"XDMG"
+],
+"dynamite (stick)": [
+"DMG"
+],
+"dynamite stick": [
+"XDMG"
+],
+"dyrrn's tentacle whip": [
+"ERLW"
+],
+"eagle whistle": [
+"TftYP"
+],
+"ear horn of hearing": [
+"XDMG",
+"XGE"
+],
+"earring of message": [
+"CRCotN"
+],
+"earworm": [
+"ERLW"
+],
+"ebonbane": [
+"RHW"
+],
+"efreeti bottle": [
+"DMG",
+"XDMG"
+],
+"efreeti chain": [
+"DMG"
+],
+"elder cartographer's glossography": [
+"AI"
+],
+"eldritch claw tattoo": [
+"TCE"
+],
+"eldritch staff": [
+"WBtW"
+],
+"electrum (ep)": [
+"PHB"
+],
+"electrum 50-zib coin": [
+"GGR"
+],
+"elemental essence shard": [
+"TCE"
+],
+"elemental essence shard (air)": [
+"TCE"
+],
+"elemental essence shard (earth)": [
+"TCE"
+],
+"elemental essence shard (fire)": [
+"TCE"
+],
+"elemental essence shard (water)": [
+"TCE"
+],
+"elemental gem, blue sapphire": [
+"DMG",
+"XDMG"
+],
+"elemental gem, emerald": [
+"DMG",
+"XDMG"
+],
+"elemental gem, red corundum": [
+"DMG",
+"XDMG"
+],
+"elemental gem, yellow diamond": [
+"DMG",
+"XDMG"
+],
+"elephant": [
+"PHB",
+"XPHB"
+],
+"elixir of health": [
+"DMG",
+"XDMG"
+],
+"elocutionist's lexicon": [
+"AU"
+],
+"elven chain": [
+"DMG"
+],
+"elven thrower": [
+"BGG"
+],
+"elven trinket": [
+"MTF"
+],
+"emblem": [
+"PHB",
+"XPHB"
+],
+"embroidered glove set with jewel chips": [
+"DMG",
+"XDMG"
+],
+"embroidered silk and velvet mantle set with numerous moonstones": [
+"DMG",
+"XDMG"
+],
+"embroidered silk handkerchief": [
+"DMG",
+"XDMG"
+],
+"emerald": [
+"DMG",
+"XDMG"
+],
+"emerald enclave trinket": [
+"FRHoF"
+],
+"emerald pen": [
+"FTD"
+],
+"enchanted three-dragon ante set": [
+"LLK"
+],
+"enduring spellbook": [
+"XDMG",
+"XGE"
+],
+"ensorcelled missive": [
+"AU"
+],
+"enspelled staff (cantrip)": [
+"XDMG"
+],
+"enspelled staff (level 1)": [
+"XDMG"
+],
+"enspelled staff (level 2)": [
+"XDMG"
+],
+"enspelled staff (level 3)": [
+"XDMG"
+],
+"enspelled staff (level 4)": [
+"XDMG"
+],
+"enspelled staff (level 5)": [
+"XDMG"
+],
+"enspelled staff (level 6)": [
+"XDMG"
+],
+"enspelled staff (level 7)": [
+"XDMG"
+],
+"enspelled staff (level 8)": [
+"XDMG"
+],
+"entertainer's pack": [
+"PHB",
+"XPHB"
+],
+"ephixis, bow of nylea": [
+"MOT"
+],
+"ersatz eye": [
+"XDMG",
+"XGE"
+],
+"essence of ether": [
+"DMG",
+"XDMG"
+],
+"euryale card": [
+"BMT"
+],
+"euryale's aegis": [
+"BMT"
+],
+"everbright lantern": [
+"ERLW"
+],
+"evergreen fertilizer": [
+"AU"
+],
+"eversmoking bottle": [
+"DMG",
+"XDMG"
+],
+"exotic saddle": [
+"PHB",
+"XPHB"
+],
+"explorer's pack": [
+"PHB",
+"XPHB"
+],
+"explosive seed": [
+"EGW"
+],
+"eye agate": [
+"DMG",
+"XDMG"
+],
+"eye of vecna": [
+"DMG",
+"XDMG"
+],
+"eye patch decorated with tiny blue sapphires and moonstones": [
+"XDMG"
+],
+"eye patch with a mock eye set in blue sapphire and moonstone": [
+"DMG"
+],
+"eye patch with a mock eye set in blue sapphire and moonstone (brazen coalition)": [
+"PSX"
+],
+"eyes of charming": [
+"DMG",
+"XDMG"
+],
+"eyes of deceit": [
+"AUD"
+],
+"eyes of minute seeing": [
+"DMG",
+"XDMG"
+],
+"eyes of the eagle": [
+"DMG",
+"XDMG"
+],
+"eyescratch": [
+"WDH"
+],
+"fabulist gem": [
+"BMT"
+],
+"faerie dust": [
+"SKT"
+],
+"failed experiment wand": [
+"AI"
+],
+"falkir's helm of pigheadedness": [
+"WDMM"
+],
+"fane-eater": [
+"BGDIA"
+],
+"far gear": [
+"AI"
+],
+"far realm shard": [
+"TCE"
+],
+"fargab": [
+"DSotDQ"
+],
+"fate cutter shears": [
+"BMT"
+],
+"fates card": [
+"BMT"
+],
+"feather of diatryma summoning": [
+"WDH"
+],
+"feather token": [
+"ERLW"
+],
+"feathered mantle with emerald clasp (sun empire)": [
+"PSX"
+],
+"feed (per day)": [
+"PHB",
+"XPHB"
+],
+"feywild shard": [
+"TCE"
+],
+"feywild trinket": [
+"WBtW"
+],
+"ffolk sailing ship": [
+"FRAiF"
+],
+"figurine of wondrous power, bronze griffon": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, ebony fly": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, golden lions": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, ivory goats": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, marble elephant": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, obsidian steed": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, onyx dog": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, serpentine owl": [
+"DMG",
+"XDMG"
+],
+"figurine of wondrous power, silver raven": [
+"DMG",
+"XDMG"
+],
+"finder's goggles": [
+"ERLW"
+],
+"fine clothes": [
+"PHB",
+"XPHB"
+],
+"fine gold chain set with a fire opal": [
+"DMG",
+"XDMG"
+],
+"fine gold chain with fire opals (legion of dusk)": [
+"PSX"
+],
+"fine robe with dinosaur feathers and silver embroidery (sun empire)": [
+"PSX"
+],
+"fine steel rapier with gold filigree hilt (legion of dusk)": [
+"PSX"
+],
+"fine wine (bottle)": [
+"PHB",
+"XPHB"
+],
+"finely articulated jade glove (river heralds)": [
+"PSX"
+],
+"fire absorbing tattoo": [
+"TCE"
+],
+"fire opal": [
+"DMG",
+"XDMG"
+],
+"fish suit": [
+"AAG"
+],
+"fishing tackle": [
+"PHB"
+],
+"flail of tiamat": [
+"FTD"
+],
+"flame tongue shortsword of greed": [
+"TftYP"
+],
+"flames card": [
+"BMT"
+],
+"flask": [
+"PHB",
+"XPHB"
+],
+"flayer slayer": [
+"PaBTSO"
+],
+"flensing claws (huge)": [
+"VGM"
+],
+"flensing claws (large)": [
+"VGM"
+],
+"flensing claws (medium)": [
+"VGM"
+],
+"flensing claws (small)": [
+"VGM"
+],
+"flour": [
+"PHB",
+"XDMG"
+],
+"flowering blossom rod": [
+"AU"
+],
+"flying chariot": [
+"MOT"
+],
+"flying citadel helm": [
+"DSotDQ"
+],
+"flying fish ship": [
+"AAG"
+],
+"flying snake": [
+"FRHoF"
+],
+"folding boat": [
+"DMG",
+"XDMG"
+],
+"fool card": [
+"BMT"
+],
+"force absorbing tattoo": [
+"TCE"
+],
+"forgery kit": [
+"PHB",
+"XPHB"
+],
+"fork of eddy summoning": [
+"NF"
+],
+"fragmentation grenade": [
+"DMG",
+"XDMG"
+],
+"frostfell and everice trinket": [
+"ERLW"
+],
+"fulminating treatise": [
+"TCE"
+],
+"galder's bubble pipe": [
+"LLK"
+],
+"galley": [
+"DMG",
+"XPHB"
+],
+"garb of light and shadow": [
+"FRHoF"
+],
+"garnet": [
+"DMG",
+"XDMG"
+],
+"gate warden trinket": [
+"SatO"
+],
+"gauntlets of flaming fury": [
+"BGDIA"
+],
+"gauntlets of ogre power": [
+"DMG",
+"XDMG"
+],
+"gauntlets of rage": [
+"CoA"
+],
+"gavel of the venn rune": [
+"SKT"
+],
+"gem card": [
+"BMT"
+],
+"gem of brightness": [
+"DMG",
+"XDMG"
+],
+"gem of seeing": [
+"DMG",
+"XDMG"
+],
+"genie robe": [
+"FRHoF"
+],
+"ghost lantern": [
+"ToA"
+],
+"ghost step tattoo": [
+"TCE"
+],
+"giant trinket": [
+"BGG"
+],
+"gilded royal coach or funeral barge": [
+"XDMG"
+],
+"ginger": [
+"PHB",
+"XDMG"
+],
+"glamoured studded leather": [
+"DMG",
+"XDMG"
+],
+"glass bottle": [
+"PHB",
+"XPHB"
+],
+"gloves of missile snaring": [
+"DMG",
+"XDMG"
+],
+"gloves of soul catching": [
+"CM"
+],
+"gloves of swimming and climbing": [
+"DMG",
+"XDMG"
+],
+"gloves of thievery": [
+"DMG",
+"XDMG"
+],
+"glowrune pigment": [
+"BGG"
+],
+"gnomengarde grenade": [
+"DC"
+],
+"goat": [
+"PHB",
+"XDMG"
+],
+"goggles of night": [
+"DMG",
+"XDMG"
+],
+"goggles of object reading": [
+"EGW"
+],
+"gold": [
+"PHB",
+"XDMG"
+],
+"gold (gp)": [
+"PHB"
+],
+"gold 5-zino coin": [
+"GGR"
+],
+"gold bar (5-pound)": [
+"XDMG"
+],
+"gold basin with rubies (legion of dusk)": [
+"PSX"
+],
+"gold bird cage with electrum filigree": [
+"DMG"
+],
+"gold birdcage with electrum filigree": [
+"XDMG"
+],
+"gold bracelet": [
+"XDMG"
+],
+"gold canary figurine of wondrous power": [
+"FTD"
+],
+"gold chalice (legion of dusk)": [
+"PSX"
+],
+"gold chalice set with emeralds (legion of dusk)": [
+"PSX"
+],
+"gold circlet set with four aquamarines": [
+"DMG",
+"XDMG"
+],
+"gold comb shaped like a dragon with red garnets as eyes": [
+"XDMG"
+],
+"gold cup set with emeralds": [
+"DMG",
+"XDMG"
+],
+"gold dragon comb set with red garnets as eyes": [
+"DMG"
+],
+"gold dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"gold idol": [
+"XDMG"
+],
+"gold jewelry box with platinum filigree": [
+"DMG",
+"XDMG"
+],
+"gold jewelry box with platinum filigree (brazen coalition)": [
+"PSX"
+],
+"gold locket with a painted portrait inside": [
+"DMG",
+"XDMG"
+],
+"gold locket with a painted portrait inside (legion of dusk)": [
+"PSX"
+],
+"gold music box": [
+"DMG",
+"XDMG"
+],
+"gold music box (brazen coalition)": [
+"PSX"
+],
+"gold pendant with black onyx (legion of dusk)": [
+"PSX"
+],
+"gold ring set with bloodstones": [
+"DMG",
+"XDMG"
+],
+"gold ring with turquoise (legion of dusk)": [
+"PSX"
+],
+"gold statuette set with rubies": [
+"XDMG"
+],
+"gold zino": [
+"GGR"
+],
+"gold-plated ceremonial helmet and pauldrons (legion of dusk)": [
+"PSX"
+],
+"gold-plated sextant with topaz (brazen coalition)": [
+"PSX"
+],
+"golden idol of good fortunes": [
+"AU"
+],
+"golgari guild signet": [
+"GGR"
+],
+"golgari keyrune": [
+"GGR"
+],
+"goose egg trinket": [
+"BGG"
+],
+"grappling hook": [
+"PHB",
+"XPHB"
+],
+"grasping whip": [
+"BMT"
+],
+"grave reaper": [
+"AU"
+],
+"gravenhollow compass ring": [
+"OotA"
+],
+"greater silver sword": [
+"MTF"
+],
+"green chromatic rose": [
+"WBtW"
+],
+"green copper ewer": [
+"CoS"
+],
+"green dragon mask": [
+"RoTOS"
+],
+"green dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"grenade launcher": [
+"DMG",
+"XDMG"
+],
+"grimoire infinitus (awakened)": [
+"EGW"
+],
+"grimoire infinitus (dormant)": [
+"EGW"
+],
+"grimoire infinitus (exalted)": [
+"EGW"
+],
+"grovelthrash (awakened)": [
+"EGW"
+],
+"grovelthrash (dormant)": [
+"EGW"
+],
+"grovelthrash (exalted)": [
+"EGW"
+],
+"gruul guild signet": [
+"GGR"
+],
+"gruul keyrune": [
+"GGR"
+],
+"guardian emblem": [
+"TCE"
+],
+"gulthias staff": [
+"CoS"
+],
+"gunpowder (keg)": [
+"XDMG"
+],
+"gunpowder (powder horn)": [
+"XDMG"
+],
+"gunpowder horn": [
+"DMG"
+],
+"gunpowder keg": [
+"DMG"
+],
+"gurt's greataxe": [
+"SKT"
+],
+"hag eye": [
+"MM",
+"XDMG"
+],
+"hammer": [
+"PHB"
+],
+"hammer of runic focus": [
+"BMT"
+],
+"hammer of thunderbolts": [
+"DMG"
+],
+"hammerhead ship": [
+"AAG"
+],
+"hammock of worlds": [
+"JttRC"
+],
+"hand of vecna": [
+"DMG",
+"XDMG"
+],
+"handheld mirror set in a painted wooden frame": [
+"XDMG"
+],
+"harbor moon": [
+"WDH"
+],
+"harkon's bite": [
+"RHW",
+"VRGR"
+],
+"harp of gilded plenty": [
+"BGG"
+],
+"harper pin": [
+"FRAiF"
+],
+"harper trinket": [
+"FRHoF"
+],
+"hat of disguise": [
+"DMG",
+"XDMG"
+],
+"hat of many spells": [
+"XDMG"
+],
+"hat of vermin": [
+"XDMG",
+"XGE"
+],
+"hat of vortexes": [
+"NF"
+],
+"hat of wizardry": [
+"XDMG",
+"XGE"
+],
+"hazirawn": [
+"HotDQ"
+],
+"headband of intellect": [
+"DMG",
+"XDMG"
+],
+"healer's kit": [
+"PHB",
+"XPHB"
+],
+"heart weaver's primer": [
+"TCE"
+],
+"heartstone": [
+"MM"
+],
+"heliacal wand of celestial prowess": [
+"AU"
+],
+"hell hound cloak": [
+"TftYP"
+],
+"helm of awareness": [
+"EFA"
+],
+"helm of brilliance": [
+"DMG",
+"XDMG"
+],
+"helm of comprehending languages": [
+"DMG",
+"XDMG"
+],
+"helm of devil command": [
+"BGDIA"
+],
+"helm of disjunction": [
+"HAT-LMI"
+],
+"helm of perfect potential": [
+"BGG"
+],
+"helm of telepathy": [
+"DMG",
+"XDMG"
+],
+"helm of teleportation": [
+"DMG",
+"XDMG"
+],
+"helm of the gods": [
+"MOT"
+],
+"helm of the scavenger": [
+"WDMM"
+],
+"helm of underwater action": [
+"GoS"
+],
+"hematite": [
+"DMG",
+"XDMG"
+],
+"hempen rope (50 feet)": [
+"PHB"
+],
+"herbalism kit": [
+"PHB",
+"XPHB"
+],
+"heretic": [
+"QftIS"
+],
+"hew": [
+"LMoP",
+"PaBTSO"
+],
+"heward's handy haversack": [
+"DMG",
+"XDMG"
+],
+"heward's handy spice pouch": [
+"XDMG",
+"XGE"
+],
+"heward's hireling armor": [
+"LLK"
+],
+"hide of the feral guardian (awakened)": [
+"EGW"
+],
+"hide of the feral guardian (dormant)": [
+"EGW"
+],
+"hide of the feral guardian (exalted)": [
+"EGW"
+],
+"hither-thither staff": [
+"HAT-LMI"
+],
+"holly's handy haversack": [
+"WttHC"
+],
+"holy symbol of ravenkind": [
+"CoS"
+],
+"holy water": [
+"XPHB"
+],
+"holy water (flask)": [
+"PHB"
+],
+"homeward compass": [
+"AU"
+],
+"hooded lantern": [
+"PHB",
+"XPHB"
+],
+"hook of fisher's delight": [
+"IDRotF"
+],
+"horizon puzzle cube": [
+"BGG"
+],
+"horizon weavers trinket": [
+"AU"
+],
+"horn of beckoning death": [
+"HAT-LMI"
+],
+"horn of blasting": [
+"DMG",
+"XDMG"
+],
+"horn of silent alarm": [
+"XDMG",
+"XGE"
+],
+"horn of the endless maze": [
+"WDMM"
+],
+"horn of valhalla, brass": [
+"DMG",
+"XDMG"
+],
+"horn of valhalla, bronze": [
+"DMG",
+"XDMG"
+],
+"horn of valhalla, iron": [
+"DMG",
+"XDMG"
+],
+"horn of valhalla, silver": [
+"DMG",
+"XDMG"
+],
+"horned ring": [
+"WDMM"
+],
+"horror trinket": [
+"VRGR"
+],
+"horseshoes of a zephyr": [
+"DMG",
+"XDMG"
+],
+"horseshoes of speed": [
+"DMG",
+"XDMG"
+],
+"hourglass": [
+"PHB"
+],
+"house of cards": [
+"BMT"
+],
+"hunk of cheese": [
+"PHB"
+],
+"hunter's coat": [
+"EGW"
+],
+"hunting trap": [
+"PHB",
+"XPHB"
+],
+"icewind dale trinket": [
+"IDRotF"
+],
+"icon of ravenloft": [
+"CoS"
+],
+"iggwilv's cauldron": [
+"WBtW"
+],
+"iggwilv's horn": [
+"DitLCoT"
+],
+"illuminator's tattoo": [
+"TCE"
+],
+"illusionist's bracers": [
+"GGR"
+],
+"immovable rod": [
+"DMG",
+"XDMG"
+],
+"infernal amulet": [
+"CoA"
+],
+"infernal plate armor": [
+"CoA"
+],
+"infernal puzzle box": [
+"BGDIA"
+],
+"infernal tack": [
+"MTF"
+],
+"infiltrator's key (awakened)": [
+"EGW"
+],
+"infiltrator's key (dormant)": [
+"EGW"
+],
+"infiltrator's key (exalted)": [
+"EGW"
+],
+"ingot of the skold rune": [
+"SKT"
+],
+"ink": [
+"XPHB"
+],
+"ink (1-ounce bottle)": [
+"PHB"
+],
+"ink pen": [
+"PHB",
+"XPHB"
+],
+"insect repellent (block of incense)": [
+"ToA"
+],
+"insect repellent (greasy salve)": [
+"ToA"
+],
+"insignia of claws": [
+"HotDQ"
+],
+"instrument of illusions": [
+"XDMG",
+"XGE"
+],
+"instrument of scribing": [
+"XDMG",
+"XGE"
+],
+"instrument of the bards, anstruth harp": [
+"DMG",
+"XDMG"
+],
+"instrument of the bards, canaith mandolin": [
+"DMG",
+"XDMG"
+],
+"instrument of the bards, cli lyre": [
+"DMG",
+"XDMG"
+],
+"instrument of the bards, doss lute": [
+"DMG",
+"XDMG"
+],
+"instrument of the bards, fochlucan bandore": [
+"DMG",
+"XDMG"
+],
+"instrument of the bards, mac-fuirmidh cittern": [
+"DMG",
+"XDMG"
+],
+"instrument of the bards, ollamh harp": [
+"DMG",
+"XDMG"
+],
+"ioun stone of vitality": [
+"IMR"
+],
+"ioun stone, absorption": [
+"DMG",
+"XDMG"
+],
+"ioun stone, agility": [
+"DMG",
+"XDMG"
+],
+"ioun stone, awareness": [
+"DMG",
+"XDMG"
+],
+"ioun stone, fortitude": [
+"DMG",
+"XDMG"
+],
+"ioun stone, greater absorption": [
+"DMG",
+"XDMG"
+],
+"ioun stone, historical knowledge": [
+"LLK"
+],
+"ioun stone, insight": [
+"DMG",
+"XDMG"
+],
+"ioun stone, intellect": [
+"DMG",
+"XDMG"
+],
+"ioun stone, language knowledge": [
+"LLK"
+],
+"ioun stone, leadership": [
+"DMG",
+"XDMG"
+],
+"ioun stone, mastery": [
+"DMG",
+"XDMG"
+],
+"ioun stone, natural knowledge": [
+"LLK"
+],
+"ioun stone, protection": [
+"DMG",
+"XDMG"
+],
+"ioun stone, regeneration": [
+"DMG",
+"XDMG"
+],
+"ioun stone, religious knowledge": [
+"LLK"
+],
+"ioun stone, reserve": [
+"DMG",
+"XDMG"
+],
+"ioun stone, self-preservation": [
+"LLK"
+],
+"ioun stone, strength": [
+"DMG",
+"XDMG"
+],
+"ioun stone, supreme intellect": [
+"LLK"
+],
+"ioun stone, sustenance": [
+"DMG",
+"XDMG"
+],
+"iron": [
+"PHB",
+"XDMG"
+],
+"iron ball": [
+"IDRotF"
+],
+"iron bands of bilarro": [
+"DMG",
+"XDMG"
+],
+"iron flask": [
+"DMG",
+"XDMG"
+],
+"iron pot": [
+"PHB",
+"XPHB"
+],
+"iron spike": [
+"PHB",
+"XPHB"
+],
+"iron spikes": [
+"XPHB"
+],
+"iron spikes (10)": [
+"PHB"
+],
+"ironfang": [
+"PotA"
+],
+"ivana's whisper": [
+"VRGR"
+],
+"izzet guild signet": [
+"GGR"
+],
+"izzet keyrune": [
+"GGR"
+],
+"jacinth": [
+"DMG",
+"XDMG"
+],
+"jade": [
+"DMG",
+"XDMG"
+],
+"jade bowl (river heralds)": [
+"PSX"
+],
+"jade breastplate (river heralds)": [
+"PSX"
+],
+"jade game board with gold playing pieces": [
+"XDMG"
+],
+"jade game board with solid gold playing pieces": [
+"DMG"
+],
+"jade headpiece (river heralds)": [
+"PSX"
+],
+"jade serpent staff": [
+"WDMM"
+],
+"jade sword with amber (river heralds)": [
+"PSX"
+],
+"jade totem with diamond eyes (river heralds)": [
+"PSX"
+],
+"jakarion's staff of frost": [
+"CoS"
+],
+"jasper": [
+"DMG",
+"XDMG"
+],
+"javelin of backbiting": [
+"TftYP"
+],
+"javelin of lightning": [
+"DMG",
+"XDMG"
+],
+"jester card": [
+"BMT"
+],
+"jester's mask": [
+"BMT"
+],
+"jet": [
+"DMG",
+"XDMG"
+],
+"jewel of three prayers (awakened)": [
+"CRCotN"
+],
+"jewel of three prayers (dormant)": [
+"CRCotN"
+],
+"jewel of three prayers (exalted)": [
+"CRCotN"
+],
+"jeweled anklet": [
+"DMG",
+"XDMG"
+],
+"jeweled anklet (brazen coalition)": [
+"PSX"
+],
+"jeweled gold crown": [
+"DMG",
+"XDMG"
+],
+"jeweled platinum ring": [
+"DMG",
+"XDMG"
+],
+"jug": [
+"PHB",
+"XPHB"
+],
+"junky +1 dagger": [
+"TftYP"
+],
+"kagonesti forest shroud": [
+"DSotDQ"
+],
+"keelboat": [
+"DMG",
+"XPHB"
+],
+"keg of alchemist's fire": [
+"LoX"
+],
+"keoghtom's ointment": [
+"DMG",
+"XDMG"
+],
+"key card": [
+"BMT"
+],
+"keycharm": [
+"ERLW"
+],
+"keystone of creation": [
+"AitFR-AVT"
+],
+"khrusor, spear of heliod": [
+"MOT"
+],
+"khyber trinket": [
+"ERLW"
+],
+"knave's eye patch": [
+"WDH"
+],
+"knife of stolen resistance": [
+"CoA"
+],
+"knight card": [
+"BMT"
+],
+"korolnor scepter": [
+"SKT"
+],
+"kyrzin's ooze": [
+"ERLW"
+],
+"ladder": [
+"XPHB"
+],
+"ladder (10-foot)": [
+"PHB"
+],
+"lamp": [
+"PHB",
+"XPHB"
+],
+"lamprey ship": [
+"AAG"
+],
+"lantern of revealing": [
+"DMG",
+"XDMG"
+],
+"lantern of tracking (aberrations)": [
+"IDRotF"
+],
+"lantern of tracking (celestials)": [
+"IDRotF"
+],
+"lantern of tracking (constructs)": [
+"IDRotF"
+],
+"lantern of tracking (dragons)": [
+"IDRotF"
+],
+"lantern of tracking (elementals)": [
+"IDRotF"
+],
+"lantern of tracking (fey)": [
+"IDRotF"
+],
+"lantern of tracking (fiends)": [
+"IDRotF"
+],
+"lantern of tracking (giants)": [
+"IDRotF"
+],
+"lantern of tracking (monstrosities)": [
+"IDRotF"
+],
+"lantern of tracking (undead)": [
+"IDRotF"
+],
+"lapis lazuli": [
+"DMG",
+"XDMG"
+],
+"large gold bracelet": [
+"DMG"
+],
+"large gold bracelet (legion of dusk)": [
+"PSX"
+],
+"large jade totem (river heralds)": [
+"PSX"
+],
+"large well-made tapestry": [
+"DMG"
+],
+"large well-made tapestry (legion of dusk)": [
+"PSX"
+],
+"lash of immolation": [
+"BGG"
+],
+"lash of shadows (awakened)": [
+"EGW"
+],
+"lash of shadows (dormant)": [
+"EGW"
+],
+"lash of shadows (exalted)": [
+"EGW"
+],
+"leather golem armor": [
+"LLK"
+],
+"lesser hammock of worlds": [
+"JttRC"
+],
+"libram of souls and flesh": [
+"TCE"
+],
+"lifewell tattoo": [
+"TCE"
+],
+"lightbringer": [
+"LMoP",
+"PaBTSO"
+],
+"lightning absorbing tattoo": [
+"TCE"
+],
+"linen (1 sq. yd.)": [
+"PHB",
+"XDMG"
+],
+"living gloves": [
+"ERLW"
+],
+"living loot satchel": [
+"AI"
+],
+"living ship": [
+"AAG"
+],
+"loadstone": [
+"TftYP"
+],
+"loaf of bread": [
+"PHB"
+],
+"lock": [
+"PHB",
+"XPHB"
+],
+"lock of trickery": [
+"XDMG",
+"XGE"
+],
+"locking spellbook": [
+"FRHoF"
+],
+"lolth's sting": [
+"XDMG"
+],
+"longbow of the healing hearth": [
+"BGG"
+],
+"longship": [
+"DMG",
+"XPHB"
+],
+"lord's ensemble": [
+"WDH"
+],
+"lords' alliance trinket": [
+"FRHoF"
+],
+"lorehold primer": [
+"SCC"
+],
+"lorehold trinket": [
+"SCC"
+],
+"lost crown of besilmer": [
+"PotA"
+],
+"luba's tarokka of souls": [
+"TCE"
+],
+"lucent destroyer": [
+"BGG"
+],
+"lucky foot": [
+"AU"
+],
+"luminous war pick": [
+"PaBTSO"
+],
+"lunar wand of celestial prowess": [
+"AU"
+],
+"lute crafted of exotic wood with mother-of-pearl inlay and zircon gems (brazen coalition)": [
+"PSX"
+],
+"lute of thunderous thumping": [
+"XDMG"
+],
+"luxon beacon": [
+"EGW"
+],
+"lyre of building": [
+"TCE"
+],
+"mace of disruption": [
+"DMG",
+"XDMG"
+],
+"mace of smiting": [
+"DMG",
+"XDMG"
+],
+"mace of terror": [
+"DMG",
+"XDMG"
+],
+"mace of the black crown (awakened)": [
+"EGW"
+],
+"mace of the black crown (dormant)": [
+"EGW"
+],
+"mace of the black crown (exalted)": [
+"EGW"
+],
+"macuahuitl": [
+"TftYP"
+],
+"maddgoth's helm": [
+"WDMM"
+],
+"mage breaker": [
+"AU"
+],
+"mage's manacle": [
+"AU"
+],
+"magen handbell": [
+"NF"
+],
+"magewright's gloves": [
+"AU"
+],
+"magnifying glass": [
+"PHB",
+"XPHB"
+],
+"malachite": [
+"DMG",
+"XDMG"
+],
+"malice": [
+"DMG",
+"XDMG"
+],
+"manacles": [
+"PHB",
+"XPHB"
+],
+"manifold tool": [
+"EFA"
+],
+"mantle of spell resistance": [
+"DMG",
+"XDMG"
+],
+"manual of bodily health": [
+"DMG",
+"XDMG"
+],
+"manual of clay golems": [
+"DMG",
+"XDMG"
+],
+"manual of flesh golems": [
+"DMG",
+"XDMG"
+],
+"manual of gainful exercise": [
+"DMG",
+"XDMG"
+],
+"manual of iron golems": [
+"DMG",
+"XDMG"
+],
+"manual of quickness of action": [
+"DMG",
+"XDMG"
+],
+"manual of stone golems": [
+"DMG",
+"XDMG"
+],
+"many keyholes dagger": [
+"AU"
+],
+"map": [
+"XPHB"
+],
+"map or scroll case": [
+"PHB",
+"XPHB"
+],
+"marble font with gold inlay (legion of dusk)": [
+"PSX"
+],
+"martialist's quarterstaff": [
+"AU"
+],
+"mask of changed appearance": [
+"NF"
+],
+"mask of the beast": [
+"ToA"
+],
+"mask of the dragon queen": [
+"RoT"
+],
+"masque charm": [
+"SCC"
+],
+"masquerade tattoo": [
+"TCE"
+],
+"masquerader's brooch": [
+"AUD"
+],
+"master's amulet": [
+"MM"
+],
+"masterpiece painting in mahogany frame with gold inlay (legion of dusk)": [
+"PSX"
+],
+"mastiff": [
+"PHB",
+"XPHB"
+],
+"mastix, whip of erebos": [
+"MOT"
+],
+"matalotok": [
+"BGDIA"
+],
+"matchless pipe": [
+"WDH"
+],
+"mechanical wonder (domestic)": [
+"FRAiF"
+],
+"mechanical wonder (flying)": [
+"FRAiF"
+],
+"mechanical wonder (gyrocopter)": [
+"FRAiF"
+],
+"mechanical wonder (mobility)": [
+"FRAiF"
+],
+"medal of muscle": [
+"CRCotN"
+],
+"medal of the conch": [
+"CRCotN"
+],
+"medal of the horizonback": [
+"CRCotN"
+],
+"medal of the maze": [
+"CRCotN"
+],
+"medal of the meat pie": [
+"CRCotN"
+],
+"medal of the wetlands": [
+"CRCotN"
+],
+"medal of wit": [
+"CRCotN"
+],
+"medallion of thoughts": [
+"DMG",
+"XDMG"
+],
+"menga leaves (1 ounce)": [
+"ToA"
+],
+"merchant's scale": [
+"PHB"
+],
+"mess kit": [
+"PHB"
+],
+"midnight tears": [
+"DMG",
+"XDMG"
+],
+"mighty servant of leuk-o": [
+"TCE"
+],
+"military saddle": [
+"PHB",
+"XPHB"
+],
+"mimir": [
+"SatO"
+],
+"mind crystal (careful)": [
+"PaBTSO"
+],
+"mind crystal (distant)": [
+"PaBTSO"
+],
+"mind crystal (empowered)": [
+"PaBTSO"
+],
+"mind crystal (extended)": [
+"PaBTSO"
+],
+"mind crystal (heightened)": [
+"PaBTSO"
+],
+"mind crystal (quickened)": [
+"PaBTSO"
+],
+"mind crystal (subtle)": [
+"PaBTSO"
+],
+"mind flayer skull": [
+"WDMM"
+],
+"mind lash": [
+"VGM"
+],
+"mind sharpener": [
+"EFA"
+],
+"mindblasting cap": [
+"PaBTSO"
+],
+"mindguard crown": [
+"PaBTSO"
+],
+"miner's pick": [
+"PHB"
+],
+"mirror": [
+"XPHB"
+],
+"mirror of life trapping": [
+"DMG",
+"XDMG"
+],
+"mirror of reflected pasts": [
+"DSotDQ"
+],
+"mirror of the past": [
+"TftYP"
+],
+"mistral mantle": [
+"BGG"
+],
+"mizzium apparatus": [
+"GGR"
+],
+"mizzium mortar": [
+"GGR"
+],
+"monster camouflage": [
+"FRHoF"
+],
+"monster hunter's pack": [
+"VRGR"
+],
+"moodmark paint": [
+"GGR"
+],
+"moon card": [
+"BMT"
+],
+"moonblade": [
+"DMG"
+],
+"moonstone": [
+"DMG",
+"XDMG"
+],
+"moorbounder": [
+"EGW"
+],
+"moss agate": [
+"DMG",
+"XDMG"
+],
+"mournland trinket": [
+"ERLW"
+],
+"mudslick tower": [
+"PaBTSO"
+],
+"mule": [
+"PHB",
+"XPHB"
+],
+"mummy rot antidote": [
+"IMR"
+],
+"murgaxor's elixir of life": [
+"SCC"
+],
+"murgaxor's orb": [
+"SCC"
+],
+"muroosa balm": [
+"EGW"
+],
+"mystery key": [
+"XDMG",
+"XGE"
+],
+"mythallar bracelet": [
+"NF"
+],
+"mythallar cloak": [
+"NF"
+],
+"namer's needle": [
+"AU"
+],
+"narycrash": [
+"DSotDQ"
+],
+"nature's mantle": [
+"TCE",
+"XDMG"
+],
+"nautiloid": [
+"AAG"
+],
+"navigation orb": [
+"SKT"
+],
+"navigator's tools": [
+"PHB",
+"XPHB"
+],
+"necklace of adaptation": [
+"DMG",
+"XDMG"
+],
+"necklace of electrum medallions with red and blue tourmalines (brazen coalition)": [
+"PSX"
+],
+"necklace of fireballs": [
+"DMG",
+"XDMG"
+],
+"necklace of jade and pink pearls (river heralds)": [
+"PSX"
+],
+"necklace of prayer beads": [
+"DMG",
+"XDMG"
+],
+"necklace of the beastly familiar (giant octopus)": [
+"AU"
+],
+"necklace of the beastly familiar (giant scorpion)": [
+"AU"
+],
+"necklace of the beastly familiar (hippopotamus)": [
+"AU"
+],
+"necklace of the beastly familiar (mammoth)": [
+"AU"
+],
+"necklace of the beastly familiar (tyrannosaurus rex)": [
+"AU"
+],
+"necklace string of small pink pearls": [
+"DMG",
+"XDMG"
+],
+"necrotic absorbing tattoo": [
+"TCE"
+],
+"needle of mending": [
+"EGW"
+],
+"needler pistol": [
+"QftIS"
+],
+"nepenthe": [
+"VRGR"
+],
+"net": [
+"PHB",
+"XPHB"
+],
+"nether scroll of azumar": [
+"CM"
+],
+"netherese ring of protection": [
+"PaBTSO"
+],
+"nib": [
+"WDH"
+],
+"night caller": [
+"TftYP"
+],
+"nightbringer": [
+"MCV2DC"
+],
+"nightfall pearl": [
+"EGW"
+],
+"nightspider": [
+"AAG"
+],
+"niko's mace": [
+"UtHftLH"
+],
+"nimblewright detector": [
+"WDH"
+],
+"nimbus coronet": [
+"BGG"
+],
+"ninth quill trinket": [
+"AU"
+],
+"nolzur's marvelous pigments": [
+"DMG",
+"XDMG"
+],
+"norlander longship": [
+"FRAiF"
+],
+"oathbow": [
+"DMG"
+],
+"obsidian": [
+"DMG",
+"XDMG"
+],
+"obsidian flint dragon plate": [
+"BGDIA"
+],
+"obsidian statuette with gold fittings and inlay": [
+"DMG",
+"XDMG"
+],
+"obviator's lenses": [
+"AI"
+],
+"occultant abacus": [
+"AI"
+],
+"oil": [
+"XPHB"
+],
+"oil (flask)": [
+"PHB"
+],
+"oil of etherealness": [
+"DMG",
+"XDMG"
+],
+"oil of sharpness": [
+"DMG",
+"XDMG"
+],
+"oil of slipperiness": [
+"DMG",
+"XDMG"
+],
+"oil of taggit": [
+"DMG",
+"XDMG"
+],
+"old masterpiece painting": [
+"DMG",
+"XDMG"
+],
+"olisuba leaf": [
+"EGW"
+],
+"ominous staff of skulls": [
+"AU"
+],
+"onyx": [
+"DMG",
+"XDMG"
+],
+"opal": [
+"DMG",
+"XDMG"
+],
+"opal of the ild rune": [
+"SKT"
+],
+"orb of damara": [
+"FRAiF"
+],
+"orb of direction": [
+"XDMG",
+"XGE"
+],
+"orb of divination detection": [
+"AU"
+],
+"orb of dragonkind": [
+"DMG",
+"XDMG"
+],
+"orb of gonging": [
+"WDMM"
+],
+"orb of skoraeus": [
+"BGG"
+],
+"orb of sorcery": [
+"AU"
+],
+"orb of the stein rune": [
+"SKT"
+],
+"orb of the veil": [
+"EGW"
+],
+"orb of time": [
+"XDMG",
+"XGE"
+],
+"orc stone": [
+"IDRotF"
+],
+"orcsplitter": [
+"PotA"
+],
+"orcus figurine": [
+"CM"
+],
+"order of the gauntlet trinket": [
+"FRHoF"
+],
+"ornithopter of flying": [
+"WBtW"
+],
+"orrery of the wanderer": [
+"AI"
+],
+"orzhov guild signet": [
+"GGR"
+],
+"orzhov keyrune": [
+"GGR"
+],
+"outer essence shard": [
+"TCE"
+],
+"outer essence shard (chaotic)": [
+"TCE"
+],
+"outer essence shard (evil)": [
+"TCE"
+],
+"outer essence shard (good)": [
+"TCE"
+],
+"outer essence shard (lawful)": [
+"TCE"
+],
+"oversized longbow": [
+"WDH"
+],
+"ox": [
+"PHB",
+"XDMG"
+],
+"pack saddle": [
+"PHB"
+],
+"painted gold child's sarcophagus": [
+"DMG"
+],
+"painted gold war mask": [
+"DMG",
+"XDMG"
+],
+"pair of engraved bone dice": [
+"DMG",
+"XDMG"
+],
+"pair of engraved bone dice (brazen coalition)": [
+"PSX"
+],
+"pale tincture": [
+"DMG",
+"XDMG"
+],
+"paper": [
+"XPHB"
+],
+"paper (one sheet)": [
+"PHB"
+],
+"paper bird": [
+"WDH"
+],
+"paralysis pistol": [
+"QftIS"
+],
+"parchment": [
+"XPHB"
+],
+"parchment (one sheet)": [
+"PHB"
+],
+"pariah's shield": [
+"GGR"
+],
+"pathfinder's greataxe": [
+"PotA"
+],
+"pearl": [
+"DMG",
+"XDMG"
+],
+"pearl of power": [
+"DMG",
+"XDMG"
+],
+"pearl of undead detection": [
+"WDMM"
+],
+"pennant of the vind rune": [
+"SKT"
+],
+"pepper": [
+"PHB",
+"XDMG"
+],
+"peregrine mask": [
+"GGR"
+],
+"perfume": [
+"XPHB"
+],
+"perfume (vial)": [
+"PHB"
+],
+"perfume of bewitching": [
+"XDMG",
+"XGE"
+],
+"periapt of health": [
+"DMG",
+"XDMG"
+],
+"periapt of proof against poison": [
+"DMG",
+"XDMG"
+],
+"periapt of wound closure": [
+"DMG",
+"XDMG"
+],
+"peridot": [
+"DMG",
+"XDMG"
+],
+"petrified grung egg": [
+"ToA"
+],
+"pewter mug with green spinels (brazen coalition)": [
+"PSX"
+],
+"phantasmic circus trinket": [
+"AU"
+],
+"philter of love": [
+"DMG",
+"XDMG"
+],
+"piercer": [
+"AI"
+],
+"pig": [
+"PHB",
+"XDMG"
+],
+"pipe of remembrance": [
+"GoS"
+],
+"pipe of smoke monsters": [
+"XDMG",
+"XGE"
+],
+"pipes of haunting": [
+"DMG",
+"XDMG"
+],
+"pipes of pestilence": [
+"WttHC"
+],
+"pipes of the sewers": [
+"DMG",
+"XDMG"
+],
+"pirate's cutlass": [
+"XMtS"
+],
+"pitcher": [
+"PHB"
+],
+"piton": [
+"PHB"
+],
+"piwafwi (cloak of elvenkind)": [
+"OotA"
+],
+"piwafwi of fire resistance": [
+"OotA"
+],
+"pixie dust": [
+"WBtW"
+],
+"planar key": [
+"AitFR-THP"
+],
+"planar philosopher trinket": [
+"SatO"
+],
+"planecaller's codex": [
+"TCE"
+],
+"plate armor of etherealness": [
+"DMG"
+],
+"plate of knight's fellowship": [
+"BMT"
+],
+"platinum": [
+"PHB",
+"XDMG"
+],
+"platinum (pp)": [
+"PHB"
+],
+"platinum 10-zino coin": [
+"GGR"
+],
+"platinum 100-zino coin": [
+"GGR"
+],
+"platinum bracelet set with a sapphire": [
+"DMG"
+],
+"platinum bracelet set with an emerald": [
+"XDMG"
+],
+"platinum headdress with topaz sun symbol (sun empire)": [
+"PSX"
+],
+"platinum ring with yellow sapphire (sun empire)": [
+"PSX"
+],
+"platinum scarf": [
+"FTD"
+],
+"platinum staff topped with amber (sun empire)": [
+"PSX"
+],
+"playing card set": [
+"PHB"
+],
+"playing cards": [
+"XPHB"
+],
+"poison absorbing tattoo": [
+"TCE"
+],
+"poison soaked kukri": [
+"WttHC"
+],
+"poisoner's kit": [
+"PHB",
+"XPHB"
+],
+"pole": [
+"XPHB"
+],
+"pole (10-foot)": [
+"PHB"
+],
+"pole of angling": [
+"XDMG",
+"XGE"
+],
+"pole of collapsing": [
+"XDMG",
+"XGE"
+],
+"pony": [
+"PHB",
+"XPHB"
+],
+"portable hole": [
+"DMG",
+"XDMG"
+],
+"portable ram": [
+"PHB",
+"XPHB"
+],
+"portal compass": [
+"SatO"
+],
+"portfolio keeper": [
+"AI"
+],
+"pot of awakening": [
+"XDMG",
+"XGE"
+],
+"potion of acid resistance": [
+"DMG",
+"XDMG"
+],
+"potion of advantage": [
+"WBtW"
+],
+"potion of animal friendship": [
+"DMG",
+"XDMG"
+],
+"potion of aqueous form": [
+"MOT"
+],
+"potion of clairvoyance": [
+"DMG",
+"XDMG"
+],
+"potion of climbing": [
+"DMG",
+"XDMG"
+],
+"potion of cloud giant strength": [
+"DMG",
+"XDMG"
+],
+"potion of cold resistance": [
+"DMG",
+"XDMG"
+],
+"potion of comprehension": [
+"WDMM",
+"XDMG"
+],
+"potion of diminution": [
+"DMG",
+"XDMG"
+],
+"potion of dragon's breath": [
+"AU"
+],
+"potion of dragon's majesty": [
+"FTD"
+],
+"potion of fire breath": [
+"DMG",
+"XDMG"
+],
+"potion of fire giant strength": [
+"DMG",
+"XDMG"
+],
+"potion of fire resistance": [
+"DMG",
+"XDMG"
+],
+"potion of flying": [
+"DMG",
+"XDMG"
+],
+"potion of force resistance": [
+"DMG",
+"XDMG"
+],
+"potion of frost giant strength": [
+"DMG",
+"XDMG"
+],
+"potion of gaseous form": [
+"DMG",
+"XDMG"
+],
+"potion of giant size": [
+"SKT"
+],
+"potion of greater healing": [
+"DMG",
+"XDMG"
+],
+"potion of greater invisibility": [
+"XDMG"
+],
+"potion of growth": [
+"DMG",
+"XDMG"
+],
+"potion of healing": [
+"DMG",
+"XDMG"
+],
+"potion of heroism": [
+"DMG",
+"XDMG"
+],
+"potion of hill giant strength": [
+"DMG",
+"XDMG"
+],
+"potion of invisibility": [
+"DMG",
+"XDMG"
+],
+"potion of invulnerability": [
+"DMG",
+"XDMG"
+],
+"potion of lightning resistance": [
+"DMG",
+"XDMG"
+],
+"potion of longevity": [
+"DMG",
+"XDMG"
+],
+"potion of maximum power": [
+"EGW"
+],
+"potion of mind control (beast)": [
+"TftYP"
+],
+"potion of mind control (humanoid)": [
+"TftYP"
+],
+"potion of mind control (monster)": [
+"TftYP"
+],
+"potion of mind reading": [
+"DMG",
+"XDMG"
+],
+"potion of necrotic resistance": [
+"DMG",
+"XDMG"
+],
+"potion of poison": [
+"DMG",
+"XDMG"
+],
+"potion of poison resistance": [
+"DMG",
+"XDMG"
+],
+"potion of polychromy": [
+"DitLCoT"
+],
+"potion of possibility": [
+"EGW"
+],
+"potion of psionic fortitude": [
+"PaBTSO"
+],
+"potion of psychic resistance": [
+"DMG",
+"XDMG"
+],
+"potion of pugilism": [
+"XDMG"
+],
+"potion of radiant resistance": [
+"DMG",
+"XDMG"
+],
+"potion of speed": [
+"DMG",
+"XDMG"
+],
+"potion of stone giant strength": [
+"DMG",
+"XDMG"
+],
+"potion of storm giant strength": [
+"DMG",
+"XDMG"
+],
+"potion of superior healing": [
+"DMG",
+"XDMG"
+],
+"potion of supreme healing": [
+"DMG",
+"XDMG"
+],
+"potion of thunder resistance": [
+"DMG",
+"XDMG"
+],
+"potion of tirelessness": [
+"AU"
+],
+"potion of vitality": [
+"DMG",
+"XDMG"
+],
+"potion of watchful rest": [
+"WDMM"
+],
+"potion of water breathing": [
+"DMG",
+"XDMG"
+],
+"pouch": [
+"PHB",
+"XPHB"
+],
+"powered armor": [
+"LLK",
+"QftIS"
+],
+"prehistoric figurine of wondrous power, carnelian triceratops": [
+"BGG"
+],
+"prehistoric figurine of wondrous power, jasper tyrannosaurus rex": [
+"BGG"
+],
+"prehistoric figurine of wondrous power, kyanite pteranodon": [
+"BGG"
+],
+"prehistoric figurine of wondrous power, pyrite plesiosaurus": [
+"BGG"
+],
+"prespra": [
+"FRAiF"
+],
+"pressure capsule": [
+"GoS"
+],
+"pride silk": [
+"EGW"
+],
+"pride silk outfit": [
+"EGW"
+],
+"priest's pack": [
+"PHB",
+"XPHB"
+],
+"primal amulet": [
+"XMtS"
+],
+"prismari primer": [
+"SCC"
+],
+"prismari trinket": [
+"SCC"
+],
+"prismatic rune": [
+"AU"
+],
+"prismatic well": [
+"NRH-AT"
+],
+"professor orb": [
+"WDMM"
+],
+"professor skant": [
+"IDRotF"
+],
+"propeller helm": [
+"WDMM"
+],
+"prosthetic limb": [
+"FRHoF",
+"TCE",
+"XDMG"
+],
+"protective verses": [
+"TCE"
+],
+"prying blade": [
+"XMtS"
+],
+"psi crystal": [
+"IDRotF"
+],
+"psionic rod of the honed mind": [
+"AU"
+],
+"psychic absorbing tattoo": [
+"TCE"
+],
+"psychic blade": [
+"XPHB"
+],
+"pulverizing staff of skulls": [
+"AU"
+],
+"purple dragon knight trinket": [
+"FRHoF"
+],
+"purple worm poison": [
+"DMG",
+"XDMG"
+],
+"puzzle card": [
+"BMT"
+],
+"pyroconverger": [
+"GGR"
+],
+"pyxis of pandemonium": [
+"MOT"
+],
+"quaal's feather token, anchor": [
+"DMG",
+"XDMG"
+],
+"quaal's feather token, bird": [
+"DMG",
+"XDMG"
+],
+"quaal's feather token, fan": [
+"DMG",
+"XDMG"
+],
+"quaal's feather token, swan boat": [
+"DMG",
+"XDMG"
+],
+"quaal's feather token, tree": [
+"DMG",
+"XDMG"
+],
+"quaal's feather token, whip": [
+"DMG",
+"XDMG"
+],
+"quandrix primer": [
+"SCC"
+],
+"quandrix trinket": [
+"SCC"
+],
+"quarterstaff of the acrobat": [
+"XDMG"
+],
+"quartz": [
+"DMG",
+"XDMG"
+],
+"queen ehlissa's marvelous nightingale": [
+"AU"
+],
+"quiver": [
+"PHB",
+"XPHB"
+],
+"quiver of ehlonna": [
+"DMG",
+"XDMG"
+],
+"radiance": [
+"CM"
+],
+"radiant absorbing tattoo": [
+"TCE"
+],
+"rain catcher": [
+"ToA"
+],
+"rakdos guild signet": [
+"GGR"
+],
+"rakdos keyrune": [
+"GGR"
+],
+"rakdos riteknife": [
+"GGR"
+],
+"ranseur of torture": [
+"CoA"
+],
+"rations": [
+"XPHB"
+],
+"rations (1 day)": [
+"PHB"
+],
+"reaper's scream": [
+"BGG"
+],
+"red chromatic rose": [
+"WBtW"
+],
+"red dragon mask": [
+"RoTOS"
+],
+"red dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"red wizard blade": [
+"HAT-LMI"
+],
+"red wizard trinket": [
+"FRHoF"
+],
+"reincarnation dust": [
+"EGW"
+],
+"reliquary": [
+"PHB",
+"XPHB"
+],
+"reliquary of dawn": [
+"LFL"
+],
+"reliquary of twilight": [
+"LFL"
+],
+"repulsion shield": [
+"EFA"
+],
+"reszur": [
+"PotA"
+],
+"reveler's concertina": [
+"TCE"
+],
+"rhodochrosite": [
+"DMG",
+"XDMG"
+],
+"riding horse": [
+"PHB",
+"XPHB"
+],
+"riding saddle": [
+"PHB",
+"XPHB"
+],
+"ring of acid resistance": [
+"DMG",
+"XDMG"
+],
+"ring of air elemental command": [
+"DMG"
+],
+"ring of amity": [
+"BGG"
+],
+"ring of animal influence": [
+"DMG",
+"XDMG"
+],
+"ring of candor": [
+"AUD"
+],
+"ring of cold resistance": [
+"DMG",
+"XDMG"
+],
+"ring of collecting": [
+"CoA"
+],
+"ring of dedicated focus": [
+"AU"
+],
+"ring of djinni summoning": [
+"DMG",
+"XDMG"
+],
+"ring of earth elemental command": [
+"DMG"
+],
+"ring of elemental command (air)": [
+"XDMG"
+],
+"ring of elemental command (earth)": [
+"XDMG"
+],
+"ring of elemental command (fire)": [
+"XDMG"
+],
+"ring of elemental command (water)": [
+"XDMG"
+],
+"ring of evasion": [
+"DMG",
+"XDMG"
+],
+"ring of feather falling": [
+"DMG",
+"XDMG"
+],
+"ring of fire elemental command": [
+"DMG"
+],
+"ring of fire resistance": [
+"DMG",
+"XDMG"
+],
+"ring of force resistance": [
+"DMG",
+"XDMG"
+],
+"ring of free action": [
+"DMG",
+"XDMG"
+],
+"ring of invisibility": [
+"DMG",
+"XDMG"
+],
+"ring of jumping": [
+"DMG",
+"XDMG"
+],
+"ring of lightning resistance": [
+"DMG",
+"XDMG"
+],
+"ring of mind shielding": [
+"DMG",
+"XDMG"
+],
+"ring of necrotic resistance": [
+"DMG",
+"XDMG"
+],
+"ring of obscuring": [
+"EGW"
+],
+"ring of poison resistance": [
+"DMG",
+"XDMG"
+],
+"ring of protection": [
+"DMG",
+"XDMG"
+],
+"ring of psychic resistance": [
+"DMG",
+"XDMG"
+],
+"ring of puzzler's wit": [
+"BMT"
+],
+"ring of radiant resistance": [
+"DMG",
+"XDMG"
+],
+"ring of red fury": [
+"CRCotN"
+],
+"ring of regeneration": [
+"DMG",
+"XDMG"
+],
+"ring of shooting stars": [
+"DMG",
+"XDMG"
+],
+"ring of spell storing": [
+"DMG",
+"XDMG"
+],
+"ring of spell turning": [
+"DMG",
+"XDMG"
+],
+"ring of swimming": [
+"DMG",
+"XDMG"
+],
+"ring of telekinesis": [
+"DMG",
+"XDMG"
+],
+"ring of temporal salvation": [
+"EGW"
+],
+"ring of the copycat": [
+"CoA"
+],
+"ring of the orator": [
+"PaBTSO"
+],
+"ring of the ram": [
+"DMG",
+"XDMG"
+],
+"ring of three wishes": [
+"DMG",
+"XDMG"
+],
+"ring of thunder resistance": [
+"DMG",
+"XDMG"
+],
+"ring of treachery": [
+"CoA"
+],
+"ring of truth telling": [
+"WDH"
+],
+"ring of warmth": [
+"DMG",
+"XDMG"
+],
+"ring of water elemental command": [
+"DMG"
+],
+"ring of water walking": [
+"DMG",
+"XDMG"
+],
+"ring of winter": [
+"ToA"
+],
+"ring of x-ray vision": [
+"DMG",
+"XDMG"
+],
+"rival coin": [
+"XDMG"
+],
+"robe": [
+"XPHB"
+],
+"robe of eyes": [
+"DMG",
+"XDMG"
+],
+"robe of scintillating colors": [
+"DMG",
+"XDMG"
+],
+"robe of serpents": [
+"SKT"
+],
+"robe of stars": [
+"DMG",
+"XDMG"
+],
+"robe of summer": [
+"TftYP"
+],
+"robe of thayan arcana": [
+"AUD"
+],
+"robe of the archmagi": [
+"DMG",
+"XDMG"
+],
+"robe of useful items": [
+"DMG",
+"XDMG"
+],
+"robes": [
+"PHB"
+],
+"robot controller": [
+"QftIS"
+],
+"rod of absorption": [
+"DMG",
+"XDMG"
+],
+"rod of alertness": [
+"DMG",
+"XDMG"
+],
+"rod of hellish flames": [
+"BMT"
+],
+"rod of lordly might": [
+"DMG",
+"XDMG"
+],
+"rod of resurrection": [
+"DMG",
+"XDMG"
+],
+"rod of retribution": [
+"EGW"
+],
+"rod of rulership": [
+"DMG",
+"XDMG"
+],
+"rod of security": [
+"DMG",
+"XDMG"
+],
+"rod of seven parts": [
+"VEoR"
+],
+"rod of the vonindod": [
+"SKT"
+],
+"rogue card": [
+"BMT"
+],
+"rogue's mantle": [
+"BMT"
+],
+"rope": [
+"XPHB"
+],
+"rope of climbing": [
+"DMG",
+"XDMG"
+],
+"rope of entanglement": [
+"DMG",
+"XDMG"
+],
+"rope of mending": [
+"XDMG",
+"XGE"
+],
+"rotor of return": [
+"AI"
+],
+"rowboat": [
+"DMG",
+"XPHB"
+],
+"ruby": [
+"DMG",
+"XDMG"
+],
+"ruby of the war mage": [
+"XDMG",
+"XGE"
+],
+"ruby rod of asmodeus": [
+"CoA"
+],
+"ruby weave gem": [
+"FTD"
+],
+"ruidium shield": [
+"CRCotN"
+],
+"ruin card": [
+"BMT"
+],
+"ruin's wake (awakened)": [
+"EGW"
+],
+"ruin's wake (dormant)": [
+"EGW"
+],
+"ruin's wake (exalted)": [
+"EGW"
+],
+"ruinblade": [
+"IMR"
+],
+"ruinous flail": [
+"BMT"
+],
+"ruinstone": [
+"DC"
+],
+"rusted hulk": [
+"FRAiF"
+],
+"ryath root": [
+"ToA"
+],
+"sack": [
+"PHB",
+"XPHB"
+],
+"saddle of the cavalier": [
+"DMG",
+"XDMG"
+],
+"saddlebags": [
+"PHB"
+],
+"saffron": [
+"PHB",
+"XDMG"
+],
+"sage card": [
+"BMT"
+],
+"sage's mirror": [
+"CoA"
+],
+"sage's signet (bear)": [
+"BMT"
+],
+"sage's signet (hart)": [
+"BMT"
+],
+"sage's signet (lion)": [
+"BMT"
+],
+"sage's signet (serpent)": [
+"BMT"
+],
+"sage's signet (songbird)": [
+"BMT"
+],
+"sage's signet (wolf)": [
+"BMT"
+],
+"sailing ship": [
+"DMG",
+"XPHB"
+],
+"saint markovia's thighbone": [
+"CoS"
+],
+"salt": [
+"PHB",
+"XDMG"
+],
+"sanctum amulet": [
+"BGG"
+],
+"sapphire buckler": [
+"FTD"
+],
+"sardonyx": [
+"DMG",
+"XDMG"
+],
+"sarlona trinket": [
+"ERLW"
+],
+"scarab of protection": [
+"DMG",
+"XDMG"
+],
+"scarlet spellbook": [
+"AUD"
+],
+"scholar's anchoring bangle": [
+"AU"
+],
+"scholar's pack": [
+"PHB",
+"XPHB"
+],
+"scimitar of speed": [
+"DMG",
+"XDMG"
+],
+"scissors of shadow snipping": [
+"WBtW"
+],
+"scorpion armor": [
+"ToA"
+],
+"scorpion ship": [
+"AAG"
+],
+"scourge of shadow": [
+"CoA"
+],
+"scribe's pen": [
+"ERLW"
+],
+"scroll of protection (aberrations)": [
+"XDMG"
+],
+"scroll of protection (beasts)": [
+"XDMG"
+],
+"scroll of protection (celestials)": [
+"XDMG"
+],
+"scroll of protection (constructs)": [
+"XDMG"
+],
+"scroll of protection (dragons)": [
+"XDMG"
+],
+"scroll of protection (elementals)": [
+"XDMG"
+],
+"scroll of protection (fey)": [
+"XDMG"
+],
+"scroll of protection (fiends)": [
+"XDMG"
+],
+"scroll of protection (giants)": [
+"XDMG"
+],
+"scroll of protection (humanoids)": [
+"XDMG"
+],
+"scroll of protection (monstrosities)": [
+"XDMG"
+],
+"scroll of protection (oozes)": [
+"XDMG"
+],
+"scroll of protection (plants)": [
+"XDMG"
+],
+"scroll of protection (undead)": [
+"XDMG"
+],
+"scroll of protection from aberrations": [
+"DMG"
+],
+"scroll of protection from beasts": [
+"DMG"
+],
+"scroll of protection from celestials": [
+"DMG"
+],
+"scroll of protection from elementals": [
+"DMG"
+],
+"scroll of protection from fey": [
+"DMG"
+],
+"scroll of protection from fiends": [
+"DMG"
+],
+"scroll of protection from plants": [
+"DMG"
+],
+"scroll of protection from undead": [
+"DMG"
+],
+"scroll of tarrasque summoning": [
+"IDRotF"
+],
+"scroll of the comet": [
+"IDRotF"
+],
+"scroll of titan summoning (animal lord)": [
+"XDMG"
+],
+"scroll of titan summoning (blob of annihilation)": [
+"XDMG"
+],
+"scroll of titan summoning (colossus)": [
+"XDMG"
+],
+"scroll of titan summoning (elemental cataclysm)": [
+"XDMG"
+],
+"scroll of titan summoning (empyrean)": [
+"XDMG"
+],
+"scroll of titan summoning (kraken)": [
+"XDMG"
+],
+"scroll of titan summoning (tarrasque)": [
+"XDMG"
+],
+"sealing wax": [
+"PHB"
+],
+"secondhand steal trinket": [
+"BMT"
+],
+"secret keeper's circlet": [
+"AU"
+],
+"seeker dart": [
+"PotA"
+],
+"seers of sea and sky trinket": [
+"AU"
+],
+"sekolahian worshiping statuette": [
+"GoS"
+],
+"selesnya guild signet": [
+"GGR"
+],
+"selesnya keyrune": [
+"GGR"
+],
+"sending stone": [
+"AI"
+],
+"sending stones": [
+"DMG",
+"XDMG"
+],
+"sensory stone": [
+"SatO"
+],
+"sentinel shield": [
+"DMG",
+"XDMG"
+],
+"serpent scale armor": [
+"CM"
+],
+"serpent venom": [
+"DMG",
+"XDMG"
+],
+"serpent's fang": [
+"CM"
+],
+"set of gold nesting dolls": [
+"XDMG"
+],
+"shadowfell brand tattoo": [
+"TCE"
+],
+"shadowfell shard": [
+"TCE"
+],
+"shard": [
+"WDH"
+],
+"shard of the ise rune": [
+"SKT"
+],
+"shard of xeluan": [
+"KftGV"
+],
+"shard solitaire (black sapphire)": [
+"KftGV"
+],
+"shard solitaire (diamond)": [
+"KftGV"
+],
+"shard solitaire (jacinth)": [
+"KftGV"
+],
+"shard solitaire (rainbow pearl)": [
+"KftGV"
+],
+"shard solitaire (ruby)": [
+"KftGV"
+],
+"shatterspike": [
+"TftYP"
+],
+"shatterstick": [
+"BGDIA"
+],
+"sheep": [
+"PHB",
+"XDMG"
+],
+"sheltering hands trinket": [
+"AU"
+],
+"shield guardian amulet": [
+"IDRotF"
+],
+"shield of expression": [
+"XDMG",
+"XGE"
+],
+"shield of far sight": [
+"VGM"
+],
+"shield of missile attraction": [
+"DMG",
+"XDMG"
+],
+"shield of shouting": [
+"ToA"
+],
+"shield of the blazing dreadnought": [
+"BGG"
+],
+"shield of the cavalier": [
+"XDMG"
+],
+"shield of the hidden lord": [
+"BGDIA"
+],
+"shield of the silver dragon": [
+"CoS"
+],
+"shield of the tortoise": [
+"BMT"
+],
+"shield of the uven rune": [
+"WDMM"
+],
+"shiftweave": [
+"ERLW"
+],
+"shovel": [
+"PHB",
+"XPHB"
+],
+"shrieking greaves": [
+"BMT"
+],
+"shrike ship": [
+"AAG"
+],
+"signal whistle": [
+"PHB",
+"XPHB"
+],
+"signet ring": [
+"PHB"
+],
+"silk": [
+"XDMG"
+],
+"silk (1 sq. yd.)": [
+"PHB"
+],
+"silk robe with gold embroidery": [
+"DMG"
+],
+"silk rope (50 feet)": [
+"PHB"
+],
+"silk vestments with gold embroidery": [
+"XDMG"
+],
+"silken spite (awakened)": [
+"EGW"
+],
+"silken spite (dormant)": [
+"EGW"
+],
+"silken spite (exalted)": [
+"EGW"
+],
+"silver": [
+"PHB",
+"XDMG"
+],
+"silver (sp)": [
+"PHB"
+],
+"silver 25-zib coin": [
+"GGR"
+],
+"silver and gold brooch": [
+"DMG",
+"XDMG"
+],
+"silver bar (2-pound)": [
+"XDMG"
+],
+"silver bar (5-pound)": [
+"XDMG"
+],
+"silver chalice set with moonstones": [
+"DMG",
+"XDMG"
+],
+"silver dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"silver ewer": [
+"DMG",
+"XDMG"
+],
+"silver headdress with amber and red-coral feathers (sun empire)": [
+"PSX"
+],
+"silver medallion (sun empire)": [
+"PSX"
+],
+"silver necklace with a gemstone pendant": [
+"DMG",
+"XDMG"
+],
+"silver necklace with an amber pendant (sun empire)": [
+"PSX"
+],
+"silver shoulder piece with amber and garnet (sun empire)": [
+"PSX"
+],
+"silver sword": [
+"MTF"
+],
+"silver-plated steel longsword with jet set in hilt": [
+"DMG"
+],
+"silverquill primer": [
+"SCC"
+],
+"silverquill trinket": [
+"SCC"
+],
+"simic guild signet": [
+"GGR"
+],
+"simic keyrune": [
+"GGR"
+],
+"sinda berries (10)": [
+"ToA"
+],
+"siren song lyre": [
+"MOT"
+],
+"skull card": [
+"BMT"
+],
+"skull helm": [
+"BMT"
+],
+"skull of selfish knowledge": [
+"CoA"
+],
+"skyblinder staff": [
+"GGR"
+],
+"skyship": [
+"EGW"
+],
+"sled": [
+"PHB",
+"XPHB"
+],
+"sled dog": [
+"FRHoF",
+"IDRotF"
+],
+"sledgehammer": [
+"PHB"
+],
+"sleep grenade": [
+"QftIS"
+],
+"sling bullets of althemone": [
+"MOT"
+],
+"sling of giant felling": [
+"BMT"
+],
+"slippers of spider climbing": [
+"DMG",
+"XDMG"
+],
+"slumbering dragon vessel": [
+"FTD"
+],
+"slumbering dragon-touched focus": [
+"FTD"
+],
+"slumbering scaled ornament": [
+"FTD"
+],
+"small gold bracelet": [
+"DMG"
+],
+"small gold idol": [
+"DMG"
+],
+"small gold statuette set with rubies": [
+"DMG"
+],
+"small mirror set in a painted wooden frame": [
+"DMG"
+],
+"smoke grenade": [
+"DMG",
+"XDMG"
+],
+"smokepowder": [
+"WDH"
+],
+"snicker-snack": [
+"WBtW"
+],
+"snowshoes": [
+"IDRotF"
+],
+"soap": [
+"PHB"
+],
+"somniferous blossom rod": [
+"AU"
+],
+"soothsalts": [
+"EGW"
+],
+"sorcerous spyglass": [
+"XMtS"
+],
+"soul bag": [
+"MM"
+],
+"soul coin": [
+"BGDIA"
+],
+"sovereign glue": [
+"DMG",
+"XDMG"
+],
+"space galleon": [
+"AAG"
+],
+"spaceship trinket": [
+"QftIS"
+],
+"speaking stone": [
+"ERLW"
+],
+"speaking stones": [
+"WttHC"
+],
+"spear of backbiting": [
+"TftYP"
+],
+"spell bottle": [
+"EGW"
+],
+"spell component ring": [
+"AU"
+],
+"spell duelist's trophy": [
+"AU"
+],
+"spell gem (amber)": [
+"OotA"
+],
+"spell gem (bloodstone)": [
+"OotA"
+],
+"spell gem (diamond)": [
+"OotA"
+],
+"spell gem (jade)": [
+"OotA"
+],
+"spell gem (lapis lazuli)": [
+"OotA"
+],
+"spell gem (obsidian)": [
+"OotA"
+],
+"spell gem (quartz)": [
+"OotA"
+],
+"spell gem (ruby)": [
+"OotA"
+],
+"spell gem (star ruby)": [
+"OotA"
+],
+"spell gem (topaz)": [
+"OotA"
+],
+"spell scroll (1st level)": [
+"DMG"
+],
+"spell scroll (2nd level)": [
+"DMG"
+],
+"spell scroll (3rd level)": [
+"DMG"
+],
+"spell scroll (4th level)": [
+"DMG"
+],
+"spell scroll (5th level)": [
+"DMG"
+],
+"spell scroll (6th level)": [
+"DMG"
+],
+"spell scroll (7th level)": [
+"DMG"
+],
+"spell scroll (8th level)": [
+"DMG"
+],
+"spell scroll (9th level)": [
+"DMG"
+],
+"spell scroll (cantrip)": [
+"DMG",
+"XDMG"
+],
+"spell scroll (level 1)": [
+"XDMG"
+],
+"spell scroll (level 2)": [
+"XDMG"
+],
+"spell scroll (level 3)": [
+"XDMG"
+],
+"spell scroll (level 4)": [
+"XDMG"
+],
+"spell scroll (level 5)": [
+"XDMG"
+],
+"spell scroll (level 6)": [
+"XDMG"
+],
+"spell scroll (level 7)": [
+"XDMG"
+],
+"spell scroll (level 8)": [
+"XDMG"
+],
+"spell scroll (level 9)": [
+"XDMG"
+],
+"spell-refueling ring": [
+"EFA"
+],
+"spell-slinger's puppet": [
+"AU"
+],
+"spellbook": [
+"PHB"
+],
+"spellguard shield": [
+"DMG",
+"XDMG"
+],
+"spelljamming helm": [
+"AAG"
+],
+"spellshard": [
+"ERLW"
+],
+"spellwrought tattoo (1st level)": [
+"TCE"
+],
+"spellwrought tattoo (2nd level)": [
+"TCE"
+],
+"spellwrought tattoo (3rd level)": [
+"TCE"
+],
+"spellwrought tattoo (4th level)": [
+"TCE"
+],
+"spellwrought tattoo (5th level)": [
+"TCE"
+],
+"spellwrought tattoo (cantrip)": [
+"TCE"
+],
+"sphere of annihilation": [
+"DMG",
+"XDMG"
+],
+"spider staff": [
+"LMoP",
+"PaBTSO"
+],
+"spies' murmur": [
+"GGR"
+],
+"spiked shield": [
+"WttHC"
+],
+"spindle of fate": [
+"BMT"
+],
+"spinel": [
+"DMG",
+"XDMG"
+],
+"spirit board": [
+"XDMG"
+],
+"spirit-binding censer": [
+"AUD"
+],
+"sprig of mistletoe": [
+"PHB",
+"XPHB"
+],
+"spyglass": [
+"PHB",
+"XPHB"
+],
+"spyglass of clairvoyance": [
+"AI"
+],
+"squid ship": [
+"AAG"
+],
+"stabling (per day)": [
+"PHB",
+"XPHB"
+],
+"staff of adornment": [
+"XDMG",
+"XGE"
+],
+"staff of birdcalls": [
+"XDMG",
+"XGE"
+],
+"staff of charming": [
+"DMG",
+"XDMG"
+],
+"staff of defense": [
+"LMoP",
+"PaBTSO"
+],
+"staff of dunamancy": [
+"EGW"
+],
+"staff of fate": [
+"CM"
+],
+"staff of fire": [
+"DMG",
+"XDMG"
+],
+"staff of flowers": [
+"XDMG",
+"XGE"
+],
+"staff of frost": [
+"DMG",
+"XDMG"
+],
+"staff of healing": [
+"DMG",
+"XDMG"
+],
+"staff of power": [
+"DMG",
+"XDMG"
+],
+"staff of ruling": [
+"QftIS"
+],
+"staff of striking": [
+"DMG",
+"XDMG"
+],
+"staff of swarming insects": [
+"DMG",
+"XDMG"
+],
+"staff of the adder": [
+"DMG",
+"XDMG"
+],
+"staff of the forgotten one": [
+"ToA"
+],
+"staff of the ivory claw": [
+"EGW"
+],
+"staff of the lost": [
+"AU"
+],
+"staff of the magi": [
+"DMG",
+"XDMG"
+],
+"staff of the python": [
+"DMG",
+"XDMG"
+],
+"staff of the rooted hills": [
+"BGG"
+],
+"staff of the spirit aegis": [
+"AUD"
+],
+"staff of the woodlands": [
+"DMG",
+"XDMG"
+],
+"staff of thunder and lightning": [
+"DMG",
+"XDMG"
+],
+"staff of withering": [
+"DMG",
+"XDMG"
+],
+"star card": [
+"BMT"
+],
+"star moth": [
+"AAG"
+],
+"star rose quartz": [
+"DMG",
+"XDMG"
+],
+"star ruby": [
+"DMG",
+"XDMG"
+],
+"star sapphire": [
+"DMG",
+"XDMG"
+],
+"statuette of augury": [
+"PaBTSO"
+],
+"statuette of saint markovia": [
+"CoS"
+],
+"steel": [
+"WBtW"
+],
+"steel mirror": [
+"PHB"
+],
+"stirring dragon vessel": [
+"FTD"
+],
+"stirring dragon-touched focus": [
+"FTD"
+],
+"stirring scaled ornament": [
+"FTD"
+],
+"stone of controlling earth elementals": [
+"DMG",
+"XDMG"
+],
+"stone of creation": [
+"AitFR-AVT"
+],
+"stone of golorr": [
+"WDH"
+],
+"stone of good luck": [
+"DMG",
+"XDMG"
+],
+"stone of ill luck": [
+"TftYP"
+],
+"stonebreaker's breastplate": [
+"BGG"
+],
+"stonemaker war pick": [
+"BMT"
+],
+"stonespeaker crystal": [
+"OotA"
+],
+"stonky's ring": [
+"CM"
+],
+"storm boomerang": [
+"PotA"
+],
+"stormgirdle (awakened)": [
+"EGW"
+],
+"stormgirdle (dormant)": [
+"EGW"
+],
+"stormgirdle (exalted)": [
+"EGW"
+],
+"string": [
+"XPHB"
+],
+"strixhaven pennant": [
+"SCC"
+],
+"sun": [
+"WDH"
+],
+"sun amulet on a beaded chain (sun empire)": [
+"PSX"
+],
+"sun blade": [
+"DMG",
+"XDMG"
+],
+"sun card": [
+"BMT"
+],
+"sun staff": [
+"BMT"
+],
+"sunforger": [
+"GGR"
+],
+"sunsword": [
+"CoS"
+],
+"survival mantle": [
+"VGM"
+],
+"sweeping broom": [
+"AU"
+],
+"sword of answering": [
+"XDMG"
+],
+"sword of answering (answerer)": [
+"DMG"
+],
+"sword of answering (back talker)": [
+"DMG"
+],
+"sword of answering (concluder)": [
+"DMG"
+],
+"sword of answering (last quip)": [
+"DMG"
+],
+"sword of answering (rebutter)": [
+"DMG"
+],
+"sword of answering (replier)": [
+"DMG"
+],
+"sword of answering (retorter)": [
+"DMG"
+],
+"sword of answering (scather)": [
+"DMG"
+],
+"sword of answering (squelcher)": [
+"DMG"
+],
+"sword of kas": [
+"DMG",
+"XDMG"
+],
+"sword of the paruns": [
+"GGR"
+],
+"sword of zariel": [
+"BGDIA"
+],
+"tablet of reawakening": [
+"HAT-LMI"
+],
+"talarith": [
+"BAM"
+],
+"talisman of pure good": [
+"DMG",
+"XDMG"
+],
+"talisman of the sphere": [
+"DMG",
+"XDMG"
+],
+"talisman of ultimate evil": [
+"DMG",
+"XDMG"
+],
+"talking doll": [
+"XDMG",
+"XGE"
+],
+"talons card": [
+"BMT"
+],
+"tangler grenade": [
+"WDMM"
+],
+"tankard": [
+"PHB"
+],
+"tankard of plenty": [
+"HotDQ"
+],
+"tankard of sobriety": [
+"XDMG",
+"XGE"
+],
+"taol": [
+"WDH"
+],
+"tarnished idol of good fortunes": [
+"AU"
+],
+"tasha's creeping keelboat": [
+"DitLCoT"
+],
+"tearulai": [
+"WDMM"
+],
+"teeth of dahlver-nar": [
+"TCE"
+],
+"tej": [
+"ToA"
+],
+"teleportation tablet": [
+"CRCotN"
+],
+"teleporter ring": [
+"WDH"
+],
+"telescopic transporter": [
+"BMT"
+],
+"ten keyholes dagger": [
+"AU"
+],
+"tent": [
+"XPHB"
+],
+"tentacle rod": [
+"DMG",
+"XDMG"
+],
+"thayan spell tattoo": [
+"FRHoF"
+],
+"the bloody end (awakened)": [
+"EGW"
+],
+"the bloody end (dormant)": [
+"EGW"
+],
+"the bloody end (exalted)": [
+"EGW"
+],
+"the codicil of white": [
+"IDRotF"
+],
+"the incantations of iriolarthas": [
+"IDRotF"
+],
+"the infernal machine of lum the mad": [
+"IMR"
+],
+"theki root": [
+"EGW"
+],
+"thermal cube": [
+"IDRotF"
+],
+"thespian's playbill": [
+"AU"
+],
+"thessaltoxin": [
+"IMR"
+],
+"thessaltoxin antidote": [
+"IMR"
+],
+"thief's thimble": [
+"AU"
+],
+"thieves' tools": [
+"PHB",
+"XPHB"
+],
+"three keyholes dagger": [
+"AU"
+],
+"three-dragon ante set": [
+"PHB",
+"XPHB"
+],
+"throne card": [
+"BMT"
+],
+"thunder absorbing tattoo": [
+"TCE"
+],
+"thunderbuss": [
+"BGG"
+],
+"thunderous greatclub": [
+"XDMG"
+],
+"tidecaller trident": [
+"BMT"
+],
+"tiger eye": [
+"DMG",
+"XDMG"
+],
+"timepiece of travel": [
+"AI"
+],
+"tinderbox": [
+"PHB",
+"XPHB"
+],
+"tinderstrike": [
+"PotA"
+],
+"tiny jade figurine (river heralds)": [
+"PSX"
+],
+"tloques' berserker battleaxe": [
+"TftYP"
+],
+"tome of clear thought": [
+"DMG",
+"XDMG"
+],
+"tome of leadership and influence": [
+"DMG",
+"XDMG"
+],
+"tome of strahd": [
+"CoS"
+],
+"tome of the dragon": [
+"FRAiF"
+],
+"tome of the stilled tongue": [
+"DMG",
+"XDMG"
+],
+"tome of understanding": [
+"DMG",
+"XDMG"
+],
+"topaz": [
+"DMG",
+"XDMG"
+],
+"topaz annihilator": [
+"FTD"
+],
+"torch": [
+"PHB",
+"XPHB"
+],
+"torpor": [
+"DMG",
+"XDMG"
+],
+"totem": [
+"PHB"
+],
+"tourmaline": [
+"DMG",
+"XDMG"
+],
+"tranquil rod of the honed mind": [
+"AU"
+],
+"travel alchemical kit": [
+"AI"
+],
+"traveler's clothes": [
+"PHB",
+"XPHB"
+],
+"traveler's pearl": [
+"AU"
+],
+"treasure chest crafted of exotic wood with gold fittings and opals (brazen coalition)": [
+"PSX"
+],
+"trident of fish command": [
+"DMG",
+"XDMG"
+],
+"trinket": [
+"AI",
+"CoS",
+"EET",
+"PHB",
+"XPHB"
+],
+"true-ice shards (dagger)": [
+"CoA"
+],
+"true-ice shards (rapier)": [
+"CoA"
+],
+"truth serum": [
+"DMG",
+"XDMG"
+],
+"turquoise": [
+"DMG",
+"XDMG"
+],
+"turtle ship": [
+"AAG"
+],
+"two-birds sling": [
+"MOT"
+],
+"two-person tent": [
+"PHB"
+],
+"tyrant ship": [
+"AAG"
+],
+"ulcrun": [
+"FRAiF"
+],
+"unbreakable arrow": [
+"XGE"
+],
+"uncommon glamerweave": [
+"ERLW"
+],
+"universal pantograph": [
+"AU"
+],
+"universal solvent": [
+"DMG",
+"XDMG"
+],
+"vanquisher's banner": [
+"XMtS"
+],
+"vanrak's mithral shirt": [
+"WDMM"
+],
+"velvet doublet with gold buttons (legion of dusk)": [
+"PSX"
+],
+"ventilating lungs": [
+"ERLW"
+],
+"verminshroud (awakened)": [
+"EGW"
+],
+"verminshroud (dormant)": [
+"EGW"
+],
+"verminshroud (exalted)": [
+"EGW"
+],
+"veteran's cane": [
+"XDMG",
+"XGE"
+],
+"vial": [
+"PHB",
+"XPHB"
+],
+"vial of greed": [
+"CoA"
+],
+"vial of stardust": [
+"WDMM"
+],
+"vial of thought capture": [
+"AZfyT"
+],
+"vigilant rod of the honed mind": [
+"AU"
+],
+"void card": [
+"BMT"
+],
+"voidwalker armor": [
+"BMT"
+],
+"voting kit": [
+"AI"
+],
+"vox seeker": [
+"EGW"
+],
+"voyager staff": [
+"GGR"
+],
+"wagon": [
+"PHB",
+"XPHB"
+],
+"wakened dragon vessel": [
+"FTD"
+],
+"wakened dragon-touched focus": [
+"FTD"
+],
+"wakened scaled ornament": [
+"FTD"
+],
+"wand of binding": [
+"DMG",
+"XDMG"
+],
+"wand of conducting": [
+"XDMG",
+"XGE"
+],
+"wand of enemy detection": [
+"DMG",
+"XDMG"
+],
+"wand of entangle": [
+"TftYP"
+],
+"wand of enthralling": [
+"AUD"
+],
+"wand of fear": [
+"DMG",
+"XDMG"
+],
+"wand of fireballs": [
+"DMG",
+"XDMG"
+],
+"wand of freshness": [
+"AU"
+],
+"wand of lightning bolts": [
+"DMG",
+"XDMG"
+],
+"wand of magic detection": [
+"DMG",
+"XDMG"
+],
+"wand of magic missiles": [
+"DMG",
+"XDMG"
+],
+"wand of orcus": [
+"DMG",
+"XDMG"
+],
+"wand of paralysis": [
+"DMG",
+"XDMG"
+],
+"wand of polymorph": [
+"DMG",
+"XDMG"
+],
+"wand of pyrotechnics": [
+"XDMG",
+"XGE"
+],
+"wand of scowls": [
+"XGE"
+],
+"wand of secrets": [
+"DMG",
+"XDMG"
+],
+"wand of slumber": [
+"AU"
+],
+"wand of smiles": [
+"XGE"
+],
+"wand of teeth": [
+"AU"
+],
+"wand of viscid globs": [
+"OotA"
+],
+"wand of web": [
+"DMG",
+"XDMG"
+],
+"wand of winter": [
+"HotDQ"
+],
+"wand of wonder": [
+"DMG",
+"XDMG"
+],
+"wand sheath": [
+"ERLW"
+],
+"war horn of valor": [
+"BGG"
+],
+"warhorse": [
+"PHB",
+"XPHB"
+],
+"warm fungal clothing": [
+"FRHoF"
+],
+"warrior's passkey": [
+"BMT"
+],
+"warship": [
+"DMG",
+"XPHB"
+],
+"wasp ship": [
+"AAG"
+],
+"watchful helm": [
+"CM"
+],
+"waterskin": [
+"PHB",
+"XPHB"
+],
+"wave": [
+"DMG",
+"XDMG"
+],
+"wayfarer's boots": [
+"BGG"
+],
+"waythe": [
+"TftYP"
+],
+"weird tank": [
+"PotA"
+],
+"well of many worlds": [
+"DMG",
+"XDMG"
+],
+"well-made tapestry that is 10 feet by 10 feet": [
+"XDMG"
+],
+"whaleboat": [
+"FRAiF"
+],
+"wheat": [
+"PHB",
+"XDMG"
+],
+"wheel of stars": [
+"AI"
+],
+"wheel of wind and water": [
+"ERLW"
+],
+"whelm": [
+"DMG",
+"XDMG"
+],
+"whetstone": [
+"PHB"
+],
+"whisper jar": [
+"AI"
+],
+"whistle-stick": [
+"OGA"
+],
+"white chromatic rose": [
+"WBtW"
+],
+"white dragon cape": [
+"TftYP"
+],
+"white dragon mask": [
+"RoTOS"
+],
+"white dragon scale mail": [
+"DMG",
+"XDMG"
+],
+"white ghost orchid seed": [
+"JttRC"
+],
+"wildroot": [
+"ToA"
+],
+"wildspace orrery": [
+"AAG"
+],
+"will of the talon (awakened)": [
+"EGW"
+],
+"will of the talon (dormant)": [
+"EGW"
+],
+"will of the talon (exalted)": [
+"EGW"
+],
+"willowshade oil": [
+"EGW"
+],
+"wind fan": [
+"DMG",
+"XDMG"
+],
+"windskiff": [
+"FRAiF"
+],
+"windvane": [
+"PotA"
+],
+"winged boots": [
+"DMG",
+"XDMG"
+],
+"wings of flying": [
+"DMG",
+"XDMG"
+],
+"wingwear": [
+"PotA"
+],
+"winter camouflage": [
+"FRHoF"
+],
+"winter's dark bite": [
+"HftT"
+],
+"witchlight vane": [
+"WBtW"
+],
+"witchlight watch": [
+"WBtW"
+],
+"witherbloom primer": [
+"SCC"
+],
+"witherbloom trinket": [
+"SCC"
+],
+"woodcutter's axe": [
+"WBtW"
+],
+"workshop wrecker": [
+"AU"
+],
+"wreath of the prism (awakened)": [
+"EGW"
+],
+"wreath of the prism (dormant)": [
+"EGW"
+],
+"wreath of the prism (exalted)": [
+"EGW"
+],
+"wrought-iron tower": [
+"CoA"
+],
+"wukka nut": [
+"ToA"
+],
+"wyllow's staff of flowers": [
+"WDMM"
+],
+"wyrmreaver gauntlets": [
+"BGG"
+],
+"wyrmskull throne": [
+"SKT"
+],
+"wyvern poison": [
+"DMG",
+"XDMG"
+],
+"xen'drik trinket": [
+"ERLW"
+],
+"yahcha": [
+"ToA"
+],
+"yellow death": [
+"FRAiF"
+],
+"yellow sapphire": [
+"DMG",
+"XDMG"
+],
+"yester hill axe": [
+"CoS"
+],
+"yew wand": [
+"PHB",
+"XPHB"
+],
+"ythryn mythallar": [
+"IDRotF"
+],
+"zabou": [
+"ToA"
+],
+"zhentarim trinket": [
+"FRHoF"
+],
+"zircon": [
+"DMG",
+"XDMG"
+],
+"alchemist's supplies": [
+"PHB",
+"XPHB"
+],
+"antimatter rifle": [
+"DMG",
+"XDMG"
+],
+"arrow": [
+"PHB",
+"XPHB"
+],
+"arrows (20)": [
+"PHB",
+"XPHB"
+],
+"automatic pistol": [
+"DMG"
+],
+"automatic rifle": [
+"DMG",
+"XDMG"
+],
+"bagpipes": [
+"PHB",
+"XPHB"
+],
+"bandore": [
+"FRHoF"
+],
+"battleaxe": [
+"PHB",
+"XPHB"
+],
+"birdpipes": [
+"SCAG"
+],
+"blowgun": [
+"PHB",
+"XPHB"
+],
+"blowgun needle": [
+"PHB"
+],
+"blowgun needles (50)": [
+"PHB"
+],
+"bolt": [
+"XPHB"
+],
+"bolts (20)": [
+"XPHB"
+],
+"breastplate": [
+"PHB",
+"XPHB"
+],
+"brewer's supplies": [
+"PHB",
+"XPHB"
+],
+"calligrapher's supplies": [
+"PHB",
+"XPHB"
+],
+"carpenter's tools": [
+"PHB",
+"XPHB"
+],
+"cartographer's tools": [
+"PHB",
+"XPHB"
+],
+"chain mail": [
+"PHB",
+"XPHB"
+],
+"chain shirt": [
+"PHB",
+"XPHB"
+],
+"cittern": [
+"FRHoF"
+],
+"club": [
+"PHB",
+"XPHB"
+],
+"cobbler's tools": [
+"PHB",
+"XPHB"
+],
+"cook's utensils": [
+"PHB",
+"XPHB"
+],
+"crossbow bolt": [
+"PHB"
+],
+"crossbow bolts (20)": [
+"PHB"
+],
+"crystal": [
+"PHB",
+"XPHB"
+],
+"dagger": [
+"PHB",
+"XPHB"
+],
+"dart": [
+"PHB",
+"XPHB"
+],
+"double-bladed scimitar": [
+"ERLW"
+],
+"drum": [
+"PHB",
+"XPHB"
+],
+"dulcimer": [
+"PHB",
+"XPHB"
+],
+"energy cell": [
+"DMG",
+"XDMG"
+],
+"firearm bullet": [
+"XPHB"
+],
+"firearm bullets (10)": [
+"XPHB"
+],
+"flail": [
+"PHB",
+"XPHB"
+],
+"flute": [
+"PHB",
+"XPHB"
+],
+"glaive": [
+"PHB",
+"XPHB"
+],
+"glassblower's tools": [
+"PHB",
+"XPHB"
+],
+"glaur": [
+"SCAG"
+],
+"greataxe": [
+"PHB",
+"XPHB"
+],
+"greatclub": [
+"PHB",
+"XPHB"
+],
+"greatsword": [
+"PHB",
+"XPHB"
+],
+"halberd": [
+"PHB",
+"XPHB"
+],
+"half plate armor": [
+"PHB",
+"XPHB"
+],
+"hand crossbow": [
+"PHB",
+"XPHB"
+],
+"hand drum": [
+"SCAG"
+],
+"handaxe": [
+"PHB",
+"XPHB"
+],
+"heavy crossbow": [
+"PHB",
+"XPHB"
+],
+"hide armor": [
+"PHB",
+"XPHB"
+],
+"hooked shortspear": [
+"OotA"
+],
+"hoopak": [
+"DSotDQ"
+],
+"horn": [
+"PHB",
+"XPHB"
+],
+"hunting rifle": [
+"DMG",
+"XDMG"
+],
+"javelin": [
+"PHB",
+"XPHB"
+],
+"jeweler's tools": [
+"PHB",
+"XPHB"
+],
+"lance": [
+"PHB",
+"XPHB"
+],
+"laser pistol": [
+"DMG",
+"XDMG"
+],
+"laser rifle": [
+"DMG",
+"XDMG"
+],
+"leather armor": [
+"PHB",
+"XPHB"
+],
+"leatherworker's tools": [
+"PHB",
+"XPHB"
+],
+"light crossbow": [
+"PHB",
+"XPHB"
+],
+"light hammer": [
+"PHB",
+"XPHB"
+],
+"light repeating crossbow": [
+"OotA"
+],
+"longbow": [
+"PHB",
+"XPHB"
+],
+"longhorn": [
+"SCAG"
+],
+"longsword": [
+"PHB",
+"XPHB"
+],
+"lute": [
+"PHB",
+"XPHB"
+],
+"lyre": [
+"PHB",
+"XPHB"
+],
+"mace": [
+"PHB",
+"XPHB"
+],
+"mason's tools": [
+"PHB",
+"XPHB"
+],
+"maul": [
+"PHB",
+"XPHB"
+],
+"modern bullet": [
+"DMG"
+],
+"modern bullets (10)": [
+"DMG"
+],
+"morningstar": [
+"PHB",
+"XPHB"
+],
+"musket": [
+"DMG",
+"XPHB"
+],
+"needle": [
+"XPHB"
+],
+"needles (50)": [
+"XPHB"
+],
+"orb": [
+"PHB",
+"XPHB"
+],
+"padded armor": [
+"PHB",
+"XPHB"
+],
+"painter's supplies": [
+"PHB",
+"XPHB"
+],
+"pan flute": [
+"PHB",
+"XPHB"
+],
+"pike": [
+"PHB",
+"XPHB"
+],
+"pistol": [
+"DMG",
+"XPHB"
+],
+"plate armor": [
+"PHB",
+"XPHB"
+],
+"potter's tools": [
+"PHB",
+"XPHB"
+],
+"quarterstaff": [
+"PHB",
+"XPHB"
+],
+"rapier": [
+"PHB",
+"XPHB"
+],
+"renaissance bullet": [
+"DMG"
+],
+"renaissance bullets (10)": [
+"DMG"
+],
+"revolver": [
+"DMG",
+"XDMG"
+],
+"ring mail": [
+"PHB",
+"XPHB"
+],
+"rod": [
+"PHB",
+"XPHB"
+],
+"scale mail": [
+"PHB",
+"XPHB"
+],
+"scimitar": [
+"PHB",
+"XPHB"
+],
+"semiautomatic pistol": [
+"XDMG"
+],
+"shawm": [
+"PHB",
+"SCAG",
+"XPHB"
+],
+"shield": [
+"PHB",
+"XPHB"
+],
+"shortbow": [
+"PHB",
+"XPHB"
+],
+"shortsword": [
+"PHB",
+"XPHB"
+],
+"shotgun": [
+"DMG",
+"XDMG"
+],
+"sickle": [
+"PHB",
+"XPHB"
+],
+"sling": [
+"PHB",
+"XPHB"
+],
+"sling bullet": [
+"PHB",
+"XPHB"
+],
+"sling bullets (20)": [
+"PHB",
+"XPHB"
+],
+"smith's tools": [
+"PHB",
+"XPHB"
+],
+"songhorn": [
+"SCAG"
+],
+"spear": [
+"PHB",
+"XPHB"
+],
+"spiked armor": [
+"SCAG"
+],
+"splint armor": [
+"PHB",
+"XPHB"
+],
+"staff": [
+"PHB",
+"XPHB"
+],
+"studded leather armor": [
+"PHB",
+"XPHB"
+],
+"tantan": [
+"SCAG"
+],
+"thelarr": [
+"SCAG"
+],
+"tinker's tools": [
+"PHB",
+"XPHB"
+],
+"tocken": [
+"SCAG"
+],
+"trident": [
+"PHB",
+"XPHB"
+],
+"viol": [
+"PHB",
+"XPHB"
+],
+"wand": [
+"PHB",
+"XPHB"
+],
+"war pick": [
+"PHB",
+"XPHB"
+],
+"wargong": [
+"SCAG"
+],
+"warhammer": [
+"PHB",
+"XPHB"
+],
+"weaver's tools": [
+"PHB",
+"XPHB"
+],
+"whip": [
+"PHB",
+"XPHB"
+],
+"woodcarver's tools": [
+"PHB",
+"XPHB"
+],
+"wooden staff": [
+"PHB",
+"XPHB"
+],
+"yarting": [
+"FRHoF",
+"SCAG"
+],
+"yklwa": [
+"ToA"
+],
+"zulkoon": [
+"SCAG"
+]
+},
+"classes": {
+"bard": [
+"PHB",
+"XPHB"
+],
+"druid": [
+"PHB",
+"XPHB"
+],
+"warlock": [
+"PHB",
+"XPHB"
+],
+"rogue": [
+"PHB",
+"XPHB"
+],
+"artificer": [
+"EFA",
+"TCE"
+],
+"wizard": [
+"PHB",
+"XPHB"
+],
+"ranger": [
+"PHB",
+"XPHB"
+],
+"cleric": [
+"PHB",
+"XPHB"
+],
+"monk": [
+"PHB",
+"XPHB"
+],
+"fighter": [
+"PHB",
+"XPHB"
+],
+"paladin": [
+"PHB",
+"XPHB"
+],
+"sorcerer": [
+"PHB",
+"XPHB"
+],
+"barbarian": [
+"PHB",
+"XPHB"
+]
+},
+"subclasses": {
+"college of lore": [
+"PHB",
+"XPHB"
+],
+"lore": [
+"PHB",
+"XPHB"
+],
+"college of valor": [
+"PHB",
+"XPHB"
+],
+"valor": [
+"PHB",
+"XPHB"
+],
+"college of glamour": [
+"XGE",
+"XPHB"
+],
+"glamour": [
+"XGE",
+"XPHB"
+],
+"college of swords": [
+"XGE"
+],
+"swords": [
+"XGE"
+],
+"college of whispers": [
+"XGE"
+],
+"whispers": [
+"XGE"
+],
+"college of creation": [
+"TCE"
+],
+"creation": [
+"TCE"
+],
+"college of eloquence": [
+"TCE"
+],
+"eloquence": [
+"TCE"
+],
+"college of spirits": [
+"RHW",
+"VRGR"
+],
+"spirits": [
+"RHW",
+"VRGR"
+],
+"college of dance": [
+"XPHB"
+],
+"dance": [
+"XPHB"
+],
+"college of the moon": [
+"FRHoF"
+],
+"moon": [
+"FRHoF",
+"PHB",
+"XPHB"
+],
+"circle of the land": [
+"PHB",
+"XPHB"
+],
+"land": [
+"PHB",
+"XPHB"
+],
+"circle of the moon": [
+"PHB",
+"XPHB"
+],
+"circle of dreams": [
+"XGE"
+],
+"dreams": [
+"XGE"
+],
+"circle of the shepherd": [
+"XGE"
+],
+"shepherd": [
+"XGE"
+],
+"circle of spores": [
+"TCE"
+],
+"spores": [
+"TCE"
+],
+"circle of stars": [
+"TCE"
+],
+"stars": [
+"TCE",
+"XPHB"
+],
+"circle of wildfire": [
+"TCE"
+],
+"wildfire": [
+"TCE"
+],
+"circle of the sea": [
+"XPHB"
+],
+"sea": [
+"XPHB"
+],
+"circle of the stars": [
+"XPHB"
+],
+"the archfey": [
+"PHB"
+],
+"archfey": [
+"PHB",
+"XPHB"
+],
+"the fiend": [
+"PHB"
+],
+"fiend": [
+"PHB",
+"XPHB"
+],
+"the great old one": [
+"PHB"
+],
+"great old one": [
+"PHB",
+"XPHB"
+],
+"the undying": [
+"SCAG"
+],
+"undying": [
+"SCAG"
+],
+"the celestial": [
+"XGE"
+],
+"celestial": [
+"XGE",
+"XPHB"
+],
+"the hexblade": [
+"XGE"
+],
+"hexblade": [
+"XGE"
+],
+"the fathomless": [
+"TCE"
+],
+"fathomless": [
+"TCE"
+],
+"the genie": [
+"TCE"
+],
+"genie": [
+"TCE"
+],
+"the undead": [
+"VRGR"
+],
+"undead": [
+"RHW",
+"VRGR"
+],
+"archfey patron": [
+"XPHB"
+],
+"celestial patron": [
+"XPHB"
+],
+"fiend patron": [
+"XPHB"
+],
+"great old one patron": [
+"XPHB"
+],
+"undead patron": [
+"RHW"
+],
+"vestige patron": [
+"AU"
+],
+"vestige": [
+"AU"
+],
+"arcane trickster": [
+"PHB",
+"XPHB"
+],
+"assassin": [
+"PHB",
+"XPHB"
+],
+"thief": [
+"PHB",
+"XPHB"
+],
+"inquisitive": [
+"XGE"
+],
+"mastermind": [
+"XGE"
+],
+"scout": [
+"XGE"
+],
+"swashbuckler": [
+"XGE"
+],
+"phantom": [
+"RHW",
+"TCE"
+],
+"soulknife": [
+"TCE",
+"XPHB"
+],
+"scion of the three": [
+"FRHoF"
+],
+"alchemist": [
+"EFA",
+"TCE"
+],
+"armorer": [
+"EFA",
+"TCE"
+],
+"artillerist": [
+"EFA",
+"TCE"
+],
+"battle smith": [
+"EFA",
+"TCE"
+],
+"cartographer": [
+"EFA"
+],
+"reanimator": [
+"RHW"
+],
+"school of abjuration": [
+"PHB"
+],
+"abjuration": [
+"PHB"
+],
+"school of conjuration": [
+"PHB"
+],
+"conjuration": [
+"PHB"
+],
+"school of divination": [
+"PHB"
+],
+"divination": [
+"PHB"
+],
+"school of enchantment": [
+"PHB"
+],
+"enchantment": [
+"PHB"
+],
+"school of evocation": [
+"PHB"
+],
+"evocation": [
+"PHB"
+],
+"school of illusion": [
+"PHB"
+],
+"illusion": [
+"PHB"
+],
+"school of necromancy": [
+"PHB"
+],
+"necromancy": [
+"PHB"
+],
+"school of transmutation": [
+"PHB"
+],
+"transmutation": [
+"PHB"
+],
+"war magic": [
+"XGE"
+],
+"war": [
+"PHB",
+"XGE",
+"XPHB"
+],
+"chronurgy magic": [
+"EGW"
+],
+"chronurgy": [
+"EGW"
+],
+"graviturgy magic": [
+"EGW"
+],
+"graviturgy": [
+"EGW"
+],
+"bladesinging": [
+"TCE"
+],
+"order of scribes": [
+"TCE"
+],
+"scribes": [
+"TCE"
+],
+"abjurer": [
+"XPHB"
+],
+"diviner": [
+"XPHB"
+],
+"evoker": [
+"XPHB"
+],
+"illusionist": [
+"XPHB"
+],
+"bladesinger": [
+"FRHoF"
+],
+"conjurer": [
+"AU"
+],
+"enchanter": [
+"AU"
+],
+"necromancer": [
+"AU"
+],
+"transmuter": [
+"AU"
+],
+"beast master": [
+"PHB",
+"XPHB"
+],
+"hunter": [
+"PHB",
+"XPHB"
+],
+"gloom stalker": [
+"XGE",
+"XPHB"
+],
+"horizon walker": [
+"XGE"
+],
+"monster slayer": [
+"XGE"
+],
+"fey wanderer": [
+"TCE",
+"XPHB"
+],
+"swarmkeeper": [
+"TCE"
+],
+"drakewarden": [
+"FTD"
+],
+"winter walker": [
+"FRHoF"
+],
+"hollow warden": [
+"RHW"
+],
+"knowledge domain": [
+"FRHoF",
+"PHB"
+],
+"knowledge": [
+"FRHoF",
+"PHB"
+],
+"life domain": [
+"PHB",
+"XPHB"
+],
+"life": [
+"PHB",
+"XPHB"
+],
+"light domain": [
+"PHB",
+"XPHB"
+],
+"light": [
+"PHB",
+"XPHB"
+],
+"nature domain": [
+"PHB"
+],
+"nature": [
+"PHB"
+],
+"tempest domain": [
+"PHB"
+],
+"tempest": [
+"PHB"
+],
+"trickery domain": [
+"PHB",
+"XPHB"
+],
+"trickery": [
+"PHB",
+"XPHB"
+],
+"war domain": [
+"PHB",
+"XPHB"
+],
+"death domain": [
+"DMG"
+],
+"death": [
+"DMG"
+],
+"arcana domain": [
+"AU",
+"SCAG"
+],
+"arcana": [
+"AU",
+"SCAG"
+],
+"ambition domain (psa)": [
+"PSA"
+],
+"ambition (psa)": [
+"PSA"
+],
+"knowledge domain (psa)": [
+"PSA"
+],
+"knowledge (psa)": [
+"PSA"
+],
+"solidarity domain (psa)": [
+"PSA"
+],
+"solidarity (psa)": [
+"PSA"
+],
+"strength domain (psa)": [
+"PSA"
+],
+"strength (psa)": [
+"PSA"
+],
+"zeal domain (psa)": [
+"PSA"
+],
+"zeal (psa)": [
+"PSA"
+],
+"forge domain": [
+"XGE"
+],
+"forge": [
+"XGE"
+],
+"grave domain": [
+"RHW",
+"XGE"
+],
+"grave": [
+"RHW",
+"XGE"
+],
+"order domain": [
+"TCE"
+],
+"order": [
+"TCE"
+],
+"peace domain": [
+"TCE"
+],
+"peace": [
+"TCE"
+],
+"twilight domain": [
+"TCE"
+],
+"twilight": [
+"TCE"
+],
+"way of shadow": [
+"PHB"
+],
+"shadow": [
+"PHB",
+"RHW",
+"XGE",
+"XPHB"
+],
+"way of the four elements": [
+"PHB"
+],
+"four elements": [
+"PHB"
+],
+"way of the open hand": [
+"PHB"
+],
+"open hand": [
+"PHB",
+"XPHB"
+],
+"way of the long death": [
+"SCAG"
+],
+"long death": [
+"SCAG"
+],
+"way of the drunken master": [
+"XGE"
+],
+"drunken master": [
+"XGE"
+],
+"way of the kensei": [
+"XGE"
+],
+"kensei": [
+"XGE"
+],
+"way of the sun soul": [
+"XGE"
+],
+"sun soul": [
+"XGE"
+],
+"way of mercy": [
+"TCE"
+],
+"mercy": [
+"TCE",
+"XPHB"
+],
+"way of the astral self": [
+"TCE"
+],
+"astral self": [
+"TCE"
+],
+"way of the ascendant dragon": [
+"FTD"
+],
+"ascendant dragon": [
+"FTD"
+],
+"warrior of mercy": [
+"XPHB"
+],
+"warrior of shadow": [
+"XPHB"
+],
+"warrior of the elements": [
+"XPHB"
+],
+"elements": [
+"XPHB"
+],
+"warrior of the open hand": [
+"XPHB"
+],
+"warrior of the mystic arts": [
+"AU"
+],
+"mystic arts": [
+"AU"
+],
+"battle master": [
+"PHB",
+"XPHB"
+],
+"champion": [
+"PHB",
+"XPHB"
+],
+"eldritch knight": [
+"PHB",
+"XPHB"
+],
+"purple dragon knight (banneret)": [
+"SCAG"
+],
+"arcane archer": [
+"AU",
+"XGE"
+],
+"cavalier": [
+"XGE"
+],
+"samurai": [
+"XGE"
+],
+"echo knight": [
+"EGW"
+],
+"psi warrior": [
+"TCE",
+"XPHB"
+],
+"rune knight": [
+"TCE"
+],
+"banneret": [
+"FRHoF"
+],
+"oath of devotion": [
+"PHB",
+"XPHB"
+],
+"devotion": [
+"PHB",
+"XPHB"
+],
+"oath of the ancients": [
+"PHB",
+"XPHB"
+],
+"ancients": [
+"PHB",
+"XPHB"
+],
+"oath of vengeance": [
+"PHB",
+"XPHB"
+],
+"vengeance": [
+"PHB",
+"XPHB"
+],
+"oathbreaker": [
+"DMG"
+],
+"oath of the crown": [
+"SCAG"
+],
+"crown": [
+"SCAG"
+],
+"oath of conquest": [
+"XGE"
+],
+"conquest": [
+"XGE"
+],
+"oath of redemption": [
+"XGE"
+],
+"redemption": [
+"XGE"
+],
+"oath of glory": [
+"TCE",
+"XPHB"
+],
+"glory": [
+"TCE",
+"XPHB"
+],
+"oath of the watchers": [
+"TCE"
+],
+"watchers": [
+"TCE"
+],
+"oath of the noble genies": [
+"FRHoF"
+],
+"noble genies": [
+"FRHoF"
+],
+"draconic bloodline": [
+"PHB"
+],
+"draconic": [
+"PHB",
+"XPHB"
+],
+"wild magic": [
+"PHB",
+"TCE",
+"XPHB"
+],
+"wild": [
+"PHB"
+],
+"pyromancer (psk)": [
+"PSK"
+],
+"divine soul": [
+"XGE"
+],
+"shadow magic": [
+"XGE"
+],
+"storm sorcery": [
+"XGE"
+],
+"storm": [
+"XGE"
+],
+"aberrant mind": [
+"TCE"
+],
+"clockwork soul": [
+"TCE"
+],
+"lunar sorcery": [
+"DSotDQ"
+],
+"lunar": [
+"DSotDQ"
+],
+"aberrant sorcery": [
+"XPHB"
+],
+"aberrant": [
+"XPHB"
+],
+"clockwork sorcery": [
+"XPHB"
+],
+"clockwork": [
+"XPHB"
+],
+"draconic sorcery": [
+"XPHB"
+],
+"wild magic sorcery": [
+"XPHB"
+],
+"spellfire sorcery": [
+"FRHoF"
+],
+"spellfire": [
+"FRHoF"
+],
+"shadow sorcery": [
+"RHW"
+],
+"path of the berserker": [
+"PHB",
+"XPHB"
+],
+"berserker": [
+"PHB",
+"XPHB"
+],
+"path of the totem warrior": [
+"PHB"
+],
+"totem warrior": [
+"PHB"
+],
+"path of the battlerager": [
+"SCAG"
+],
+"battlerager": [
+"SCAG"
+],
+"path of the ancestral guardian": [
+"XGE"
+],
+"ancestral guardian": [
+"XGE"
+],
+"path of the storm herald": [
+"XGE"
+],
+"storm herald": [
+"XGE"
+],
+"path of the zealot": [
+"XGE",
+"XPHB"
+],
+"zealot": [
+"XGE",
+"XPHB"
+],
+"path of the beast": [
+"TCE"
+],
+"beast": [
+"TCE"
+],
+"path of wild magic": [
+"TCE"
+],
+"path of the giant": [
+"BGG"
+],
+"giant": [
+"BGG"
+],
+"path of the wild heart": [
+"XPHB"
+],
+"wild heart": [
+"XPHB"
+],
+"path of the world tree": [
+"XPHB"
+],
+"world tree": [
+"XPHB"
+]
+}
+}

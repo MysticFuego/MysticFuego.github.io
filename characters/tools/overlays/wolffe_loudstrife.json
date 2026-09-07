@@ -1,21 +1,30 @@
 {
   "slug": "wolffe_loudstrife",
   "icon": "🔫",
-  "hide_weapons": ["Natural weapon"],
-  "adjust": { "ranged_attack_bonus": 2 },
+  "hide_weapons": [
+    "Natural weapon"
+  ],
+  "adjust": {
+    "ranged_attack_bonus": 2
+  },
   "links": {
     "class": null,
-    "race": "https://5e.tools/races.html#human_xphb",
     "background": null
   },
   "theme": {
     "theme_name": "Gunslinger — gunmetal and brass",
-    "c1": "#64748b", "c1b": "#cbd5e1", "c1d": "#111820",
-    "c2": "#b45309", "c2b": "#fbbf24",
-    "hero_a": "#0a0d12", "hero_b": "#12161d",
-    "glow1": "rgba(100,116,139,.18)", "glow2": "rgba(180,83,9,.12)",
+    "c1": "#64748b",
+    "c1b": "#cbd5e1",
+    "c1d": "#111820",
+    "c2": "#b45309",
+    "c2b": "#fbbf24",
+    "hero_a": "#0a0d12",
+    "hero_b": "#12161d",
+    "glow1": "rgba(100,116,139,.18)",
+    "glow2": "rgba(180,83,9,.12)",
     "name_color": "#f1f5f9",
-    "reminder_icon": "🔫", "reminder_text": "#e2e8f0"
+    "reminder_icon": "🔫",
+    "reminder_text": "#e2e8f0"
   },
   "bio": {},
   "short_rest": {
@@ -61,27 +70,35 @@
     "<strong>Double Draw:</strong> you can draw or stow two one-handed weapons where others manage one."
   ],
   "features": [
-    { "title": "🧬 Species — Human (Lycanar)",
+    {
+      "title": "🧬 Species — Human (Lycanar)",
       "bullets": [
         "Darkvision 60 ft",
         "Origin feat and extra skill proficiencies",
         "Speed 30 ft · Medium"
-      ] },
-    { "title": "🔫 Class — Gunslinger 1",
+      ]
+    },
+    {
+      "title": "🔫 Class — Gunslinger 1",
       "bullets": [
         "<strong>Fighting Style</strong> — Archery (+2 to ranged attack rolls)",
         "<strong>Quick Draw</strong> — advantage on Initiative; draw or stow two weapons",
         "<strong>Weapon Mastery</strong> — two ranged weapon kinds, swappable on a long rest",
         "Homebrew class — no 5e.tools entry"
-      ] },
-    { "title": "🛡 Background — Knight of the Order",
+      ]
+    },
+    {
+      "title": "🛡 Background — Knight of the Order",
       "bullets": [
         "<strong>Knightly Regard</strong> — shelter and aid from your order and its sympathisers",
         "Persuasion and a Gaming Set"
-      ] },
-    { "title": "✨ Origin Feat",
+      ]
+    },
+    {
+      "title": "✨ Origin Feat",
       "bullets": [
         "<strong>Skilled</strong> — three extra skill or tool proficiencies"
-      ] }
+      ]
+    }
   ]
 }

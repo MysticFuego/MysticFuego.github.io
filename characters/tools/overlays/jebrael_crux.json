@@ -1,19 +1,21 @@
 {
   "slug": "jebrael_crux",
   "icon": "🐎",
-  "links": {
-    "class": "https://5e.tools/classes.html#rogue_xphb",
-    "race": "https://5e.tools/races.html#centaur_mpmm",
-    "background": "https://5e.tools/backgrounds.html#sailor_xphb"
-  },
+  "links": {},
   "theme": {
     "theme_name": "Centaur rogue — deep sea teal and brass",
-    "c1": "#0f766e", "c1b": "#2dd4bf", "c1d": "#042f2a",
-    "c2": "#b45309", "c2b": "#fbbf24",
-    "hero_a": "#04120f", "hero_b": "#071a17",
-    "glow1": "rgba(15,118,110,.18)", "glow2": "rgba(180,83,9,.12)",
+    "c1": "#0f766e",
+    "c1b": "#2dd4bf",
+    "c1d": "#042f2a",
+    "c2": "#b45309",
+    "c2b": "#fbbf24",
+    "hero_a": "#04120f",
+    "hero_b": "#071a17",
+    "glow1": "rgba(15,118,110,.18)",
+    "glow2": "rgba(180,83,9,.12)",
     "name_color": "#ccfbf1",
-    "reminder_icon": "🐎", "reminder_text": "#99f6e4"
+    "reminder_icon": "🐎",
+    "reminder_text": "#99f6e4"
   },
   "bio": {},
   "short_rest": {
@@ -58,31 +60,39 @@
     "Expertise: Stealth +8 and Intimidation +5. Cunning Action does not arrive until level 2 — hiding still costs your action."
   ],
   "features": [
-    { "title": "🐎 Species — Centaur (Fey)",
+    {
+      "title": "🐎 Species — Centaur (Fey)",
       "bullets": [
         "<strong>Charge</strong> — 30 ft straight + melee hit → bonus-action hoof attack",
         "<strong>Hooves</strong> — unarmed strike deals 1d6 + STR bludgeoning",
         "<strong>Equine Build</strong> — carry as one size larger; climbs cost 4 extra ft per ft",
         "<strong>Natural Affinity</strong> — one nature skill proficiency",
         "Speed 40 ft · Creature type Fey"
-      ] },
-    { "title": "🗡 Class — Rogue 1",
+      ]
+    },
+    {
+      "title": "🗡 Class — Rogue 1",
       "bullets": [
         "<strong>Sneak Attack</strong> — 1d6, once per turn",
         "<strong>Expertise</strong> — Stealth and Intimidation",
         "<strong>Weapon Mastery</strong> — Dagger (Nick) and Shortbow (Vex)",
         "<strong>Thieves' Cant</strong>",
         "Cunning Action comes at level 2"
-      ] },
-    { "title": "⚓ Background — Sailor",
+      ]
+    },
+    {
+      "title": "⚓ Background — Sailor",
       "bullets": [
         "Acrobatics and Perception proficiency",
         "Navigator's Tools",
         "Ship's Passage — you can usually find a berth for the party"
-      ] },
-    { "title": "✨ Origin Feat",
+      ]
+    },
+    {
+      "title": "✨ Origin Feat",
       "bullets": [
         "<strong>Savage Attacker</strong> — once per turn, reroll a weapon's damage dice and keep either"
-      ] }
+      ]
+    }
   ]
 }

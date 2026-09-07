@@ -3,25 +3,37 @@
   "icon": "🏹",
   "max_prepared": 2,
   "links": {
-    "class": "https://5e.tools/classes.html#ranger_xphb",
-    "race": "https://5e.tools/races.html#plasmoid_aag",
     "background": null
   },
   "theme": {
     "theme_name": "Plasmoid ranger — moss green and acid",
-    "c1": "#15803d", "c1b": "#4ade80", "c1d": "#052e16",
-    "c2": "#65a30d", "c2b": "#a3e635",
-    "hero_a": "#04120a", "hero_b": "#071a0e",
-    "glow1": "rgba(21,128,61,.18)", "glow2": "rgba(101,163,13,.12)",
+    "c1": "#15803d",
+    "c1b": "#4ade80",
+    "c1d": "#052e16",
+    "c2": "#65a30d",
+    "c2b": "#a3e635",
+    "hero_a": "#04120a",
+    "hero_b": "#071a0e",
+    "glow1": "rgba(21,128,61,.18)",
+    "glow2": "rgba(101,163,13,.12)",
     "name_color": "#dcfce7",
-    "reminder_icon": "🏹", "reminder_text": "#bbf7d0"
+    "reminder_icon": "🏹",
+    "reminder_text": "#bbf7d0"
   },
   "bio": {},
   "resources": [
-    { "id": "favoredEnemy", "name": "Hunter's Mark (free)", "total": 2,
-      "note": "Favored Enemy — 2 free casts, no slot · returns on a long rest" },
-    { "id": "magicInitiate", "name": "Magic Initiate Spell", "total": 1,
-      "note": "One free level-1 wizard spell · returns on a long rest" }
+    {
+      "id": "favoredEnemy",
+      "name": "Hunter's Mark (free)",
+      "total": 2,
+      "note": "Favored Enemy — 2 free casts, no slot · returns on a long rest"
+    },
+    {
+      "id": "magicInitiate",
+      "name": "Magic Initiate Spell",
+      "total": 1,
+      "note": "One free level-1 wizard spell · returns on a long rest"
+    }
   ],
   "short_rest": {
     "keys": [],
@@ -76,29 +88,37 @@
     "Magic Initiate (Wizard) gives you two cantrips plus one free level-1 casting per long rest."
   ],
   "features": [
-    { "title": "🫧 Species — Plasmoid (Ooze)",
+    {
+      "title": "🫧 Species — Plasmoid (Ooze)",
       "bullets": [
         "<strong>Amorphous</strong> — squeeze through a 1-inch gap; advantage on grapple checks",
         "<strong>Natural Resilience</strong> — acid and poison resistance, advantage vs poisoned",
         "<strong>Shape Self</strong> — reshape your body; pseudopod as a bonus action",
         "<strong>Hold Breath</strong> — 1 hour",
         "Darkvision 60 ft · Small size"
-      ] },
-    { "title": "🏹 Class — Ranger 1",
+      ]
+    },
+    {
+      "title": "🏹 Class — Ranger 1",
       "bullets": [
         "<strong>Favored Enemy</strong> — Hunter's Mark always prepared, 2 free casts",
         "<strong>Weapon Mastery</strong> — two weapon kinds (Nick, Vex)",
         "<strong>Spellcasting</strong> — Wisdom, save DC 13, attack +5",
         "Prepares 2 spells"
-      ] },
-    { "title": "🎖 Background — Variant Survivor",
+      ]
+    },
+    {
+      "title": "🎖 Background — Variant Survivor",
       "bullets": [
         "<strong>Makeshift Meals</strong> — on a short rest, feed 2 creatures for 1 HP each",
         "Veteran of the Civil War"
-      ] },
-    { "title": "✨ Origin Feat",
+      ]
+    },
+    {
+      "title": "✨ Origin Feat",
       "bullets": [
         "<strong>Magic Initiate (Wizard)</strong> — 2 cantrips plus one level-1 spell free each long rest"
-      ] }
+      ]
+    }
   ]
 }

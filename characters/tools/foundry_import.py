@@ -15,7 +15,7 @@ without losing any of the authored text.
 The generated sheet links ../characters/sheet.css and sheet.js, so it picks
 up the shared engine (dice roller, trackers, rests) automatically.
 """
-import json, re, html, argparse, os, sys
+import json, re, html, argparse, os, sys, urllib.parse
 
 # ─────────────────────────────────────────────────────────── extraction ──
 
@@ -55,6 +55,52 @@ LANGS = {"common": "Common", "cant": "Thieves' Cant", "undercommon": "Undercommo
          "halfling": "Halfling", "gnomish": "Gnomish", "abyssal": "Abyssal", "celestial": "Celestial",
          "deep": "Deep Speech", "primordial": "Primordial", "druidic": "Druidic"}
 SIZES = {"tiny": "Tiny", "sm": "Small", "med": "Medium", "lg": "Large", "huge": "Huge", "grg": "Gargantuan"}
+
+# These characters use the 2024 rules, so prefer the 2024 books when an entry
+# exists in both, and fall back to the 2014-era sources otherwise.
+SOURCE_PREF = ["XPHB", "XDMG", "PHB", "DMG", "MM", "XGE", "TCE", "SCAG", "VGM", "MPMM",
+               "MTF", "SCC", "EGW", "GGR", "AAG", "SatO", "AI", "FTD", "BMT", "IDRotF"]
+_INDEX = None
+
+
+def load_index():
+    """name -> sources, per 5e.tools page type. Built from the 5etools data set."""
+    global _INDEX
+    if _INDEX is None:
+        p = os.path.join(os.path.dirname(os.path.abspath(__file__)), "5etools-index.json")
+        try:
+            _INDEX = json.load(open(p, encoding="utf-8"))
+        except Exception:
+            _INDEX = {}
+    return _INDEX
+
+
+def link_for(page, name):
+    """A 5e.tools URL for an official entry, or None when it is homebrew."""
+    have = load_index().get(page, {}).get((name or "").strip().lower())
+    if not have:
+        return None
+    src = next((x for x in SOURCE_PREF if x in have), have[0])
+    return "https://5e.tools/%s.html#%s_%s" % (
+        page, urllib.parse.quote(name.strip().lower(), safe="'+/()"), src.lower())
+
+
+def linked_name(page, name, extra=""):
+    url = link_for(page, name)
+    return ('<a href="%s">%s</a>%s' % (url, esc(name), extra)) if url else (esc(name) + extra)
+
+
+MASTERY_TAIL = re.compile(r"\s*Mastery:\s*(?:%s)\b.*$" % "|".join(MASTERY.values()), re.I | re.S)
+
+
+def flavour(text):
+    """Homebrew item text, minus the standard mastery rules the card already shows."""
+    t = MASTERY_TAIL.sub("", strip_html(text)).strip()
+    t = re.sub(r"^(?:Primary|Bonus)\s+skill:\s*", "", t, flags=re.I)
+    t = re.sub(r"\s*(?:Primary|Bonus)\s+skill:\s*", " ", t, flags=re.I)
+    t = re.sub(r":\s*\u2022\s*", ": ", t)
+    t = re.sub(r"\s*\u2022\s*", " ", t)
+    return re.sub(r"\s+", " ", t).strip(" .") + ("." if t and not t.endswith(".") else "")
 
 
 def strip_html(s):
@@ -165,6 +211,7 @@ def extract(path):
             "ranged": ranged, "range": s.get("range") or {},
             "mastery": MASTERY.get(s.get("mastery") or "", ""),
             "equipped": bool(s.get("equipped")), "magic": magic,
+            "desc": s.get("description", {}).get("value", ""),
         })
 
     spells, seen_s = [], set()
@@ -210,7 +257,8 @@ def extract(path):
         s = i["system"]
         gear.append({"name": i["name"], "type": i["type"], "qty": s.get("quantity", 1),
                      "equipped": bool(s.get("equipped")),
-                     "kind": (s.get("type") or {}).get("value", "")})
+                     "kind": (s.get("type") or {}).get("value", ""),
+                     "desc": s.get("description", {}).get("value", "")})
 
     tools = []
     for k, v in (sysd.get("tools") or {}).items():
@@ -364,6 +412,9 @@ CSS_TEMPLATE = """<style>
 .sbadge.conc {{ background: {glow2}; color: var(--c2b); border-color: {glow2}; }}
 .sbadge.ritual {{ background: {glow1}; color: var(--c1b); border-color: {glow1}; }}
 .sbadge.cantrip {{ background: rgba(148,163,184,.12); color: var(--muted); border-color: var(--line2); }}
+.item-note {{ margin-top: 8px; font-size: 11px; line-height: 1.45; color: var(--muted);
+  border-top: 1px solid var(--line); padding-top: 8px; }}
+.item-note.inline {{ display: block; margin-top: 2px; border: 0; padding: 0; font-size: 11px; }}
 .mastery-tag {{ display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .06em; padding: 2px 7px; border-radius: 6px; margin-left: 6px;
   background: {glow2}; color: var(--c2b); border: 1px solid {glow2}; }}
@@ -406,12 +457,19 @@ def render(m, ov):
         """Homebrew entries have no 5e.tools page — render those as plain text."""
         return '<a href="%s">%s</a>' % (url, esc(label)) if url else esc(label)
 
-    L = ov["links"]
-    sub_bits = [linked(L.get("class"), "%s %d" % (m["class_name"], m["level"]))]
+    L = ov.get("links", {})
+
+    def url_for(key, page, name):
+        """Overlay wins when the key is present (null = homebrew, no link);
+        otherwise fall back to looking the name up in the 5etools index."""
+        return L[key] if key in L else link_for(page, name)
+
+    sub_bits = [linked(url_for("class", "classes", m["class_name"]),
+                       "%s %d" % (m["class_name"], m["level"]))]
     if m["subclass"]:
-        sub_bits.append(linked(L.get("subclass"), m["subclass"]))
-    sub_bits.append(linked(L.get("race"), m["race"]))
-    sub_bits.append(linked(L.get("background"), m["background"]))
+        sub_bits.append(linked(url_for("subclass", "subclasses", m["subclass"]), m["subclass"]))
+    sub_bits.append(linked(url_for("race", "races", m["race"]), m["race"]))
+    sub_bits.append(linked(url_for("background", "backgrounds", m["background"]), m["background"]))
     hero_sub = '\n      <span class="sep">\u2022</span>\n      '.join(sub_bits)
 
     bio = ov.get("bio", {})
@@ -540,14 +598,23 @@ def render(m, ov):
             props.append("Reach %s ft" % rng["reach"])
         mast = ('<span class="mastery-tag">%s</span>' % esc(w["mastery"])) if w["mastery"] else ""
         magic = ' <span class="weapon-magic">\u2726 Magic</span>' if w["magic"] else ""
+        page = "variantrules" if w["name"].lower() == "unarmed strike" else "items"
+        url = link_for(page, w["name"])
+        title = ('<a href="%s">%s</a>' % (url, esc(w["name"]))) if url else esc(w["name"])
+        note = ""
+        if not url:
+            f = flavour(w.get("desc", ""))
+            if f:
+                note = '\n            <div class="item-note">%s</div>' % esc(f)
         wcards.append('''          <div class="weapon-card{mc}">
-            <div class="weapon-name">{name}{magic}{mast}</div>
+            <div class="weapon-name">{title}{magic}{mast}</div>
             <div><button class="roll-btn" data-label="{name}" data-bonus="{th}">{ths} to hit</button></div>
             <div class="weapon-dmg">{dmg}</div>
-            <div class="weapon-props">{ab} \u00b7 {props}</div>
-          </div>'''.format(mc=" magic" if w["magic"] else "", name=esc(w["name"]), magic=magic, mast=mast,
-                           th=th, ths=sgn(th), dmg=esc(dice_txt(w)), ab=w["ability"],
-                           props=esc(" \u00b7 ".join(props)) if props else "\u2014"))
+            <div class="weapon-props">{ab} \u00b7 {props}</div>{note}
+          </div>'''.format(mc=" magic" if w["magic"] else "", title=title, name=esc(w["name"]),
+                           magic=magic, mast=mast, th=th, ths=sgn(th), dmg=esc(dice_txt(w)),
+                           ab=w["ability"], props=esc(" \u00b7 ".join(props)) if props else "\u2014",
+                           note=note))
 
     # ── actions (authored) ──────────────────────────────────────────────
     ACT_CLS = {"attack": "atk", "bonus": "bon", "reaction": "rea", "magic": "mag", "other": "oth"}
@@ -608,7 +675,7 @@ def render(m, ov):
             '<div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">%s %s</div></div>'
             % ("prof-dot expertise" if t.get("rank", 1) == 2 else
                ("prof-dot filled" if t.get("rank", 1) else "prof-dot"),
-               esc(t["name"]), t["ability"], sgn(t["bonus"])) for t in m["tools"])
+               linked_name("items", t["name"]), t["ability"], sgn(t["bonus"])) for t in m["tools"])
     else:
         toolrows = ('\n          <div class="stat-row"><div class="stat-name" '
                     'style="color:var(--muted);font-style:italic;">None recorded</div></div>')
@@ -638,11 +705,25 @@ def render(m, ov):
     # ── gear tab ────────────────────────────────────────────────────────
     groups = {"Worn & Equipped": [], "Weapons": [], "Consumables": [], "Carried": []}
     for w in m["weapons"]:
-        if w["name"] not in ov.get("hide_weapons", []):
-            groups["Weapons"].append(w["name"])
+        if w["name"] in ov.get("hide_weapons", []):
+            continue
+        page = "variantrules" if w["name"].lower() == "unarmed strike" else "items"
+        groups["Weapons"].append(linked_name(page, w["name"]))
+    seen_gear = set()
     for g in m["gear"]:
+        key = (g["name"], g["qty"])
+        if key in seen_gear:
+            continue
+        seen_gear.add(key)
         q = " \u00d7%d" % g["qty"] if g["qty"] and g["qty"] > 1 else ""
-        label = esc(g["name"]) + q
+        page = "items"
+        url = link_for(page, g["name"])
+        label = ('<a href="%s">%s</a>' % (url, esc(g["name"]))) if url else esc(g["name"])
+        label += q
+        if not url:
+            f = flavour(g.get("desc", ""))
+            if f:
+                label += ' <span class="item-note inline">%s</span>' % esc(f)
         if g["equipped"]:
             groups["Worn & Equipped"].append(label)
         elif g["type"] == "consumable":
@@ -688,7 +769,7 @@ def render(m, ov):
                 dmg = ('<div class="spell-dmg">%s</div>' % esc(s["damage"])) if s["damage"] else ""
                 blocks.append('''        <div class="spell-card{extra}" data-name="{key}" data-level="{lvl}">
           <div class="spell-card-header">
-            <div class="spell-card-name">{name}</div>
+            <div class="spell-card-name">{linked}</div>
             {prep}
           </div>
           <div class="spell-badges">{badges}</div>
@@ -699,7 +780,8 @@ def render(m, ov):
             <div class="spell-meta-item">Components <span>{comp}</span></div>
           </div>
           {dmg}
-        </div>'''.format(extra=extra, key=esc(s["name"].lower()), lvl=lvl, name=esc(s["name"]),
+        </div>'''.format(extra=extra, key=esc(s["name"].lower()), lvl=lvl,
+                         linked=linked_name("spells", s["name"]),
                          prep=prep, badges="".join(badges), act=esc(s["activation"]),
                          rng=esc(s["range"]), dur=esc(s["duration"]),
                          comp=esc(s["components"] or "\u2014"), dmg=dmg))

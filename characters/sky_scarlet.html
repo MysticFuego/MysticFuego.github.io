@@ -102,6 +102,9 @@
 .sbadge.conc { background: rgba(251,191,36,.10); color: var(--c2b); border-color: rgba(251,191,36,.10); }
 .sbadge.ritual { background: rgba(190,18,60,.18); color: var(--c1b); border-color: rgba(190,18,60,.18); }
 .sbadge.cantrip { background: rgba(148,163,184,.12); color: var(--muted); border-color: var(--line2); }
+.item-note { margin-top: 8px; font-size: 11px; line-height: 1.45; color: var(--muted);
+  border-top: 1px solid var(--line); padding-top: 8px; }
+.item-note.inline { display: block; margin-top: 2px; border: 0; padding: 0; font-size: 11px; }
 .mastery-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .06em; padding: 2px 7px; border-radius: 6px; margin-left: 6px;
   background: rgba(251,191,36,.10); color: var(--c2b); border: 1px solid rgba(251,191,36,.10); }
@@ -277,7 +280,7 @@
         <div class="panel-title">⚔️ Weapons</div>
         <div class="weapon-grid">
           <div class="weapon-card">
-            <div class="weapon-name">Unarmed Strike</div>
+            <div class="weapon-name"><a href="https://5e.tools/variantrules.html#unarmed%20strike_xphb">Unarmed Strike</a></div>
             <div><button class="roll-btn" data-label="Unarmed Strike" data-bonus="4">+4 to hit</button></div>
             <div class="weapon-dmg">3 bludgeoning</div>
             <div class="weapon-props">STR · —</div>
@@ -287,15 +290,17 @@
             <div><button class="roll-btn" data-label="N.E.S.T. Dagger" data-bonus="4">+4 to hit</button></div>
             <div class="weapon-dmg">1d4 + 2 piercing</div>
             <div class="weapon-props">STR · Finesse · Light · Thrown · Range 20/60</div>
+            <div class="item-note">MF Coating: Any creature that is a construct (Chitonarack) will bypass any special resistance it has</div>
           </div>
           <div class="weapon-card">
             <div class="weapon-name">Moonstone Dagger<span class="mastery-tag">Nick</span></div>
             <div><button class="roll-btn" data-label="Moonstone Dagger" data-bonus="4">+4 to hit</button></div>
             <div class="weapon-dmg">1d4 + 2 piercing</div>
             <div class="weapon-props">STR · Finesse · Light · Thrown · Range 20/60</div>
+            <div class="item-note">MF Coating: Any creature that is a construct (Chitonarack) will bypass any special resistance it has. Stored power: If you have the Night Slash feat, this weapon can store lunar energy. While you are under the night sky, the weapon gains a number of charges equal to your proficiency bonus. You can expend one charge to use your Night Slash feature at any time of day. The weapon regains all expended charges at night</div>
           </div>
           <div class="weapon-card">
-            <div class="weapon-name">Dagger<span class="mastery-tag">Nick</span></div>
+            <div class="weapon-name"><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a><span class="mastery-tag">Nick</span></div>
             <div><button class="roll-btn" data-label="Dagger" data-bonus="4">+4 to hit</button></div>
             <div class="weapon-dmg">1d4 + 2 piercing</div>
             <div class="weapon-props">STR · Finesse · Light · Thrown · Range 20/60</div>
@@ -391,7 +396,7 @@
         <div class="spell-level-header">Cantrips</div>
         <div class="spell-card conc-spell" data-name="dancing lights" data-level="0">
           <div class="spell-card-header">
-            <div class="spell-card-name">Dancing Lights</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#dancing%20lights_xphb">Dancing Lights</a></div>
             
           </div>
           <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span><span class="sbadge conc">Conc</span></div>
@@ -405,7 +410,7 @@
         </div>
         <div class="spell-card" data-name="thunderclap" data-level="0">
           <div class="spell-card-header">
-            <div class="spell-card-name">Thunderclap</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#thunderclap_xphb">Thunderclap</a></div>
             
           </div>
           <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
@@ -420,7 +425,7 @@
         <div class="spell-level-header">Level 1</div>
         <div class="spell-card" data-name="animal friendship" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Animal Friendship</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#animal%20friendship_xphb">Animal Friendship</a></div>
             <button class="prep-toggle" data-spell="animal friendship" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -434,7 +439,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="bane" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Bane</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#bane_xphb">Bane</a></div>
             <button class="prep-toggle" data-spell="bane" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
@@ -448,7 +453,7 @@
         </div>
         <div class="spell-card" data-name="charm person" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Charm Person</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#charm%20person_xphb">Charm Person</a></div>
             <button class="prep-toggle" data-spell="charm person" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -462,7 +467,7 @@
         </div>
         <div class="spell-card" data-name="color spray" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Color Spray</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#color%20spray_xphb">Color Spray</a></div>
             <button class="prep-toggle" data-spell="color spray" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -476,7 +481,7 @@
         </div>
         <div class="spell-card" data-name="command" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Command</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#command_xphb">Command</a></div>
             <button class="prep-toggle" data-spell="command" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -490,7 +495,7 @@
         </div>
         <div class="spell-card ritual-spell" data-name="comprehend languages" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Comprehend Languages</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#comprehend%20languages_xphb">Comprehend Languages</a></div>
             <button class="prep-toggle" data-spell="comprehend languages" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -504,7 +509,7 @@
         </div>
         <div class="spell-card" data-name="cure wounds" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Cure Wounds</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#cure%20wounds_xphb">Cure Wounds</a></div>
             <button class="prep-toggle" data-spell="cure wounds" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -518,7 +523,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="detect magic" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Detect Magic</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#detect%20magic_xphb">Detect Magic</a></div>
             <button class="prep-toggle" data-spell="detect magic" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span><span class="sbadge ritual">Ritual</span></div>
@@ -532,7 +537,7 @@
         </div>
         <div class="spell-card" data-name="disguise self" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Disguise Self</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#disguise%20self_xphb">Disguise Self</a></div>
             <button class="prep-toggle" data-spell="disguise self" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -546,7 +551,7 @@
         </div>
         <div class="spell-card" data-name="dissonant whispers" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Dissonant Whispers</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#dissonant%20whispers_xphb">Dissonant Whispers</a></div>
             <button class="prep-toggle" data-spell="dissonant whispers" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -574,7 +579,7 @@
         </div>
         <div class="spell-card" data-name="earth tremor" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Earth Tremor</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#earth%20tremor_xge">Earth Tremor</a></div>
             <button class="prep-toggle" data-spell="earth tremor" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -588,7 +593,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="faerie fire" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Faerie Fire</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#faerie%20fire_xphb">Faerie Fire</a></div>
             <button class="prep-toggle" data-spell="faerie fire" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
@@ -602,7 +607,7 @@
         </div>
         <div class="spell-card" data-name="feather fall" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Feather Fall</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#feather%20fall_xphb">Feather Fall</a></div>
             <button class="prep-toggle" data-spell="feather fall" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -616,7 +621,7 @@
         </div>
         <div class="spell-card" data-name="healing word" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Healing Word</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#healing%20word_xphb">Healing Word</a></div>
             <button class="prep-toggle" data-spell="healing word" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -630,7 +635,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="heroism" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Heroism</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#heroism_xphb">Heroism</a></div>
             <button class="prep-toggle" data-spell="heroism" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
@@ -644,7 +649,7 @@
         </div>
         <div class="spell-card ritual-spell" data-name="identify" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Identify</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#identify_xphb">Identify</a></div>
             <button class="prep-toggle" data-spell="identify" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -658,7 +663,7 @@
         </div>
         <div class="spell-card ritual-spell" data-name="illusory script" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Illusory Script</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#illusory%20script_xphb">Illusory Script</a></div>
             <button class="prep-toggle" data-spell="illusory script" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -672,7 +677,7 @@
         </div>
         <div class="spell-card" data-name="longstrider" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Longstrider</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#longstrider_xphb">Longstrider</a></div>
             <button class="prep-toggle" data-spell="longstrider" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -686,7 +691,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="silent image" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Silent Image</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#silent%20image_xphb">Silent Image</a></div>
             <button class="prep-toggle" data-spell="silent image" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
@@ -700,7 +705,7 @@
         </div>
         <div class="spell-card" data-name="silvery barbs" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Silvery Barbs</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#silvery%20barbs_scc">Silvery Barbs</a></div>
             <button class="prep-toggle" data-spell="silvery barbs" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -714,7 +719,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="sleep" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Sleep</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#sleep_xphb">Sleep</a></div>
             <button class="prep-toggle" data-spell="sleep" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
@@ -728,7 +733,7 @@
         </div>
         <div class="spell-card ritual-spell" data-name="speak with animals" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Speak with Animals</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#speak%20with%20animals_xphb">Speak with Animals</a></div>
             <button class="prep-toggle" data-spell="speak with animals" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -742,7 +747,7 @@
         </div>
         <div class="spell-card conc-spell" data-name="tasha&#x27;s hideous laughter" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Tasha&#x27;s Hideous Laughter</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#tasha's%20hideous%20laughter_xphb">Tasha&#x27;s Hideous Laughter</a></div>
             <button class="prep-toggle" data-spell="tasha&#x27;s hideous laughter" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
@@ -756,7 +761,7 @@
         </div>
         <div class="spell-card" data-name="thunderwave" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Thunderwave</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#thunderwave_xphb">Thunderwave</a></div>
             <button class="prep-toggle" data-spell="thunderwave" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"></div>
@@ -770,7 +775,7 @@
         </div>
         <div class="spell-card ritual-spell" data-name="unseen servant" data-level="1">
           <div class="spell-card-header">
-            <div class="spell-card-name">Unseen Servant</div>
+            <div class="spell-card-name"><a href="https://5e.tools/spells.html#unseen%20servant_xphb">Unseen Servant</a></div>
             <button class="prep-toggle" data-spell="unseen servant" title="Add to prepared">✦</button>
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
@@ -888,11 +893,11 @@
         </div>
         <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
         <div class="stat-list">
-          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name">Flute</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +5</div></div>
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Lute</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Viol</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
+          <div class="stat-row"><div class="prof-dot"></div><div class="stat-name"><a href="https://5e.tools/items.html#flute_xphb">Flute</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +5</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name"><a href="https://5e.tools/items.html#lute_xphb">Lute</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name"><a href="https://5e.tools/items.html#viol_xphb">Viol</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
           <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Dice</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">WIS +1</div></div>
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Lyre</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name"><a href="https://5e.tools/items.html#lyre_xphb">Lyre</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">CHA +7</div></div>
           <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Hackers tool</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">INT +2</div></div>
         </div>
       </div>
@@ -964,54 +969,43 @@
       <div class="equip-card">
         <div class="equip-card-title">Worn & Equipped</div>
         <ul class="link-list">
-          <li>Leather Armor</li>
-          <li>Backpack</li>
-          <li>Bell</li>
-          <li>Bullseye Lantern</li>
-          <li>Costume ×3</li>
-          <li>Tinderbox</li>
-          <li>Waterskin</li>
-          <li>Fine Clothes</li>
-          <li>Backpack</li>
-          <li>Bell</li>
-          <li>Bullseye Lantern</li>
-          <li>Costume ×3</li>
-          <li>Tinderbox</li>
-          <li>Waterskin</li>
+          <li><a href="https://5e.tools/items.html#leather%20armor_xphb">Leather Armor</a></li>
+          <li><a href="https://5e.tools/items.html#backpack_xphb">Backpack</a></li>
+          <li><a href="https://5e.tools/items.html#bell_xphb">Bell</a></li>
+          <li><a href="https://5e.tools/items.html#bullseye%20lantern_xphb">Bullseye Lantern</a></li>
+          <li><a href="https://5e.tools/items.html#costume_xphb">Costume</a> ×3</li>
+          <li><a href="https://5e.tools/items.html#tinderbox_xphb">Tinderbox</a></li>
+          <li><a href="https://5e.tools/items.html#waterskin_xphb">Waterskin</a></li>
+          <li><a href="https://5e.tools/items.html#fine%20clothes_xphb">Fine Clothes</a></li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">Weapons</div>
         <ul class="link-list">
-          <li>Unarmed Strike</li>
+          <li><a href="https://5e.tools/variantrules.html#unarmed%20strike_xphb">Unarmed Strike</a></li>
           <li>N.E.S.T. Dagger</li>
           <li>Moonstone Dagger</li>
-          <li>Dagger</li>
+          <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a></li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">Consumables</div>
         <ul class="link-list">
-          <li>Oil ×8</li>
-          <li>Rations ×9</li>
-          <li>Oil ×8</li>
-          <li>Rations ×9</li>
-          <li>Potion of Healing ×3</li>
+          <li><a href="https://5e.tools/items.html#oil_xphb">Oil</a> ×8</li>
+          <li><a href="https://5e.tools/items.html#rations_xphb">Rations</a> ×9</li>
+          <li><a href="https://5e.tools/items.html#potion%20of%20healing_xdmg">Potion of Healing</a> ×3</li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">Carried</div>
         <ul class="link-list">
-          <li>Lyre</li>
-          <li>Bedroll</li>
-          <li>Mirror</li>
-          <li>Gaming Set</li>
-          <li>Perfume</li>
-          <li>Hackers tool</li>
-          <li>Leather Armor</li>
-          <li>Lute</li>
-          <li>Bedroll</li>
-          <li>Mirror</li>
+          <li><a href="https://5e.tools/items.html#lyre_xphb">Lyre</a></li>
+          <li><a href="https://5e.tools/items.html#bedroll_xphb">Bedroll</a></li>
+          <li><a href="https://5e.tools/items.html#mirror_xphb">Mirror</a></li>
+          <li>Gaming Set <span class="item-note inline">Multiple variations of this item exist, as listed below: Dice Set Dragonchess Set Playing Cards Three-Dragon Ante Set.</span></li>
+          <li><a href="https://5e.tools/items.html#perfume_xphb">Perfume</a></li>
+          <li>Hackers tool <span class="item-note inline">Ability: Intelligence Utilize: Hack a system that uses RM to gain info.</span></li>
+          <li><a href="https://5e.tools/items.html#lute_xphb">Lute</a></li>
         </ul>
       </div>
       <div class="equip-card">

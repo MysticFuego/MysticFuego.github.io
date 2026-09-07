@@ -102,6 +102,9 @@
 .sbadge.conc { background: rgba(180,83,9,.12); color: var(--c2b); border-color: rgba(180,83,9,.12); }
 .sbadge.ritual { background: rgba(15,118,110,.18); color: var(--c1b); border-color: rgba(15,118,110,.18); }
 .sbadge.cantrip { background: rgba(148,163,184,.12); color: var(--muted); border-color: var(--line2); }
+.item-note { margin-top: 8px; font-size: 11px; line-height: 1.45; color: var(--muted);
+  border-top: 1px solid var(--line); padding-top: 8px; }
+.item-note.inline { display: block; margin-top: 2px; border: 0; padding: 0; font-size: 11px; }
 .mastery-tag { display: inline-block; font-size: 10px; font-weight: 700; text-transform: uppercase;
   letter-spacing: .06em; padding: 2px 7px; border-radius: 6px; margin-left: 6px;
   background: rgba(180,83,9,.12); color: var(--c2b); border: 1px solid rgba(180,83,9,.12); }
@@ -236,7 +239,7 @@
         <div class="panel-title">⚔️ Weapons</div>
         <div class="weapon-grid">
           <div class="weapon-card">
-            <div class="weapon-name">Unarmed Strike</div>
+            <div class="weapon-name"><a href="https://5e.tools/variantrules.html#unarmed%20strike_xphb">Unarmed Strike</a></div>
             <div><button class="roll-btn" data-label="Unarmed Strike" data-bonus="5">+5 to hit</button></div>
             <div class="weapon-dmg">4 bludgeoning</div>
             <div class="weapon-props">STR · —</div>
@@ -246,18 +249,21 @@
             <div><button class="roll-btn" data-label="N.E.S.T. Shortbow" data-bonus="6">+6 to hit</button></div>
             <div class="weapon-dmg">1d6 + 4 piercing</div>
             <div class="weapon-props">DEX · Ammunition · Two-Handed · Range 80/320</div>
+            <div class="item-note">MF Coating: Any creature that is a construct (Chitonarack) will bypass any special resistance it has</div>
           </div>
           <div class="weapon-card">
             <div class="weapon-name">N.E.S.T. Shortsword<span class="mastery-tag">Vex</span></div>
             <div><button class="roll-btn" data-label="N.E.S.T. Shortsword" data-bonus="6">+6 to hit</button></div>
             <div class="weapon-dmg">1d6 + 4 piercing</div>
             <div class="weapon-props">DEX · Finesse · Light</div>
+            <div class="item-note">MF Coating: Any creature that is a construct (Chitonarack) will bypass any special resistance it has</div>
           </div>
           <div class="weapon-card">
             <div class="weapon-name">N.E.S.T. Dagger<span class="mastery-tag">Nick</span></div>
             <div><button class="roll-btn" data-label="N.E.S.T. Dagger" data-bonus="6">+6 to hit</button></div>
             <div class="weapon-dmg">1d4 + 4 piercing</div>
             <div class="weapon-props">DEX · Finesse · Light · Thrown · Range 20/60</div>
+            <div class="item-note">MF Coating: Any creature that is a construct (Chitonarack) will bypass any special resistance it has</div>
           </div>
         </div>
       </div>
@@ -409,8 +415,8 @@
         </div>
         <div class="panel-title" style="margin-top:14px;">🔧 Tools</div>
         <div class="stat-list">
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Thieves&#x27; Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX +6</div></div>
-          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name">Navigator&#x27;s Tools</div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">WIS +2</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name"><a href="https://5e.tools/items.html#thieves'%20tools_xphb">Thieves&#x27; Tools</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">DEX +6</div></div>
+          <div class="stat-row"><div class="prof-dot filled"></div><div class="stat-name"><a href="https://5e.tools/items.html#navigator's%20tools_xphb">Navigator&#x27;s Tools</a></div><div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">WIS +2</div></div>
         </div>
       </div>
     </div>
@@ -490,20 +496,20 @@
       <div class="equip-card">
         <div class="equip-card-title">Worn & Equipped</div>
         <ul class="link-list">
-          <li>Leather Armor</li>
-          <li>Quiver</li>
-          <li>Backpack</li>
-          <li>Bell</li>
-          <li>Hooded Lantern</li>
-          <li>Tinderbox</li>
-          <li>Waterskin</li>
-          <li>Traveler&#x27;s Clothes</li>
+          <li><a href="https://5e.tools/items.html#leather%20armor_xphb">Leather Armor</a></li>
+          <li><a href="https://5e.tools/items.html#quiver_xphb">Quiver</a></li>
+          <li><a href="https://5e.tools/items.html#backpack_xphb">Backpack</a></li>
+          <li><a href="https://5e.tools/items.html#bell_xphb">Bell</a></li>
+          <li><a href="https://5e.tools/items.html#hooded%20lantern_xphb">Hooded Lantern</a></li>
+          <li><a href="https://5e.tools/items.html#tinderbox_xphb">Tinderbox</a></li>
+          <li><a href="https://5e.tools/items.html#waterskin_xphb">Waterskin</a></li>
+          <li><a href="https://5e.tools/items.html#traveler's%20clothes_xphb">Traveler&#x27;s Clothes</a></li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">Weapons</div>
         <ul class="link-list">
-          <li>Unarmed Strike</li>
+          <li><a href="https://5e.tools/variantrules.html#unarmed%20strike_xphb">Unarmed Strike</a></li>
           <li>N.E.S.T. Shortbow</li>
           <li>N.E.S.T. Shortsword</li>
           <li>N.E.S.T. Dagger</li>
@@ -512,21 +518,20 @@
       <div class="equip-card">
         <div class="equip-card-title">Consumables</div>
         <ul class="link-list">
-          <li>Arrow ×17</li>
-          <li>Candle ×10</li>
-          <li>Oil ×7</li>
-          <li>Rations ×5</li>
+          <li><a href="https://5e.tools/items.html#arrow_xphb">Arrow</a> ×17</li>
+          <li><a href="https://5e.tools/items.html#candle_xphb">Candle</a> ×10</li>
+          <li><a href="https://5e.tools/items.html#oil_xphb">Oil</a> ×7</li>
+          <li><a href="https://5e.tools/items.html#rations_xphb">Rations</a> ×5</li>
         </ul>
       </div>
       <div class="equip-card">
         <div class="equip-card-title">Carried</div>
         <ul class="link-list">
-          <li>Thieves&#x27; Tools</li>
-          <li>Ball Bearings</li>
-          <li>Crowbar</li>
-          <li>Rope</li>
-          <li>Navigator&#x27;s Tools</li>
-          <li>Rope</li>
+          <li><a href="https://5e.tools/items.html#thieves'%20tools_xphb">Thieves&#x27; Tools</a></li>
+          <li><a href="https://5e.tools/items.html#ball%20bearings_xphb">Ball Bearings</a></li>
+          <li><a href="https://5e.tools/items.html#crowbar_xphb">Crowbar</a></li>
+          <li><a href="https://5e.tools/items.html#rope_xphb">Rope</a></li>
+          <li><a href="https://5e.tools/items.html#navigator's%20tools_xphb">Navigator&#x27;s Tools</a></li>
           <li>Food materials ×4</li>
         </ul>
       </div>

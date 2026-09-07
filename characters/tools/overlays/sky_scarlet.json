@@ -2,29 +2,41 @@
   "slug": "sky_scarlet",
   "icon": "🎭",
   "max_prepared": 4,
-  "links": {
-    "class": "https://5e.tools/classes.html#bard_xphb",
-    "race": "https://5e.tools/races.html#human_xphb",
-    "background": "https://5e.tools/backgrounds.html#noble_xphb"
-  },
+  "links": {},
   "theme": {
     "theme_name": "Scarlet bard — crimson and gold",
-    "c1": "#be123c", "c1b": "#fb7185", "c1d": "#2a0710",
-    "c2": "#b45309", "c2b": "#fbbf24",
-    "hero_a": "#14060a", "hero_b": "#22080e",
-    "glow1": "rgba(190,18,60,.18)", "glow2": "rgba(251,191,36,.10)",
+    "c1": "#be123c",
+    "c1b": "#fb7185",
+    "c1d": "#2a0710",
+    "c2": "#b45309",
+    "c2b": "#fbbf24",
+    "hero_a": "#14060a",
+    "hero_b": "#22080e",
+    "glow1": "rgba(190,18,60,.18)",
+    "glow2": "rgba(251,191,36,.10)",
     "name_color": "#ffe4e6",
-    "reminder_icon": "🎭", "reminder_text": "#fecdd3"
+    "reminder_icon": "🎭",
+    "reminder_text": "#fecdd3"
   },
   "bio": {},
   "resources": [
-    { "id": "bardicInspiration", "name": "Bardic Inspiration", "total": 5,
-      "note": "d6 · Bonus Action · all uses return on a short rest" },
-    { "id": "luckPoints", "name": "Luck Points", "total": 2,
-      "note": "Lucky feat — spend for advantage, or disadvantage on an attack against you" }
+    {
+      "id": "bardicInspiration",
+      "name": "Bardic Inspiration",
+      "total": 5,
+      "note": "d6 · Bonus Action · all uses return on a short rest"
+    },
+    {
+      "id": "luckPoints",
+      "name": "Luck Points",
+      "total": 2,
+      "note": "Lucky feat — spend for advantage, or disadvantage on an attack against you"
+    }
   ],
   "short_rest": {
-    "keys": ["bardicInspiration"],
+    "keys": [
+      "bardicInspiration"
+    ],
     "msg": "Bardic Inspiration fully recharged.\nYou may also spend Hit Dice (d8 + CON +1) to recover HP."
   },
   "rest": [
@@ -74,28 +86,36 @@
     "Deception +7 and Performance +7 are your best checks by a mile — talk first."
   ],
   "features": [
-    { "title": "🧬 Species — Human",
+    {
+      "title": "🧬 Species — Human",
       "bullets": [
         "<strong>Resourceful</strong> — Heroic Inspiration after every long rest",
         "<strong>Skillful</strong> — one extra skill proficiency",
         "<strong>Versatile</strong> — one Origin feat (Lucky)",
         "Darkvision 60 ft (from Night Slash)"
-      ] },
-    { "title": "🎵 Class — Bard 1",
+      ]
+    },
+    {
+      "title": "🎵 Class — Bard 1",
       "bullets": [
         "<strong>Bardic Inspiration</strong> — d6, Bonus Action, 5/short rest",
         "<strong>Spellcasting</strong> — Charisma, save DC 15, attack +7",
         "4 prepared spells + 2 cantrips"
-      ] },
-    { "title": "🏛 Background — Noble",
+      ]
+    },
+    {
+      "title": "🏛 Background — Noble",
       "bullets": [
         "History, Persuasion and a Gaming Set from the background",
         "Position of Privilege — people of rank tend to hear you out"
-      ] },
-    { "title": "✨ Origin Feats",
+      ]
+    },
+    {
+      "title": "✨ Origin Feats",
       "bullets": [
         "<strong>Lucky</strong> — 2 Luck Points per long rest",
         "<strong>Skilled</strong> — three extra proficiencies"
-      ] }
+      ]
+    }
   ]
 }

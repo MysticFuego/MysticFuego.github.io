@@ -3,24 +3,34 @@
   "icon": "⚙️",
   "max_prepared": 4,
   "links": {
-    "class": "https://5e.tools/classes.html#artificer_tce",
-    "race": "https://5e.tools/races.html#harengon_mpmm",
-    "background": "https://5e.tools/backgrounds.html#golgari%20agent_ggr"
+    "class": "https://5e.tools/classes.html#artificer_tce"
   },
   "theme": {
     "theme_name": "Golgari artificer — bronze and rot-green",
-    "c1": "#a16207", "c1b": "#fbbf24", "c1d": "#1c1207",
-    "c2": "#15803d", "c2b": "#4ade80",
-    "hero_a": "#0d0f08", "hero_b": "#16180c",
-    "glow1": "rgba(161,98,7,.18)", "glow2": "rgba(21,128,61,.12)",
+    "c1": "#a16207",
+    "c1b": "#fbbf24",
+    "c1d": "#1c1207",
+    "c2": "#15803d",
+    "c2b": "#4ade80",
+    "hero_a": "#0d0f08",
+    "hero_b": "#16180c",
+    "glow1": "rgba(161,98,7,.18)",
+    "glow2": "rgba(21,128,61,.12)",
     "name_color": "#fef3c7",
-    "reminder_icon": "⚙️", "reminder_text": "#fde68a"
+    "reminder_icon": "⚙️",
+    "reminder_text": "#fde68a"
   },
   "bio": {},
-  "adjust": { "init_bonus": 2 },
+  "adjust": {
+    "init_bonus": 2
+  },
   "resources": [
-    { "id": "rabbitHop", "name": "Rabbit Hop", "total": 2,
-      "note": "Bonus Action · jump 10 ft, no opportunity attacks · returns on a long rest" }
+    {
+      "id": "rabbitHop",
+      "name": "Rabbit Hop",
+      "total": 2,
+      "note": "Bonus Action · jump 10 ft, no opportunity attacks · returns on a long rest"
+    }
   ],
   "short_rest": {
     "keys": [],
@@ -73,28 +83,36 @@
     "All four tool kits sit at +6. Smith's, Tinker's and Poisoner's are your best non-magic answers to a problem."
   ],
   "features": [
-    { "title": "🐇 Species — Harengon",
+    {
+      "title": "🐇 Species — Harengon",
       "bullets": [
         "<strong>Hare-Trigger</strong> — add proficiency to initiative",
         "<strong>Leporine Senses</strong> — Perception proficiency",
         "<strong>Lucky Footwork</strong> — reaction, d4 on a failed DEX save",
         "<strong>Rabbit Hop</strong> — bonus-action 10 ft jump, 2/long rest",
         "Small size · Speed 30 ft"
-      ] },
-    { "title": "⚙️ Class — Artificer 1",
+      ]
+    },
+    {
+      "title": "⚙️ Class — Artificer 1",
       "bullets": [
         "<strong>Spellcasting</strong> — Intelligence, save DC 14, attack +6",
         "<strong>Tinker's Magic</strong> — Mending known; conjure small mundane items",
         "Prepares 4 spells; can swap them after a long rest"
-      ] },
-    { "title": "🍄 Background — Golgari Agent",
+      ]
+    },
+    {
+      "title": "🍄 Background — Golgari Agent",
       "bullets": [
         "<strong>Undercity Paths</strong> — travel the city at double speed out of combat",
         "Nature and Survival proficiency"
-      ] },
-    { "title": "✨ Origin Feat",
+      ]
+    },
+    {
+      "title": "✨ Origin Feat",
       "bullets": [
         "<strong>Savage Attacker</strong> — once per turn, reroll a weapon's damage dice and keep either"
-      ] }
+      ]
+    }
   ]
 }

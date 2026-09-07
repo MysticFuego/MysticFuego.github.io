@@ -67,6 +67,31 @@ in the numbers. Two are applied by hand and noted in each sheet's reminders:
 If you add a feature that changes a derived number, put it in `adjust` and say
 so in `reminders` — don't hand-edit the generated HTML, it gets overwritten.
 
+## Links and homebrew
+
+`5etools-index.json` is a name-to-source index built from the 5etools data set.
+Every weapon, item, tool and spell name is looked up in it:
+
+* **Found** — the name is linked to 5e.tools, preferring the 2024 books
+  (`XPHB`/`XDMG`) and falling back to `PHB`, `DMG`, `XGE`, `TCE` and so on.
+* **Not found** — the item is homebrew, so instead of a dead link the card
+  shows the item's own description from the Foundry export.
+
+Homebrew flavour is cleaned before it is shown: the standard "Mastery: Nick…"
+rules text is stripped, because the card already displays a mastery tag, and
+the nested `Primary skill: / Bonus skill:` bullets are flattened.
+
+To refresh the index after a 5etools data update:
+
+```sh
+# from the 5etools source data, build {page: {name: [sources]}}
+python3 - <<'PY'
+# see git history for the builder; it reads data/spells/*.json, items.json,
+# items-base.json, actions.json, variantrules.json, races.json,
+# backgrounds.json and class/class-*.json
+PY
+```
+
 ## Assumptions
 
 * HP maximum is computed as hit die + CON at level 1; above that the exported
