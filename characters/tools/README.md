@@ -135,3 +135,58 @@ PY
 * AC comes from equipped armour + DEX (capped for medium) + shield.
 * Tool proficiency uses the kit's canonical ability, since Foundry often
   stores a generic `int`.
+
+
+## Offline app (PWA)
+
+The `characters/` folder installs to a phone or desktop home screen and works
+with no signal. Everything lives inside `characters/`, so the tracker at the
+site root is untouched and keeps behaving like a normal page.
+
+| File | Role |
+| --- | --- |
+| `manifest.webmanifest` | name, icons, colours, and the `standalone` display mode |
+| `sw.js` | **generated** — the service worker and its precache list |
+| `pwa.js` | registers the worker and shows the "newer version is ready" bar |
+| `icons/` | 192/512 app icons, a maskable variant, an apple-touch-icon and a favicon |
+| `fonts/` | Cinzel and Inter variable woff2, plus their OFL licences |
+| `fonts.css` | the `@font-face` rules, linked by every page |
+| `tools/build_sw.py` | regenerates `sw.js` |
+
+### After changing anything under `characters/`
+
+```
+python characters/tools/build_sw.py
+```
+
+then commit the regenerated `sw.js` along with your edit.
+
+`build_sw.py` hashes every precached file and writes that hash into `sw.js` as
+the cache version. Changing a sheet changes the hash, which changes `sw.js`,
+which is what makes browsers notice there is an update at all — so **forgetting
+to run it is the one way to strand players on an old sheet**. The damage is
+limited: HTML, CSS and JS are served stale-while-revalidate, so a player still
+picks up the change on their next *online* visit. They just see the stale page
+once first.
+
+### What is cached, and how
+
+- **HTML / CSS / JS** — stale-while-revalidate. Opens instantly, refreshes quietly.
+- **Portraits and icons** — cache-first. They only change when the version does.
+- **Fonts** — precached like everything else. Cinzel and Inter are committed
+  under `fonts/` as variable woff2 (74 KB for both), so there is no Google
+  Fonts request at all and typography is correct even on a first offline load.
+  See `fonts.css` for why there is no `unicode-range` and no italic file.
+- **Anything outside `characters/`** — not intercepted at all. Nothing in the
+  app links out, so this never comes up in normal use.
+
+### Testing it
+
+Service workers need a real origin, so `file://` will not do:
+
+```
+cd MysticFuego.github.io && python -m http.server 8000
+```
+
+then open `http://localhost:8000/characters/` and use DevTools ▸ Application ▸
+Service Workers. Tick "Offline" there to check the offline path.
