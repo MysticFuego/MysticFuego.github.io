@@ -46,6 +46,9 @@ actor without losing any authored text.
 | `links` | 5e.tools URLs for class / race / background; `null` renders plain text for homebrew |
 | `theme` | palette + hero gradient + reminder icon |
 | `bio` | age, gender, height… — Foundry leaves these blank, so fill them in here |
+| `portrait` | path to the portrait; defaults to `portraits/<slug>.jpg` |
+| `languages` | replaces the languages the export recorded |
+| `mastery` | replaces the chosen weapon masteries the export recorded |
 | `resources` | extra dot trackers (`id`, `name`, `total`, `note`) |
 | `short_rest` | `keys` recharged on a short rest + the message shown |
 | `rest` | bullets for the Rest Recovery card |
@@ -76,6 +79,39 @@ Every weapon, item, tool and spell name is looked up in it:
   (`XPHB`/`XDMG`) and falling back to `PHB`, `DMG`, `XGE`, `TCE` and so on.
 * **Not found** — the item is homebrew, so instead of a dead link the card
   shows the item's own description from the Foundry export.
+
+### Partnered and third-party books
+
+`5etools-index.json` is built from the 5etools **core** data, which does not
+include partnered/third-party books such as Valda's Spire of Secrets or
+Dungeons of Drakkenheim. Those names would otherwise be treated as homebrew, so
+an overlay can point them anywhere by exact name:
+
+```json
+"extra_links": {
+  "Concealed Shot": "https://5e.tools/book.html#ValdaGunslinger",
+  "Finger Guns":    "https://5e.tools/book.html#ValdaGunslinger"
+}
+```
+
+`extra_links` is checked **before** the index, so it also overrides a bad
+auto-resolved link without hand-editing the generated HTML. Set a name to
+`null` to force it back to homebrew flavour text.
+
+Currently mapped: the Gunslinger class and Bullet (Wolffe) and the Concealed
+Shot / Finger Guns cantrips (Cronus), all to Valda's Spire of Secrets. They
+point at the book rather than an entity anchor, because partnered entity URLs
+can't be verified against the core data.
+
+Mapped so far:
+
+| book | where | points at |
+|---|---|---|
+| Valda's Spire of Secrets | Wolffe — Gunslinger, Bullet · Cronus — Concealed Shot, Finger Guns | `book.html#ValdaGunslinger` |
+| Dungeons of Drakkenheim | Mimic — Variant Survivor, Makeshift Meals, Pair of Thick Gloves, Cloak with a Hood | `adventure.html#dungeonsdrakkenheim` |
+
+Both point at the book rather than an entity anchor. If you find the real
+per-entity URL, swap it in `extra_links` — no HTML editing needed.
 
 Homebrew flavour is cleaned before it is shown: the standard "Mastery: Nick…"
 rules text is stripped, because the card already displays a mastery tag, and

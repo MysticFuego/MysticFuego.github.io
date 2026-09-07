@@ -1579,6 +1579,7 @@
 "XGE"
 ],
 "catnap": [
+"AU",
 "XGE"
 ],
 "cause fear": [
@@ -1630,6 +1631,7 @@
 "XGE"
 ],
 "enervation": [
+"AU",
 "XGE"
 ],
 "erupting earth": [
@@ -1660,6 +1662,7 @@
 "XGE"
 ],
 "illusory dragon": [
+"AU",
 "XGE"
 ],
 "immolation": [
@@ -1684,6 +1687,7 @@
 "XGE"
 ],
 "invulnerability": [
+"AU",
 "XGE"
 ],
 "life transference": [
@@ -1717,9 +1721,11 @@
 "XGE"
 ],
 "negative energy flood": [
+"AU",
 "XGE"
 ],
 "power word pain": [
+"AU",
 "XGE"
 ],
 "primal savagery": [
@@ -1815,6 +1821,36 @@
 "zephyr strike": [
 "XGE"
 ],
+"distort value": [
+"AI"
+],
+"fast friends": [
+"AI"
+],
+"gift of gab": [
+"AI"
+],
+"incite greed": [
+"AI"
+],
+"jim's glowing coin": [
+"AI"
+],
+"jim's magic missile": [
+"AI"
+],
+"motivational speech": [
+"AI"
+],
+"gate seal": [
+"SatO"
+],
+"warp sense": [
+"SatO"
+],
+"linked glyphs": [
+"AitFR-AVT"
+],
 "borrowed knowledge": [
 "SCC"
 ],
@@ -1828,9 +1864,11 @@
 "SCC"
 ],
 "wither and bloom": [
+"AU",
 "SCC"
 ],
 "blade of disaster": [
+"FRHoF",
 "TCE"
 ],
 "booming blade": [
@@ -1865,6 +1903,93 @@
 ],
 "tasha's otherworldly guise": [
 "TCE"
+],
+"flock of familiars": [
+"LLK"
+],
+"galder's speedy courier": [
+"LLK"
+],
+"galder's tower": [
+"LLK"
+],
+"aura of evasion": [
+"AU"
+],
+"battle familiar": [
+"AU"
+],
+"detonate": [
+"AU"
+],
+"disruptive tune": [
+"AU"
+],
+"distorted distance": [
+"AU"
+],
+"dueling ground": [
+"AU"
+],
+"entrancing mirrors": [
+"AU"
+],
+"festering blast": [
+"AU"
+],
+"fractured awareness": [
+"AU"
+],
+"grave ground": [
+"AU"
+],
+"hindsight": [
+"AU"
+],
+"inflict doubt": [
+"AU"
+],
+"iron body": [
+"AU"
+],
+"lightning ring": [
+"AU"
+],
+"moment of prescience": [
+"AU"
+],
+"mordenkainen's lucubration": [
+"AU"
+],
+"reweave fate": [
+"AU"
+],
+"spirit lantern": [
+"AU"
+],
+"summon dinosaur": [
+"AU"
+],
+"summon plant": [
+"AU"
+],
+"transfix": [
+"AU"
+],
+"uncertain footing": [
+"AU"
+],
+"vision of elapsing eons": [
+"AU"
+],
+"wail of the banshee": [
+"AU"
+],
+"waves of exhaustion": [
+"AU"
+],
+"zone of amicability": [
+"AU"
 ],
 "dark star": [
 "EGW"
@@ -1910,6 +2035,84 @@
 ],
 "wristpocket": [
 "EGW"
+],
+"alustriel's mooncloak": [
+"FRHoF"
+],
+"backlash": [
+"FRHoF"
+],
+"cacophonic shield": [
+"FRHoF"
+],
+"conjure constructs": [
+"FRHoF"
+],
+"death armor": [
+"FRHoF"
+],
+"deryan's helpful homunculi": [
+"FRHoF"
+],
+"dirge": [
+"FRHoF"
+],
+"doomtide": [
+"FRHoF"
+],
+"elminster's effulgent spheres": [
+"FRHoF"
+],
+"elminster's elusion": [
+"FRHoF"
+],
+"holy star of mystra": [
+"FRHoF"
+],
+"laeral's silver lance": [
+"FRHoF"
+],
+"simbul's synostodweomer": [
+"FRHoF"
+],
+"songal's elemental suffusion": [
+"FRHoF"
+],
+"spellfire flare": [
+"FRHoF"
+],
+"spellfire storm": [
+"FRHoF"
+],
+"sylun\u00e9's viper": [
+"FRHoF"
+],
+"wardaway": [
+"FRHoF"
+],
+"create magen": [
+"IDRotF"
+],
+"frost fingers": [
+"IDRotF"
+],
+"antagonize": [
+"BMT"
+],
+"spirit of death": [
+"BMT"
+],
+"spray of cards": [
+"BMT"
+],
+"air bubble": [
+"AAG"
+],
+"create spelljamming helm": [
+"AAG"
+],
+"homunculus servant": [
+"EFA"
 ]
 },
 "actions": {

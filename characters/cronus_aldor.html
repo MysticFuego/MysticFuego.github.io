@@ -122,13 +122,13 @@
 <section class="hero">
   <div class="hero-border-accent"></div>
   <div class="hero-avatar-wrap">
-    <img class="hero-avatar" src="https://assets.forge-vtt.com/686144e3b8bca65b627cc2e2/tokenizer/pc-images/cronus_aldor.Avatar.webp?1761672799488" alt="Cronus Aldor">
+    <img class="hero-avatar" src="portraits/cronus_aldor.jpg" alt="Cronus Aldor">
     <div class="hero-class-icon">⚙️</div>
   </div>
   <div class="hero-info">
     <div class="hero-name">Cronus Aldor</div>
     <div class="hero-sub">
-      <a href="https://5e.tools/classes.html#artificer_tce">Artificer 1</a>
+      <a href="https://5e.tools/classes.html#artificer_efa">Artificer 1</a>
       <span class="sep">•</span>
       <a href="https://5e.tools/races.html#harengon_mpmm">Harengon</a>
       <span class="sep">•</span>
@@ -364,7 +364,7 @@
   <div class="panel">
     <div class="panel-title">✨ Prepared</div>
     <div class="slot-info">Prepared spells count against your limit; cantrips are always known.
-      <strong id="preparedCount" style="margin-left:8px;">0 / 4</strong></div>
+      <strong id="preparedCount" style="margin-left:8px;">0 / 2</strong></div>
     <div class="spells-grid" id="preparedList"></div>
     <div id="preparedEmpty" style="color:var(--muted);font-size:13px;padding:8px 0;">
       Nothing prepared yet — tap ✦ on any spell below.</div>
@@ -379,7 +379,7 @@
         <div class="spell-level-header">Cantrips</div>
         <div class="spell-card" data-name="concealed shot" data-level="0">
           <div class="spell-card-header">
-            <div class="spell-card-name">Concealed Shot</div>
+            <div class="spell-card-name"><a href="https://5e.tools/book.html#ValdaGunslinger">Concealed Shot</a></div>
             
           </div>
           <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
@@ -407,7 +407,7 @@
         </div>
         <div class="spell-card" data-name="finger guns" data-level="0">
           <div class="spell-card-header">
-            <div class="spell-card-name">Finger Guns</div>
+            <div class="spell-card-name"><a href="https://5e.tools/book.html#ValdaGunslinger">Finger Guns</a></div>
             
           </div>
           <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
@@ -809,7 +809,7 @@
         <ul class="link-list">
           <li><strong>Spellcasting</strong> — Intelligence, save DC 14, attack +6</li>
           <li><strong>Tinker's Magic</strong> — Mending known; conjure small mundane items</li>
-          <li>Prepares 4 spells; can swap them after a long rest</li>
+          <li>Prepares 2 spells; can swap them after a long rest</li>
         </ul>
       </div>
       <div class="feature-card">
@@ -912,7 +912,7 @@
 const SHEET = {
   prefix: 'cronus_aldor_v1_',
   hpMax: 11,
-  maxPrepared: 4,
+  maxPrepared: 2,
   shortRest: { keys: [],
                msg: 'Spend Hit Dice (d8 + CON +3) to recover HP.\nRabbit Hop does NOT return on a short rest.' }
 };

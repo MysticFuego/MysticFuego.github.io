@@ -117,5 +117,9 @@
         "<strong>Skilled</strong> — three extra proficiencies"
       ]
     }
+  ],
+  "languages": [
+    "Common",
+    "Common Sign Language"
   ]
 }

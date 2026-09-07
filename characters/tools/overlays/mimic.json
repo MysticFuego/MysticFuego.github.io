@@ -3,7 +3,7 @@
   "icon": "🏹",
   "max_prepared": 2,
   "links": {
-    "background": null
+    "background": "https://5e.tools/adventure.html#dungeonsdrakkenheim"
   },
   "theme": {
     "theme_name": "Plasmoid ranger — moss green and acid",
@@ -110,7 +110,7 @@
     {
       "title": "🎖 Background — Variant Survivor",
       "bullets": [
-        "<strong>Makeshift Meals</strong> — on a short rest, feed 2 creatures for 1 HP each",
+        "<strong><a href=\"https://5e.tools/adventure.html#dungeonsdrakkenheim\">Makeshift Meals</a></strong> — on a short rest, feed 2 creatures for 1 HP each",
         "Veteran of the Civil War"
       ]
     },
@@ -120,5 +120,9 @@
         "<strong>Magic Initiate (Wizard)</strong> — 2 cantrips plus one level-1 spell free each long rest"
       ]
     }
-  ]
+  ],
+  "extra_links": {
+    "Pair of Thick Gloves": "https://5e.tools/adventure.html#dungeonsdrakkenheim",
+    "Cloak with a Hood": "https://5e.tools/adventure.html#dungeonsdrakkenheim"
+  }
 }

@@ -8,8 +8,7 @@
     "ranged_attack_bonus": 2
   },
   "links": {
-    "class": null,
-    "background": null
+    "class": "https://5e.tools/book.html#ValdaGunslinger"
   },
   "theme": {
     "theme_name": "Gunslinger — gunmetal and brass",
@@ -34,17 +33,16 @@
   "rest": [
     "<strong>Short Rest:</strong> spend Hit Dice (d8 + CON +1)",
     "<strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)",
-    "<strong>Weapon Mastery:</strong> you may swap one of your two chosen weapons after a long rest"
+    "<strong>Weapon Mastery:</strong> you may swap your chosen weapon (Revolver) after a long rest"
   ],
   "actions": {
     "attack": [
       "<strong>N.E.S.T. Revolver</strong> +7 (2d6+3) — Slow",
-      "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +5 (1d4+3) — Nick",
-      "<strong>Hate Mace</strong> +4 (1d6+2) — Sap",
+      "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +5 (1d4+3)",
+      "<strong>Hate Mace</strong> +4 (1d6+2)",
       "Unarmed Strike +4"
     ],
     "bonus": [
-      "Nick (off-hand dagger, part of the Attack action)",
       "<strong>Double Draw</strong> — draw or stow two one-handed weapons"
     ],
     "reaction": [
@@ -64,8 +62,6 @@
     "<strong>Quick Draw gives you Advantage on Initiative</strong> — the Initiative +3 pill does not show it, so roll with advantage.",
     "<strong>Archery is already in the numbers:</strong> the Revolver's +7 includes the +2 Fighting Style bonus. Melee weapons do not get it.",
     "<strong>Slow</strong> (Revolver): a hit reduces the target's Speed by 10 ft until the start of your next turn.",
-    "<strong>Sap</strong> (Hate Mace): a hit gives the target disadvantage on its next attack roll.",
-    "<strong>Nick</strong> (Dagger): the off-hand attack rides along with the Attack action, no Bonus Action needed.",
     "The Revolver has the <strong>Reload</strong> property — track your bullets, and reloading costs an action.",
     "<strong>Double Draw:</strong> you can draw or stow two one-handed weapons where others manage one."
   ],
@@ -83,7 +79,7 @@
       "bullets": [
         "<strong>Fighting Style</strong> — Archery (+2 to ranged attack rolls)",
         "<strong>Quick Draw</strong> — advantage on Initiative; draw or stow two weapons",
-        "<strong>Weapon Mastery</strong> — two ranged weapon kinds, swappable on a long rest",
+        "<strong>Weapon Mastery</strong> — Revolver (Slow); ranged weapons only, swappable on a long rest",
         "Homebrew class — no 5e.tools entry"
       ]
     },
@@ -100,5 +96,11 @@
         "<strong>Skilled</strong> — three extra skill or tool proficiencies"
       ]
     }
+  ],
+  "extra_links": {
+    "Bullet": "https://5e.tools/book.html#ValdaGunslinger"
+  },
+  "mastery": [
+    "Revolver"
   ]
 }

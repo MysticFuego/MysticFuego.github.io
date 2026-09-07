@@ -1,10 +1,8 @@
 {
   "slug": "cronus_aldor",
   "icon": "⚙️",
-  "max_prepared": 4,
-  "links": {
-    "class": "https://5e.tools/classes.html#artificer_tce"
-  },
+  "max_prepared": 2,
+  "links": {},
   "theme": {
     "theme_name": "Golgari artificer — bronze and rot-green",
     "c1": "#a16207",
@@ -98,7 +96,7 @@
       "bullets": [
         "<strong>Spellcasting</strong> — Intelligence, save DC 14, attack +6",
         "<strong>Tinker's Magic</strong> — Mending known; conjure small mundane items",
-        "Prepares 4 spells; can swap them after a long rest"
+        "Prepares 2 spells; can swap them after a long rest"
       ]
     },
     {
@@ -114,5 +112,9 @@
         "<strong>Savage Attacker</strong> — once per turn, reroll a weapon's damage dice and keep either"
       ]
     }
-  ]
+  ],
+  "extra_links": {
+    "Concealed Shot": "https://5e.tools/book.html#ValdaGunslinger",
+    "Finger Guns": "https://5e.tools/book.html#ValdaGunslinger"
+  }
 }

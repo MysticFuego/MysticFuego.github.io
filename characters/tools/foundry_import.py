@@ -58,8 +58,16 @@ SIZES = {"tiny": "Tiny", "sm": "Small", "med": "Medium", "lg": "Large", "huge": 
 
 # These characters use the 2024 rules, so prefer the 2024 books when an entry
 # exists in both, and fall back to the 2014-era sources otherwise.
-SOURCE_PREF = ["XPHB", "XDMG", "PHB", "DMG", "MM", "XGE", "TCE", "SCAG", "VGM", "MPMM",
-               "MTF", "SCC", "EGW", "GGR", "AAG", "SatO", "AI", "FTD", "BMT", "IDRotF"]
+# 5etools tags every entry with an edition: "one" is the 2024 rules, "classic"
+# is 2014. List every 2024-edition book first so a class or item that exists in
+# both lines (Artificer is in TCE and EFA) resolves to the 2024 one.
+SOURCE_PREF = [
+    # edition: one (2024)
+    "XPHB", "XDMG", "EFA", "ABH", "AU", "FRHoF", "LFL", "RHW",
+    # edition: classic (2014) and setting books with no 2024 equivalent
+    "PHB", "DMG", "MM", "XGE", "TCE", "SCAG", "VGM", "MPMM", "MTF",
+    "SCC", "EGW", "GGR", "AAG", "SatO", "AI", "FTD", "BMT", "IDRotF",
+]
 _INDEX = None
 
 
@@ -447,7 +455,27 @@ def chips(names):
 
 def render(m, ov):
     slug = ov["slug"]
+
+    # Partnered / third-party books (Valda's Spire of Secrets, Drakkenheim, ...)
+    # are not in the 5etools core data, so the overlay can supply URLs for them
+    # by exact item name. Checked before the index, so it also lets you override
+    # a bad auto-resolved link without editing the generated HTML.
+    EXTRA = ov.get("extra_links", {})
+
+    def resolve(page, name):
+        if name in EXTRA:
+            return EXTRA[name] or None
+        return link_for(page, name)
     caster = bool(m["spell_dc"])
+
+    # Foundry does not always carry the truth. `languages` and `mastery` let the
+    # overlay replace what the export recorded (e.g. a mastery entered against the
+    # wrong weapon, or languages never filled in on the actor).
+    if ov.get("languages") is not None:
+        m["languages"] = list(ov["languages"])
+    if ov.get("mastery") is not None:
+        m["mastery"] = list(ov["mastery"])
+
     acc = ov.get("adjust", {})
     init = m["init"] + acc.get("init_bonus", 0)
     ranged_bonus = acc.get("ranged_attack_bonus", 0)
@@ -462,7 +490,9 @@ def render(m, ov):
     def url_for(key, page, name):
         """Overlay wins when the key is present (null = homebrew, no link);
         otherwise fall back to looking the name up in the 5etools index."""
-        return L[key] if key in L else link_for(page, name)
+        if key in L:
+            return L[key]
+        return EXTRA.get(name) if name in EXTRA else link_for(page, name)
 
     sub_bits = [linked(url_for("class", "classes", m["class_name"]),
                        "%s %d" % (m["class_name"], m["level"]))]
@@ -599,7 +629,7 @@ def render(m, ov):
         mast = ('<span class="mastery-tag">%s</span>' % esc(w["mastery"])) if w["mastery"] else ""
         magic = ' <span class="weapon-magic">\u2726 Magic</span>' if w["magic"] else ""
         page = "variantrules" if w["name"].lower() == "unarmed strike" else "items"
-        url = link_for(page, w["name"])
+        url = resolve(page, w["name"])
         title = ('<a href="%s">%s</a>' % (url, esc(w["name"]))) if url else esc(w["name"])
         note = ""
         if not url:
@@ -675,7 +705,9 @@ def render(m, ov):
             '<div class="stat-bonus" style="color:var(--muted);font-weight:400;font-size:12px;">%s %s</div></div>'
             % ("prof-dot expertise" if t.get("rank", 1) == 2 else
                ("prof-dot filled" if t.get("rank", 1) else "prof-dot"),
-               linked_name("items", t["name"]), t["ability"], sgn(t["bonus"])) for t in m["tools"])
+               (('<a href="%s">%s</a>' % (resolve("items", t["name"]), esc(t["name"])))
+                if resolve("items", t["name"]) else esc(t["name"])),
+               t["ability"], sgn(t["bonus"])) for t in m["tools"])
     else:
         toolrows = ('\n          <div class="stat-row"><div class="stat-name" '
                     'style="color:var(--muted);font-style:italic;">None recorded</div></div>')
@@ -708,7 +740,8 @@ def render(m, ov):
         if w["name"] in ov.get("hide_weapons", []):
             continue
         page = "variantrules" if w["name"].lower() == "unarmed strike" else "items"
-        groups["Weapons"].append(linked_name(page, w["name"]))
+        wu = resolve(page, w["name"])
+        groups["Weapons"].append(('<a href="%s">%s</a>' % (wu, esc(w["name"]))) if wu else esc(w["name"]))
     seen_gear = set()
     for g in m["gear"]:
         key = (g["name"], g["qty"])
@@ -717,7 +750,7 @@ def render(m, ov):
         seen_gear.add(key)
         q = " \u00d7%d" % g["qty"] if g["qty"] and g["qty"] > 1 else ""
         page = "items"
-        url = link_for(page, g["name"])
+        url = resolve(page, g["name"])
         label = ('<a href="%s">%s</a>' % (url, esc(g["name"]))) if url else esc(g["name"])
         label += q
         if not url:
@@ -781,7 +814,8 @@ def render(m, ov):
           </div>
           {dmg}
         </div>'''.format(extra=extra, key=esc(s["name"].lower()), lvl=lvl,
-                         linked=linked_name("spells", s["name"]),
+                         linked=(('<a href="%s">%s</a>' % (resolve("spells", s["name"]), esc(s["name"])))
+                                 if resolve("spells", s["name"]) else esc(s["name"])),
                          prep=prep, badges="".join(badges), act=esc(s["activation"]),
                          rng=esc(s["range"]), dur=esc(s["duration"]),
                          comp=esc(s["components"] or "\u2014"), dmg=dmg))
@@ -992,7 +1026,8 @@ const SHEET = {{
 <script src="sheet.js"></script>
 </body>
 </html>
-'''.format(name=esc(m["name"]), css=css, img=esc(m["img"] or ""), icon=ov["icon"],
+'''.format(name=esc(m["name"]), css=css,
+           img=esc(ov.get("portrait") or "portraits/%s.jpg" % slug), icon=ov["icon"],
            hero_sub=hero_sub, bio=bio_html, pills="\n".join(pill_html), tabs=tabs_html,
            trackers="\n".join(trackers), slots=slot_html, conc=conc_html,
            rolls=rolls_html, weapons="\n".join(wcards), actions="\n".join(acards),
