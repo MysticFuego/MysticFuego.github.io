@@ -57,6 +57,7 @@ actor without losing any authored text.
 | `features` | feature cards: `title` + `bullets` |
 | `adjust` | manual corrections: `init_bonus`, `ranged_attack_bonus` |
 | `hide_weapons` | weapon names to leave off the sheet |
+| `hide_mastery` | weapon names whose mastery tag is hidden (the character lacks that mastery) |
 | `max_prepared` | prepared-spell limit for casters |
 
 ### Why `adjust` exists

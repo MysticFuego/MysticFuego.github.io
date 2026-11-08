@@ -626,7 +626,8 @@ def render(m, ov):
             props.append("Range %s/%s" % (rng.get("value"), rng.get("long") or rng.get("value")))
         elif rng.get("reach"):
             props.append("Reach %s ft" % rng["reach"])
-        mast = ('<span class="mastery-tag">%s</span>' % esc(w["mastery"])) if w["mastery"] else ""
+        show_mast = w["mastery"] and w["name"] not in ov.get("hide_mastery", [])
+        mast = ('<span class="mastery-tag">%s</span>' % esc(w["mastery"])) if show_mast else ""
         magic = ' <span class="weapon-magic">\u2726 Magic</span>' if w["magic"] else ""
         page = "variantrules" if w["name"].lower() == "unarmed strike" else "items"
         url = resolve(page, w["name"])
@@ -858,6 +859,15 @@ def render(m, ov):
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="fonts.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#0d1117">
+<link rel="icon" href="icons/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MF Sheets">
+<meta name="mobile-web-app-capable" content="yes">
 <title>{name} \u2013 Character Sheet</title>
 <link rel="stylesheet" href="sheet.css">
 {css}
@@ -1024,6 +1034,7 @@ const SHEET = {{
 }};
 </script>
 <script src="sheet.js"></script>
+<script src="pwa.js" defer></script>
 </body>
 </html>
 '''.format(name=esc(m["name"]), css=css,

@@ -1803,8 +1803,8 @@
       "sort": 0
     },
     {
-      "_id": "5XInFSX8asq7L5kY",
-      "name": "Leather Armor",
+      "_id": "vBGdMMX9XvYyGWfk",
+      "name": "Studded Leather Armor",
       "type": "equipment",
       "system": {
         "source": {
@@ -1822,11 +1822,11 @@
         "proficient": null,
         "quantity": 1,
         "weight": {
-          "value": 10,
+          "value": 13,
           "units": "lb"
         },
         "price": {
-          "value": 10,
+          "value": 45,
           "denomination": "gp"
         },
         "attuned": false,
@@ -1835,7 +1835,7 @@
         "rarity": "",
         "type": {
           "value": "light",
-          "baseItem": "leather"
+          "baseItem": "studded"
         },
         "properties": [],
         "attunement": "",
@@ -1845,12 +1845,12 @@
           "recovery": []
         },
         "armor": {
-          "value": 11,
+          "value": 12,
           "dex": null
         },
         "strength": null,
         "activities": {},
-        "identifier": "leather-armor",
+        "identifier": "studded-leather-armor",
         "unidentified": {
           "description": ""
         },
@@ -1860,7 +1860,7 @@
           "value": []
         }
       },
-      "img": "https://cdn.5e.tools/2024/img/items/XPHB/Leather%20Armor.webp",
+      "img": "https://cdn.5e.tools/2024/img/items/XPHB/Studded%20Leather%20Armor.webp",
       "ownership": {
         "default": 0,
         "rbquDFsRq0mPJ8jx": 3
@@ -1869,7 +1869,7 @@
         "plutonium": {
           "page": "items.html",
           "source": "XPHB",
-          "hash": "leather%20armor_xphb"
+          "hash": "studded%20leather%20armor_xphb"
         }
       },
       "effects": [],
@@ -1879,8 +1879,8 @@
         "coreVersion": "14.365",
         "systemId": "dnd5e",
         "systemVersion": "5.3.3",
-        "createdTime": 1752883102361,
-        "modifiedTime": 1779060733899,
+        "createdTime": 1751845354433,
+        "modifiedTime": 1788274326337,
         "lastModifiedBy": "rbquDFsRq0mPJ8jx",
         "exportSource": null
       },
@@ -12704,7 +12704,7 @@
           "value": "<div class=\"ve-rd__b  ve-rd__b--2\"><p>This potion is a magic item. As a @variantrule[Bonus Action|XPHB], you can drink it or administer it to another creature within 5 feet of yourself. The creature that drinks the magical red fluid in this vial regains [[/r 2d4 + 2]] @variantrule[Hit Points|XPHB]. The potion's red liquid glimmers when agitated.</p></div>",
           "chat": ""
         },
-        "quantity": 3,
+        "quantity": 4,
         "weight": {
           "value": 0.5,
           "units": "lb"

@@ -2393,8 +2393,8 @@
       "sort": 0
     },
     {
-      "_id": "ddKf2VFhfrbBk4MU",
-      "name": "Leather Armor",
+      "_id": "QvqHJ7Wl1bssACcx",
+      "name": "Studded Leather Armor",
       "type": "equipment",
       "system": {
         "source": {
@@ -2412,11 +2412,11 @@
         "proficient": null,
         "quantity": 1,
         "weight": {
-          "value": 10,
+          "value": 13,
           "units": "lb"
         },
         "price": {
-          "value": 10,
+          "value": 45,
           "denomination": "gp"
         },
         "attuned": false,
@@ -2425,7 +2425,7 @@
         "rarity": "",
         "type": {
           "value": "light",
-          "baseItem": "leather"
+          "baseItem": "studded"
         },
         "properties": [],
         "attunement": "",
@@ -2435,12 +2435,12 @@
           "recovery": []
         },
         "armor": {
-          "value": 11,
+          "value": 12,
           "dex": null
         },
         "strength": null,
         "activities": {},
-        "identifier": "leather-armor",
+        "identifier": "studded-leather-armor",
         "unidentified": {
           "description": ""
         },
@@ -2450,7 +2450,7 @@
           "value": []
         }
       },
-      "img": "https://cdn.5e.tools/2024/img/items/XPHB/Leather%20Armor.webp",
+      "img": "https://cdn.5e.tools/2024/img/items/XPHB/Studded%20Leather%20Armor.webp",
       "ownership": {
         "default": 0,
         "rbquDFsRq0mPJ8jx": 3
@@ -2459,7 +2459,7 @@
         "plutonium": {
           "page": "items.html",
           "source": "XPHB",
-          "hash": "leather%20armor_xphb"
+          "hash": "studded%20leather%20armor_xphb"
         }
       },
       "effects": [],
@@ -2468,9 +2468,9 @@
         "duplicateSource": null,
         "coreVersion": "14.365",
         "systemId": "dnd5e",
-        "systemVersion": "4.4.4",
-        "createdTime": 1751842459235,
-        "modifiedTime": 1751842459235,
+        "systemVersion": "5.3.3",
+        "createdTime": 1751845354433,
+        "modifiedTime": 1788274326337,
         "lastModifiedBy": "rbquDFsRq0mPJ8jx",
         "exportSource": null
       },
@@ -5059,6 +5059,171 @@
         "modifiedTime": 1771189950517,
         "lastModifiedBy": "rbquDFsRq0mPJ8jx"
       }
+    },
+    {
+      "_id": "P7q4uZNNqmtRIXKO",
+      "name": "Potion of Healing",
+      "type": "consumable",
+      "system": {
+        "source": {
+          "custom": "",
+          "book": "DMG 2024",
+          "page": "288",
+          "license": "",
+          "rules": "2024",
+          "revision": 1
+        },
+        "description": {
+          "value": "<div class=\"ve-rd__b  ve-rd__b--2\"><p>This potion is a magic item. As a @variantrule[Bonus Action|XPHB], you can drink it or administer it to another creature within 5 feet of yourself. The creature that drinks the magical red fluid in this vial regains [[/r 2d4 + 2]] @variantrule[Hit Points|XPHB]. The potion's red liquid glimmers when agitated.</p></div>",
+          "chat": ""
+        },
+        "quantity": 2,
+        "weight": {
+          "value": 0.5,
+          "units": "lb"
+        },
+        "price": {
+          "value": 50,
+          "denomination": "gp"
+        },
+        "attuned": false,
+        "equipped": false,
+        "identified": true,
+        "rarity": "common",
+        "type": {
+          "value": "potion",
+          "subtype": ""
+        },
+        "properties": [
+          "mgc"
+        ],
+        "attunement": "",
+        "uses": {
+          "max": "1",
+          "spent": 0,
+          "recovery": [],
+          "autoDestroy": true
+        },
+        "magicalBonus": "0",
+        "damage": {
+          "base": {
+            "types": [],
+            "custom": {
+              "enabled": false
+            },
+            "scaling": {
+              "number": 1
+            }
+          },
+          "replace": false
+        },
+        "activities": {
+          "dnd5eactivity000": {
+            "name": "Consume",
+            "type": "heal",
+            "activation": {
+              "type": "bonus",
+              "override": false
+            },
+            "consumption": {
+              "targets": [
+                {
+                  "type": "itemUses",
+                  "value": "1",
+                  "scaling": {}
+                }
+              ],
+              "scaling": {
+                "allowed": false
+              },
+              "spellSlot": true
+            },
+            "target": {
+              "affects": {
+                "type": "creature",
+                "choice": false
+              },
+              "prompt": true,
+              "template": {
+                "contiguous": false,
+                "stationary": false,
+                "units": "ft"
+              },
+              "override": false
+            },
+            "healing": {
+              "number": 2,
+              "denomination": 4,
+              "types": [
+                "healing"
+              ],
+              "scaling": {
+                "number": 1
+              },
+              "bonus": "2",
+              "custom": {
+                "enabled": false
+              }
+            },
+            "_id": "dnd5eactivity000",
+            "img": null,
+            "sort": 0,
+            "description": {},
+            "duration": {
+              "units": "inst",
+              "concentration": false,
+              "override": false
+            },
+            "effects": [],
+            "flags": {},
+            "range": {
+              "units": "self",
+              "override": false
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            },
+            "visibility": {
+              "level": {},
+              "requireAttunement": false,
+              "requireIdentification": false,
+              "requireMagic": false
+            }
+          }
+        },
+        "identifier": "potion-of-healing",
+        "unidentified": {
+          "description": ""
+        },
+        "container": null
+      },
+      "img": "https://cdn.5e.tools/2024/img/items/XDMG/Potion%20of%20Healing.webp",
+      "ownership": {
+        "default": 0,
+        "rbquDFsRq0mPJ8jx": 3
+      },
+      "flags": {
+        "plutonium": {
+          "page": "items.html",
+          "source": "XDMG",
+          "hash": "potion%20of%20healing_xdmg"
+        }
+      },
+      "effects": [],
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null,
+        "coreVersion": "14.365",
+        "systemId": "dnd5e",
+        "systemVersion": "5.3.3",
+        "createdTime": 1779060621559,
+        "modifiedTime": 1779060711671,
+        "lastModifiedBy": "rbquDFsRq0mPJ8jx"
+      },
+      "folder": null,
+      "sort": 0
     }
   ],
   "effects": [],
