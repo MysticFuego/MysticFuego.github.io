@@ -144,15 +144,8 @@
       <a href="https://5e.tools/backgrounds.html#knight%20of%20the%20order_scag">Knight of the Order</a>
     </div>
     <div class="hero-bio">
-      Age: <span>—</span>
-      Gender: <span>—</span>
-      Height: <span>—</span>
-      Eyes: <span>—</span>
-      Hair: <span>—</span>
-      Skin: <span>—</span>
       Size: <span>Medium</span>
       Type: <span>Humanoid</span>
-      Alignment: <span>—</span>
     </div>
     <div class="stat-bar">
       <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">9</span></div>
@@ -483,7 +476,7 @@
         <div class="feature-card-title">💤 Rest Recovery</div>
         <ul class="link-list">
           <li><strong>Short Rest:</strong> spend Hit Dice (d8 + CON +1)</li>
-          <li><strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)</li>
+          <li><strong>Long Rest:</strong> Full HP, all Hit Dice restored</li>
           <li><strong>Weapon Mastery:</strong> you may swap your chosen weapon (Revolver) after a long rest</li>
         </ul>
       </div>
@@ -553,6 +546,7 @@
 const SHEET = {
   prefix: 'wolffe_loudstrife_v1_',
   hpMax: 9,
+  rules: '2024',
   shortRest: { keys: [],
                msg: 'Spend Hit Dice (d8 + CON +1) to recover HP.\nNo Gunslinger short-rest resources at level 1.' }
 };

@@ -36,7 +36,7 @@
   },
   "rest": [
     "<strong>Short Rest:</strong> spend Hit Dice (d8 + CON +3)",
-    "<strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)",
+    "<strong>Long Rest:</strong> Full HP, both spell slots, all Hit Dice restored",
     "Rabbit Hop uses reset on a long rest",
     "Prepared spells can be swapped after a long rest"
   ],
@@ -44,11 +44,11 @@
     "attack": [
       "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +5 (1d4+3) — Nick",
       "<a href=\"https://5e.tools/items.html#sling_xphb\">Sling</a> +5 (1d4+3) — Slow",
-      "Unarmed Strike +2"
+      "Unarmed Strike +2",
+      "<strong>Nick</strong> (off-hand dagger) — extra attack as part of the Attack action, not a Bonus Action"
     ],
     "bonus": [
-      "<strong>Rabbit Hop</strong> — jump 10 ft without provoking",
-      "Nick (off-hand dagger, part of the Attack action)"
+      "<strong>Rabbit Hop</strong> — jump 10 ft without provoking"
     ],
     "reaction": [
       "Opportunity Attack",

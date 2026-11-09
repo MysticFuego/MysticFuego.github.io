@@ -104,11 +104,47 @@ MASTERY_TAIL = re.compile(r"\s*Mastery:\s*(?:%s)\b.*$" % "|".join(MASTERY.values
 def flavour(text):
     """Homebrew item text, minus the standard mastery rules the card already shows."""
     t = MASTERY_TAIL.sub("", strip_html(text)).strip()
+    # Generic "pick one of these" placeholders (Gaming Set, Musical Instrument)
+    # are 5e.tools boilerplate, not something the player needs on the sheet.
+    if re.match(r"Multiple variations of this item exist", t, re.I):
+        return ""
     t = re.sub(r"^(?:Primary|Bonus)\s+skill:\s*", "", t, flags=re.I)
     t = re.sub(r"\s*(?:Primary|Bonus)\s+skill:\s*", " ", t, flags=re.I)
     t = re.sub(r":\s*\u2022\s*", ": ", t)
     t = re.sub(r"\s*\u2022\s*", " ", t)
     return re.sub(r"\s+", " ", t).strip(" .") + ("." if t and not t.endswith(".") else "")
+
+
+# Foundry stores a spell's range and duration as {value, units}. Units like
+# "self" or "inst" carry a placeholder value of 0, and scaling ranges are a
+# formula ("15 * pow(2, @scaling.increase)"), so neither can be printed as is.
+UNIT_WORDS = {"inst": "Instantaneous", "self": "Self", "touch": "Touch",
+              "perm": "Permanent", "spec": "Special", "any": "Any",
+              "sight": "Sight", "unlimited": "Unlimited"}
+TIME_UNITS = {"turn", "round", "minute", "hour", "day", "month", "year"}
+
+
+ACTIVATION_WORDS = {"action": "1 Action", "bonus": "Bonus Action", "reaction": "Reaction"}
+
+
+def fmt_activation(act):
+    t = (act.get("type") or "").strip()
+    if t in ACTIVATION_WORDS:
+        return ACTIVATION_WORDS[t]
+    return fmt_amount({"value": act.get("value"), "units": t}, "—")
+
+
+def fmt_amount(d, default):
+    units = (d.get("units") or "").strip()
+    if units in UNIT_WORDS:
+        return UNIT_WORDS[units]
+    m = re.match(r"\s*(\d+(?:\.\d+)?)", str(d.get("value") or ""))
+    if not m:
+        return units.title() if units else default
+    n = m.group(1)
+    if units in TIME_UNITS and n != "1":
+        units += "s"
+    return ("%s %s" % (n, units)).strip()
 
 
 def strip_html(s):
@@ -222,6 +258,22 @@ def extract(path):
             "desc": s.get("description", {}).get("value", ""),
         })
 
+    # Foundry marks a spell 0 (not prepared), 1 (prepared) or 2 (always
+    # prepared); older dnd5e versions used preparation.{mode, prepared}. A
+    # spell can be on the actor twice (class list + feat), so keep the highest.
+    def prep_state(sys_):
+        v = sys_.get("prepared")
+        if v is None:
+            pr = sys_.get("preparation") or {}
+            v = 2 if pr.get("mode") == "always" else (1 if pr.get("prepared") else 0)
+        try:
+            return int(v)
+        except (TypeError, ValueError):
+            return 0
+    prep_of = {}
+    for i in of("spell"):
+        prep_of[i["name"]] = max(prep_of.get(i["name"], 0), prep_state(i["system"]))
+
     spells, seen_s = [], set()
     for i in of("spell"):
         if i["name"] in seen_s:
@@ -238,12 +290,13 @@ def extract(path):
         act, dur, rng = s.get("activation") or {}, s.get("duration") or {}, s.get("range") or {}
         spells.append({
             "name": i["name"], "level": s.get("level", 0),
+            "prepared": prep_of.get(i["name"], 0),
             "school": SCHOOLS.get(s.get("school", ""), ""),
             "ritual": "ritual" in props, "conc": "concentration" in props,
             "components": "".join(c for c, k in (("V", "vocal"), ("S", "somatic"), ("M", "material")) if k in props),
-            "activation": ("%s %s" % (act.get("value") or "", act.get("type") or "")).strip().title() or "\u2014",
-            "duration": ("%s %s" % (dur.get("value") or "", dur.get("units") or "")).strip() or "Instant",
-            "range": ("%s %s" % (rng.get("value") or "", rng.get("units") or "")).strip() or "Self",
+            "activation": fmt_activation(act),
+            "duration": fmt_amount(dur, "Instantaneous"),
+            "range": fmt_amount(rng, "Self"),
             "damage": " \u00b7 ".join(parts),
             "desc": strip_html(s.get("description", {}).get("value", "")),
         })
@@ -508,7 +561,9 @@ def render(m, ov):
                   ("Hair", bio.get("hair", "\u2014")), ("Skin", bio.get("skin", "\u2014")),
                   ("Size", m["size"]), ("Type", (m["creature_type"] or "humanoid").title()),
                   ("Alignment", bio.get("alignment", "\u2014"))]
-    bio_html = "\n".join('      %s: <span>%s</span>' % (k, esc(v)) for k, v in bio_fields)
+    # Blank fields ("—") are left off rather than shown as a row of dashes.
+    bio_html = "\n".join('      %s: <span>%s</span>' % (k, esc(v)) for k, v in bio_fields
+                         if v and str(v).strip() not in ("—", "-", ""))
 
     pills = [('sp-hp', 'HP', str(m["hp_max"]), 'hpPill'), ('sp-ac', 'AC', str(m["ac"]), None)]
     pills += [('', 'Initiative', sgn(init), None), ('', 'Speed', m["speed"], None),
@@ -797,8 +852,11 @@ def render(m, ov):
                     badges.append('<span class="sbadge conc">Conc</span>')
                 if s["ritual"]:
                     badges.append('<span class="sbadge ritual">Ritual</span>')
+                always = lvl > 0 and s["prepared"] == 2
+                if always:
+                    badges.append('<span class="sbadge always">Always prepared</span>')
                 extra = " conc-spell" if s["conc"] else (" ritual-spell" if s["ritual"] else "")
-                prep = ("" if lvl == 0 else
+                prep = ("" if lvl == 0 or always else
                         '<button class="prep-toggle" data-spell="%s" title="Add to prepared">\u2726</button>' % esc(s["name"].lower()))
                 dmg = ('<div class="spell-dmg">%s</div>' % esc(s["damage"])) if s["damage"] else ""
                 blocks.append('''        <div class="spell-card{extra}" data-name="{key}" data-level="{lvl}">
@@ -844,9 +902,21 @@ def render(m, ov):
 </div>'''.format(maxprep=ov.get("max_prepared", 2), blocks="\n".join(blocks))
 
     # ── SHEET config ────────────────────────────────────────────────────
-    cfg = ["  prefix: '%s_v1_'," % slug, "  hpMax: %d," % m["hp_max"]]
+    # Foundry-imported characters play the 2024 rules (see SOURCE_PREF), which
+    # tells sheet.js to restore every Hit Die on a long rest.
+    cfg = ["  prefix: '%s_v1_'," % slug, "  hpMax: %d," % m["hp_max"], "  rules: '2024',"]
     if caster:
         cfg.append("  maxPrepared: %d," % ov.get("max_prepared", 2))
+        # Start the Prepared list from what Foundry had prepared, but only when
+        # that fits the limit; an over-full list means the export is stale.
+        seeded = [s["name"].lower() for s in m["spells"] if s["level"] > 0 and s["prepared"] == 1]
+        seeded = sorted(set(seeded), key=seeded.index)
+        if seeded and len(seeded) <= ov.get("max_prepared", 2):
+            cfg.append("  defaultPrepared: [%s]," % ", ".join(json.dumps(n) for n in seeded))
+        elif seeded:
+            print("note: %s has %d spells prepared in Foundry but max_prepared is %d; "
+                  "not seeding the Prepared list" % (slug, len(seeded), ov.get("max_prepared", 2)),
+                  file=sys.stderr)
     sr = ov.get("short_rest", {})
     cfg.append("  shortRest: { keys: [%s],\n               msg: '%s' }"
                % (", ".join("'%s'" % k for k in sr.get("keys", [])),

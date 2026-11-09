@@ -278,3 +278,130 @@ input[type="search"]::-webkit-search-cancel-button { display: none; }
 @media (max-width:900px) { .two-col,.two-col-eq{grid-template-columns:1fr} .three-col,.tracker-grid,.slot-grid{grid-template-columns:1fr 1fr} .weapon-grid{grid-template-columns:1fr 1fr} .feature-grid,.action-section.bottom{grid-template-columns:1fr 1fr} .action-section{grid-template-columns:1fr} .hero{flex-direction:column} .abilities-grid{grid-template-columns:repeat(2,1fr)} }
 @media (max-width:600px) { .roll-mode-bar{gap:6px} .roll-mode-btn{padding:6px 9px;font-size:10px} .page{padding:12px 14px 50px} .hero-name{font-size:22px} .spells-grid,.equip-grid,.three-col,.tracker-grid,.slot-grid{grid-template-columns:1fr} .feature-grid,.action-section,.action-section.bottom{grid-template-columns:1fr} .weapon-grid{grid-template-columns:1fr} .abilities-grid{grid-template-columns:repeat(3,1fr)} .tab-btn{font-size:12px;padding:8px 10px} }
 @media print { body{background:#fff;color:#000} .tabs-bar,.btn,.roll-btn,.spell-search-wrap,.roll-mode-bar,.dmg-roll-btn{display:none} .tab-pane{display:block!important} }
+
+/* ═══ MOBILE-FIRST ADDITIONS ═══════════════════════════════════════════
+   The sheets are used almost entirely on phones: no hover, no Shift key,
+   fingers instead of a mouse pointer. */
+
+/* 5e.tools links: visibly tappable, with an arrow to say "opens elsewhere". */
+a.rules-link { text-decoration: underline dotted; text-decoration-color: rgba(126,184,247,.45); text-underline-offset: 3px; }
+a.rules-link::after { content: '↗'; display: inline-block; margin-left: 2px; font-size: .72em; opacity: .65; text-decoration: none; }
+
+/* Tracker counter and legend. */
+.dots-count { margin-top: 6px; font-size: 11px; font-weight: 600; color: var(--muted); }
+.dots-count.empty { color: var(--danger); }
+.dots-legend { margin: -6px 0 12px; font-size: 12px; color: var(--muted); }
+
+/* Stat pills that open an explanation. */
+.stat-pill.has-info { cursor: pointer; }
+.stat-pill.has-info .sp-label::after { content: ' ⓘ'; opacity: .7; }
+#inspirationPill .sp-label::after { content: ' · tap'; opacity: .7; text-transform: none; }
+
+/* Bottom toast: roll results and stat explanations. */
+.sheet-toast {
+  position: fixed; left: 50%; bottom: max(14px, env(safe-area-inset-bottom));
+  transform: translate(-50%, 140%); opacity: 0; pointer-events: none;
+  width: min(440px, calc(100vw - 24px)); z-index: 9000;
+  background: var(--panel2); border: 1px solid var(--line2); border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.55); padding: 12px 14px;
+  transition: transform .2s ease, opacity .2s ease;
+}
+.sheet-toast.show { transform: translate(-50%, 0); opacity: 1; pointer-events: auto; }
+.toast-roll { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.toast-roll .roll-entry-label { font-size: 13px; color: var(--text); font-weight: 600; }
+.toast-roll .roll-entry-total { font-size: 26px; }
+.toast-info { display: flex; flex-direction: column; gap: 6px; font-size: 13px; color: var(--muted); }
+.toast-info strong { color: var(--text); font-size: 14px; }
+.toast-info a { align-self: flex-start; font-weight: 600; padding: 4px 0; }
+
+@media (prefers-reduced-motion: reduce) { .sheet-toast { transition: none; } }
+
+/* Phones: finger-sized targets, and 16px inputs so iOS does not zoom in
+   every time a player types damage or HP. */
+@media (max-width: 600px) {
+  .dot { width: 42px; height: 42px; font-size: 13px; }
+  .dots-row { gap: 9px; }
+  .roll-btn { padding: 9px 12px; font-size: 13px; }
+  .roll-mode-btn { padding: 10px 11px; }
+  .dmg-roll-btn { padding: 6px 10px; font-size: 12px; margin-left: 8px; }
+  .prep-toggle { padding: 6px 11px; font-size: 13px; }
+  .btn-dmg, .btn-heal { padding: 9px 14px; font-size: 13px; }
+  .btn { padding: 11px 16px; }
+  .tab-btn { padding: 11px 10px; }
+  .hp-adjust-input, .temp-hp-input { width: 64px; padding: 8px 6px; font-size: 16px; }
+  .text-field, .spell-search { font-size: 16px; }
+  .stat-pill { padding: 8px 12px; }
+}
+
+/* No double-tap-to-zoom delay on anything tappable. */
+button, a, .stat-pill, .conc-toggle, input { touch-action: manipulation; }
+
+/* Tabs stay reachable while scrolling. */
+.tabs-bar { position: sticky; top: 0; z-index: 50; box-shadow: 0 6px 16px rgba(0,0,0,.35); }
+
+/* "This turn" strip at the top of the Combat tab. */
+.turn-strip { padding: 14px 16px; margin-bottom: 16px; }
+.turn-head { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+.turn-title { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin-right: auto; }
+.turn-reset {
+  background: var(--panel2); color: var(--text); border: 1px solid var(--line2); border-radius: 9px;
+  padding: 7px 11px; font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+}
+.wake-btn { color: var(--muted); }
+.wake-btn.on { color: var(--warn); border-color: rgba(251,191,36,.5); }
+.turn-chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.turn-chip {
+  background: var(--good-dim); color: var(--good); border: 1px solid #166534; border-radius: 10px;
+  padding: 10px 4px; font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.turn-chip.used { background: var(--panel3); color: var(--muted2); border-color: var(--line); text-decoration: line-through; }
+
+/* Floating reminder while advantage / disadvantage / crit is on. */
+.mode-chip {
+  position: fixed; right: 12px; bottom: calc(max(14px, env(safe-area-inset-bottom)) + 84px); z-index: 8999;
+  display: none; border-radius: 999px; padding: 9px 14px; font: inherit; font-size: 12px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .04em; cursor: pointer; border: 1px solid var(--line2);
+  background: var(--panel2); color: var(--text); box-shadow: 0 6px 20px rgba(0,0,0,.5);
+}
+.mode-chip.show { display: block; }
+.mode-chip.adv { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.mode-chip.dis { background: var(--danger-dim); color: var(--danger); border-color: #7f1d1d; }
+.mode-chip.crit:not(.adv):not(.dis) { background: var(--warn); color: #1a1205; border-color: var(--warn); }
+
+/* First-visit help. */
+.help-card { margin-bottom: 16px; border-color: var(--line2); }
+.help-card ul { list-style: none; display: grid; gap: 7px; margin-bottom: 14px; font-size: 13px; }
+.help-card li::before { content: '• '; color: var(--sheet-accent, var(--link)); font-weight: 700; }
+.rules-link-sample { color: var(--link); font-size: .8em; }
+
+/* Spells in the Combat tab that are not prepared today. */
+.action-card li.not-prepared { opacity: .5; }
+.np-tag {
+  display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 999px; vertical-align: 1px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted); border: 1px solid var(--line2);
+}
+
+@media (max-width: 600px) {
+  /* One scrollable row of tabs instead of two wrapped rows. */
+  .tabs-bar { flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; border-radius: 0 0 14px 14px; margin-left: -14px; margin-right: -14px; }
+  .tabs-bar::-webkit-scrollbar { display: none; }
+  .page .tab-btn { flex: 0 0 auto; min-width: 0; }
+
+  /* Compact header: portrait beside the name, stats in an even grid.
+     `.page` raises specificity above each sheet's own hero rules. */
+  .page .hero { display: grid; grid-template-columns: 76px 1fr; column-gap: 14px; row-gap: 4px; align-items: center; padding: 18px 16px; }
+  .page .hero-info { display: contents; }
+  .page .hero-avatar-wrap { grid-row: 1 / span 2; }
+  .page .hero-avatar { width: 76px; height: 76px; border-radius: 14px; }
+  .page .hero-class-icon { width: 26px; height: 26px; font-size: 13px; bottom: -6px; right: -6px; }
+  .page .hero-name { font-size: 22px; align-self: end; }
+  .page .hero-sub { margin-top: 0; align-self: start; }
+  .page .hero-bio, .page .stat-bar { grid-column: 1 / -1; }
+  .page .hero-bio { margin-top: 10px; font-size: 11px; gap: 3px 12px; }
+  .page .stat-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-top: 12px; }
+  .page .stat-pill { min-width: 0; padding: 7px 3px; text-align: center; }
+  .page .stat-pill .sp-label { font-size: 9px; letter-spacing: .03em; line-height: 1.25; }
+  .page .stat-pill .sp-val { font-size: 15px; }
+}
+.sbadge.always { background: rgba(74,222,128,.1); color: var(--good); border-color: rgba(74,222,128,.3); }

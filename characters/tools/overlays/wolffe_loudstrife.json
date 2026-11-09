@@ -32,7 +32,7 @@
   },
   "rest": [
     "<strong>Short Rest:</strong> spend Hit Dice (d8 + CON +1)",
-    "<strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)",
+    "<strong>Long Rest:</strong> Full HP, all Hit Dice restored",
     "<strong>Weapon Mastery:</strong> you may swap your chosen weapon (Revolver) after a long rest"
   ],
   "actions": {

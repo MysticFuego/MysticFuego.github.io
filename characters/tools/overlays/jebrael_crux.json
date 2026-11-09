@@ -24,7 +24,7 @@
   },
   "rest": [
     "<strong>Short Rest:</strong> spend Hit Dice (d8 + CON +2)",
-    "<strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)",
+    "<strong>Long Rest:</strong> Full HP, all Hit Dice restored",
     "No class resources to recharge yet — Cunning Action arrives at level 2"
   ],
   "actions": {
@@ -32,11 +32,11 @@
       "<a href=\"https://5e.tools/items.html#shortsword_xphb\">Shortsword</a> +6 (1d6+4) — Vex",
       "<a href=\"https://5e.tools/items.html#shortbow_xphb\">Shortbow</a> +6 (1d6+4) — Vex",
       "<a href=\"https://5e.tools/items.html#dagger_xphb\">Dagger</a> +6 (1d4+4) — Nick",
-      "<strong>Hooves</strong> +5 (1d6+3 bludgeoning)"
+      "<strong>Hooves</strong> +5 (1d6+3 bludgeoning)",
+      "<strong>Nick</strong> (off-hand dagger) — extra attack as part of the Attack action, not a Bonus Action"
     ],
     "bonus": [
-      "<strong>Charge</strong> — move 30 ft straight, hit in melee, then a free hoof attack",
-      "Nick (off-hand dagger, part of the Attack action)"
+      "<strong>Charge</strong> — move 30 ft straight, hit in melee, then a free hoof attack"
     ],
     "reaction": [
       "Opportunity Attack"

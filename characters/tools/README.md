@@ -191,3 +191,14 @@ cd MysticFuego.github.io && python -m http.server 8000
 
 then open `http://localhost:8000/characters/` and use DevTools ▸ Application ▸
 Service Workers. Tick "Offline" there to check the offline path.
+
+## What the importer takes from Foundry's spell list
+
+* **Prepared spells** start the sheet's Prepared list (`defaultPrepared`), as
+  long as they fit within `max_prepared`. If Foundry has more prepared than
+  the limit, the importer prints a note and leaves the list empty instead.
+  Once a player prepares or unprepares anything, their own list wins.
+* **Always-prepared spells** get an "Always prepared" badge and no prepare
+  toggle, and never count against the limit.
+* Empty bio fields are left off the header rather than shown as dashes.
+* Generated sheets set `rules: '2024'`, so a long rest restores every Hit Die.

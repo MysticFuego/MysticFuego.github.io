@@ -144,15 +144,8 @@
       <a href="https://5e.tools/backgrounds.html#noble_xphb">Noble</a>
     </div>
     <div class="hero-bio">
-      Age: <span>—</span>
-      Gender: <span>—</span>
-      Height: <span>—</span>
-      Eyes: <span>—</span>
-      Hair: <span>—</span>
-      Skin: <span>—</span>
       Size: <span>Medium</span>
       Type: <span>Humanoid</span>
-      Alignment: <span>—</span>
     </div>
     <div class="stat-bar">
       <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">9</span></div>
@@ -210,7 +203,7 @@
           <div class="tracker-card">
             <h3>Bardic Inspiration</h3>
             <div class="dots-row" id="bardicInspirationDots" data-key="bardicInspiration" data-total="5" data-label="Bardic Inspiration"></div>
-            <div style="font-size:11px;color:var(--muted);margin-top:8px;">d6 · Bonus Action · all uses return on a short rest</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:8px;">d6 · Bonus Action · all uses return on a long rest</div>
           </div>
           <div class="tracker-card">
             <h3>Luck Points</h3>
@@ -326,7 +319,6 @@
             <ul class="link-list">
               <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> +4 (1d4+2)</li>
               <li>Unarmed Strike +4</li>
-              <li><a href="https://5e.tools/spells.html#thunderclap_xphb">Thunderclap</a> — 5 ft burst, CON save</li>
             </ul>
           </div>
           <div class="action-card">
@@ -334,7 +326,6 @@
             <ul class="link-list">
               <li><strong>Bardic Inspiration</strong> — d6 to an ally within 60 ft</li>
               <li><a href="https://5e.tools/spells.html#healing word_xphb">Healing Word</a> — 60 ft, 2d4+5</li>
-              <li>Nick (off-hand dagger)</li>
             </ul>
           </div>
           <div class="action-card">
@@ -347,6 +338,7 @@
           <div class="action-card">
             <div class="action-card-title mag">✨ Magic</div>
             <ul class="link-list">
+              <li><a href="https://5e.tools/spells.html#thunderclap_xphb">Thunderclap</a> — 5 ft burst, CON save</li>
               <li><a href="https://5e.tools/spells.html#charm person_xphb">Charm Person</a> — WIS save DC 15</li>
               <li><a href="https://5e.tools/spells.html#command_xphb">Command</a> — WIS save DC 15</li>
               <li><a href="https://5e.tools/spells.html#dissonant whispers_xphb">Dissonant Whispers</a> — 3d6 psychic</li>
@@ -373,7 +365,7 @@
       <div class="panel">
         <div class="panel-title">🎭 Don't Forget</div>
         <div class="reminder">
-          <div class="reminder-item"><strong>Bardic Inspiration is a Bonus Action</strong> — 5 uses, and they all come back on a short rest. Spend them freely.</div>
+          <div class="reminder-item"><strong>Bardic Inspiration is a Bonus Action</strong> — 5 uses that only come back on a <em>long</em> rest (short rests too from Bard 5). Save one for a big save or attack.</div>
           <div class="reminder-item"><strong>Resourceful:</strong> you gain Heroic Inspiration after every long rest. Spend the old one before you sleep.</div>
           <div class="reminder-item"><strong>Lucky:</strong> 2 Luck Points — advantage on one of your d20 tests, or disadvantage on an attack aimed at you.</div>
           <div class="reminder-item">Spell save DC 15 is unusually high for level 1. Lead with Charm Person, Command or Tasha's Hideous Laughter.</div>
@@ -425,8 +417,8 @@
           <div class="spell-badges"><span class="sbadge cantrip">Cantrip</span></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>S</span></div>
           </div>
           <div class="spell-dmg">1d6 thunder</div>
@@ -441,7 +433,7 @@
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
             <div class="spell-meta-item">Range <span>30 ft</span></div>
-            <div class="spell-meta-item">Duration <span>24 hour</span></div>
+            <div class="spell-meta-item">Duration <span>24 hours</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
           
@@ -482,8 +474,8 @@
           <div class="spell-badges"></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
           
@@ -497,7 +489,7 @@
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>V</span></div>
           </div>
           
@@ -510,7 +502,7 @@
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
             <div class="spell-meta-item">Duration <span>1 hour</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
@@ -524,8 +516,8 @@
           <div class="spell-badges"></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 touch</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Range <span>Touch</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
           
@@ -538,8 +530,8 @@
           <div class="spell-badges"><span class="sbadge conc">Conc</span><span class="sbadge ritual">Ritual</span></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
-            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minutes</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
           
@@ -552,7 +544,7 @@
           <div class="spell-badges"></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
             <div class="spell-meta-item">Duration <span>1 hour</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
@@ -567,7 +559,7 @@
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>V</span></div>
           </div>
           <div class="spell-dmg">3d6 psychic</div>
@@ -579,9 +571,9 @@
           </div>
           <div class="spell-badges"></div>
           <div class="spell-meta">
-            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
-            <div class="spell-meta-item">Range <span>0 touch</span></div>
-            <div class="spell-meta-item">Duration <span>8 hour</span></div>
+            <div class="spell-meta-item">Cast <span>1 minute</span></div>
+            <div class="spell-meta-item">Range <span>Touch</span></div>
+            <div class="spell-meta-item">Duration <span>8 hours</span></div>
             <div class="spell-meta-item">Components <span>V</span></div>
           </div>
           
@@ -595,7 +587,7 @@
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
             <div class="spell-meta-item">Range <span>10 ft</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
           <div class="spell-dmg">1d6 bludgeoning</div>
@@ -621,7 +613,7 @@
           </div>
           <div class="spell-badges"></div>
           <div class="spell-meta">
-            <div class="spell-meta-item">Cast <span>1 Reaction</span></div>
+            <div class="spell-meta-item">Cast <span>Reaction</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
             <div class="spell-meta-item">Duration <span>1 minute</span></div>
             <div class="spell-meta-item">Components <span>VM</span></div>
@@ -635,9 +627,9 @@
           </div>
           <div class="spell-badges"></div>
           <div class="spell-meta">
-            <div class="spell-meta-item">Cast <span>1 Bonus</span></div>
+            <div class="spell-meta-item">Cast <span>Bonus Action</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>V</span></div>
           </div>
           
@@ -650,7 +642,7 @@
           <div class="spell-badges"><span class="sbadge conc">Conc</span></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Range <span>Touch</span></div>
             <div class="spell-meta-item">Duration <span>1 minute</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
@@ -663,9 +655,9 @@
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
           <div class="spell-meta">
-            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
-            <div class="spell-meta-item">Range <span>0 touch</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Cast <span>1 minute</span></div>
+            <div class="spell-meta-item">Range <span>Touch</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
           
@@ -677,9 +669,9 @@
           </div>
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
           <div class="spell-meta">
-            <div class="spell-meta-item">Cast <span>1 Minute</span></div>
-            <div class="spell-meta-item">Range <span>0 touch</span></div>
-            <div class="spell-meta-item">Duration <span>10 day</span></div>
+            <div class="spell-meta-item">Cast <span>1 minute</span></div>
+            <div class="spell-meta-item">Range <span>Touch</span></div>
+            <div class="spell-meta-item">Duration <span>10 days</span></div>
             <div class="spell-meta-item">Components <span>SM</span></div>
           </div>
           
@@ -692,7 +684,7 @@
           <div class="spell-badges"></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 touch</span></div>
+            <div class="spell-meta-item">Range <span>Touch</span></div>
             <div class="spell-meta-item">Duration <span>1 hour</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
@@ -707,7 +699,7 @@
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
-            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Duration <span>10 minutes</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
           
@@ -719,9 +711,9 @@
           </div>
           <div class="spell-badges"></div>
           <div class="spell-meta">
-            <div class="spell-meta-item">Cast <span>1 Reaction</span></div>
+            <div class="spell-meta-item">Cast <span>Reaction</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>V</span></div>
           </div>
           
@@ -748,8 +740,8 @@
           <div class="spell-badges"><span class="sbadge ritual">Ritual</span></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
-            <div class="spell-meta-item">Duration <span>10 minute</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
+            <div class="spell-meta-item">Duration <span>10 minutes</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
           
@@ -776,8 +768,8 @@
           <div class="spell-badges"></div>
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
-            <div class="spell-meta-item">Range <span>0 self</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Range <span>Self</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>VS</span></div>
           </div>
           <div class="spell-dmg">2d8 thunder</div>
@@ -805,7 +797,7 @@
           <div class="spell-meta">
             <div class="spell-meta-item">Cast <span>1 Action</span></div>
             <div class="spell-meta-item">Range <span>60 ft</span></div>
-            <div class="spell-meta-item">Duration <span>0 inst</span></div>
+            <div class="spell-meta-item">Duration <span>Instantaneous</span></div>
             <div class="spell-meta-item">Components <span>VSM</span></div>
           </div>
           <div class="spell-dmg">2d4 force</div>
@@ -932,7 +924,7 @@
       <div class="feature-card">
         <div class="feature-card-title">🎵 Class — Bard 1</div>
         <ul class="link-list">
-          <li><strong>Bardic Inspiration</strong> — d6, Bonus Action, 5/short rest</li>
+          <li><strong>Bardic Inspiration</strong> — d6, Bonus Action, 5/long rest</li>
           <li><strong>Spellcasting</strong> — Charisma, save DC 15, attack +7</li>
           <li>4 prepared spells + 2 cantrips</li>
         </ul>
@@ -961,8 +953,8 @@
       <div class="feature-card">
         <div class="feature-card-title">💤 Rest Recovery</div>
         <ul class="link-list">
-          <li><strong>Short Rest:</strong> Bardic Inspiration returns in full; spend Hit Dice (d8 + CON +1)</li>
-          <li><strong>Long Rest:</strong> Full HP, both spell slots, half Hit Dice restored (1 of 1)</li>
+          <li><strong>Short Rest:</strong> spend Hit Dice (d8 + CON +1). Bardic Inspiration does not return until Bard 5</li>
+          <li><strong>Long Rest:</strong> Full HP, all 5 Bardic Inspiration, both spell slots, all Hit Dice restored</li>
           <li>Luck Points reset on a long rest</li>
           <li><strong>Resourceful</strong> grants Heroic Inspiration every time you finish a long rest</li>
         </ul>
@@ -1012,7 +1004,7 @@
           <li><a href="https://5e.tools/items.html#lyre_xphb">Lyre</a></li>
           <li><a href="https://5e.tools/items.html#bedroll_xphb">Bedroll</a></li>
           <li><a href="https://5e.tools/items.html#mirror_xphb">Mirror</a></li>
-          <li>Gaming Set <span class="item-note inline">Multiple variations of this item exist, as listed below: Dice Set Dragonchess Set Playing Cards Three-Dragon Ante Set.</span></li>
+          <li>Gaming Set</li>
           <li><a href="https://5e.tools/items.html#perfume_xphb">Perfume</a></li>
           <li>Hackers tool <span class="item-note inline">Ability: Intelligence Utilize: Hack a system that uses RM to gain info.</span></li>
           <li><a href="https://5e.tools/items.html#leather%20armor_xphb">Leather Armor</a></li>
@@ -1036,9 +1028,11 @@
 const SHEET = {
   prefix: 'sky_scarlet_v1_',
   hpMax: 9,
+  rules: '2024',
   maxPrepared: 4,
-  shortRest: { keys: ['bardicInspiration'],
-               msg: 'Bardic Inspiration fully recharged.\nYou may also spend Hit Dice (d8 + CON +1) to recover HP.' }
+  defaultPrepared: ["dissonant whispers", "healing word", "longstrider", "thunderwave"],
+  shortRest: { keys: [],
+               msg: 'Spend Hit Dice (d8 + CON +1) to recover HP.\nBardic Inspiration does NOT return on a short rest until Bard 5 (Font of Inspiration).' }
 };
 </script>
 <script src="sheet.js"></script>

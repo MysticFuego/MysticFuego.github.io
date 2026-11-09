@@ -9,9 +9,12 @@
        hpMax: 42,
        shortRest: { keys: ['channelDivinity'], msg: 'Channel Divinity recharged.' },
        maxPrepared: 9,            // casters with a prepared list
+       defaultPrepared: [...],    // starting prepared list until the player edits it
        domainSpells: [...],       // always-prepared spells (optional)
        extraHp: [...],            // companion HP boxes (optional)
-       crit19: false              // Champion improved crit (optional)
+       crit19: false,             // Champion improved crit (optional)
+       rules: '2024'              // '2014' (default) or '2024' — a 2024 long
+                                  // rest restores ALL Hit Dice, 2014 only half
      };
      </script>
      <script src="sheet.js"></script>
@@ -37,16 +40,37 @@ function load(k, fallback) {
 }
 var $ = function (id) { return document.getElementById(id); };
 
-/* ── TABS ────────────────────────────────────────────────────────────── */
+/* ── TABS ──────────────────────────────────────────────────────────────
+   The bar sticks to the top of the screen on phones. Switching tabs while
+   scrolled down jumps to the top of the new tab instead of leaving the
+   player halfway down a page they have never seen, and the sheet reopens on
+   the tab that was open last. */
+function showTab(btn, scroll) {
+  document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
+  document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
+  btn.classList.add('active');
+  var pane = $('tab-' + btn.dataset.tab);
+  if (pane) pane.classList.add('active');
+  save('lastTab', btn.dataset.tab);
+  var bar = document.querySelector('.tabs-bar');
+  if (scroll && bar && pane) {
+    /* Measured from the pane, not the bar: a stuck bar reports where it is
+       stuck, not where it sits in the page. */
+    var y = pane.getBoundingClientRect().top + window.pageYOffset - bar.offsetHeight - 10;
+    if (window.pageYOffset > y) window.scrollTo(0, Math.max(0, y));
+  }
+  if (btn.scrollIntoView && btn.parentNode.scrollWidth > btn.parentNode.clientWidth) {
+    btn.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  }
+}
 document.querySelectorAll('.tab-btn').forEach(function (btn) {
-  btn.addEventListener('click', function () {
-    document.querySelectorAll('.tab-btn').forEach(function (b) { b.classList.remove('active'); });
-    document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
-    btn.classList.add('active');
-    var pane = $('tab-' + btn.dataset.tab);
-    if (pane) pane.classList.add('active');
-  });
+  btn.addEventListener('click', function () { showTab(btn, true); });
 });
+(function restoreTab() {
+  var last = load('lastTab', null);
+  var btn = last && document.querySelector('.tab-btn[data-tab="' + last + '"]');
+  if (btn) showTab(btn, false);
+})();
 
 /* ── DOT TRACKERS ────────────────────────────────────────────────────── */
 function dotRows() {
@@ -86,7 +110,36 @@ function makeDots(id) {
       el.appendChild(btn);
     })(i);
   }
+  paintDotsCount(el, total, used.length);
 }
+
+/* "3 of 5 left" under each tracker, so nobody has to work out which colour
+   means spent. Death saves count up, not down, so they get no counter. */
+function paintDotsCount(el, total, spent) {
+  if (!total || el.dataset.success === 'true' || el.dataset.fail === 'true') return;
+  var c = el.nextElementSibling;
+  if (!c || !c.classList.contains('dots-count')) {
+    c = document.createElement('div');
+    c.className = 'dots-count';
+    el.insertAdjacentElement('afterend', c);
+  }
+  var left = Math.max(0, total - spent);
+  c.textContent = left + ' of ' + total + ' left';
+  c.classList.toggle('empty', left === 0);
+}
+
+/* One line of instructions above the first tracker panel. */
+(function addDotsLegend() {
+  var first = document.querySelector('.tracker-grid') || document.querySelector('.dots-row[data-key]');
+  var panel = first && first.closest('.panel');
+  var title = panel && panel.querySelector('.panel-title');
+  if (!title) return;
+  var d = document.createElement('div');
+  d.className = 'dots-legend';
+  d.textContent = 'Tap a box when you use it, tap again to undo. ' +
+                  'The count under each tracker is what you have left; rests refill them.';
+  title.insertAdjacentElement('afterend', d);
+})();
 function refreshDots() { dotRows().forEach(function (el) { makeDots(el.id); }); }
 
 /* ── HIT POINTS ──────────────────────────────────────────────────────── */
@@ -151,7 +204,7 @@ function applyDamage(amt) {
   var pill = $('inspirationPill'), val = $('inspirationVal');
   if (!pill || !val) return;
   var on = load('inspiration', false);
-  function draw() { val.textContent = on ? '✦ ON' : '—'; pill.classList.toggle('on', on); }
+  function draw() { val.textContent = on ? '✦ ON' : 'Off'; pill.classList.toggle('on', on); }
   draw();
   pill.addEventListener('click', function () { on = !on; save('inspiration', on); draw(); });
 })();
@@ -241,6 +294,37 @@ function paintDamageButtons() {
   });
 }
 
+/* ── TOAST ───────────────────────────────────────────────────────────────
+   On a phone the roll log sits in a different panel from the weapons and
+   spells, usually off screen. Every roll therefore also pops up at the
+   bottom of the screen; tap it to dismiss. The stat pills reuse it too. */
+var Toast = (function () {
+  var el = document.createElement('div');
+  el.className = 'sheet-toast';
+  el.setAttribute('role', 'status');
+  el.setAttribute('aria-live', 'polite');
+  document.body.appendChild(el);
+  var timer;
+  function hide() { el.classList.remove('show'); }
+  el.addEventListener('click', function (e) { if (!(e.target.closest && e.target.closest('a'))) hide(); });
+  return {
+    show: function (html, ms) {
+      el.innerHTML = html;
+      el.classList.add('show');
+      clearTimeout(timer);
+      timer = setTimeout(hide, ms || 4500);
+    }
+  };
+})();
+
+/* The roll log lives for the browser tab (sessionStorage), so popping out to
+   5e.tools and back, or the phone reloading the page, keeps it. */
+var LOG_KEY = PREFIX + 'rollLog';
+(function restoreLog() {
+  var log = $('rollLog'); if (!log) return;
+  try { var html = sessionStorage.getItem(LOG_KEY); if (html) log.innerHTML = html; } catch (e) {}
+})();
+
 function logEntry(label, detail, total, cls, mark) {
   var log = $('rollLog'); if (!log) return;
   var empty = log.querySelector('.roll-log-empty');
@@ -254,6 +338,10 @@ function logEntry(label, detail, total, cls, mark) {
     '<div class="roll-entry-time">' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + '</div>';
   log.insertBefore(div, log.firstChild);
   while (log.children.length > 12) log.removeChild(log.lastChild);
+  try { sessionStorage.setItem(LOG_KEY, log.innerHTML); } catch (e) {}
+  Toast.show('<div class="toast-roll"><div><div class="roll-entry-label">' + label + '</div>' +
+             '<div class="roll-entry-detail">' + detail + '</div></div>' +
+             '<div class="roll-entry-total' + (cls || '') + '">' + total + (mark || '') + '</div></div>');
 }
 
 /* ── d20 ATTACK / CHECK ROLLS ────────────────────────────────────────── */
@@ -359,7 +447,7 @@ function attachDamageButtons() {
     var btn = document.createElement('button');
     btn.className = 'dmg-roll-btn';
     btn.textContent = '🎲 dmg';
-    btn.title = 'Roll ' + spec.n + 'd' + spec.faces + ' damage (shift-click to crit)';
+    btn.title = 'Roll ' + spec.n + 'd' + spec.faces + ' damage';
     btn.dataset.dmgLabel = name;
     btn.dataset.dmgN = spec.n;
     btn.dataset.dmgFaces = spec.faces;
@@ -411,9 +499,12 @@ if (longBtn) longBtn.addEventListener('click', function () {
   rows.filter(function (el) { return !isHitDice(el); })
       .forEach(function (el) { save(el.dataset.key, []); });
 
-  /* Hit dice: you regain HALF your total, minimum 1 (PHB p.186). */
+  /* Hit dice: 2014 rules regain HALF your total, minimum 1 (PHB 2014 p.186);
+     2024 rules regain them all (PHB 2024, Long Rest). */
   var totalHd = hd.reduce(function (n, el) { return n + Number(el.dataset.total || 0); }, 0);
-  var regain = Math.max(1, Math.floor(totalHd / 2));
+  var allHd = CFG.rules === '2024';
+  var regainTotal = allHd ? totalHd : Math.max(1, Math.floor(totalHd / 2));
+  var regain = regainTotal;
   hd.forEach(function (el) {
     var used = load(el.dataset.key, []).slice().sort(function (a, b) { return b - a; });
     while (regain > 0 && used.length) { used.shift(); regain--; }
@@ -429,7 +520,8 @@ if (longBtn) longBtn.addEventListener('click', function () {
   var spent = hd.reduce(function (n, el) { return n + load(el.dataset.key, []).length; }, 0);
   if (totalHd) {
     alert('Long Rest: HP restored to full, all resources recharged.\n' +
-          'Hit Dice: regained half your total (' + Math.max(1, Math.floor(totalHd / 2)) + ' of ' + totalHd + ') — ' +
+          'Hit Dice: regained ' + (allHd ? 'all of them' : 'half your total') +
+          ' (' + regainTotal + ' of ' + totalHd + ') — ' +
           spent + ' still spent.');
   }
 });
@@ -500,7 +592,13 @@ function buildDomainSection() {
 
 /* ── PREPARED SPELLS ─────────────────────────────────────────────────── */
 var PREP_KEY = 'preparedSpells';
-function loadPrepared() { var v = load(PREP_KEY, []); return Array.isArray(v) ? v : []; }
+/* Until the player changes anything, start from the spells the character
+   sheet in Foundry had prepared (CFG.defaultPrepared). */
+function loadPrepared() {
+  var v = load(PREP_KEY, null);
+  if (v === null) v = CFG.defaultPrepared || [];
+  return Array.isArray(v) ? v.slice() : [];
+}
 function savePrepared(l) { save(PREP_KEY, l); }
 
 function buildPreparedSection() {
@@ -549,6 +647,44 @@ function refreshPreparedUI() {
     btn.title = on ? 'Remove from prepared' : 'Add to prepared';
   });
   buildPreparedSection();
+  markUnprepared();
+}
+
+/* ── ACTIONS: FLAG SPELLS THAT ARE NOT PREPARED ──────────────────────────
+   The Combat tab lists the spells worth casting, but a prepared caster can
+   only cast what is prepared today. Anything else is dimmed and tagged, and
+   the tag disappears as soon as the spell is prepared on the Spells tab.
+   A spell counts as castable when it is a cantrip, always prepared (domain,
+   subclass, or a card with no prepare toggle) or in the prepared list. */
+function spellKeyFromHref(href) {
+  var m = /spells\.html#([^_]+)_/.exec(href || '');
+  if (!m) return null;
+  try { return decodeURIComponent(m[1]).toLowerCase().trim(); } catch (e) { return m[1].toLowerCase(); }
+}
+function markUnprepared() {
+  if (!CFG.maxPrepared || !$('spellGrid')) return;
+  var prepared = loadPrepared();
+  var always = (CFG.domainSpells || []).map(function (d) { return (d.name || '').toLowerCase(); });
+  document.querySelectorAll('.action-card li').forEach(function (li) {
+    var a = li.querySelector('a[href*="spells.html#"]');
+    if (!a) return;
+    var key = spellKeyFromHref(a.getAttribute('href'));
+    var card = key && document.querySelector('#spellGrid .spell-card[data-name="' + key.replace(/"/g, '') + '"]');
+    if (!card) return;                                  // not on this sheet's list
+    var castable = card.dataset.level === '0' || card.dataset.domain === 'true' ||
+                   !card.querySelector('.prep-toggle') || prepared.indexOf(key) >= 0 ||
+                   always.indexOf(key) >= 0;
+    li.classList.toggle('not-prepared', !castable);
+    var tag = li.querySelector('.np-tag');
+    if (!castable && !tag) {
+      tag = document.createElement('span');
+      tag.className = 'np-tag';
+      tag.textContent = 'not prepared';
+      li.appendChild(tag);
+    } else if (castable && tag) {
+      tag.remove();
+    }
+  });
 }
 document.querySelectorAll('#spellGrid .prep-toggle').forEach(function (btn) {
   btn.addEventListener('click', function (e) { e.stopPropagation(); togglePrepared(btn.dataset.spell); });
@@ -582,13 +718,225 @@ if (healBtn) healBtn.addEventListener('click', function () {
   setHp(Number($('hpCurrent').value) + amt);
 });
 
+/* ── 5e.TOOLS LINKS ───────────────────────────────────────────────────────
+   Rules text stays on 5e.tools rather than being copied onto the sheet.
+   Open it in a new tab so the sheet (HP typed in, roll log, roll mode) is
+   still there when the player comes back, and mark every link with an arrow
+   so it is obvious on a touch screen that the name can be tapped. */
+function markRulesLinks() {
+  document.querySelectorAll('a[href^="https://5e.tools"]').forEach(function (a) {
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.classList.add('rules-link');
+  });
+}
+
+/* ── STAT PILLS ──────────────────────────────────────────────────────────
+   Phones never show hover tooltips, so a tap on a pill shows the full name,
+   the breakdown that used to hide in its title (e.g. how AC adds up) and, on
+   2024 sheets, a link to that rule in the 2024 glossary on 5e.tools. 2014
+   sheets get no glossary link, because that glossary is the 2024 text. */
+var PILL_INFO = {
+  'HP': ['Hit Points', 'hit points'],
+  'AC': ['Armor Class', 'armor class'],
+  'Initiative': ['Initiative', 'initiative'],
+  'Speed': ['Speed', 'speed'],
+  'Prof.': ['Proficiency Bonus', 'proficiency'],
+  'Spell DC': ['Spell Save DC', 'spellcasting'],
+  'Spell Atk': ['Spell Attack Bonus', 'spell attack'],
+  'Passive Perc': ['Passive Perception', 'passive perception'],
+  'Passive Ins': ['Passive Insight', 'passive perception'],
+  'Crit Range': ['Critical Hit Range', 'critical hit'],
+  'Sneak Atk': ['Sneak Attack', null]
+};
+function glossaryUrl(key) {
+  return 'https://5e.tools/variantrules.html#' + encodeURIComponent(key) + '_xphb';
+}
+function escHtml(t) { return t.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+function bindStatPills() {
+  document.querySelectorAll('.stat-pill').forEach(function (pill) {
+    if (pill.id === 'inspirationPill') return;          // a tap toggles it
+    var labelEl = pill.querySelector('.sp-label'), valEl = pill.querySelector('.sp-val');
+    if (!labelEl || !valEl) return;
+    var label = labelEl.textContent.trim();
+    var info = PILL_INFO[label] || [label, null];
+    var note = valEl.getAttribute('title') || pill.getAttribute('title') || '';
+    var link = CFG.rules === '2024' && info[1];
+    if (!note && !link && info[0] === label) return;    // nothing to add
+    pill.classList.add('has-info');
+    pill.setAttribute('role', 'button');
+    pill.setAttribute('tabindex', '0');
+    function show() {
+      var html = '<div class="toast-info"><strong>' + escHtml(info[0]) + ': ' +
+                 escHtml(valEl.textContent.trim()) + '</strong>';
+      if (note) html += '<div>' + escHtml(note) + '</div>';
+      if (link) html += '<a class="rules-link" target="_blank" rel="noopener" href="' + glossaryUrl(link) +
+                        '">Rules: ' + link.replace(/\b\w/g, function (c) { return c.toUpperCase(); }) + '</a>';
+      Toast.show(html + '</div>', 7000);
+    }
+    pill.addEventListener('click', show);
+    pill.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); show(); }
+    });
+  });
+}
+
+/* ── COMMON ROLLS: NO DUPLICATE WEAPONS ──────────────────────────────────
+   Weapons already have a to-hit button on their card in the Weapons panel,
+   right next to the damage button. Showing them again in Common Rolls just
+   makes a long list longer on a phone, so they are dropped there. */
+function dedupeCommonRolls() {
+  var weaponLabels = {};
+  document.querySelectorAll('.weapon-card .roll-btn').forEach(function (b) {
+    weaponLabels[(b.dataset.label || '').toLowerCase()] = true;
+  });
+  document.querySelectorAll('.roll-buttons .roll-btn').forEach(function (b) {
+    if (weaponLabels[(b.dataset.label || '').toLowerCase()]) b.remove();
+  });
+}
+
+/* ── THIS TURN ───────────────────────────────────────────────────────────
+   Action / Bonus Action / Reaction / Movement chips at the top of the Combat
+   tab. Tap one when you use it; "New turn" clears them. Also hosts the
+   keep-the-screen-on switch, since phones dim mid-fight. */
+var TURN_PARTS = [['action', 'Action'], ['bonus', 'Bonus'], ['reaction', 'Reaction'], ['move', 'Move']];
+function buildTurnStrip() {
+  var pane = $('tab-combat');
+  if (!pane || $('turnStrip')) return;
+  var strip = document.createElement('div');
+  strip.className = 'panel turn-strip';
+  strip.id = 'turnStrip';
+  strip.innerHTML =
+    '<div class="turn-head"><span class="turn-title">This turn</span>' +
+    '<button class="turn-reset" type="button">↻ New turn</button></div>' +
+    '<div class="turn-chips">' + TURN_PARTS.map(function (t) {
+      return '<button class="turn-chip" type="button" data-turn="' + t[0] + '" aria-pressed="false">' + t[1] + '</button>';
+    }).join('') + '</div>';
+  pane.insertBefore(strip, pane.firstChild);
+
+  var used = load('turnUsed', {});
+  function draw() {
+    strip.querySelectorAll('.turn-chip').forEach(function (c) {
+      var on = !!used[c.dataset.turn];
+      c.classList.toggle('used', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+  }
+  strip.addEventListener('click', function (e) {
+    var chip = e.target.closest('.turn-chip');
+    if (chip) { used[chip.dataset.turn] = !used[chip.dataset.turn]; save('turnUsed', used); draw(); }
+    if (e.target.closest('.turn-reset')) { used = {}; save('turnUsed', used); draw(); }
+  });
+  draw();
+
+  /* Keep the screen awake (Screen Wake Lock API: Chrome on Android, Safari
+     on iOS 16.4+). Hidden where unsupported. The lock is dropped whenever the
+     page is hidden, so it is taken again when the player comes back. */
+  if (!('wakeLock' in navigator)) return;
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'turn-reset wake-btn';
+  strip.querySelector('.turn-head').insertBefore(btn, strip.querySelector('.turn-reset'));
+  var want = load('wakeLock', false), lock = null;
+  function paint() { btn.textContent = lock ? '☀ Screen stays on' : '☾ Screen may sleep'; btn.classList.toggle('on', !!lock); }
+  function take() {
+    navigator.wakeLock.request('screen').then(function (l) {
+      lock = l; paint();
+      l.addEventListener('release', function () { lock = null; paint(); });
+    }).catch(function () { lock = null; paint(); });
+  }
+  btn.addEventListener('click', function () {
+    want = !lock; save('wakeLock', want);
+    if (want) take(); else if (lock) lock.release();
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (want && !lock && document.visibilityState === 'visible') take();
+  });
+  paint();
+  if (want) take();
+}
+
+/* ── ROLL MODE REMINDER ──────────────────────────────────────────────────
+   Advantage, disadvantage and crit are set in Common Rolls, which is usually
+   off screen on a phone. While any of them is on, a chip floats in the
+   corner so it is never forgotten; tap it to go back to a normal roll. */
+var modeChip;
+function buildModeChip() {
+  if (!$('rollLog')) return;
+  modeChip = document.createElement('button');
+  modeChip.type = 'button';
+  modeChip.className = 'mode-chip';
+  document.body.appendChild(modeChip);
+  modeChip.addEventListener('click', function () {
+    var normal = document.querySelector('.roll-mode-btn[data-adv="0"]');
+    if (normal) normal.click();
+    if (Mode.crit) setCrit(false);
+    paintModeChip();
+  });
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('.roll-mode-btn, .roll-btn, .dmg-roll-btn')) setTimeout(paintModeChip, 0);
+  });
+  paintModeChip();
+}
+function paintModeChip() {
+  if (!modeChip) return;
+  var parts = [];
+  if (Mode.adv > 0) parts.push('Advantage');
+  if (Mode.adv < 0) parts.push('Disadvantage');
+  if (Mode.crit) parts.push('Crit');
+  modeChip.textContent = parts.join(' + ') + ' on  ✕';
+  modeChip.className = 'mode-chip' + (parts.length ? ' show' : '') +
+                       (Mode.adv > 0 ? ' adv' : Mode.adv < 0 ? ' dis' : '') + (Mode.crit ? ' crit' : '');
+}
+
+/* ── FIRST-VISIT HELP ────────────────────────────────────────────────────
+   A short how-to above the tabs, shown until "Got it" is tapped. Shared by
+   every sheet on the device, so a player only dismisses it once. */
+var HELP_KEY = 'mfsheets_help_dismissed_v1';
+function buildHelpCard() {
+  var tabs = document.querySelector('.tabs-bar');
+  if (!tabs) return;
+  try { if (localStorage.getItem(HELP_KEY)) return; } catch (e) {}
+  var card = document.createElement('div');
+  card.className = 'panel help-card';
+  card.innerHTML =
+    '<div class="panel-title">👋 How this sheet works</div>' +
+    '<ul>' +
+      '<li>Names with <span class="rules-link-sample">↗</span> open the full rules on 5e.tools in a new tab.</li>' +
+      '<li>Tap a stat with ⓘ to see what it means.</li>' +
+      '<li>Tap the boxes in Trackers as you spend things. Rest buttons refill them.</li>' +
+      '<li>Roll buttons roll for you. Set Advantage or Disadvantage in Common Rolls first.</li>' +
+      '<li>Everything you change is saved on this phone automatically.</li>' +
+    '</ul>' +
+    '<button class="btn help-ok" type="button">Got it</button>';
+  tabs.parentNode.insertBefore(card, tabs);
+  card.querySelector('.help-ok').addEventListener('click', function () {
+    try { localStorage.setItem(HELP_KEY, '1'); } catch (e) {}
+    card.remove();
+  });
+}
+
+/* Number fields get the number pad on phones instead of the full keyboard. */
+function numericKeyboards() {
+  document.querySelectorAll('input[type="number"]').forEach(function (el) {
+    if (!el.hasAttribute('inputmode')) el.setAttribute('inputmode', 'numeric');
+  });
+}
+
 /* ── INIT ────────────────────────────────────────────────────────────── */
 refreshDots();
 bindInput('hpCurrent', 'hpCurrent');
 bindInput('hpTemp', 'hpTemp');
 updateHp();
 buildDomainSection();
-attachDamageButtons();   // before the prepared list clones any cards
+markRulesLinks();        // before the prepared list clones any cards
+attachDamageButtons();
 refreshPreparedUI();
+bindStatPills();
+dedupeCommonRolls();
+buildTurnStrip();
+buildModeChip();
+buildHelpCard();
+numericKeyboards();
 
 })();

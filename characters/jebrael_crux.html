@@ -144,15 +144,8 @@
       <a href="https://5e.tools/backgrounds.html#sailor_xphb">Sailor</a>
     </div>
     <div class="hero-bio">
-      Age: <span>—</span>
-      Gender: <span>—</span>
-      Height: <span>—</span>
-      Eyes: <span>—</span>
-      Hair: <span>—</span>
-      Skin: <span>—</span>
       Size: <span>Medium</span>
       Type: <span>Fey</span>
-      Alignment: <span>—</span>
     </div>
     <div class="stat-bar">
       <div class="stat-pill sp-hp"><span class="sp-label">HP</span><span class="sp-val" id="hpPill">10</span></div>
@@ -288,13 +281,13 @@
               <li><a href="https://5e.tools/items.html#shortbow_xphb">Shortbow</a> +6 (1d6+4) — Vex</li>
               <li><a href="https://5e.tools/items.html#dagger_xphb">Dagger</a> +6 (1d4+4) — Nick</li>
               <li><strong>Hooves</strong> +5 (1d6+3 bludgeoning)</li>
+              <li><strong>Nick</strong> (off-hand dagger) — extra attack as part of the Attack action, not a Bonus Action</li>
             </ul>
           </div>
           <div class="action-card">
             <div class="action-card-title bon">✦ Bonus Action</div>
             <ul class="link-list">
               <li><strong>Charge</strong> — move 30 ft straight, hit in melee, then a free hoof attack</li>
-              <li>Nick (off-hand dagger, part of the Attack action)</li>
             </ul>
           </div>
           <div class="action-card">
@@ -489,7 +482,7 @@
         <div class="feature-card-title">💤 Rest Recovery</div>
         <ul class="link-list">
           <li><strong>Short Rest:</strong> spend Hit Dice (d8 + CON +2)</li>
-          <li><strong>Long Rest:</strong> Full HP, half Hit Dice restored (1 of 1)</li>
+          <li><strong>Long Rest:</strong> Full HP, all Hit Dice restored</li>
           <li>No class resources to recharge yet — Cunning Action arrives at level 2</li>
         </ul>
       </div>
@@ -562,6 +555,7 @@
 const SHEET = {
   prefix: 'jebrael_crux_v1_',
   hpMax: 10,
+  rules: '2024',
   shortRest: { keys: [],
                msg: 'Spend Hit Dice (d8 + CON +2) to recover HP.\nRogue has no short-rest resources at level 1.' }
 };
