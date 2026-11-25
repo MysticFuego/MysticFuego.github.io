@@ -143,10 +143,13 @@ function paintDotsCount(el, total, spent) {
 function refreshDots() { dotRows().forEach(function (el) { makeDots(el.id); }); }
 
 /* ── HIT POINTS ──────────────────────────────────────────────────────── */
+var previousHp;
 function updateHp() {
   var el = $('hpCurrent');
-  if (!el) return;
+  if (!el || el.value === '') return;
   var val = Number(el.value);
+  if (val > 0 && !(previousHp > 0)) clearDeathSaves();
+  previousHp = val;
   el.classList.remove('hp-warn', 'hp-danger');
   var dp = $('deathSavePanel');
   if (val === 0) {
@@ -161,12 +164,22 @@ function updateHp() {
   if (pill) pill.textContent = val + '/' + HP_MAX;
 }
 
-function bindInput(id, key) {
+function boundedHp(value, max) {
+  return Math.max(0, Math.min(max, Math.trunc(Number(value) || 0)));
+}
+
+function bindHpInput(id, max, paint) {
   var el = $(id); if (!el) return;
-  el.value = load(key, el.value);
+  var initial = el.value;
+  el.value = boundedHp(load(id, initial), max);
   el.addEventListener('input', function () {
-    save(key, el.value);
-    if (id === 'hpCurrent') updateHp();
+    if (el.value === '') return;
+    el.value = boundedHp(el.value, max);
+    save(id, el.value);
+    if (paint) paint();
+  });
+  el.addEventListener('blur', function () {
+    if (el.value === '') el.value = boundedHp(load(id, initial), max);
   });
 }
 function bindText(id, key) {
@@ -177,13 +190,13 @@ function bindText(id, key) {
 
 function setHp(v) {
   var el = $('hpCurrent'); if (!el) return;
-  el.value = Math.max(0, Math.min(HP_MAX, v));
+  el.value = boundedHp(v, HP_MAX);
   save('hpCurrent', el.value);
   updateHp();
 }
 function setTempHp(v) {
   var el = $('hpTemp'); if (!el) return;
-  el.value = Math.max(0, v);
+  el.value = boundedHp(v, Number.MAX_SAFE_INTEGER);
   save('hpTemp', el.value);
 }
 
@@ -196,7 +209,6 @@ function applyDamage(amt) {
   var rest = amt - absorbed;
   if (rest > 0) setHp(Number($('hpCurrent').value) - rest);
   else updateHp();
-  return { absorbed: absorbed, toHp: rest };
 }
 
 /* ── INSPIRATION ─────────────────────────────────────────────────────── */
@@ -243,7 +255,7 @@ var Conc = (function () {
 /* ── ROLL MODE: advantage / disadvantage / critical ───────────────────
    Session-only on purpose: it resets to Normal on every page load so a
    forgotten "advantage" can never silently follow you into a later roll. */
-var Mode = { adv: 0, crit: false };   // adv: 1 advantage, -1 disadvantage
+var Mode = { adv: 0, crit: false, sneakCrit: false, attackCrit: false };
 
 (function buildRollControls() {
   var log = $('rollLog');
@@ -261,7 +273,7 @@ var Mode = { adv: 0, crit: false };   // adv: 1 advantage, -1 disadvantage
       '<button class="roll-mode-btn dis" data-adv="-1">Disadvantage</button>' +
     '</div>' +
     '<button class="roll-mode-btn crit-btn" id="critToggle" aria-pressed="false" ' +
-      'title="Doubles the dice on your next damage roll">Crit ×2</button>';
+      'title="Doubles the dice on your next damage roll and any separate Sneak Attack roll">Crit ×2</button>';
   title.insertAdjacentElement('afterend', bar);
 
   bar.querySelectorAll('[data-adv]').forEach(function (btn) {
@@ -274,24 +286,26 @@ var Mode = { adv: 0, crit: false };   // adv: 1 advantage, -1 disadvantage
   });
   var crit = $('critToggle');
   crit.addEventListener('click', function () {
-    Mode.crit = !Mode.crit;
-    crit.classList.toggle('on', Mode.crit);
-    crit.setAttribute('aria-pressed', Mode.crit ? 'true' : 'false');
-    paintDamageButtons();
+    setCrit(!(Mode.crit || Mode.sneakCrit));
   });
 })();
 
-function setCrit(on) {
+function setCrit(on, fromAttack) {
   Mode.crit = on;
+  Mode.sneakCrit = on && !!document.querySelector('.dmg-roll-btn[data-sneak-attack]');
+  Mode.attackCrit = on && !!fromAttack;
+  paintCrit();
+}
+function paintCrit() {
+  var on = Mode.crit || Mode.sneakCrit;
   var c = $('critToggle');
   if (c) { c.classList.toggle('on', on); c.setAttribute('aria-pressed', on ? 'true' : 'false'); }
-  paintDamageButtons();
-}
-function paintDamageButtons() {
   document.querySelectorAll('.dmg-roll-btn').forEach(function (b) {
-    b.classList.toggle('crit', Mode.crit);
-    b.textContent = Mode.crit ? '🎲 crit dmg' : '🎲 dmg';
+    var crit = b.hasAttribute('data-sneak-attack') ? Mode.sneakCrit : Mode.crit;
+    b.classList.toggle('crit', crit);
+    b.textContent = crit ? '🎲 crit dmg' : '🎲 dmg';
   });
+  paintModeChip();
 }
 
 /* ── TOAST ───────────────────────────────────────────────────────────────
@@ -352,9 +366,10 @@ function addRoll(label, bonus, advOverride, isAttack) {
   var a = d20(), b = adv ? d20() : null;
   var die = b === null ? a : (adv > 0 ? Math.max(a, b) : Math.min(a, b));
   var total = die + bonus;
-  var crit = die === 20 || (CFG.crit19 && die === 19);
+  var improvedCrit = isAttack && CFG.crit19 && die === 19;
+  var crit = die === 20 || improvedCrit;
   var fumble = die === 1;
-  var cls = die === 20 ? ' nat20' : (CFG.crit19 && die === 19) ? ' nat19' : fumble ? ' nat1' : '';
+  var cls = die === 20 ? ' nat20' : improvedCrit ? ' nat19' : fumble ? ' nat1' : '';
   var mark = crit ? ' 🎉' : fumble ? ' 💀' : '';
   var bonusStr = bonus >= 0 ? '+' + bonus : '' + bonus;
 
@@ -373,7 +388,7 @@ function addRoll(label, bonus, advOverride, isAttack) {
            dice + ' ' + bonusStr, total, cls, mark);
   /* Only an attack roll can crit. A natural 20 on a skill check or save is
      just a good roll, so it must not arm the damage multiplier. */
-  if (crit && isAttack) setCrit(true);
+  if (isAttack && (crit || Mode.attackCrit)) setCrit(crit, true);
 }
 
 document.querySelectorAll('.roll-btn').forEach(function (btn) {
@@ -411,7 +426,6 @@ function rollDamage(label, spec, isCrit) {
   logEntry(label + (isCrit ? ' — CRIT damage' : ' — damage'),
            n + 'd' + spec.faces + modStr + ' → (' + rolls.join(', ') + ')' + modStr,
            total, isCrit ? ' crit-dmg' : ' dmg', '');
-  if (isCrit) setCrit(false);                // a crit applies once
 }
 
 function attachDamageButtons() {
@@ -452,6 +466,7 @@ function attachDamageButtons() {
     btn.dataset.dmgN = spec.n;
     btn.dataset.dmgFaces = spec.faces;
     btn.dataset.dmgMod = spec.mod;
+    if (card.matches('.sneak-card, [data-sneak-attack]')) btn.setAttribute('data-sneak-attack', '');
     el.appendChild(document.createTextNode(' '));
     el.appendChild(btn);
   });
@@ -462,9 +477,15 @@ document.addEventListener('click', function (e) {
   var btn = e.target.closest && e.target.closest('.dmg-roll-btn');
   if (!btn) return;
   e.stopPropagation();
+  // A critical hit includes Sneak Attack even when its dice are rolled separately.
+  var critKey = btn.hasAttribute('data-sneak-attack') ? 'sneakCrit' : 'crit';
   rollDamage(btn.dataset.dmgLabel,
              { n: Number(btn.dataset.dmgN), faces: Number(btn.dataset.dmgFaces), mod: Number(btn.dataset.dmgMod) },
-             e.shiftKey || Mode.crit);
+             e.shiftKey || Mode[critKey]);
+  if (Mode[critKey]) {
+    Mode[critKey] = false;
+    paintCrit();
+  }
 });
 
 /* ── RESTS ───────────────────────────────────────────────────────────── */
@@ -484,47 +505,103 @@ function paintExtraHp(spec) {
   el.style.color = c; el.style.borderColor = c;
 }
 (CFG.extraHp || []).forEach(function (spec) {
-  var el = $(spec.id); if (!el) return;
-  el.value = load(spec.id, String(spec.max));
+  bindHpInput(spec.id, spec.max, function () { paintExtraHp(spec); });
   paintExtraHp(spec);
-  el.addEventListener('input', function () { save(spec.id, el.value); paintExtraHp(spec); });
 });
 
 var longBtn = $('longRestBtn');
 if (longBtn) longBtn.addEventListener('click', function () {
   var rows = dotRows();
-  var hd = rows.filter(isHitDice);
-
-  /* Everything except hit dice comes back in full. */
-  rows.filter(function (el) { return !isHitDice(el); })
-      .forEach(function (el) { save(el.dataset.key, []); });
-
-  /* Hit dice: 2014 rules regain HALF your total, minimum 1 (PHB 2014 p.186);
-     2024 rules regain them all (PHB 2024, Long Rest). */
-  var totalHd = hd.reduce(function (n, el) { return n + Number(el.dataset.total || 0); }, 0);
-  var allHd = CFG.rules === '2024';
-  var regainTotal = allHd ? totalHd : Math.max(1, Math.floor(totalHd / 2));
-  var regain = regainTotal;
-  hd.forEach(function (el) {
-    var used = load(el.dataset.key, []).slice().sort(function (a, b) { return b - a; });
-    while (regain > 0 && used.length) { used.shift(); regain--; }
-    save(el.dataset.key, used);
+  var hitDice = rows.filter(isHitDice);
+  var pools = hitDice.map(function (el) {
+    return { key: el.dataset.key, label: el.dataset.label || 'Hit Dice',
+             spent: load(el.dataset.key, []).length };
+  });
+  var total = hitDice.reduce(function (n, el) { return n + Number(el.dataset.total); }, 0);
+  var spent = pools.reduce(function (n, pool) { return n + pool.spent; }, 0);
+  // The 2014 long rest restores up to half the total, rounded down (minimum 1).
+  var budget = CFG.rules === '2024' ? total : Math.max(1, Math.floor(total / 2));
+  var regain = Math.min(budget, spent);
+  var left = regain;
+  var defaultCounts = pools.map(function (pool) {
+    var count = Math.min(pool.spent, left);
+    left -= count;
+    return count;
   });
 
-  setHp(HP_MAX);
-  setTempHp(0);
-  resetExtraHp();
-  Conc.drop();
-  refreshDots();
+  function finishRest(counts) {
+    rows.filter(function (el) { return !isHitDice(el); })
+        .forEach(function (el) { save(el.dataset.key, []); });
+    var regained = 0;
+    var stillSpent = 0;
+    pools.forEach(function (pool, i) {
+      var used = load(pool.key, []).slice().sort(function (a, b) { return b - a; });
+      var remaining = used.slice(counts[i]);
+      regained += used.length - remaining.length;
+      stillSpent += remaining.length;
+      save(pool.key, remaining);
+    });
+    setHp(HP_MAX);
+    setTempHp(0);
+    resetExtraHp();
+    Conc.drop();
+    refreshDots();
+    if (total) {
+      alert('Long Rest: HP restored to full, all resources recharged.\n' +
+            'Hit Dice regained: ' + regained + ' — ' + stillSpent + ' still spent.');
+    }
+  }
 
-  var spent = hd.reduce(function (n, el) { return n + load(el.dataset.key, []).length; }, 0);
-  if (totalHd) {
-    alert('Long Rest: HP restored to full, all resources recharged.\n' +
-          'Hit Dice: regained ' + (allHd ? 'all of them' : 'half your total') +
-          ' (' + regainTotal + ' of ' + totalHd + ') — ' +
-          spent + ' still spent.');
+  if (regain < spent && pools.filter(function (pool) { return pool.spent > 0; }).length > 1) {
+    chooseHitDice(pools, regain, defaultCounts, finishRest);
+  } else {
+    finishRest(defaultCounts);
   }
 });
+
+function chooseHitDice(pools, regain, defaultCounts, finishRest) {
+  var dialog = document.createElement('dialog');
+  dialog.className = 'hit-dice-dialog';
+  dialog.setAttribute('aria-labelledby', 'hitDiceRestTitle');
+  dialog.innerHTML = '<form method="dialog">' +
+    '<h2 id="hitDiceRestTitle">Recover Hit Dice</h2>' +
+    '<div class="hit-dice-choices"></div><p class="hit-dice-count" role="status"></p>' +
+    '<div class="btn-row"><button class="btn" type="button">Cancel</button>' +
+    '<button class="btn btn-rest" value="recover">Finish Long Rest</button></div></form>';
+  var choices = dialog.querySelector('.hit-dice-choices');
+  var status = dialog.querySelector('.hit-dice-count');
+  var finish = dialog.querySelector('[value="recover"]');
+  var selects = pools.map(function (pool, i) {
+    var label = document.createElement('label');
+    label.textContent = pool.label;
+    var select = document.createElement('select');
+    for (var n = 0; n <= Math.min(regain, pool.spent); n++) {
+      select.add(new Option(String(n), String(n)));
+    }
+    select.value = String(defaultCounts[i]);
+    label.appendChild(select);
+    choices.appendChild(label);
+    return select;
+  });
+  function selectedCounts() {
+    return selects.map(function (select) { return Number(select.value); });
+  }
+  function paintCount() {
+    var selected = selectedCounts().reduce(function (n, count) { return n + count; }, 0);
+    status.textContent = selected + ' of ' + regain + ' Hit Dice selected';
+    finish.disabled = selected !== regain;
+  }
+  choices.addEventListener('change', paintCount);
+  dialog.querySelector('[type="button"]').addEventListener('click', function () { dialog.close(); });
+  dialog.addEventListener('close', function () {
+    var counts = selectedCounts();
+    dialog.remove();
+    if (dialog.returnValue === 'recover') finishRest(counts);
+  });
+  paintCount();
+  document.body.appendChild(dialog);
+  dialog.showModal();
+}
 
 var shortBtn = $('shortRestBtn');
 if (shortBtn) shortBtn.addEventListener('click', function () {
@@ -533,11 +610,12 @@ if (shortBtn) shortBtn.addEventListener('click', function () {
   if (CFG.shortRest && CFG.shortRest.msg) alert('Short Rest: ' + CFG.shortRest.msg);
 });
 
-var clearDeath = $('clearDeathBtn');
-if (clearDeath) clearDeath.addEventListener('click', function () {
+function clearDeathSaves() {
   save('deathSuccess', []); save('deathFail', []);
   makeDots('deathSuccessDots'); makeDots('deathFailDots');
-});
+}
+var clearDeath = $('clearDeathBtn');
+if (clearDeath) clearDeath.addEventListener('click', clearDeathSaves);
 
 var clearAll = $('clearSessionBtn');
 if (clearAll) clearAll.addEventListener('click', function () {
@@ -634,7 +712,15 @@ function togglePrepared(name) {
   if (card && card.dataset.level === '0') return;   // cantrips are always known
   var prepared = loadPrepared();
   var i = prepared.indexOf(name);
-  if (i >= 0) prepared.splice(i, 1); else prepared.push(name);
+  if (i >= 0) {
+    prepared.splice(i, 1);
+  } else {
+    if (prepared.length >= CFG.maxPrepared) {
+      Toast.show('Prepared spell limit reached. Remove a spell to prepare another.');
+      return;
+    }
+    prepared.push(name);
+  }
   savePrepared(prepared);
   refreshPreparedUI();
 }
@@ -693,22 +779,22 @@ document.querySelectorAll('#spellGrid .prep-toggle').forEach(function (btn) {
 /* ── DAMAGE / HEAL BUTTONS ───────────────────────────────────────────── */
 function adjustAmount() {
   var el = $('hpAdjust');
-  var n = el ? Number(el.value) : 0;
-  return (!n || n < 1) ? 0 : n;
+  return el ? boundedHp(el.value, Number.MAX_SAFE_INTEGER) : 0;
 }
 var dmgBtn = $('dmgBtn');
 if (dmgBtn) dmgBtn.addEventListener('click', function () {
   var amt = adjustAmount(); if (!amt) return;
-  var r = applyDamage(amt);
+  applyDamage(amt);
 
-  /* Concentration check, using the damage that actually landed. */
-  if (Conc.active() && r.toHp > 0) {
-    var dc = Math.max(10, Math.floor(r.toHp / 2));
+  /* Temporary HP absorbs the hit, but the entire damage amount sets the DC. */
+  if (Conc.active()) {
+    var dc = Math.max(10, Math.floor(amt / 2));
+    var spell = Conc.spell();
     if (Number($('hpCurrent').value) === 0) {
       Conc.drop();
-      alert('You dropped to 0 HP — concentration on ' + Conc.spell() + ' ends.');
+      alert('You dropped to 0 HP — concentration on ' + spell + ' ends.');
     } else {
-      alert('Concentration check: CON save DC ' + dc + ' to keep ' + Conc.spell() + '.');
+      alert('Concentration check: CON save DC ' + dc + ' to keep ' + spell + '.');
     }
   }
 });
@@ -825,7 +911,12 @@ function buildTurnStrip() {
   strip.addEventListener('click', function (e) {
     var chip = e.target.closest('.turn-chip');
     if (chip) { used[chip.dataset.turn] = !used[chip.dataset.turn]; save('turnUsed', used); draw(); }
-    if (e.target.closest('.turn-reset')) { used = {}; save('turnUsed', used); draw(); }
+    if (e.target.closest('.turn-reset')) {
+      used = {};
+      save('turnUsed', used);
+      draw();
+      if (Mode.crit || Mode.sneakCrit) setCrit(false);
+    }
   });
   draw();
 
@@ -870,7 +961,7 @@ function buildModeChip() {
   modeChip.addEventListener('click', function () {
     var normal = document.querySelector('.roll-mode-btn[data-adv="0"]');
     if (normal) normal.click();
-    if (Mode.crit) setCrit(false);
+    if (Mode.crit || Mode.sneakCrit) setCrit(false);
     paintModeChip();
   });
   document.addEventListener('click', function (e) {
@@ -883,10 +974,11 @@ function paintModeChip() {
   var parts = [];
   if (Mode.adv > 0) parts.push('Advantage');
   if (Mode.adv < 0) parts.push('Disadvantage');
-  if (Mode.crit) parts.push('Crit');
+  if (Mode.crit || Mode.sneakCrit) parts.push(Mode.crit ? 'Crit' : 'Sneak Attack crit');
   modeChip.textContent = parts.join(' + ') + ' on  ✕';
   modeChip.className = 'mode-chip' + (parts.length ? ' show' : '') +
-                       (Mode.adv > 0 ? ' adv' : Mode.adv < 0 ? ' dis' : '') + (Mode.crit ? ' crit' : '');
+                       (Mode.adv > 0 ? ' adv' : Mode.adv < 0 ? ' dis' : '') +
+                       (Mode.crit || Mode.sneakCrit ? ' crit' : '');
 }
 
 /* ── FIRST-VISIT HELP ────────────────────────────────────────────────────
@@ -925,8 +1017,8 @@ function numericKeyboards() {
 
 /* ── INIT ────────────────────────────────────────────────────────────── */
 refreshDots();
-bindInput('hpCurrent', 'hpCurrent');
-bindInput('hpTemp', 'hpTemp');
+bindHpInput('hpCurrent', HP_MAX, updateHp);
+bindHpInput('hpTemp', Number.MAX_SAFE_INTEGER);
 updateHp();
 buildDomainSection();
 markRulesLinks();        // before the prepared list clones any cards

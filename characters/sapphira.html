@@ -202,7 +202,7 @@
           <div class="tracker-card">
             <h3>Arcane Recovery</h3>
             <div class="dots-row" id="arcaneRecoveryDots" data-key="arcaneRecovery" data-total="1"></div>
-            <div style="font-size:11px;color:var(--muted);margin-top:6px;">1×/short rest — recover up to 3 levels of slots</div>
+            <div style="font-size:11px;color:var(--muted);margin-top:6px;">Once per day after a short rest, recover up to 3 combined spell slot levels.</div>
           </div>
         </div>
 
@@ -360,7 +360,7 @@
           <div class="reminder-item">INT spellcaster — Spell DC 13, attack +5</div>
           <div class="reminder-item">Initiative = DEX +2 + INT +2 (Temporal Awareness) = +4</div>
           <div class="reminder-item">Chronal Shift — 2 uses per long rest, force any reroll within 30 ft</div>
-          <div class="reminder-item">Arcane Recovery — once per short rest, recover up to 3 levels of spell slots</div>
+          <div class="reminder-item">Arcane Recovery — once per day after a short rest, recover up to 3 combined spell slot levels.</div>
           <div class="reminder-item">Shield reaction gives +5 AC until your next turn — use it preemptively</div>
           <div class="reminder-item">Silvery Barbs — reaction when a creature succeeds on a roll; they reroll and another creature has advantage</div>
           <div class="reminder-item">AC is only 12 without armor — consider casting Mage Armor (not in spellbook yet) or stay at range</div>
@@ -632,7 +632,7 @@
         <div class="feature-card-title">📖 Class — Wizard 5</div>
         <ul class="link-list">
           <li><a href="https://5e.tools/classes.html#wizard_phb">Spellcasting (INT)</a></li>
-          <li><a href="https://5e.tools/classes.html#wizard_phb">Arcane Recovery</a> — 1×/short rest, up to 3 levels of slots</li>
+          <li><a href="https://5e.tools/classes.html#wizard_phb">Arcane Recovery</a> — once per day after a short rest, recover up to 3 combined spell slot levels.</li>
           <li><a href="https://5e.tools/classes.html#wizard_phb">Ritual Casting</a> — cast rituals without slots</li>
           <li>Spellbook — copy new spells (INT check, 2h & 50gp/level)</li>
         </ul>
@@ -664,7 +664,7 @@
         <div class="feature-card-title">💤 Rest Recovery</div>
         <ul class="link-list">
           <li><strong>Short Rest:</strong> Arcane Recovery (up to 3 slot levels, 1×/day)</li>
-          <li><strong>Long Rest:</strong> Full HP, all spell slots, Chronal Shift resets, half Hit Dice restored (2 of 5)</li>
+          <li><strong>Long Rest:</strong> Full HP, all spell slots, Arcane Recovery and Chronal Shift reset, up to 2 of 5 Hit Dice restored.</li>
         </ul>
       </div>
     </div>
@@ -715,8 +715,8 @@ const SHEET = {
   prefix: 'sapphira_v1_',
   hpMax: 37,
   maxPrepared: 7,                       // INT mod (+2) + Wizard level (5)
-  shortRest: { keys: ['arcaneRecovery'],
-               msg: 'Arcane Recovery recharged.\nYou may also spend Hit Dice (d6 + CON mod +3) to recover HP.' }
+  shortRest: { keys: [],
+               msg: 'If you have not used Arcane Recovery today, you may use it now to recover up to 3 combined spell slot levels.\nYou may also spend Hit Dice (d6 + CON mod +3) to recover HP.' }
 };
 </script>
 <script src="sheet.js"></script>

@@ -300,7 +300,7 @@
           <ul style="list-style:none;font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:3px;">
             <li>AC 15 · HP = 2 + INT + (5×level)</li>
             <li>Deflect reaction — impose disadv on attack</li>
-            <li>Repair: bonus action, 2d8 + INT HP once/turn</li>
+            <li>Repair (3/day): Tick restores 2d8 + 3 HP when commanded with Nadarr's bonus action.</li>
           </ul>
         </div>
       </div>
@@ -405,7 +405,7 @@
         <div class="reminder">
           <div class="reminder-item">Battle Ready — weapons use INT (+4), not STR/DEX</div>
           <div class="reminder-item">Extra Attack — attack twice when you take the Attack action</div>
-          <div class="reminder-item">Steel Defender — repair it with a bonus action (2d8+4 HP) once per turn</div>
+          <div class="reminder-item">Steel Defender — command Tick to use Repair with a bonus action. Repair restores 2d8 + 3 HP and has three uses per day.</div>
           <div class="reminder-item">Infusions active: Repeating Shot (Longbow), Enhanced Defense, Spell-Refueling Ring, Returning Weapon</div>
           <div class="reminder-item">Shadow Touched feat — Invisibility + Inflict Wounds, 1 free cast/long rest</div>
           <div class="reminder-item">Pearl of Power — once per day restore one expended spell slot (max 3rd)</div>
@@ -1026,8 +1026,8 @@
             <div style="font-size:10px;color:var(--muted);">Natural armor</div>
           </div>
           <div style="background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
-            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">HP</div>
-            <div style="font-size:26px;font-weight:800;color:var(--good);" id="tickHpDisplay">36</div>
+            <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;">Max HP</div>
+            <div style="font-size:26px;font-weight:800;color:var(--good);">36</div>
             <div style="font-size:10px;color:var(--muted);">2 + INT + (5×level) = 36</div>
           </div>
           <div style="background:var(--panel2);border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;">
@@ -1117,7 +1117,8 @@
         <div style="background:rgba(22,163,74,.07);border:1px solid rgba(74,222,128,.2);border-radius:14px;padding:16px;margin-bottom:10px;">
           <div style="font-weight:700;font-size:14px;margin-bottom:4px;color:var(--good);">⚕️ Repair</div>
           <div style="font-size:13px;color:var(--text);margin-bottom:4px;">Restores <strong style="color:var(--good);">2d8 + 3 HP</strong> to itself or a construct/object within 5 ft</div>
-          <div style="font-size:11px;color:var(--muted);">Uses Nadarr's bonus action · PB = +3</div>
+          <div style="font-size:11px;color:var(--muted);">Three uses per day. Nadarr uses a bonus action to command Tick.</div>
+          <div class="dots-row" id="tickRepairDots" data-key="tickRepair" data-total="3" data-label="Repair use"></div>
         </div>
 
         <!-- Fire Breath -->
