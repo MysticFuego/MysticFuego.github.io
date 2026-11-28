@@ -429,3 +429,75 @@ button, a, .stat-pill, .conc-toggle, input { touch-action: manipulation; }
   .page .stat-pill .sp-val { font-size: 15px; }
 }
 .sbadge.always { background: rgba(74,222,128,.1); color: var(--good); border-color: rgba(74,222,128,.3); }
+
+/* ── AUTO-ROLL SWITCH ──
+   Off by default: the table rolls real dice, so roll buttons only show the
+   bonus and the roller, log and roll modes are hidden. */
+.autoroll-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: -4px 0 12px; }
+.autoroll-btn {
+  background: var(--panel2); color: var(--muted); border: 1px solid var(--line2); border-radius: 999px;
+  padding: 7px 13px; font: inherit; font-size: 12px; font-weight: 700; cursor: pointer;
+}
+.autoroll-btn.on { background: var(--good-dim); color: var(--good); border-color: #166534; }
+.autoroll-hint { font-size: 12px; color: var(--muted); }
+.manual-dice .roll-mode-bar,
+.manual-dice #rollLog,
+.manual-dice .dmg-roll-btn,
+.manual-dice .mode-chip { display: none !important; }
+.manual-dice .roll-btn { pointer-events: none; cursor: default; }
+.manual-dice .roll-btn::before { content: none; }
+
+/* ── BAG ── */
+.bag-legend { margin: -6px 0 14px; font-size: 12px; color: var(--muted); }
+.bag-coins { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 16px; }
+.bag-coin { background: var(--panel2); border: 1px solid var(--line); border-radius: 12px; padding: 8px; text-align: center; }
+.bag-coin-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; margin-bottom: 6px; color: var(--muted); }
+.coin-pp .bag-coin-label { color: #e2e8f0; }
+.coin-gp .bag-coin-label { color: var(--warn); }
+.coin-ep .bag-coin-label { color: #7dd3fc; }
+.coin-sp .bag-coin-label { color: #cbd5e1; }
+.coin-cp .bag-coin-label { color: #d97706; }
+.bag-stepper { display: flex; align-items: stretch; gap: 4px; }
+.bag-step {
+  flex: 0 0 34px; min-height: 34px; border-radius: 8px; border: 1px solid var(--line2);
+  background: var(--panel3, var(--panel)); color: var(--text); font: inherit; font-size: 18px; font-weight: 700;
+  line-height: 1; cursor: pointer; padding: 0;
+}
+.bag-step:active { background: var(--line2); }
+.bag-qty {
+  flex: 1 1 auto; width: 100%; min-width: 0; text-align: center; border-radius: 8px; border: 1px solid var(--line2);
+  background: var(--bg2, var(--panel)); color: var(--text); font: inherit; font-size: 15px; font-weight: 700; padding: 4px 2px;
+  -moz-appearance: textfield; appearance: textfield;
+}
+.bag-qty::-webkit-outer-spin-button, .bag-qty::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.bag-coin .bag-qty { font-size: 17px; }
+.bag-list { display: flex; flex-direction: column; gap: 6px; }
+.bag-row {
+  display: grid; grid-template-columns: 1fr 132px 30px; align-items: center; gap: 10px;
+  padding: 6px 8px 6px 12px; background: var(--panel2); border: 1px solid var(--line); border-radius: 10px;
+}
+.bag-row.empty .bag-name, .bag-row.empty .bag-qty { opacity: .5; }
+.bag-row.flash { border-color: var(--good); }
+.bag-name { font-size: 13px; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.bag-note { display: block; font-size: 11px; font-weight: 400; color: var(--muted); }
+.bag-del {
+  width: 30px; height: 30px; border-radius: 8px; border: 1px solid transparent; background: none;
+  color: var(--muted2); font-size: 13px; cursor: pointer; padding: 0;
+}
+.bag-del:hover, .bag-del:focus-visible { color: var(--danger); border-color: var(--line2); }
+.bag-sub { margin: 10px 0 2px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--muted); }
+.bag-add { display: flex; gap: 8px; margin-top: 14px; }
+.bag-add-name { flex: 1 1 auto; min-width: 0; }
+.bag-add-qty {
+  flex: 0 0 64px; width: 64px; text-align: center; border-radius: 8px; border: 1px solid var(--line2);
+  background: var(--bg2, var(--panel)); color: var(--text); font: inherit; font-weight: 700;
+}
+.bag-add .btn { margin: 0; }
+
+@media (max-width: 600px) {
+  .bag-coins { grid-template-columns: repeat(3, 1fr); }
+  .bag-row { grid-template-columns: 1fr 126px 26px; gap: 6px; }
+  .bag-step { flex-basis: 38px; min-height: 38px; }
+  .bag-qty, .bag-add-qty, .bag-add-name { font-size: 16px; }
+}
+@media print { .bag-step, .bag-del, .bag-add, .autoroll-row { display: none; } }

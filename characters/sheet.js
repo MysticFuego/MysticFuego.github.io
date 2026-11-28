@@ -257,12 +257,49 @@ var Conc = (function () {
    forgotten "advantage" can never silently follow you into a later roll. */
 var Mode = { adv: 0, crit: false, sneakCrit: false, attackCrit: false };
 
+/* ── AUTO-ROLL SWITCH ──────────────────────────────────────────────────
+   The table rolls physical dice, so the sheet does not roll by default:
+   the buttons just show the bonus to add. One switch in Common Rolls turns
+   the dice roller on; it is shared by every sheet on the device. */
+var AUTOROLL_KEY = 'mfsheets_autoroll_v1';
+function autoRoll() {
+  try { return localStorage.getItem(AUTOROLL_KEY) === '1'; } catch (e) { return false; }
+}
+function paintAutoRoll() {
+  var on = autoRoll();
+  document.body.classList.toggle('manual-dice', !on);
+  var b = $('autoRollBtn');
+  if (b) {
+    b.textContent = on ? '🎲 Auto-roll: On' : '🎲 Auto-roll: Off';
+    b.classList.toggle('on', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  }
+  var hint = $('manualDiceHint');
+  if (hint) hint.hidden = on;
+  if (!on && (Mode.adv || Mode.crit || Mode.sneakCrit)) {
+    var normal = document.querySelector('.roll-mode-btn[data-adv="0"]');
+    if (normal) normal.click();
+    if (Mode.crit || Mode.sneakCrit) setCrit(false);
+  }
+}
+
 (function buildRollControls() {
   var log = $('rollLog');
   if (!log) return;
   var panel = log.closest ? log.closest('.panel') : null;
   var title = panel && panel.querySelector('.panel-title');
   if (!title) return;
+
+  var sw = document.createElement('div');
+  sw.className = 'autoroll-row';
+  sw.innerHTML =
+    '<button type="button" class="autoroll-btn" id="autoRollBtn" aria-pressed="false"></button>' +
+    '<span class="autoroll-hint" id="manualDiceHint">Roll your own dice and add the bonus shown.</span>';
+  title.insertAdjacentElement('afterend', sw);
+  $('autoRollBtn').addEventListener('click', function () {
+    try { localStorage.setItem(AUTOROLL_KEY, autoRoll() ? '0' : '1'); } catch (e) {}
+    paintAutoRoll();
+  });
 
   var bar = document.createElement('div');
   bar.className = 'roll-mode-bar';
@@ -274,7 +311,7 @@ var Mode = { adv: 0, crit: false, sneakCrit: false, attackCrit: false };
     '</div>' +
     '<button class="roll-mode-btn crit-btn" id="critToggle" aria-pressed="false" ' +
       'title="Doubles the dice on your next damage roll and any separate Sneak Attack roll">Crit ×2</button>';
-  title.insertAdjacentElement('afterend', bar);
+  sw.insertAdjacentElement('afterend', bar);
 
   bar.querySelectorAll('[data-adv]').forEach(function (btn) {
     btn.addEventListener('click', function () {
@@ -395,6 +432,7 @@ document.querySelectorAll('.roll-btn').forEach(function (btn) {
   var isAttack = !!btn.closest('.weapon-card') ||
                  /attack/i.test(btn.dataset.label || '');
   btn.addEventListener('click', function (e) {
+    if (!autoRoll()) return;
     var override;
     if (e.shiftKey) override = 1;
     else if (e.altKey) override = -1;
@@ -475,7 +513,7 @@ function attachDamageButtons() {
 /* Delegated so cloned cards (the prepared-spell list) work without rebinding. */
 document.addEventListener('click', function (e) {
   var btn = e.target.closest && e.target.closest('.dmg-roll-btn');
-  if (!btn) return;
+  if (!btn || !autoRoll()) return;
   e.stopPropagation();
   // A critical hit includes Sneak Attack even when its dice are rolled separately.
   var critKey = btn.hasAttribute('data-sneak-attack') ? 'sneakCrit' : 'crit';
@@ -984,7 +1022,7 @@ function paintModeChip() {
 /* ── FIRST-VISIT HELP ────────────────────────────────────────────────────
    A short how-to above the tabs, shown until "Got it" is tapped. Shared by
    every sheet on the device, so a player only dismisses it once. */
-var HELP_KEY = 'mfsheets_help_dismissed_v1';
+var HELP_KEY = 'mfsheets_help_dismissed_v2';
 function buildHelpCard() {
   var tabs = document.querySelector('.tabs-bar');
   if (!tabs) return;
@@ -997,7 +1035,8 @@ function buildHelpCard() {
       '<li>Names with <span class="rules-link-sample">↗</span> open the full rules on 5e.tools in a new tab.</li>' +
       '<li>Tap a stat with ⓘ to see what it means.</li>' +
       '<li>Tap the boxes in Trackers as you spend things. Rest buttons refill them.</li>' +
-      '<li>Roll buttons roll for you. Set Advantage or Disadvantage in Common Rolls first.</li>' +
+      '<li>Buttons like “Perception +4” show the bonus to add to your own dice. Turn on 🎲 Auto-roll in Common Rolls if you want the sheet to roll instead.</li>' +
+      '<li>Gear tab → 💰 Bag: tap + or − the moment you get or use coins, potions, arrows and other items.</li>' +
       '<li>Everything you change is saved on this phone automatically.</li>' +
     '</ul>' +
     '<button class="btn help-ok" type="button">Got it</button>';
@@ -1006,6 +1045,228 @@ function buildHelpCard() {
     try { localStorage.setItem(HELP_KEY, '1'); } catch (e) {}
     card.remove();
   });
+}
+
+/* ── BAG ─────────────────────────────────────────────────────────────────
+   Coins and anything that gets used up or picked up mid-session, editable
+   on the spot instead of after the game. The common items are always listed,
+   at 0 if the character has none, so finding one is a single tap on +.
+
+   On first load the bag is filled from the Gear tab itself: the Coin card
+   and every counted item ("Rations ×10", "Crossbow Bolts (20)") or common
+   item ("Potion of Healing") move into the bag, and leave the static list so
+   no stale count is left behind. Each item is only ever imported once, so a
+   player's changes are never overwritten, and an item added to the HTML
+   later still shows up. */
+var COINS = [['pp', 'PP'], ['gp', 'GP'], ['ep', 'EP'], ['sp', 'SP'], ['cp', 'CP']];
+/* link: [2024 name, 2014 name, book] — 5e.tools names some items differently in each. */
+var COMMON_ITEMS = [
+  { name: 'Potion of Healing', note: '2d4 + 2 HP', link: ['potion of healing', 'potion of healing', 'dmg'], match: ['potion of healing', 'potions of healing'] },
+  { name: 'Potion of Greater Healing', note: '4d4 + 4 HP', link: ['potion of greater healing', 'potion of greater healing', 'dmg'], match: ['potion of greater healing'] },
+  { name: 'Rations', note: '1 per day', link: ['rations', 'rations (1 day)', 'phb'], match: ['rations', 'ration', 'rations (1 day)'] },
+  { name: 'Torches', link: ['torch', 'torch', 'phb'], match: ['torch', 'torches'] },
+  { name: 'Oil (flasks)', link: ['oil', 'oil (flask)', 'phb'], match: ['oil', 'oil flask', 'flask of oil', 'oil (flask)'] },
+  { name: 'Candles', link: ['candle', 'candle', 'phb'], match: ['candle', 'candles'] },
+  { name: 'Arrows', link: ['arrow', 'arrow', 'phb'], match: ['arrow', 'arrows'] },
+  { name: 'Crossbow Bolts', link: ['bolt', 'crossbow bolt', 'phb'], match: ['crossbow bolt', 'crossbow bolts', 'bolt', 'bolts'] },
+  { name: 'Sling Bullets', link: ['sling bullet', 'sling bullet', 'phb'], match: ['sling bullet', 'sling bullets'] },
+  { name: 'Holy Water', link: ['holy water', 'holy water (flask)', 'phb'], match: ['holy water', 'flask of holy water', 'holy water (flask)'] },
+  { name: "Alchemist's Fire", link: ["alchemist's fire", "alchemist's fire (flask)", 'phb'], match: ["alchemist's fire", "alchemist's fire (flask)"] },
+  { name: 'Antitoxin', link: ['antitoxin', 'antitoxin (vial)', 'phb'], match: ['antitoxin', 'antitoxin (vial)'] },
+  { name: "Healer's Kit", link: ["healer's kit", "healer's kit", 'phb'], match: ["healer's kit"] }
+];
+function itemUrl(link) {
+  if (!link) return null;
+  var is24 = CFG.rules === '2024';
+  return 'https://5e.tools/items.html#' + encodeURIComponent(is24 ? link[0] : link[1]).replace(/'/g, '%27') +
+         (is24 ? '_x' : '_') + link[2];
+}
+function normName(t) { return t.toLowerCase().replace(/[’‘]/g, "'").replace(/\s+/g, ' ').trim(); }
+function commonFor(name) {
+  var n = normName(name);
+  for (var i = 0; i < COMMON_ITEMS.length; i++) if (COMMON_ITEMS[i].match.indexOf(n) >= 0) return COMMON_ITEMS[i];
+  return null;
+}
+function escAttr(t) { return escHtml(String(t)).replace(/"/g, '&quot;'); }
+
+/* "Arrows ×20 (Repeating Shot — unlimited)" → { name, qty: 20, note }.
+   A × inside brackets ("Shortsword (×2 for dual wielding)") is not a count. */
+function parseGearLi(li) {
+  var c = li.cloneNode(true);
+  var noteEl = c.querySelector('.item-note');
+  var notes = [];
+  if (noteEl) { notes.push(noteEl.textContent.trim()); noteEl.parentNode.removeChild(noteEl); }
+  var a = c.querySelector('a[href]');
+  var text = c.textContent.replace(/\s+/g, ' ').trim();
+  var qty = null;
+  var m = /\s*×\s*(\d+)\b(?![^()]*\))/.exec(text);
+  if (m) { qty = Number(m[1]); text = (text.slice(0, m.index) + ' ' + text.slice(m.index + m[0].length)).replace(/\s+/g, ' ').trim(); }
+  var cut = text.search(/ — | \(/);
+  var name = cut < 0 ? text : text.slice(0, cut).trim();
+  var rest = cut < 0 ? '' : text.slice(cut).replace(/^ — /, '').trim();
+  var paren = /^\((.*)\)$/.exec(rest);
+  if (paren) rest = paren[1].trim();
+  if (/^\d+$/.test(rest) && qty === null) { qty = Number(rest); rest = ''; }
+  if (rest) notes.unshift(rest);
+  return { name: name, qty: qty, note: notes.join(' · '),
+           url: a && normName(a.textContent) === normName(name) ? a.href : null };
+}
+
+function harvestGear(pane) {
+  var found = { coins: null, items: [] };
+  pane.querySelectorAll('.equip-card').forEach(function (card) {
+    var t = card.querySelector('.equip-card-title');
+    var title = t ? t.textContent : '';
+    if (/coin/i.test(title)) {
+      found.coins = {};
+      var re = /(\d+)\s*(pp|gp|ep|sp|cp)\b/gi, m, txt = card.textContent;
+      while ((m = re.exec(txt))) found.coins[m[2].toLowerCase()] = (found.coins[m[2].toLowerCase()] || 0) + Number(m[1]);
+      card.parentNode.removeChild(card);
+      return;
+    }
+    var isWeapons = /weapon/i.test(title);
+    card.querySelectorAll('li').forEach(function (li) {
+      var p = parseGearLi(li);
+      if (!p.name) return;
+      var common = commonFor(p.name);
+      if (!common && (isWeapons || p.qty === null)) return;
+      var key = common ? 'c:' + common.name : 'x:' + normName(p.name) + (p.note ? '|' + normName(p.note) : '');
+      found.items.push({ key: key, name: p.name, note: common ? '' : p.note, url: p.url,
+                         qty: p.qty === null ? 1 : p.qty });
+      li.parentNode.removeChild(li);
+    });
+    if (!card.querySelector('li')) card.parentNode.removeChild(card);
+  });
+  return found;
+}
+
+function buildBag() {
+  var pane = $('tab-gear');
+  if (!pane || $('bagPanel')) return;
+  var found = harvestGear(pane);
+
+  var st = load('bag', null) || {};
+  st.coins = st.coins || {};
+  st.qty = st.qty || {};
+  st.extras = st.extras || [];
+  st.seeded = st.seeded || [];
+  if (!st.coinsSeeded) {
+    COINS.forEach(function (c) { st.coins[c[0]] = (st.coins[c[0]] || 0) + ((found.coins || {})[c[0]] || 0); });
+    st.coinsSeeded = true;
+  }
+  var byKey = {}, order = [];
+  found.items.forEach(function (it) {
+    if (byKey[it.key]) { byKey[it.key].qty += it.qty; return; }
+    byKey[it.key] = it; order.push(it.key);
+  });
+  order.forEach(function (key) {
+    var it = byKey[key];
+    if (st.seeded.indexOf(key) >= 0) return;          // imported on an earlier visit
+    st.qty[key] = (st.qty[key] || 0) + it.qty;
+    if (key.indexOf('x:') === 0 && !st.extras.some(function (e) { return e.key === key; })) {
+      st.extras.push({ key: key, name: it.name, note: it.note, url: it.url });
+    }
+    st.seeded.push(key);
+  });
+  save('bag', st);
+
+  var panel = document.createElement('div');
+  panel.className = 'panel bag-panel';
+  panel.id = 'bagPanel';
+  pane.insertBefore(panel, pane.firstChild);
+
+  function stepper(kind, key, val, label) {
+    return '<div class="bag-stepper">' +
+      '<button type="button" class="bag-step" data-step="-1" aria-label="One less ' + escAttr(label) + '">−</button>' +
+      '<input class="bag-qty" type="number" min="0" inputmode="numeric" value="' + (val || 0) + '" aria-label="' + escAttr(label) + '">' +
+      '<button type="button" class="bag-step" data-step="1" aria-label="One more ' + escAttr(label) + '">+</button></div>';
+  }
+  function rowHtml(def, custom) {
+    var q = st.qty[def.key] || 0;
+    var url = def.url || itemUrl(def.link);
+    var name = url ? '<a href="' + escAttr(url) + '">' + escHtml(def.name) + '</a>' : escHtml(def.name);
+    return '<div class="bag-row' + (q ? '' : ' empty') + '" data-kind="item" data-key="' + escAttr(def.key) + '">' +
+      '<div class="bag-name">' + name + (def.note ? '<span class="bag-note">' + escHtml(def.note) + '</span>' : '') + '</div>' +
+      stepper('item', def.key, q, def.name) +
+      (custom ? '<button type="button" class="bag-del" aria-label="Remove ' + escAttr(def.name) + '">✕</button>'
+              : '<span class="bag-del-spacer"></span>') +
+      '</div>';
+  }
+  function render() {
+    panel.innerHTML =
+      '<div class="panel-title">💰 Bag</div>' +
+      '<div class="bag-legend">Change it the moment you get or spend something. Saved on this device.</div>' +
+      '<div class="bag-coins">' + COINS.map(function (c) {
+        return '<div class="bag-coin coin-' + c[0] + '" data-kind="coin" data-key="' + c[0] + '">' +
+          '<div class="bag-coin-label">' + c[1] + '</div>' + stepper('coin', c[0], st.coins[c[0]], c[1]) + '</div>';
+      }).join('') + '</div>' +
+      '<div class="bag-list">' +
+        COMMON_ITEMS.map(function (d) { return rowHtml({ key: 'c:' + d.name, name: d.name, note: d.note, link: d.link }, false); }).join('') +
+        (st.extras.length ? '<div class="bag-sub">Other items</div>' : '') +
+        st.extras.map(function (d) { return rowHtml(d, true); }).join('') +
+      '</div>' +
+      '<form class="bag-add">' +
+        '<input class="bag-add-name text-field" type="text" placeholder="Add an item, e.g. Silver ring" aria-label="New item name" autocomplete="off">' +
+        '<input class="bag-add-qty" type="number" min="1" inputmode="numeric" value="1" aria-label="How many">' +
+        '<button type="submit" class="btn">Add</button>' +
+      '</form>';
+    markRulesLinks();
+  }
+  function setVal(holder, v) {
+    v = Math.max(0, Math.trunc(Number(v) || 0));
+    var key = holder.dataset.key;
+    if (holder.dataset.kind === 'coin') st.coins[key] = v; else st.qty[key] = v;
+    save('bag', st);
+    var inp = holder.querySelector('.bag-qty');
+    if (inp && Number(inp.value) !== v) inp.value = v;
+    if (holder.classList.contains('bag-row')) holder.classList.toggle('empty', !v);
+  }
+  panel.addEventListener('click', function (e) {
+    var step = e.target.closest('.bag-step');
+    if (step) {
+      var h = step.closest('[data-kind]');
+      setVal(h, Number(h.querySelector('.bag-qty').value || 0) + Number(step.dataset.step));
+      return;
+    }
+    var del = e.target.closest('.bag-del');
+    if (del) {
+      var row = del.closest('[data-key]'), key = row.dataset.key;
+      var def = st.extras.filter(function (x) { return x.key === key; })[0];
+      if (!confirm('Remove ' + (def ? def.name : 'this item') + ' from the bag?')) return;
+      st.extras = st.extras.filter(function (x) { return x.key !== key; });
+      delete st.qty[key];
+      save('bag', st);
+      render();
+    }
+  });
+  panel.addEventListener('input', function (e) {
+    if (!e.target.classList.contains('bag-qty') || e.target.value === '') return;
+    setVal(e.target.closest('[data-kind]'), e.target.value);
+  });
+  panel.addEventListener('focusout', function (e) {
+    if (e.target.classList.contains('bag-qty') && e.target.value === '') setVal(e.target.closest('[data-kind]'), 0);
+  });
+  panel.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nameEl = panel.querySelector('.bag-add-name');
+    var name = nameEl.value.replace(/\s+/g, ' ').trim();
+    if (!name) { nameEl.focus(); return; }
+    var qty = Math.max(1, Math.trunc(Number(panel.querySelector('.bag-add-qty').value) || 1));
+    var common = commonFor(name);
+    var key = common ? 'c:' + common.name : 'x:' + normName(name);
+    if (!common && !st.extras.some(function (x) { return x.key === key; })) {
+      st.extras.push({ key: key, name: name, note: '', url: null });
+    }
+    st.qty[key] = (st.qty[key] || 0) + qty;
+    save('bag', st);
+    render();
+    var row = panel.querySelector('[data-key="' + key.replace(/["\\]/g, '\\$&') + '"]');
+    if (row) {
+      row.classList.add('flash');
+      if (row.scrollIntoView) row.scrollIntoView({ block: 'nearest' });
+    }
+  });
+  render();
 }
 
 /* Number fields get the number pad on phones instead of the full keyboard. */
@@ -1021,13 +1282,15 @@ bindHpInput('hpCurrent', HP_MAX, updateHp);
 bindHpInput('hpTemp', Number.MAX_SAFE_INTEGER);
 updateHp();
 buildDomainSection();
-markRulesLinks();        // before the prepared list clones any cards
+buildBag();
+markRulesLinks();       // before the prepared list clones any cards
 attachDamageButtons();
 refreshPreparedUI();
 bindStatPills();
 dedupeCommonRolls();
 buildTurnStrip();
 buildModeChip();
+paintAutoRoll();
 buildHelpCard();
 numericKeyboards();
 
